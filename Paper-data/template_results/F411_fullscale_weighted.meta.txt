@@ -1,0 +1,10 @@
+﻿source_grid=processed_data/stanford_vi_e_z10_z21_3d_full.txt
+target_property=F411_fullscale_weighted
+target_origin=0,0,0
+display_direction_x=1
+display_direction_y=2
+display_direction_z=3
+displayed_dirs=1,2,3
+hidden_dirs=
+fixed_positions=
+output_shape=75,100,12

@@ -1,0 +1,20 @@
+Moving-window calculation parameters
+
+Fig. 4.11:
+- Input: processed_data/stanford_vi_e_z10_z21_3d_full.txt
+- Fourth-order cumulant
+- Complete 5 x 5 x 3 windows, unit moving step
+- Full windows only; missing samples are skipped; output is written at window centers
+- Output support: 71 x 96 x 10 = 68,160 window centers
+- Value-weighted case: normalized value-Gaussian weights, reference porosity 0.28, bandwidth 0.04, zero-first-order-moment option enabled
+- F412_unweighted_avl_fullwindows, F412_unweighted_bell_fullwindows, and F412_weighted_fullwindows are the corresponding calculation outputs. The figure embedded in this package is Fig4.11_spatial_local_attribute_slices.png from the current paper.
+
+Section 4.5 A/B/C comparison:
+- Input slice: processed_data/stanford_vi_e_z62_2d.txt
+- Fourth-order cumulant with complete 11 x 11 windows and unit step
+- A: complete-data reference; B: regularly sampled data with uniform weights; C: the same sampled data with value-Gaussian weights
+- Sample support: x = 1, 3, ..., 75 and y = 1, 6, ..., 96 plus y = 100; n = 798
+- A/B/C output support: 65 x 90 = 5,850 complete window centers, x = 6-70 and y = 6-95
+- Case C reference porosity: 0.26; bandwidth: 0.08; normalized weights; zero-first-order-moment option enabled
+
+The revision_metrics.csv file contains the reported correlations, F1 scores, errors, and AVL/Bell agreement checks.

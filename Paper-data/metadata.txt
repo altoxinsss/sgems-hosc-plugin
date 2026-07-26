@@ -1,0 +1,25 @@
+Title: Supporting data for An integrated SGeMS implementation for high-order spatial cumulant calculation and local geological attribute mapping
+Version: 1.0
+Source model: Stanford VI-E porosity model, Stanford Center for Earth Resources Forecasting
+Source URL: https://github.com/SCRFpublic/Stanford-VI-E
+Code URL: https://github.com/altoxinsss/sgems-hosc-plugin
+
+Derived data:
+- Coarse source grid: 75 x 100 x 100 cells, generated from the 150 x 200 x 200 fine grid by 2 x 2 x 2 linear block averaging.
+- 2D dataset: z = 62, 7,500 cells.
+- 3D dataset: z = 10-21, 90,000 cells.
+- High-porosity-band dataset: threshold >= 0.25; 26-neighbor connected components; minimum component size 300 nodes.
+
+Template results:
+- Fig. 4.10: 2D x-y lag sections for fourth-order moment, AVL-based HOSC, Bell-partition HOSC, and value-weighted HOSC.
+- Supplementary F411 files: 3D lag-volume outputs from the same complete z = 10-21 subvolume.
+
+Moving-window results:
+- Fig. 4.11: complete 5 x 5 x 3 moving-window outputs at 71 x 96 x 10 window centers, shown as spatial local-attribute slices.
+- Section 4.5: complete-data reference, regularly sampled uniform-weight result, and regularly sampled value-weighted result on the z = 62 slice.
+
+Coordinate convention: one-based x, y, z coordinates; x varies fastest in row order.
+Missing values: none in the processed datasets; full-window calculations require complete windows.
+File format: SGeMS text format with tab-separated data rows.
+
+For parameter values, output dimensions, evaluator agreement, correlations, F1 scores, and error metrics, see the README.txt files and moving_window_results/revision_metrics.csv.

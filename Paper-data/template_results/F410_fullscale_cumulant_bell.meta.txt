@@ -1,0 +1,10 @@
+﻿source_grid=processed_data/stanford_vi_e_z10_z21_3d_full.txt
+target_property=F410_fullscale_cumulant_bell
+target_origin=0,0,0
+display_direction_x=1
+display_direction_y=2
+display_direction_z=0
+displayed_dirs=1,2
+hidden_dirs=3
+fixed_positions=1
+output_shape=75,100,1
