@@ -1,20 +1,48 @@
 Moving-window calculation parameters
 
-Fig. 4.11:
+Common settings for Section 4.5 (Figs. 4.6-4.9):
+- Input: processed_data/stanford_vi_e_z62_2d.txt
+- Complete 75 x 100 grid containing 7,500 porosity values
+- Fourth-order local HOSC cumulant evaluated on complete windows only
+- Unit moving step; output is written at complete window centers
+- Value weighting uses a Gaussian kernel in porosity-value space
+- The high-porosity threshold used for the F1 and contrast metrics is 0.25
+- Quantitative metrics were calculated from unclipped local-statistic maps
+- Percentile clipping at the 2nd and 98th percentiles was used only for visualization
+
+Fig. 4.6, unweighted and weighted comparison:
+- Unweighted baseline: 3 x 3 windows; zero-first-order-moment option enabled
+- Weighted main case: 3 x 3 windows, reference porosity 0.26, bandwidth 0.08, normalized weights, zero-first-order-moment option enabled
+
+Fig. 4.7, parameter sensitivity:
+- All cases use complete 3 x 3 windows, normalized value-Gaussian weights, and the zero-first-order-moment option
+- Reference porosity 0.26, bandwidth 0.08
+- Reference porosity 0.27, bandwidth 0.08
+- Reference porosity 0.28, bandwidth 0.10
+
+Fig. 4.8, normalization comparison:
+- Unweighted baseline compared with a non-normalized value-weighted sum
+- The current manuscript does not report the reference porosity and bandwidth for the non-normalized panel; they are therefore not assigned here
+
+Fig. 4.9, window-size and first-order-term comparison:
+- Unweighted baseline: complete 3 x 3 windows
+- Weighted 3 x 3 case: reference porosity 0.28, bandwidth 0.03, normalized weights, zero-first-order-moment option disabled
+- Unweighted baseline: complete 11 x 11 windows
+- Weighted 11 x 11 case: reference porosity 0.26, bandwidth 0.04, normalized weights, zero-first-order-moment option disabled
+
+Fig. 4.11, three-dimensional moving-window calculation:
 - Input: processed_data/stanford_vi_e_z10_z21_3d_full.txt
-- Fourth-order cumulant
+- Complete 75 x 100 x 12 grid
+- Fourth-order local HOSC cumulant
 - Complete 5 x 5 x 3 windows, unit moving step
-- Full windows only; missing samples are skipped; output is written at window centers
+- Full windows only; the complete input contains no missing samples; output is written at window centers
 - Output support: 71 x 96 x 10 = 68,160 window centers
 - Value-weighted case: normalized value-Gaussian weights, reference porosity 0.28, bandwidth 0.04, zero-first-order-moment option enabled
-- F412_unweighted_avl_fullwindows, F412_unweighted_bell_fullwindows, and F412_weighted_fullwindows are the corresponding calculation outputs. The figure embedded in this package is Fig4.11_spatial_local_attribute_slices.png from the current paper.
+- F412_unweighted_avl_fullwindows, F412_unweighted_bell_fullwindows, and F412_weighted_fullwindows are the corresponding calculation outputs
+- The current Fig. 4.11 image is archived under figures/from_Paper.docx; see figure_index.txt for its file mapping
 
-Section 4.5 A/B/C comparison:
-- Input slice: processed_data/stanford_vi_e_z62_2d.txt
-- Fourth-order cumulant with complete 11 x 11 windows and unit step
-- A: complete-data reference; B: regularly sampled data with uniform weights; C: the same sampled data with value-Gaussian weights
-- Sample support: x = 1, 3, ..., 75 and y = 1, 6, ..., 96 plus y = 100; n = 798
-- A/B/C output support: 65 x 90 = 5,850 complete window centers, x = 6-70 and y = 6-95
-- Case C reference porosity: 0.26; bandwidth: 0.08; normalized weights; zero-first-order-moment option enabled
+Legacy files:
+- S45_A_full_uniform_centered_w11, S45_B_sample_uniform_centered_w11, and S45_C_sample_value_weighted_w11 are retained for provenance
+- These files belong to an earlier sampled-data A/B/C experiment and are not used in the current manuscript
 
-The revision_metrics.csv file contains the reported correlations, F1 scores, errors, and AVL/Bell agreement checks.
+The revision_metrics.csv file contains the Section 4.5 metrics reported in Table 4.4 and the AVL/Bell agreement checks for Figs. 4.10 and 4.11.
