@@ -22,7 +22,6 @@ Fig. 4.7, parameter sensitivity:
 
 Fig. 4.8, normalization comparison:
 - Unweighted baseline compared with a non-normalized value-weighted sum
-- The current manuscript does not report the reference porosity and bandwidth for the non-normalized panel; they are therefore not assigned here
 
 Fig. 4.9, window-size and first-order-term comparison:
 - Unweighted baseline: complete 3 x 3 windows
