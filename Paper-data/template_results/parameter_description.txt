@@ -1,6 +1,6 @@
 Template-based calculation parameters
 
-Fig. 4.10:
+Fig. 15:
 - Input: processed_data/stanford_vi_e_z10_z21_3d_full.txt
 - Complete source volume: 75 x 100 x 12 cells, z = 10-21 of the coarse grid
 - Fourth-order statistic with alpha = (1, 1, 1)
@@ -15,7 +15,7 @@ Supplementary three-dimensional template outputs:
 - Fourth-order template cumulant volume with alpha = (1, 1, 1)
 - Directions aligned with x, y, and z; unit lag spacing
 - AVL-based and Bell-partition evaluator outputs are included
-- These F411 files are supplementary three-dimensional template outputs; they are not the spatial local-attribute map shown as Fig. 4.11 in the current paper version.
+- These F411 files are supplementary three-dimensional template outputs; they are not the spatial local-attribute map shown as Fig. 16 in the current paper version.
 
 File naming:
-F410_* files are the Fig. 4.10 outputs. F411_* files are supplementary three-dimensional template outputs. Each result has a value file and a matching metadata file.
+F410_* files are the Fig. 15 outputs. F411_* files are supplementary three-dimensional template outputs. Each result has a value file and a matching metadata file.

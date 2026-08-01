@@ -1,4 +1,4 @@
-Title: Supporting data for An integrated SGeMS implementation for high-order spatial cumulant calculation and local geological attribute mapping
+Title: Supporting data for An integrated SGeMS plugin for high-order statistics calculation
 Version: 1.0
 Source model: Stanford VI-E porosity model, Stanford Center for Earth Resources Forecasting
 Source URL: https://github.com/SCRFpublic/Stanford-VI-E
@@ -11,15 +11,15 @@ Derived data:
 - High-porosity-band dataset: threshold >= 0.25; 26-neighbor connected components; minimum component size 300 nodes.
 
 Template results:
-- Fig. 4.10: 2D x-y lag sections for fourth-order moment, AVL-based HOSC, Bell-partition HOSC, and value-weighted HOSC.
+- Fig. 15: 2D x-y lag sections for fourth-order moment, AVL-based HOSC, Bell-partition HOSC, and value-weighted HOSC.
 - Supplementary F411 files: 3D lag-volume outputs from the same complete z = 10-21 subvolume.
 
 Moving-window results:
-- Fig. 4.11: complete 5 x 5 x 3 moving-window outputs at 71 x 96 x 10 window centers, shown as spatial local-attribute slices.
-- Section 4.5: complete-data reference, regularly sampled uniform-weight result, and regularly sampled value-weighted result on the z = 62 slice.
+- Fig. 16: complete 5 x 5 x 3 moving-window outputs at 71 x 96 x 10 window centers, shown as spatial local-attribute slices.
+- Figs. 11-14: complete-grid unweighted and value-weighted moving-window experiments on the z = 62 slice, including parameter sensitivity, weight normalization, and weighted-centering comparisons.
 
 Coordinate convention: one-based x, y, z coordinates; x varies fastest in row order.
 Missing values: none in the processed datasets; full-window calculations require complete windows.
 File format: SGeMS text format with tab-separated data rows.
 
-For parameter values, output dimensions, evaluator agreement, correlations, F1 scores, and error metrics, see the README.txt files and moving_window_results/revision_metrics.csv.
+For parameter values, output dimensions, evaluator agreement, correlations, F1 scores, and error metrics, see the parameter_description.txt files and moving_window_results/revision_metrics.csv.
