@@ -1,0 +1,10 @@
+Multi-property columnar fixture
+4
+x
+y
+porosity
+permeability
+0 0 0.10 10
+1 0 0.20 20
+0 1 0.30 30
+1 1 0.40 40

@@ -1,0 +1,12 @@
+[sliding_window]
+center_cumulant_input_for_order_ge_2=true
+
+[weighted_moment]
+; Use the unweighted Bell/AVL evaluator for the formal baseline.
+enable_weighted_moment=false
+weight_mode=uniform
+enable_coordinate_gaussian=false
+enable_soft_high_porosity=false
+normalize_weights=true
+zero_first_order_moment=false
+min_weight=0

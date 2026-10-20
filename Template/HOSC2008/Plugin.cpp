@@ -23,13 +23,16 @@
 #include <GsTLAppli/actions/action.h>
 
 #include <ctype.h>
+#include <errno.h>
 #include <limits.h>
+#include <limits>
 #include <new>
 #include <sstream>
 
 #include "Plugin.h"
 #include "PCA.h"
 #include "DebugLogger.h"
+#include "../../shared/ValidationFeedback.h"
 
 namespace {
 std::string normalize_algorithm_text(const std::string& text)
@@ -40,6 +43,26 @@ std::string normalize_algorithm_text(const std::string& text)
         normalized[i] = (char)tolower((unsigned char)normalized[i]);
     }
     return normalized;
+}
+
+// The SGeMS error handler inserts diagnostics into XML attributes verbatim.
+// Escape parameter text before including it in a field-specific diagnostic.
+std::string template_diagnostic_value(const std::string& text)
+{
+    std::string escaped;
+    for(size_t i = 0; i < text.size(); ++i)
+    {
+        switch(text[i])
+        {
+        case '&': escaped += "&amp;"; break;
+        case '<': escaped += "&lt;"; break;
+        case '>': escaped += "&gt;"; break;
+        case '"': escaped += "&quot;"; break;
+        case '\'': escaped += "&apos;"; break;
+        default: escaped += text[i]; break;
+        }
+    }
+    return escaped;
 }
 
 Algorithm parse_algorithm_selection(const std::string& text)
@@ -57,6 +80,140 @@ bool parse_bool_selection(const std::string& text)
     std::string normalized = normalize_algorithm_text(text);
     return normalized == "true" || normalized == "yes" || normalized == "1" || normalized == "on" ||
         normalized.find("enable") != std::string::npos;
+}
+
+bool is_template_float_representable(double value)
+{
+	const double limit = (double)std::numeric_limits<float>::max();
+	return weighted_moment_core::is_finite_number(value) && value >= -limit && value <= limit;
+}
+
+// Result rows retain one lag value for every reordered direction. SGeMS
+// Cartesian properties are x-fastest, so rows are placed by lag indices, not
+// by the enumeration order used to construct the lag table. The layout is
+// captured before the calculator releases the Key-owned direction arrays.
+int template_result_row_to_node_id(
+	const TemplateOutputLayout& layout,
+	const RGrid* output_grid,
+	const double* row)
+{
+	if(!layout.valid || output_grid == NULL || row == NULL ||
+	   (layout.displayed_direction_count != 2 && layout.displayed_direction_count != 3))
+	{
+		return -1;
+	}
+	const int dimensions[3] = { output_grid->nx(), output_grid->ny(), output_grid->nz() };
+	for(int axis = 0; axis < 3; ++axis)
+	{
+		if(dimensions[axis] != layout.dimensions[axis] || dimensions[axis] <= 0)
+		{
+			return -1;
+		}
+	}
+	int lag_index[3] = { 0, 0, 0 };
+	for(int axis = 0; axis < layout.displayed_direction_count; ++axis)
+	{
+		const int column = layout.row_column[axis];
+		const int step = layout.lag_step[axis];
+		const double lag_value = row[column];
+		if(column < 0 || step <= 0 || !weighted_moment_core::is_finite_number(lag_value))
+		{
+			return -1;
+		}
+		if(lag_value < 0.0 || lag_value > (double)INT_MAX - 0.5)
+		{
+			return -1;
+		}
+		const int rounded_lag = (int)floor(lag_value + 0.5);
+		if(fabs(lag_value - (double)rounded_lag) > 1.0e-9 ||
+		   rounded_lag % step != 0)
+		{
+			return -1;
+		}
+		lag_index[axis] = rounded_lag / step;
+		if(lag_index[axis] < 0 || lag_index[axis] >= dimensions[axis])
+		{
+			return -1;
+		}
+	}
+	if(layout.displayed_direction_count == 2 && dimensions[2] != 1)
+	{
+		return -1;
+	}
+	return lag_index[0] + dimensions[0] * (lag_index[1] + dimensions[1] * lag_index[2]);
+}
+
+bool parse_strict_template_int(const std::string& text, int* value)
+{
+	char* end = NULL;
+	long parsed = 0;
+	if(value == NULL || text.empty())
+	{
+		return false;
+	}
+	errno = 0;
+	parsed = strtol(text.c_str(), &end, 10);
+	if(end == text.c_str() || errno == ERANGE || parsed < INT_MIN || parsed > INT_MAX)
+	{
+		return false;
+	}
+	while(end != NULL && *end != '\0' && isspace((unsigned char)*end))
+	{
+		++end;
+	}
+	if(end == NULL || *end != '\0')
+	{
+		return false;
+	}
+	*value = (int)parsed;
+	return true;
+}
+
+bool parse_exact_template_directions(
+	const std::string& text,
+	int expected_count,
+	int coordinate_dimensions,
+	std::vector<ExactTemplateDirection>* directions)
+{
+	if(directions == NULL || expected_count <= 0 || (coordinate_dimensions != 2 && coordinate_dimensions != 3))
+	{
+		return false;
+	}
+	directions->clear();
+	std::stringstream input(text);
+	std::string token;
+	while(std::getline(input, token, ';'))
+	{
+		for(size_t character = 0; character < token.size(); ++character)
+		{
+			if(token[character] == ',' || token[character] == '(' || token[character] == ')' || token[character] == '[' || token[character] == ']')
+			{
+				token[character] = ' ';
+			}
+		}
+		std::stringstream coordinates(token);
+		std::string part_x;
+		std::string part_y;
+		std::string part_z;
+		std::string extra;
+		ExactTemplateDirection direction;
+		direction.x = 0;
+		direction.y = 0;
+		direction.z = 0;
+		if(!(coordinates >> part_x >> part_y) ||
+		   (coordinate_dimensions == 3 && !(coordinates >> part_z)) ||
+		   (coordinates >> extra) ||
+		   !parse_strict_template_int(part_x, &direction.x) ||
+		   !parse_strict_template_int(part_y, &direction.y) ||
+		   (coordinate_dimensions == 3 && !parse_strict_template_int(part_z, &direction.z)) ||
+		   (direction.x == 0 && direction.y == 0 && direction.z == 0))
+		{
+			directions->clear();
+			return false;
+		}
+		directions->push_back(direction);
+	}
+	return (int)directions->size() == expected_count;
 }
 
 weighted_moment_core::WeightMode parse_weight_mode_selection(const std::string& text)
@@ -367,12 +524,22 @@ HOSC_TEMPLATE::HOSC_TEMPLATE()
 	Key = NULL;
 	al = AVL;
 	weighted_enabled_ = false;
+	template_sampling_exact_ = false;
+	integer_direction_vectors_.clear();
 	current_project_ = NULL;
 	auto_grid_ = NULL;
 	auto_grid_name_.clear();
 	slice_grid_ = NULL;
 	slice_property_ = NULL;
 	slice_grid_name_.clear();
+	output_layout_.valid = false;
+	output_layout_.displayed_direction_count = 0;
+	for(int axis = 0; axis < 3; ++axis)
+	{
+		output_layout_.row_column[axis] = -1;
+		output_layout_.lag_step[axis] = 0;
+		output_layout_.dimensions[axis] = 0;
+	}
 #if 0
 	momentWindowL = 0;
 	momentWindowW = 0;
@@ -396,6 +563,7 @@ HOSC_TEMPLATE::HOSC_TEMPLATE()
 bool HOSC_TEMPLATE::initialize( const Parameters_handler* parameters,
 							   Error_messages_handler* error_mesgs )
 {
+	hosc_validation::FeedbackGuard feedback(error_mesgs, "hosc_template_validation_summary");
 	hosc_install_exception_filter();
 	hosc_debug_log("initialize.begin", "start");
 
@@ -420,12 +588,18 @@ bool HOSC_TEMPLATE::initialize( const Parameters_handler* parameters,
 		return true;
 	}
 
-	get_Calculate_Target(parameters, error_mesgs);
+	if(!get_Calculate_Target(parameters, error_mesgs))
+	{
+		return false;
+	}
 	hosc_debug_log("initialize.target", "target=%d", G_CalculateTarget);
 
 
-	get_Calculate_Algorithm(parameters, error_mesgs);
-	get_Weighted_Options(parameters, error_mesgs);
+	if(!get_Calculate_Algorithm(parameters, error_mesgs) ||
+	   !get_Weighted_Options(parameters, error_mesgs))
+	{
+		return false;
+	}
 	hosc_debug_log(
 		"initialize.options",
 		"algorithm=%d weighted=%d",
@@ -441,6 +615,11 @@ bool HOSC_TEMPLATE::initialize( const Parameters_handler* parameters,
 	if ( !get_Keys_Data(parameters, error_mesgs))
 	{
 		hosc_debug_log("initialize.fail", "get_Keys_Data failed");
+		return false;
+	}
+	if(!get_Template_Sampling(parameters, error_mesgs))
+	{
+		hosc_debug_log("initialize.fail", "get_Template_Sampling failed");
 		return false;
 	}
 
@@ -605,7 +784,19 @@ int HOSC_TEMPLATE::execute( GsTL_project* proj )
 				gridSize = auto_grid_->ny() * auto_grid_->nz();
 		}
 
-		if(weighted_enabled_)
+		if(template_sampling_exact_)
+		{
+			hosc_debug_log("execute.calc.begin", "ExactRecCalculation4DLL exact unweighted cumulant gridSize=%d", gridSize);
+			targetGrid = ExactRecCalculation4DLL(
+				Key,
+				grid,
+				&gridSize,
+				avlCrossection,
+				crossectionNum,
+				integer_direction_vectors_,
+				al == Bell);
+		}
+		else if(weighted_enabled_)
 		{
 			if(al == AVL)
 			{
@@ -695,6 +886,10 @@ int HOSC_TEMPLATE::execute( GsTL_project* proj )
 			hosc_debug_log("execute.write.begin", "gridSize=%d valuePos=%d", gridSize, Key->NDIR);
 			if(set_MyGrid_Data(targetGrid, gridSize, Key->NDIR) != 0)
 				return 1;
+			if(!write_Template_Output_Validity(targetGrid, gridSize, Key->NDIR))
+				return 1;
+			if(template_sampling_exact_ && !write_Template_Exact_Support(targetGrid, gridSize, Key->NDIR))
+				return 1;
 			hosc_debug_log("execute.write.end", "done");
 		if(!create_3d_slice_output())
 		{
@@ -770,6 +965,8 @@ int HOSC_TEMPLATE::execute( GsTL_project* proj )
 			hosc_debug_log("execute.write.begin", "moment gridSize=%d valuePos=%d", gridSize, Key->NDIR);
 			if(set_MyGrid_Data(targetGrid, gridSize, Key->NDIR) != 0)
 				return 1;
+			if(!write_Template_Output_Validity(targetGrid, gridSize, Key->NDIR))
+				return 1;
 			hosc_debug_log("execute.write.end", "moment done");
 			if(!create_3d_slice_output())
 			{
@@ -827,6 +1024,12 @@ bool HOSC_TEMPLATE::get_Source_Data(const Parameters_handler* parameters,
 		hosc_debug_log("get_Source_Data.fail", "source geostat grid lookup failed");
         return false;
     }
+	if(source_grid_ == NULL)
+	{
+		error_mesgs->report("Source_Grid", "HOSC_TEMPLATE supports Cartesian grids only");
+		hosc_debug_log("get_Source_Data.fail", "source grid is not Cartesian");
+		return false;
+	}
     source_node_count_ = source_geostat_grid_->size();
     source_nx_ = source_grid_ != NULL ? source_grid_->nx() : 0;
     source_ny_ = source_grid_ != NULL ? source_grid_->ny() : 0;
@@ -842,10 +1045,11 @@ bool HOSC_TEMPLATE::get_Source_Data(const Parameters_handler* parameters,
 		source_geostat_grid_->classname().c_str());
 
 
-
-	source_x = source_geostat_grid_->select_property("x");
-	source_y = source_geostat_grid_->select_property("y");
-	source_z = source_geostat_grid_->select_property("z");
+	// Cartesian-grid geometry is defined by node index and grid dimensions.
+	// Ordinary x/y/z properties are data columns and must not affect templates.
+	source_x = NULL;
+	source_y = NULL;
+	source_z = NULL;
 	string prop_name = parameters->value( "Source_Property.value" );
 	hosc_debug_log(
 		"get_Source_Data.props",
@@ -867,14 +1071,6 @@ bool HOSC_TEMPLATE::get_Source_Data(const Parameters_handler* parameters,
 		hosc_debug_log("get_Source_Data.fail", "source property does not exist: %s", prop_name.c_str());
 		return false;
 	}
-	if(prop_name == "z" || prop_name == "Z")
-	{
-
-
-
-		source_z = NULL;
-		hosc_debug_log("get_Source_Data.info", "source property z treated as value column; spatial z disabled");
-	}
 	int num_xyz = source_node_count_;
 	if(num_xyz <= 0)
 	{
@@ -883,10 +1079,28 @@ bool HOSC_TEMPLATE::get_Source_Data(const Parameters_handler* parameters,
 		return false;
 	}
 
+	int informed_count = 0;
+	for(int node = 0; node < num_xyz; node++)
+	{
+		if(!source_val->is_informed(node))
+		{
+			continue;
+		}
+		const double value = (double)source_val->get_value(node);
+		if(!weighted_moment_core::is_finite_number(value))
+		{
+			continue;
+		}
+		informed_count++;
+	}
+	if(informed_count == 0)
+	{
+		error_mesgs->report("Source_Property", "Selected source property has no informed finite values");
+		hosc_debug_log("get_Source_Data.fail", "no informed finite source values");
+		return false;
+	}
 
-
-
-	grid = new (std::nothrow) double*[1+num_xyz];
+	grid = new (std::nothrow) double*[1+informed_count];
 
 	if(grid == NULL)
 	{
@@ -901,87 +1115,38 @@ bool HOSC_TEMPLATE::get_Source_Data(const Parameters_handler* parameters,
 		hosc_debug_log("get_Source_Data.fail", "grid header allocation failed");
 		return false;
 	}
-	grid[0][0] = (double)source_node_count_;
+	grid[0][0] = (double)informed_count;
 	grid[0][1] = 4;
-
-
-	double min_coord_x = 0.0;
-	double min_coord_y = 0.0;
-	double min_coord_z = 0.0;
-	if(source_grid_ == NULL && num_xyz > 0)
+	int row = 1;
+	for(int zero_index = 0; zero_index < num_xyz; zero_index++)
 	{
-		bool initialized = false;
-		for(int idx = 0; idx < num_xyz; idx++)
+		if(!source_val->is_informed(zero_index))
 		{
-			Geostat_grid::location_type loc = source_geostat_grid_->location(idx);
-			const double lx = source_x != NULL ? (double)source_x->get_value(idx) : (double)loc.x();
-			const double ly = source_y != NULL ? (double)source_y->get_value(idx) : (double)loc.y();
-			const double lz = source_z != NULL ? (double)source_z->get_value(idx) : (double)loc.z();
-			if(!initialized)
-			{
-				min_coord_x = lx;
-				min_coord_y = ly;
-				min_coord_z = lz;
-				initialized = true;
-			}
-			else
-			{
-				if(lx < min_coord_x) min_coord_x = lx;
-				if(ly < min_coord_y) min_coord_y = ly;
-				if(lz < min_coord_z) min_coord_z = lz;
-			}
+			continue;
 		}
-		hosc_debug_log("get_Source_Data.pointset_min", "min=(%.6f,%.6f,%.6f)", min_coord_x, min_coord_y, min_coord_z);
-	}
-	for(int i = 1; i <= num_xyz; i++)
-	{
-		grid[i] = new (std::nothrow) double[4];
-		if(grid[i] == NULL)
+		const double source_value = (double)source_val->get_value(zero_index);
+		if(!weighted_moment_core::is_finite_number(source_value))
 		{
-			hosc_debug_log("get_Source_Data.fail", "grid row allocation failed at row=%d", i);
+			continue;
+		}
+		grid[row] = new (std::nothrow) double[4];
+		if(grid[row] == NULL)
+		{
+			hosc_debug_log("get_Source_Data.fail", "grid row allocation failed at row=%d", row);
 			return false;
 		}
-
-		const int zero_index = i - 1;
 		const int nx = source_nx_;
 		const int ny = source_ny_;
 		const int safe_nx = (nx > 0) ? nx : 1;
 		const int safe_ny = (ny > 0) ? ny : 1;
 		const int xy = safe_nx * safe_ny;
-		Geostat_grid::location_type loc;
-		if(source_grid_ == NULL)
-		{
-			loc = source_geostat_grid_->location(zero_index);
-		}
-
-		if(source_x != NULL)
-			grid[i][0] = (double)source_x->get_value(i-1);
-		else if(source_grid_ == NULL)
-			grid[i][0] = (double)loc.x();
-		else
-			grid[i][0] = (double)(zero_index % safe_nx + 1);
-
-		if(source_y != NULL)
-			grid[i][1] = (double)source_y->get_value(i-1);
-		else if(source_grid_ == NULL)
-			grid[i][1] = (double)loc.y();
-		else
-			grid[i][1] = (double)((zero_index / safe_nx) % safe_ny + 1);
-
-		if(source_z != NULL)
-			grid[i][2] = (double)source_z->get_value(i-1);
-		else if(source_grid_ == NULL)
-			grid[i][2] = (double)loc.z();
-		else
-			grid[i][2] = (double)(xy > 0 ? zero_index / xy + 1 : 1);
-
-		if(source_grid_ == NULL)
-		{
-			grid[i][0] = grid[i][0] - min_coord_x + 1.0;
-			grid[i][1] = grid[i][1] - min_coord_y + 1.0;
-			grid[i][2] = grid[i][2] - min_coord_z + 1.0;
-		}
-		grid[i][3] = (double)source_val->get_value(i-1);
+		// This plugin boundary is always zero-based; it must not depend on the
+		// first informed source node that happens to be encountered.
+		grid[row][0] = (double)(zero_index % safe_nx);
+		grid[row][1] = (double)((zero_index / safe_nx) % safe_ny);
+		grid[row][2] = (double)(xy > 0 ? zero_index / xy : 0);
+		grid[row][3] = source_value;
+		row++;
 
 
 	}
@@ -989,9 +1154,10 @@ bool HOSC_TEMPLATE::get_Source_Data(const Parameters_handler* parameters,
 	{
 		hosc_debug_log(
 			"get_Source_Data.sample",
-			"first=(%.6f,%.6f,%.6f,%.6f) last=(%.6f,%.6f,%.6f,%.6f)",
+			"valid=%d first=(%.6f,%.6f,%.6f,%.6f) last=(%.6f,%.6f,%.6f,%.6f)",
+			informed_count,
 			grid[1][0], grid[1][1], grid[1][2], grid[1][3],
-			grid[num_xyz][0], grid[num_xyz][1], grid[num_xyz][2], grid[num_xyz][3]);
+			grid[informed_count][0], grid[informed_count][1], grid[informed_count][2], grid[informed_count][3]);
 	}
 
 
@@ -1086,37 +1252,11 @@ bool HOSC_TEMPLATE::get_Keys_Data(const Parameters_handler* parameters, Error_me
 
 
 
-	int inferred_nx = source_nx_;
-	int inferred_ny = source_ny_;
-	int inferred_nz = source_nz_;
-	if(grid != NULL && grid[0] != NULL && (int)grid[0][0] > 0)
-	{
-		int min_x = INT_MAX;
-		int min_y = INT_MAX;
-		int min_z = INT_MAX;
-		int max_x = INT_MIN;
-		int max_y = INT_MIN;
-		int max_z = INT_MIN;
-		const int node_count = (int)grid[0][0];
-		for(int i = 1; i <= node_count; i++)
-		{
-			const int x = (int)grid[i][0];
-			const int y = (int)grid[i][1];
-			const int z = (int)grid[i][2];
-			if(x < min_x) min_x = x;
-			if(y < min_y) min_y = y;
-			if(z < min_z) min_z = z;
-			if(x > max_x) max_x = x;
-			if(y > max_y) max_y = y;
-			if(z > max_z) max_z = z;
-		}
-		if(max_x >= min_x)
-			inferred_nx = max_x - min_x + 1;
-		if(max_y >= min_y)
-			inferred_ny = max_y - min_y + 1;
-		if(max_z >= min_z)
-			inferred_nz = max_z - min_z + 1;
-	}
+	// Use the Cartesian grid's declared dimensions.  Inferring dimensions from
+	// the informed node subset would shift or shrink geometry at missing edges.
+	const int inferred_nx = source_nx_;
+	const int inferred_ny = source_ny_;
+	const int inferred_nz = source_nz_;
 	Key->NX = inferred_nx;
 
 
@@ -1183,6 +1323,9 @@ bool HOSC_TEMPLATE::get_Keys_Data(const Parameters_handler* parameters, Error_me
 
 
 
+	const char* direction_fields[] = {
+		"NOD", "NLAG", "LAG", "LTOL", "AZM", "ATOL", "BANDWH", "DIP", "DTOL", "BANDWD"
+	};
 	vector<string>texts;
 	texts.push_back(parameters->value("NOD.value"));
 	texts.push_back(parameters->value("NLAG.value"));
@@ -1207,11 +1350,21 @@ bool HOSC_TEMPLATE::get_Keys_Data(const Parameters_handler* parameters, Error_me
 	vector<string> tempResult;
 	for(int i = 0; i < texts.size(); i++)
 	{
+		if(texts[i].empty())
+		{
+			error_mesgs->report(direction_fields[i], "Template shape: this direction parameter list is empty. Enter one value per direction, separated by commas.");
+			return false;
+		}
 		stringstream ss(texts[i]);
 		string strItem;
 		int tempNum = 0;
 		while(getline(ss, strItem, ','))
 		{
+			if(strItem.empty())
+			{
+				error_mesgs->report(direction_fields[i], "Template shape: this list contains an empty item. Enter one value per direction, separated by commas, without empty items.");
+				return false;
+			}
 			tempResult.push_back(strItem);
 			tempNum++;
 			if(i == 0)
@@ -1219,10 +1372,19 @@ bool HOSC_TEMPLATE::get_Keys_Data(const Parameters_handler* parameters, Error_me
 		}
 		if(tempNum != dirNum)
 		{
-			error_mesgs->report("NLAG", "Number of NLAG should equal to number of direction");
+			std::ostringstream diagnostic;
+			diagnostic << "Template shape: " << direction_fields[i] << " contains " << tempNum
+				<< " values, but Number of occurrences (NOD) defines " << dirNum
+				<< " directions. Enter exactly one value per direction.";
+			error_mesgs->report(direction_fields[i], diagnostic.str());
 			hosc_debug_log("get_Keys_Data.fail", "parameter count mismatch group=%d tempNum=%d dirNum=%d", i, tempNum, dirNum);
 			return false;
 		}
+	}
+	if(dirNum <= 0 || dirNum > 10)
+	{
+		error_mesgs->report("NOD", "The number of directions must be between 1 and 10");
+		return false;
 	}
 	Key->NDIR = dirNum;
 	Key->ORDER = dirNum+1;
@@ -1253,14 +1415,60 @@ bool HOSC_TEMPLATE::get_Keys_Data(const Parameters_handler* parameters, Error_me
 	Key->BANDWD = (int*)calloc(Key->NDIR, sizeof(int));
 	tempInt.push_back(Key->BANDWD);
 
-	for(int i = 0; i < tempResult.size(); i++)
+	for(int group = 0; group < (int)tempInt.size(); group++)
 	{
 		for(int j = 0; j < Key->NDIR; j++)
 		{
-			tempInt[i/Key->NDIR][j] = atoi(tempResult[i].c_str());
-			i++;
+			const int value_index = group * Key->NDIR + j;
+			int parsed = 0;
+			if(value_index >= (int)tempResult.size() || !parse_strict_template_int(tempResult[value_index], &parsed))
+			{
+				std::ostringstream diagnostic;
+				diagnostic << "Template shape: " << direction_fields[group] << ", direction " << (j + 1)
+					<< " requires a complete integer without trailing characters.";
+				error_mesgs->report(direction_fields[group], diagnostic.str());
+				return false;
+			}
+			tempInt[group][j] = parsed;
 		}
-		i--;
+	}
+	bool valid_direction_ranges = true;
+	for(int group = 0; group < (int)tempInt.size(); group++)
+	{
+		// Azimuth and dip may be signed; only counts, steps, and tolerances
+		// have the positivity constraints already enforced by this parser.
+		if(group == 4 || group == 7)
+		{
+			continue;
+		}
+		for(int direction = 0; direction < Key->NDIR; direction++)
+		{
+			const int value = tempInt[group][direction];
+			if((group < 3 && value <= 0) || (group >= 3 && value < 0))
+			{
+				std::ostringstream diagnostic;
+				diagnostic << "Template shape: " << direction_fields[group] << ", direction " << (direction + 1)
+					<< " has value " << value << ". Enter "
+					<< (group < 3 ? "a positive integer." : "a non-negative integer.");
+				error_mesgs->report(direction_fields[group], diagnostic.str());
+				valid_direction_ranges = false;
+				break;
+			}
+		}
+	}
+	if(!valid_direction_ranges)
+	{
+		return false;
+	}
+	int requested_joint_order = 1;
+	for(int direction = 0; direction < Key->NDIR; direction++)
+	{
+		requested_joint_order += Key->NOD[direction];
+	}
+	if(requested_joint_order > 8)
+	{
+		error_mesgs->report("NOD", "The supported total cumulant order is at most 8");
+		return false;
 	}
 	vector<string>().swap(texts);
 	vector<string>().swap(tempResult);
@@ -1313,10 +1521,11 @@ bool HOSC_TEMPLATE::get_Calculate_Target(const Parameters_handler* parameters, E
 		G_CalculateTarget = 2;
 	else if(Calculate_Target == "Cumulant")
 		G_CalculateTarget = 1;
-	else if(Calculate_Target == "Windows Moment")
-		G_CalculateTarget = 3;
 	else
-		G_CalculateTarget = 4;
+	{
+		error_mesgs->report("Target_Button", "Expected Moment or Cumulant");
+		return false;
+	}
 	hosc_debug_log("get_Calculate_Target", "raw=%s parsed=%d", Calculate_Target.c_str(), G_CalculateTarget);
 
 	return true;
@@ -1329,8 +1538,96 @@ bool HOSC_TEMPLATE::get_Calculate_Algorithm(const Parameters_handler* parameters
 	{
 		Calculate_Algorithm = parameter_value_or_empty(parameters, "Algorithm_Button.value");
 	}
-	al = parse_algorithm_selection(Calculate_Algorithm);
+	const std::string normalized = normalize_algorithm_text(Calculate_Algorithm);
+	if(normalized == "bell" || normalized == "bell algorithm" || normalized == "bell based algorithm")
+	{
+		al = Bell;
+	}
+	else if(normalized == "avl" || normalized == "avl algorithm" || normalized == "avl based algorithm")
+	{
+		al = AVL;
+	}
+	else
+	{
+		error_mesgs->report("Algorithm_Mode", "General / Calculate Algorithm: select Bell or AVL.");
+		return false;
+	}
 	hosc_debug_log("get_Calculate_Algorithm", "raw=%s parsed=%d", Calculate_Algorithm.c_str(), (int)al);
+	return true;
+}
+
+bool HOSC_TEMPLATE::get_Template_Sampling(const Parameters_handler* parameters, Error_messages_handler* error_mesgs)
+{
+	template_sampling_exact_ = false;
+	integer_direction_vectors_.clear();
+	const std::string sampling_text = parameter_value_or_empty(parameters, "template_sampling.value");
+	const std::string sampling = normalize_algorithm_text(sampling_text);
+	const bool legacy_sampling = sampling.empty() || sampling == "legacy" || sampling == "legacy_search";
+	if(legacy_sampling && source_nz_ <= 1)
+	{
+		return true;
+	}
+	if(!legacy_sampling && sampling != "exact" && sampling != "exhaustive_integer_offsets")
+	{
+		std::ostringstream diagnostic;
+		diagnostic << "Exact Template / Sampling mode: current value '" << template_diagnostic_value(sampling_text)
+			<< "' is not supported. Select legacy_search for a 2D grid, or exhaustive_integer_offsets for an unweighted Cumulant.";
+		error_mesgs->report("template_sampling", diagnostic.str());
+		return false;
+	}
+
+	// A 3D grid requires exact sampling. Report all incompatible inputs at
+	// once so correcting the mode does not merely reveal the next error.
+	bool valid = true;
+	if(legacy_sampling)
+	{
+		std::ostringstream diagnostic;
+		diagnostic << "Exact Template / Sampling mode: current value '"
+			<< template_diagnostic_value(sampling_text.empty() ? "legacy_search (default)" : sampling_text)
+			<< "' cannot sample this 3D Cartesian grid (Nz=" << source_nz_
+			<< "). Select exhaustive_integer_offsets, then satisfy the other fields listed below.";
+		error_mesgs->report("template_sampling", diagnostic.str());
+		valid = false;
+	}
+	if(G_CalculateTarget != 1)
+	{
+		std::ostringstream diagnostic;
+		diagnostic << "General / Calculate Target: current value '"
+			<< template_diagnostic_value(parameter_value_or_empty(parameters, "Target_Button.value"))
+			<< "' is incompatible with exhaustive_integer_offsets. Select Cumulant; exact template sampling does not support Moment output.";
+		error_mesgs->report("Target_Button", diagnostic.str());
+		valid = false;
+	}
+	if(weighted_enabled_)
+	{
+		std::ostringstream diagnostic;
+		diagnostic << "Weighted Moment / Enable Weighted Cumulant: current value '"
+			<< template_diagnostic_value(parameter_value_or_empty(parameters, "Weighted_Enable.value"))
+			<< "' is incompatible with exhaustive_integer_offsets. Select Disable; choosing uniform alone does not disable weighting.";
+		error_mesgs->report("Weighted_Enable", diagnostic.str());
+		valid = false;
+	}
+	const int coordinate_dimensions = source_nz_ <= 1 ? 2 : 3;
+	const int direction_count = Key != NULL ? Key->NDIR : 0;
+	const std::string direction_text = parameter_value_or_empty(parameters, "integer_direction_vectors.value");
+	std::vector<ExactTemplateDirection> parsed_directions;
+	if(!parse_exact_template_directions(direction_text, direction_count, coordinate_dimensions, &parsed_directions))
+	{
+		std::ostringstream diagnostic;
+		diagnostic << "Exact Template / Integer direction vectors: current value '" << template_diagnostic_value(direction_text)
+			<< "' is invalid. Enter exactly " << direction_count << " nonzero integer vectors, one per Template shape direction, with "
+			<< coordinate_dimensions << " components each (" << (coordinate_dimensions == 3 ? "dx,dy,dz" : "dx,dy")
+			<< "), separated by semicolons. Use directions appropriate to the intended template.";
+		error_mesgs->report("integer_direction_vectors", diagnostic.str());
+		valid = false;
+	}
+	if(!valid)
+	{
+		return false;
+	}
+	integer_direction_vectors_.swap(parsed_directions);
+	template_sampling_exact_ = true;
+	hosc_debug_log("get_Template_Sampling", "exhaustive integer offsets directions=%d", (int)integer_direction_vectors_.size());
 	return true;
 }
 
@@ -2477,11 +2774,14 @@ int HOSC_TEMPLATE::set_MyGrid_Data(double** targetGrid, int gridSize, int valueP
 		hosc_debug_log("set_MyGrid_Data.fail", "invalid valuePos=%d", valuePos);
 		return -1;
 	}
-	const int writableSize = (gridSize < auto_grid_->nxyz()) ? gridSize : auto_grid_->nxyz();
-	hosc_debug_log("set_MyGrid_Data.range", "writableSize=%d auto_nxyz=%d", writableSize, auto_grid_->nxyz());
-
-
-	for(int i = 0; i < writableSize; i++)
+	const int output_size = auto_grid_->nxyz();
+	hosc_debug_log("set_MyGrid_Data.range", "rows=%d auto_nxyz=%d", gridSize, output_size);
+	for(int node = 0; node < output_size; ++node)
+	{
+		auto_property_->set_not_informed(node);
+	}
+	std::vector<unsigned char> assigned((size_t)output_size, 0);
+	for(int i = 0; i < gridSize; i++)
 	{
 		if(targetGrid[i] == NULL)
 		{
@@ -2489,17 +2789,101 @@ int HOSC_TEMPLATE::set_MyGrid_Data(double** targetGrid, int gridSize, int valueP
 			hosc_debug_log("set_MyGrid_Data.fail", "targetGrid[%d] is NULL", i);
 			return -1;
 		}
-		if(i == 0 || i == writableSize - 1)
+		const int node_id = template_result_row_to_node_id(output_layout_, auto_grid_, targetGrid[i]);
+		if(node_id < 0 || node_id >= output_size || assigned[(size_t)node_id] != 0)
 		{
-			hosc_debug_log("set_MyGrid_Data.sample", "row=%d value=%.17g", i, targetGrid[i][valuePos]);
+			GsTLcerr << "Cannot write HOSC output: result lag coordinates do not map uniquely to the output grid." << gstlIO::end;
+			hosc_debug_log("set_MyGrid_Data.fail", "row=%d node=%d lag mapping invalid", i, node_id);
+			return -1;
 		}
-		auto_property_->set_value(targetGrid[i][valuePos], i);
+		assigned[(size_t)node_id] = 1;
+		if(i == 0 || i == gridSize - 1)
+		{
+			hosc_debug_log("set_MyGrid_Data.sample", "row=%d node=%d value=%.17g", i, node_id, targetGrid[i][valuePos]);
+		}
+		const double value = targetGrid[i][valuePos];
+		if(is_template_float_representable(value) && value != myEmpty)
+		{
+			auto_property_->set_value(value, node_id);
+		}
 
 	}
 
 
 	hosc_debug_log("set_MyGrid_Data.end", "done");
 	return 0;
+}
+
+bool HOSC_TEMPLATE::write_Template_Output_Validity(double** targetGrid, int gridSize, int valuePos)
+{
+	if(auto_grid_ == NULL || targetGrid == NULL || valuePos < 0)
+	{
+		return false;
+	}
+	const std::string numeric_property_name = auto_prop_name_ + "_numeric_valid";
+	const std::string display_property_name = auto_prop_name_ + "_display_valid";
+	GsTLGridProperty* numeric_validity = geostat_utils::add_property_to_grid(auto_grid_, numeric_property_name);
+	GsTLGridProperty* display_validity = geostat_utils::add_property_to_grid(auto_grid_, display_property_name);
+	if(numeric_validity == NULL || display_validity == NULL)
+	{
+		hosc_debug_log("write_Template_Output_Validity.fail", "property creation failed");
+		return false;
+	}
+	const int output_size = auto_grid_->nxyz();
+	for(int i = 0; i < output_size; ++i)
+	{
+		numeric_validity->set_value(0.0, i);
+		display_validity->set_value(0.0, i);
+	}
+	for(int i = 0; i < gridSize; ++i)
+	{
+		if(targetGrid[i] == NULL)
+		{
+			return false;
+		}
+		const int node_id = template_result_row_to_node_id(output_layout_, auto_grid_, targetGrid[i]);
+		if(node_id < 0 || node_id >= output_size)
+		{
+			return false;
+		}
+		const double value = targetGrid[i][valuePos];
+		const bool numeric_valid = weighted_moment_core::is_finite_number(value) && value != myEmpty;
+		numeric_validity->set_value(numeric_valid ? 1.0 : 0.0, node_id);
+		display_validity->set_value(numeric_valid && is_template_float_representable(value) ? 1.0 : 0.0, node_id);
+	}
+	return true;
+}
+
+bool HOSC_TEMPLATE::write_Template_Exact_Support(double** targetGrid, int gridSize, int valuePos)
+{
+	if(auto_grid_ == NULL || targetGrid == NULL || valuePos < 0)
+	{
+		return false;
+	}
+	GsTLGridProperty* support = geostat_utils::add_property_to_grid(auto_grid_, auto_prop_name_ + "_support");
+	if(support == NULL)
+	{
+		return false;
+	}
+	const int output_size = auto_grid_->nxyz();
+	for(int i = 0; i < output_size; ++i)
+	{
+		support->set_value(0.0, i);
+	}
+	for(int i = 0; i < gridSize; ++i)
+	{
+		if(targetGrid[i] == NULL)
+		{
+			return false;
+		}
+		const int node_id = template_result_row_to_node_id(output_layout_, auto_grid_, targetGrid[i]);
+		if(node_id < 0 || node_id >= output_size)
+		{
+			return false;
+		}
+		support->set_value(targetGrid[i][valuePos + 1], node_id);
+	}
+	return true;
 }
 
 RGrid* HOSC_TEMPLATE::CreateCartesianGridWithProperty(
@@ -2980,6 +3364,7 @@ bool HOSC_TEMPLATE::create_3d_slice_output_from_selected_grid()
 
 bool HOSC_TEMPLATE::get_My_Shape(const Parameters_handler* parameters, Error_messages_handler* error_mesgs)
 {
+	output_layout_.valid = false;
 	if(Key == NULL)
 	{
 		error_mesgs->report("template_shape", "Keys are not initialized");
@@ -3156,6 +3541,7 @@ bool HOSC_TEMPLATE::get_My_Shape(const Parameters_handler* parameters, Error_mes
 	std::vector<int> oldNOD(Key->NOD, Key->NOD + Key->NDIR);
 	std::vector<int> oldNLAG(Key->NLAG, Key->NLAG + Key->NDIR);
 	std::vector<int> oldLAG(Key->LAG, Key->LAG + Key->NDIR);
+	std::vector<int> oldLTOL(Key->LTOL, Key->LTOL + Key->NDIR);
 	std::vector<int> oldAZM(Key->AZM, Key->AZM + Key->NDIR);
 	std::vector<int> oldATOL(Key->ATOL, Key->ATOL + Key->NDIR);
 	std::vector<int> oldBANDWH(Key->BANDWH, Key->BANDWH + Key->NDIR);
@@ -3165,18 +3551,24 @@ bool HOSC_TEMPLATE::get_My_Shape(const Parameters_handler* parameters, Error_mes
 
 	std::vector<int> reorderedDirs = hiddenDirs;
 	reorderedDirs.insert(reorderedDirs.end(), displayedDirs.begin(), displayedDirs.end());
+	std::vector<ExactTemplateDirection> oldExactDirections = integer_direction_vectors_;
 	for(int i = 0; i < Key->NDIR; i++)
 	{
 		const int oldIndex = reorderedDirs[i] - 1;
 		Key->NOD[i] = oldNOD[oldIndex];
 		Key->NLAG[i] = oldNLAG[oldIndex];
 		Key->LAG[i] = oldLAG[oldIndex];
+		Key->LTOL[i] = oldLTOL[oldIndex];
 		Key->AZM[i] = oldAZM[oldIndex];
 		Key->ATOL[i] = oldATOL[oldIndex];
 		Key->BANDWH[i] = oldBANDWH[oldIndex];
 		Key->DIP[i] = oldDIP[oldIndex];
 		Key->DTOL[i] = oldDTOL[oldIndex];
 		Key->BANDWD[i] = oldBANDWD[oldIndex];
+		if(template_sampling_exact_ && oldIndex >= 0 && oldIndex < (int)oldExactDirections.size())
+		{
+			integer_direction_vectors_[i] = oldExactDirections[oldIndex];
+		}
 	}
 
 	crossectionNum = (int)fixedPositions.size();
@@ -3195,9 +3587,42 @@ bool HOSC_TEMPLATE::get_My_Shape(const Parameters_handler* parameters, Error_mes
 		crossection[i] = fixedPositions[i] - 1;
 	}
 
+	// The calculators call Destruction() before returning targetGrid. Freeze the
+	// reordered result-row columns and lag steps before that ownership boundary.
+	output_layout_.displayed_direction_count = (int)displayedDirs.size();
+	output_layout_.dimensions[0] = myGridShape.nx;
+	output_layout_.dimensions[1] = myGridShape.ny;
+	output_layout_.dimensions[2] = myGridShape.nz;
+	for(int axis = 0; axis < 3; ++axis)
+	{
+		output_layout_.row_column[axis] = -1;
+		output_layout_.lag_step[axis] = 0;
+	}
+	for(int axis = 0; axis < output_layout_.displayed_direction_count; ++axis)
+	{
+		const int reordered_direction = Key->NDIR - output_layout_.displayed_direction_count + axis;
+		if(reordered_direction < 0 || reordered_direction >= Key->NDIR || Key->LAG == NULL || Key->LAG[reordered_direction] <= 0)
+		{
+			error_mesgs->report("template_shape", "Unable to freeze the displayed lag layout");
+			hosc_debug_log("get_My_Shape.fail", "cannot freeze layout axis=%d reordered_direction=%d", axis, reordered_direction);
+			return false;
+		}
+		output_layout_.row_column[axis] = reordered_direction;
+		output_layout_.lag_step[axis] = Key->LAG[reordered_direction];
+	}
+	if(output_layout_.dimensions[0] <= 0 || output_layout_.dimensions[1] <= 0 ||
+	   output_layout_.dimensions[2] <= 0 ||
+	   (output_layout_.displayed_direction_count == 2 && output_layout_.dimensions[2] != 1))
+	{
+		error_mesgs->report("template_shape", "The frozen template output layout is invalid");
+		hosc_debug_log("get_My_Shape.fail", "invalid frozen layout count=%d dimensions=%d,%d,%d", output_layout_.displayed_direction_count, output_layout_.dimensions[0], output_layout_.dimensions[1], output_layout_.dimensions[2]);
+		return false;
+	}
+	output_layout_.valid = true;
+
 	hosc_debug_log(
 		"get_My_Shape.end",
-		"shape=%d,%d,%d displayed=%d,%d,%d hidden_count=%d cross_count=%d cross0_zero=%d reordered_first_nlag=%d",
+		"shape=%d,%d,%d displayed=%d,%d,%d hidden_count=%d cross_count=%d cross0_zero=%d layout_count=%d layout_columns=%d,%d,%d layout_steps=%d,%d,%d",
 		myGridShape.nx,
 		myGridShape.ny,
 		myGridShape.nz,
@@ -3207,7 +3632,13 @@ bool HOSC_TEMPLATE::get_My_Shape(const Parameters_handler* parameters, Error_mes
 		(int)hiddenDirs.size(),
 		crossectionNum,
 		crossectionNum > 0 ? crossection[0] : -1,
-		Key->NDIR > 0 ? Key->NLAG[0] : -1);
+		output_layout_.displayed_direction_count,
+		output_layout_.row_column[0],
+		output_layout_.row_column[1],
+		output_layout_.row_column[2],
+		output_layout_.lag_step[0],
+		output_layout_.lag_step[1],
+		output_layout_.lag_step[2]);
 	return true;
 
 }

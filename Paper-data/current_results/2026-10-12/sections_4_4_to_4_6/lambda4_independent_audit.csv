@@ -1,0 +1,16 @@
+section,dataset_id,window,weighting,parameter_set,parameter_role,audit_method,valid_count,max_abs_error,mean_abs_error,max_relative_error,absolute_tolerance,relative_tolerance,within_tolerance,finite
+4.5,z15_26,3x3x3,uniform,uniform,primary,python_raw_weighted_central_moment4,71540,3.6912695122737205e-11,2.778914704797639e-13,1.97160768203561e-12,2e-06,1e-06,True,True
+4.5,z15_26,5x5x3,uniform,uniform,primary,python_raw_weighted_central_moment4,68160,8.631673154013697e-11,5.954856838524255e-13,1.9580942637165846e-12,2e-06,1e-06,True,True
+4.5,z15_26,7x7x3,uniform,uniform,primary,python_raw_weighted_central_moment4,64860,1.4442491647059796e-10,6.838950368612958e-13,1.894719377408603e-12,2e-06,1e-06,True,True
+4.5,z45_56,3x3x3,uniform,uniform,primary,python_raw_weighted_central_moment4,71540,3.310063334538427e-11,2.477429797674648e-13,1.9732879716915704e-12,2e-06,1e-06,True,True
+4.5,z45_56,5x5x3,uniform,uniform,primary,python_raw_weighted_central_moment4,68160,8.383693739233422e-11,4.881183649174689e-13,1.9774257094760728e-12,2e-06,1e-06,True,True
+4.5,z45_56,7x7x3,uniform,uniform,primary,python_raw_weighted_central_moment4,64860,1.0928147275990341e-10,5.470077549930275e-13,1.9020248239602525e-12,2e-06,1e-06,True,True
+4.5,z75_86,3x3x3,uniform,uniform,primary,python_raw_weighted_central_moment4,71540,2.3941737481436576e-11,1.9758803715254786e-13,1.8862991727905934e-12,2e-06,1e-06,True,True
+4.5,z75_86,5x5x3,uniform,uniform,primary,python_raw_weighted_central_moment4,68160,4.873612624578527e-11,2.1744727123032052e-13,1.9267250456744757e-12,2e-06,1e-06,True,True
+4.5,z75_86,7x7x3,uniform,uniform,primary,python_raw_weighted_central_moment4,64860,3.5342395676707383e-11,1.3454316641188255e-13,1.8720647946247053e-12,2e-06,1e-06,True,True
+4.6,z15_26,5x5x3,coordinate_gaussian,coordinate_gaussian_sigma_1.00,primary,python_raw_weighted_central_moment4,68160,1.5660361896152608e-10,8.233459301670841e-13,1.9444543186732004e-12,2e-06,1e-06,True,True
+4.6,z15_26,5x5x3,soft_high_porosity,soft_high_porosity_width_0.02_strength_0.80,primary,python_raw_weighted_central_moment4,68160,2.6628299565345515e-10,8.175307643361765e-13,1.954245177741568e-12,2e-06,1e-06,True,True
+4.6,z45_56,5x5x3,coordinate_gaussian,coordinate_gaussian_sigma_1.00,primary,python_raw_weighted_central_moment4,68160,1.2585132935782894e-10,6.731078715737622e-13,1.9516610549885627e-12,2e-06,1e-06,True,True
+4.6,z45_56,5x5x3,soft_high_porosity,soft_high_porosity_width_0.02_strength_0.80,primary,python_raw_weighted_central_moment4,68160,1.2865086773672374e-10,5.466171974574781e-13,1.9116897153632467e-12,2e-06,1e-06,True,True
+4.6,z75_86,5x5x3,coordinate_gaussian,coordinate_gaussian_sigma_1.00,primary,python_raw_weighted_central_moment4,68160,1.1294787327642553e-10,3.168295550431077e-13,1.926298136712471e-12,2e-06,1e-06,True,True
+4.6,z75_86,5x5x3,soft_high_porosity,soft_high_porosity_width_0.02_strength_0.80,primary,python_raw_weighted_central_moment4,68160,5.679368086930481e-11,2.8745199894368525e-13,1.8373439542201e-12,2e-06,1e-06,True,True

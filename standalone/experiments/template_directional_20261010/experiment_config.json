@@ -1,0 +1,245 @@
+{
+  "template_sampling": "exhaustive_integer_offsets",
+  "template_cli": "../../build/Release/template_cli.exe",
+  "native_test_workdir": "../../build",
+  "native_test_commands": [
+    {
+      "name": "weighted_core_checks",
+      "command": ["Release/weighted_core_checks.exe"]
+    },
+    {
+      "name": "window_avl_core_checks",
+      "command": ["Release/window_avl_core_checks.exe"]
+    },
+    {
+      "name": "movewindow_cli_smoke",
+      "command": ["Release/movewindow_cli.exe", "tests/movewindow_cli_smoke.ini"]
+    },
+    {
+      "name": "template_cli_exhaustive_integer_smoke",
+      "command": ["Release/template_cli.exe", "tests/template_exhaustive_smoke.ini"]
+    }
+  ],
+  "preprocessing_manifest": "../../data/r1_5_high_order_20261010/preprocessing_manifest.json",
+  "output_root": "../../output/template_directional_20261010",
+  "template_cli_timeout_seconds": 900,
+  "source_spacing": [50.0, 50.0, 2.0],
+  "porosity_excursion_threshold": 0.25,
+  "surrogates": {
+    "smoke_count": 30,
+    "formal_count": 199,
+    "seed": 20261010,
+    "iaaft_iterations": 240,
+    "max_attempts_per_id": 24,
+    "swap_iterations": 600,
+    "minimum_original_difference_fraction": 0.001,
+    "minimum_pair_difference_fraction": 0.001,
+    "maximum_duplicate_fraction": 0.0
+  },
+  "algorithm_audit": {
+    "max_absolute_error": 1e-12,
+    "max_relative_l2_error": 1e-10
+  },
+  "confirmatory_direction_pairs": [
+    "axis_0_90",
+    "diag_45_135"
+  ],
+  "datasets": [
+    {
+      "id": "stanford_vie_z15_26",
+      "slice_z": 20,
+      "attributes": [
+        {
+          "property_id": "porosity",
+          "grid_path": "../../data/r1_5_high_order_20261010/z15_26/stanford_vie_z15_26_porosity.grid",
+          "property_name": "porosity",
+          "field_type": "continuous",
+          "surrogate_generator": "continuous_iaaft_swap",
+          "connectivity_rule": "high_porosity_excursion"
+        },
+        {
+          "property_id": "channel_occupancy",
+          "grid_path": "../../data/r1_5_high_order_20261010/z15_26/stanford_vie_z15_26_channel_occupancy.grid",
+          "property_name": "channel_occupancy",
+          "field_type": "discrete",
+          "valid_mask_path": "../../data/r1_5_high_order_20261010/z15_26/stanford_vie_z15_26_channel_label_valid.grid",
+          "valid_mask_property": "channel_label_valid",
+          "surrogate_generator": "discrete_h2_constrained_swap_walk",
+          "connectivity_rule": "channel_strict_majority"
+        }
+      ]
+    },
+    {
+      "id": "stanford_vie_z45_56",
+      "slice_z": 50,
+      "attributes": [
+        {
+          "property_id": "porosity",
+          "grid_path": "../../data/r1_5_high_order_20261010/z45_56/stanford_vie_z45_56_porosity.grid",
+          "property_name": "porosity",
+          "field_type": "continuous",
+          "surrogate_generator": "continuous_iaaft_swap",
+          "connectivity_rule": "high_porosity_excursion"
+        },
+        {
+          "property_id": "channel_occupancy",
+          "grid_path": "../../data/r1_5_high_order_20261010/z45_56/stanford_vie_z45_56_channel_occupancy.grid",
+          "property_name": "channel_occupancy",
+          "field_type": "discrete",
+          "valid_mask_path": "../../data/r1_5_high_order_20261010/z45_56/stanford_vie_z45_56_channel_label_valid.grid",
+          "valid_mask_property": "channel_label_valid",
+          "surrogate_generator": "discrete_h2_constrained_swap_walk",
+          "connectivity_rule": "channel_strict_majority"
+        }
+      ]
+    },
+    {
+      "id": "stanford_vie_z75_86",
+      "slice_z": 80,
+      "attributes": [
+        {
+          "property_id": "porosity",
+          "grid_path": "../../data/r1_5_high_order_20261010/z75_86/stanford_vie_z75_86_porosity.grid",
+          "property_name": "porosity",
+          "field_type": "continuous",
+          "surrogate_generator": "continuous_iaaft_swap",
+          "connectivity_rule": "high_porosity_excursion"
+        },
+        {
+          "property_id": "channel_occupancy",
+          "grid_path": "../../data/r1_5_high_order_20261010/z75_86/stanford_vie_z75_86_channel_occupancy.grid",
+          "property_name": "channel_occupancy",
+          "field_type": "discrete",
+          "valid_mask_path": "../../data/r1_5_high_order_20261010/z75_86/stanford_vie_z75_86_channel_label_valid.grid",
+          "valid_mask_property": "channel_label_valid",
+          "surrogate_generator": "discrete_h2_constrained_swap_walk",
+          "connectivity_rule": "channel_strict_majority"
+        }
+      ]
+    }
+  ],
+  "directional_cases": [
+    {
+      "id": "axis_0_90",
+      "orientation_label": "0 deg / 90 deg",
+      "nod": [2, 1],
+      "nlag": [5, 5],
+      "lag_cells": [1, 1],
+      "azimuth": [0, 90],
+      "dip": [0, 0],
+      "integer_direction_vectors": [[1, 0], [0, 1]],
+      "displayed_dirs": [1, 2]
+    },
+    {
+      "id": "axis_90_180",
+      "orientation_label": "90 deg / 180 deg",
+      "nod": [2, 1],
+      "nlag": [5, 5],
+      "lag_cells": [1, 1],
+      "azimuth": [90, 180],
+      "dip": [0, 0],
+      "integer_direction_vectors": [[0, 1], [-1, 0]],
+      "displayed_dirs": [1, 2]
+    },
+    {
+      "id": "axis_180_270",
+      "orientation_label": "180 deg / 270 deg",
+      "nod": [2, 1],
+      "nlag": [5, 5],
+      "lag_cells": [1, 1],
+      "azimuth": [180, 270],
+      "dip": [0, 0],
+      "integer_direction_vectors": [[-1, 0], [0, -1]],
+      "displayed_dirs": [1, 2]
+    },
+    {
+      "id": "axis_270_0",
+      "orientation_label": "270 deg / 0 deg",
+      "nod": [2, 1],
+      "nlag": [5, 5],
+      "lag_cells": [1, 1],
+      "azimuth": [270, 0],
+      "dip": [0, 0],
+      "integer_direction_vectors": [[0, -1], [1, 0]],
+      "displayed_dirs": [1, 2]
+    },
+    {
+      "id": "diag_45_135",
+      "orientation_label": "45 deg / 135 deg",
+      "nod": [2, 1],
+      "nlag": [5, 5],
+      "lag_cells": [1, 1],
+      "azimuth": [45, 135],
+      "dip": [0, 0],
+      "integer_direction_vectors": [[1, 1], [-1, 1]],
+      "displayed_dirs": [1, 2]
+    },
+    {
+      "id": "diag_135_225",
+      "orientation_label": "135 deg / 225 deg",
+      "nod": [2, 1],
+      "nlag": [5, 5],
+      "lag_cells": [1, 1],
+      "azimuth": [135, 225],
+      "dip": [0, 0],
+      "integer_direction_vectors": [[-1, 1], [-1, -1]],
+      "displayed_dirs": [1, 2]
+    },
+    {
+      "id": "diag_225_315",
+      "orientation_label": "225 deg / 315 deg",
+      "nod": [2, 1],
+      "nlag": [5, 5],
+      "lag_cells": [1, 1],
+      "azimuth": [225, 315],
+      "dip": [0, 0],
+      "integer_direction_vectors": [[-1, -1], [1, -1]],
+      "displayed_dirs": [1, 2]
+    },
+    {
+      "id": "diag_315_45",
+      "orientation_label": "315 deg / 45 deg",
+      "nod": [2, 1],
+      "nlag": [5, 5],
+      "lag_cells": [1, 1],
+      "azimuth": [315, 45],
+      "dip": [0, 0],
+      "integer_direction_vectors": [[1, -1], [1, 1]],
+      "displayed_dirs": [1, 2]
+    }
+  ],
+  "three_dimensional_cases": [
+    {
+      "id": "orthogonal_xyz",
+      "orientation_label": "horizontal-x / horizontal-y / vertical-z",
+      "nod": [1, 1, 1],
+      "nlag": [4, 4, 4],
+      "lag_cells": [1, 1, 1],
+      "azimuth": [0, 90, 0],
+      "dip": [0, 0, 90],
+      "integer_direction_vectors": [[1, 0, 0], [0, 1, 0], [0, 0, 1]],
+      "displayed_dirs": [1, 2, 3]
+    }
+  ],
+  "explicit_templates_2d": {
+    "line4": [[0, 0], [1, 0], [2, 0], [3, 0]],
+    "rectangle4": [[0, 0], [1, 0], [0, 1], [1, 1]],
+    "l4": [[0, 0], [1, 0], [2, 0], [0, 1]]
+  },
+  "explicit_directions_degrees": [0, 45, 90, 135],
+  "explicit_lags_cells": [1, 2, 3, 4],
+  "rotation_validation": {
+    "max_absolute_error": 1e-12,
+    "max_relative_l2_error": 1e-10,
+    "pairs": [
+      {"original_case_id": "axis_0_90", "rotated_case_id": "axis_90_180", "include_in_smoke": true},
+      {"original_case_id": "axis_90_180", "rotated_case_id": "axis_180_270", "include_in_smoke": false},
+      {"original_case_id": "axis_180_270", "rotated_case_id": "axis_270_0", "include_in_smoke": false},
+      {"original_case_id": "axis_270_0", "rotated_case_id": "axis_0_90", "include_in_smoke": false},
+      {"original_case_id": "diag_45_135", "rotated_case_id": "diag_135_225", "include_in_smoke": true},
+      {"original_case_id": "diag_135_225", "rotated_case_id": "diag_225_315", "include_in_smoke": false},
+      {"original_case_id": "diag_225_315", "rotated_case_id": "diag_315_45", "include_in_smoke": false},
+      {"original_case_id": "diag_315_45", "rotated_case_id": "diag_45_135", "include_in_smoke": false}
+    ]
+  }
+}

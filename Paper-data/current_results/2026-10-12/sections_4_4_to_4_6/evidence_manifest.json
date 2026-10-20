@@ -1,0 +1,362 @@
+{
+  "checks": [
+    {
+      "details": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\logs\\cmake_release_build.log.txt",
+      "name": "release_build",
+      "passed": true
+    },
+    {
+      "details": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\logs\\python_tests.log.txt",
+      "name": "python_regression_tests",
+      "passed": true
+    },
+    {
+      "details": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\logs\\ctest.log.txt",
+      "name": "native_release_ctest",
+      "passed": true
+    },
+    {
+      "details": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\preprocessing_manifest.json",
+      "name": "stanford_preprocessing",
+      "passed": true
+    },
+    {
+      "details": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\section_4_4\\run_20261011_191125\\gate.json",
+      "gate_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\section_4_4\\run_20261011_191125\\gate.json",
+      "name": "section44",
+      "passed": true,
+      "surrogate_count": 199
+    },
+    {
+      "bootstrap_replicates": 10000,
+      "details": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\components\\controlled_positive_controls\\run_20261011_194421\\gate.json",
+      "gate_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\components\\controlled_positive_controls\\run_20261011_194421\\gate.json",
+      "name": "controlled_positive_controls",
+      "passed": true,
+      "random_seed_count": 30,
+      "windows_per_class": 2000
+    },
+    {
+      "details": "fixture=D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\cpp_python_fixture_matrix_gate.json; uniform_routes=D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\uniform_three_route_audit\\uniform_three_route_audit.json; real_input=D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\cpp_python_parity_gate.json",
+      "name": "cpp_python_parity_gate",
+      "passed": true
+    },
+    {
+      "details": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_feature_map_manifest.csv",
+      "name": "direct_cpp_map_matrix",
+      "passed": true
+    },
+    {
+      "details": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\report_artifact_contract.csv",
+      "name": "direct_report_artifacts",
+      "passed": true
+    },
+    {
+      "details": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\time_projection.json",
+      "name": "formal_time_budget_projection",
+      "passed": true
+    },
+    {
+      "details": "{\"forbidden_artifact_count\": 0, \"map_count\": 102, \"required_artifact_count\": 17, \"sealed\": false}",
+      "name": "direct_output_contract",
+      "passed": true
+    }
+  ],
+  "direct": {
+    "bootstrap_diagnostics": {
+      "large_block": {
+        "accepted_replicates": 500,
+        "attempts": 500,
+        "block_count_groups": 6,
+        "block_shape_xyz": "12x20x6",
+        "case_count": 12,
+        "elapsed_seconds": 44.00091970000358,
+        "rejected_replicates": 0,
+        "replicates": 500,
+        "requested_replicates": 500,
+        "scope": "large_block",
+        "seed": 20261013
+      },
+      "parameter_sensitivity": {
+        "accepted_replicates": 1000,
+        "attempts": 1000,
+        "block_count_groups": 2,
+        "block_shape_xyz": "8x13x6",
+        "case_count": 8,
+        "elapsed_seconds": 26.521248899996863,
+        "rejected_replicates": 0,
+        "replicates": 1000,
+        "requested_replicates": 1000,
+        "scope": "parameter_sensitivity",
+        "seed": 20261014
+      },
+      "primary": {
+        "accepted_replicates": 2000,
+        "attempts": 2000,
+        "block_count_groups": 6,
+        "block_shape_xyz": "8x13x6",
+        "case_count": 12,
+        "elapsed_seconds": 159.54759770000237,
+        "rejected_replicates": 0,
+        "replicates": 2000,
+        "requested_replicates": 2000,
+        "scope": "primary",
+        "seed": 20261011
+      },
+      "scale": {
+        "accepted_replicates": 1000,
+        "attempts": 1000,
+        "block_count_groups": 6,
+        "block_shape_xyz": "8x13x6",
+        "case_count": 6,
+        "elapsed_seconds": 32.544252100007725,
+        "rejected_replicates": 0,
+        "replicates": 1000,
+        "requested_replicates": 1000,
+        "scope": "scale",
+        "seed": 20261012
+      }
+    },
+    "cpp_manifest": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_feature_map_manifest.csv",
+    "evidence_sealing_estimate": {
+      "hash_inventory_bytes": 1584992072,
+      "hash_inventory_file_count": 60764,
+      "hash_inventory_seconds": 44.062674600005266,
+      "sealing_estimate_seconds": 176.25069840002107
+    },
+    "lambda4_equivalence_max_abs_error": 2.6628299565345515e-10,
+    "map_counts": {
+      "dataset_count": 3,
+      "map_count": 102,
+      "primary_count": 90,
+      "section45_primary_count": 54,
+      "section46_primary_count": 36,
+      "sensitivity_count": 12
+    },
+    "matrix_elapsed_seconds": 344.90214540000306,
+    "primary_case_count": 18,
+    "sensitivity_case_count": 8,
+    "time_projection": {
+      "analysis_smoke_component_seconds": {
+        "controlled_positive_controls": 40.407009400005336,
+        "cpp_python_parity": 41.08975980000105,
+        "direct_analysis_overhead": 116.35748819999571,
+        "evidence_sealing_estimate": 176.25069840002107,
+        "preprocessing": 10.569711299991468,
+        "release_build_and_tests": 36.85416919999989,
+        "report_generation": 19.279881200011005,
+        "section44": 1976.6190530000022
+      },
+      "bootstrap_baseline": {
+        "large_block": {
+          "case_count": 12,
+          "elapsed_seconds": 44.00091970000358,
+          "replicates": 500,
+          "seconds_per_replicate": 0.08800183940000715
+        },
+        "parameter_sensitivity": {
+          "case_count": 8,
+          "elapsed_seconds": 26.521248899996863,
+          "replicates": 1000,
+          "seconds_per_replicate": 0.026521248899996862
+        },
+        "primary": {
+          "case_count": 12,
+          "elapsed_seconds": 159.54759770000237,
+          "replicates": 2000,
+          "seconds_per_replicate": 0.07977379885000119
+        },
+        "scale": {
+          "case_count": 6,
+          "elapsed_seconds": 32.544252100007725,
+          "replicates": 1000,
+          "seconds_per_replicate": 0.03254425210000773
+        }
+      },
+      "bootstrap_projection_by_scope": {
+        "large_block": {
+          "analysis_smoke_case_count": 12,
+          "case_scale_factor": 1.0,
+          "estimated_seconds": 44.00091970000358,
+          "formal_case_count": 12,
+          "formal_replicates": 500
+        },
+        "parameter_sensitivity": {
+          "analysis_smoke_case_count": 8,
+          "case_scale_factor": 1.0,
+          "estimated_seconds": 26.521248899996863,
+          "formal_case_count": 8,
+          "formal_replicates": 1000
+        },
+        "primary": {
+          "analysis_smoke_case_count": 12,
+          "case_scale_factor": 1.0,
+          "estimated_seconds": 159.54759770000237,
+          "formal_case_count": 12,
+          "formal_replicates": 2000
+        },
+        "scale": {
+          "analysis_smoke_case_count": 6,
+          "case_scale_factor": 1.0,
+          "estimated_seconds": 32.544252100007725,
+          "formal_case_count": 6,
+          "formal_replicates": 1000
+        }
+      },
+      "formal_component_scale_factors": {
+        "controlled_positive_control_work": 1.0,
+        "map_or_map_derived_output": 1.0,
+        "section44_surrogate_work": 1.0
+      },
+      "formal_fixed_component_projection_seconds": {
+        "controlled_positive_controls": 40.407009400005336,
+        "cpp_python_parity": 41.08975980000105,
+        "direct_analysis_overhead": 116.35748819999571,
+        "evidence_sealing": 176.25069840002107,
+        "preprocessing": 10.569711299991468,
+        "release_build_and_tests": 36.85416919999989,
+        "report_generation": 19.279881200011005,
+        "section44": 1976.6190530000022
+      },
+      "formal_projection": {
+        "budget_seconds": 21600.0,
+        "estimated_bootstrap_seconds": 262.61401840001054,
+        "estimated_fixed_workflow_seconds": 2417.4277705000277,
+        "estimated_map_seconds": 282.96123959938996,
+        "estimated_total_seconds": 2963.003028499428,
+        "map_count": 102,
+        "time_budget_pass": true
+      },
+      "matrix_elapsed_seconds": 344.90214540000306,
+      "mode": "formal",
+      "schema_version": "direct-time-projection.v2",
+      "three_map_fixture": {
+        "elapsed_seconds": 8.322389399982058,
+        "identity": "z45_56;5x5x3;uniform;orders=2,5,6",
+        "map_count": 3,
+        "seconds_per_map": 2.7741297999940193
+      }
+    }
+  },
+  "entrypoint_id": "direct-44-46-374de37d-a8dc-49ad-a503-9ed66bc0c9ea-efe9b4ee7ea3",
+  "environment": {
+    "cli_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\build_release_no_local_template\\Release\\movewindow_cli.exe",
+    "cli_sha256": "57f33c0f336abb272ebfb9ceb8a5e15a103a7ab88cd35fe80630fdf3b2e7978f",
+    "created_utc": "2026-10-11T19:58:50.438824+00:00",
+    "packages": {
+      "matplotlib": "3.11.2",
+      "numpy": "2.3.5",
+      "pandas": "3.0.1",
+      "scipy": "1.18.1",
+      "sklearn": "1.9.1"
+    },
+    "platform": "Windows-10-10.0.19043-SP0",
+    "processor": "Intel64 Family 6 Model 158 Stepping 13, GenuineIntel",
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+    "python_executable": "C:\\Users\\Administrator\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\python\\python.exe",
+    "python_executable_sha256": "10d845f50a2af64e3500bb2fcb348b5bc98a75d8ddada63e45ba1da6a1fc79d1",
+    "random_seed": 20261011,
+    "source_files": [
+      {
+        "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\run_direct_sections_44_46.py",
+        "sha256": "d27923b5026995a78cc18f24b7da266608a2c0e9b30408751609318a5c34da29"
+      },
+      {
+        "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\r1_5_incremental_value_20260924\\cli_runner.py",
+        "sha256": "7c65bae39918bb83d9dcd1529456e6cf7743a8ed4a8043da5281d089325eb70e"
+      },
+      {
+        "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\r1_5_incremental_value_20260924\\direct_statistical_evaluation.py",
+        "sha256": "3cbf943e962c4e8fcfbb6bc72b467554d87e507d7719c77f00e390810ded16a2"
+      },
+      {
+        "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\r1_5_incremental_value_20260924\\report_direct_results.py",
+        "sha256": "22e188cfb76c4a8501660fb51b45b2124c3e2c883d2b86405a16aab747fd70c9"
+      },
+      {
+        "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\r1_5_incremental_value_20260924\\weighting.py",
+        "sha256": "b76b062e141a36bca89357a6b338ded7974016f3b1358ec6105228e6df1acc92"
+      },
+      {
+        "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\r1_5_incremental_value_20260924\\statistics.py",
+        "sha256": "f7314805d4a0d8419cc7f25767365a7a3e38f25175f547031532ac464d839ea0"
+      },
+      {
+        "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\r1_5_incremental_value_20260924\\cpp_python_parity_gate.py",
+        "sha256": "78269eb8f3890969318537be2556ef794c6e752f4858d7eef0383b8c82bcb9b1"
+      },
+      {
+        "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\verify_direct_evidence.py",
+        "sha256": "04526c3812a9eb79a4f29f93c3546a6457c7738784f52f90e730800c7eb31adf"
+      },
+      {
+        "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\run_direct_sections_44_46_6h.bat",
+        "sha256": "41f4c9daee0658830aa5f8c0e10a87907da66820388d83c2273f064d1f45c54a"
+      },
+      {
+        "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\stanford_vie_preprocessing\\prepare_stanford_vie.py",
+        "sha256": "89014f6af01991b320b0c7c256d74f88f8f53ff2d82ef37aad41174315db49b3"
+      },
+      {
+        "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\template_directional_20261010\\formal_runner.py",
+        "sha256": "ef9828963ec1c2440be65c54d962b0b21ab9407cf9b2b89aadb6c19cc739722c"
+      },
+      {
+        "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\template_directional_20261010\\run_template_directional_experiment.py",
+        "sha256": "d674e416a43d674df7988d315a5075b238c311e46e766fdd4ecf5dc618eb27ba"
+      },
+      {
+        "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\controlled_moment_experiments_20261010\\direct_evaluation.py",
+        "sha256": "92610988c7bd6f418d1e6d0f5d47b0d06cd3f07ac8938245dc6993ada01954c0"
+      },
+      {
+        "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\controlled_moment_experiments_20261010\\run_direct_controlled_moment_experiment.py",
+        "sha256": "59926a0ec6a9bc118d845e2fbaeaa39d32a5df2f28d9bcfc050f87d3ba2f4afc"
+      },
+      {
+        "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\configs\\direct_common_protocol.json",
+        "sha256": "29a28bf63507cea7ba7dd0b054c3fbe3b38ac303df6f623a938de16beea9e2fe"
+      },
+      {
+        "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\configs\\direct_section45.json",
+        "sha256": "8ffafe1e27e82d42ac4bc2d9069ae3061cacfb4bdf853fc024f6f0311350fb84"
+      },
+      {
+        "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\configs\\direct_section46.json",
+        "sha256": "55e3d0009f27b47b273649da026a30cf6a669766e47a1f06ede5e9c8d53c5480"
+      },
+      {
+        "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\configs\\formal_section44.json",
+        "sha256": "7f32a574c3d16dbdd1ad69ddb42397fc97d19f89ae5d8346829e27f971135615"
+      },
+      {
+        "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\stanford_vie_preprocessing\\preprocessing_config.json",
+        "sha256": "001e675d8f937161f26f76fe6097f82ea8dee1020df4abe88ec0ae5fb84c3516"
+      },
+      {
+        "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\template_directional_20261010\\experiment_config.json",
+        "sha256": "a9d0e14a9568afe16c9a2e777faf8efa86fbcea80fac246a4abdea58390d352a"
+      },
+      {
+        "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\controlled_moment_experiments_20261010\\experiment_config.json",
+        "sha256": "5346c352c16abe399c3546ad9155da5fc9da58b1f0f32b38216c0d741bf35d02"
+      }
+    ]
+  },
+  "mode": "formal",
+  "output_contract": {
+    "forbidden_artifact_count": 0,
+    "map_count": 102,
+    "required_artifact_count": 17,
+    "sealed": false
+  },
+  "preprocessing_manifest": {
+    "path": "preprocessing/preprocessing_manifest.json",
+    "sha256": "83f6945a893c6870070e5b8df0a646fed20c8484113a9955819e19c197a3c439"
+  },
+  "run_manifest": {
+    "path": "run_manifest.json",
+    "sha256": "da0db4358af6b5ec773e9a09fba56401fbf4572a58de7372748884ca1a1cbb5c"
+  },
+  "schema_version": "direct-sections-44-46.v1"
+}

@@ -1,0 +1,13 @@
+{
+  "actual_result_rows": 1620,
+  "all_metrics_finite": true,
+  "analytic_moment_checks_pass": true,
+  "complete_execution_pass": true,
+  "component_execution": "COMPLETE",
+  "expected_result_rows": 1620,
+  "matched_lower_order_diagnostic_mean_abs_delta": 1.0187553860263997e-05,
+  "overall_pass": true,
+  "run_kind": "formal",
+  "status": "VALIDATION_PASS",
+  "target_order_detection_pass": true
+}

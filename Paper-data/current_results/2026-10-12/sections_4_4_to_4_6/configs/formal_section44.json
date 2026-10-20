@@ -1,0 +1,20 @@
+{
+  "section": "4.4",
+  "runner": "template_directional_20261010/run_template_directional_experiment.py",
+  "sampling_mode": "exhaustive_integer_offsets",
+  "production_algorithm": "AVL Based algorithm",
+  "audit_algorithm": "Bell algorithm",
+  "two_dimensional_nlag": 5,
+  "three_dimensional_nlag": 4,
+  "formal_surrogates_per_dataset_property": 199,
+  "smoke_surrogates_per_dataset_property": 30,
+  "surrogate_minimum_pair_difference_fraction": 0.001,
+  "surrogate_maximum_duplicate_fraction": 0.0,
+  "continuous_surrogate": "iaaft_then_variogram_swap",
+  "discrete_surrogate": "histogram_preserving_swap_annealing",
+  "h2_max_relative_error": 0.1,
+  "h2_weighted_relative_rmse": 0.05,
+  "rotation_relative_l2": 1e-10,
+  "bell_avl_max_abs": 1e-12,
+  "bell_avl_relative_l2": 1e-10
+}

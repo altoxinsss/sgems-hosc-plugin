@@ -1,0 +1,13 @@
+SGeMS compatibility fixture
+          9           4
+ # FOR EACH OF THE NODES :  "INDEX" "X" "Y" "Z" "VAL"
+ # IF THE DATA ARE IN 2D : Z = 0
+         1          0          0          0          1
+         2          1          0          0          2
+         3          2          0          0          3
+         4          0          1          0          4
+         5          1          1          0          5
+         6          2          1          0          6
+         7          0          2          0          7
+         8          1          2          0          8
+         9          2          2          0          9

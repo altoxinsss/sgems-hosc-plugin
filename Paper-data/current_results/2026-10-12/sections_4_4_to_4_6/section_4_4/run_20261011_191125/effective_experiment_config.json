@@ -1,0 +1,644 @@
+{
+  "algorithm_audit": {
+    "max_absolute_error": 1e-12,
+    "max_relative_l2_error": 1e-10
+  },
+  "confirmatory_direction_pairs": [
+    "axis_0_90",
+    "diag_45_135"
+  ],
+  "datasets": [
+    {
+      "attributes": [
+        {
+          "connectivity_rule": "high_porosity_excursion",
+          "field_type": "continuous",
+          "grid_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z15_26\\stanford_vie_z15_26_porosity.grid",
+          "property_id": "porosity",
+          "property_name": "porosity",
+          "surrogate_generator": "continuous_iaaft_swap"
+        },
+        {
+          "connectivity_rule": "channel_strict_majority",
+          "field_type": "discrete",
+          "grid_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z15_26\\stanford_vie_z15_26_channel_occupancy.grid",
+          "property_id": "channel_occupancy",
+          "property_name": "channel_occupancy",
+          "surrogate_generator": "discrete_h2_constrained_swap_walk",
+          "valid_mask_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z15_26\\stanford_vie_z15_26_channel_label_valid.grid",
+          "valid_mask_property": "channel_label_valid"
+        }
+      ],
+      "id": "stanford_vie_z15_26",
+      "slice_z": 20
+    },
+    {
+      "attributes": [
+        {
+          "connectivity_rule": "high_porosity_excursion",
+          "field_type": "continuous",
+          "grid_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z45_56\\stanford_vie_z45_56_porosity.grid",
+          "property_id": "porosity",
+          "property_name": "porosity",
+          "surrogate_generator": "continuous_iaaft_swap"
+        },
+        {
+          "connectivity_rule": "channel_strict_majority",
+          "field_type": "discrete",
+          "grid_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z45_56\\stanford_vie_z45_56_channel_occupancy.grid",
+          "property_id": "channel_occupancy",
+          "property_name": "channel_occupancy",
+          "surrogate_generator": "discrete_h2_constrained_swap_walk",
+          "valid_mask_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z45_56\\stanford_vie_z45_56_channel_label_valid.grid",
+          "valid_mask_property": "channel_label_valid"
+        }
+      ],
+      "id": "stanford_vie_z45_56",
+      "slice_z": 50
+    },
+    {
+      "attributes": [
+        {
+          "connectivity_rule": "high_porosity_excursion",
+          "field_type": "continuous",
+          "grid_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z75_86\\stanford_vie_z75_86_porosity.grid",
+          "property_id": "porosity",
+          "property_name": "porosity",
+          "surrogate_generator": "continuous_iaaft_swap"
+        },
+        {
+          "connectivity_rule": "channel_strict_majority",
+          "field_type": "discrete",
+          "grid_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z75_86\\stanford_vie_z75_86_channel_occupancy.grid",
+          "property_id": "channel_occupancy",
+          "property_name": "channel_occupancy",
+          "surrogate_generator": "discrete_h2_constrained_swap_walk",
+          "valid_mask_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z75_86\\stanford_vie_z75_86_channel_label_valid.grid",
+          "valid_mask_property": "channel_label_valid"
+        }
+      ],
+      "id": "stanford_vie_z75_86",
+      "slice_z": 80
+    }
+  ],
+  "directional_cases": [
+    {
+      "azimuth": [
+        0,
+        90
+      ],
+      "dip": [
+        0,
+        0
+      ],
+      "displayed_dirs": [
+        1,
+        2
+      ],
+      "id": "axis_0_90",
+      "integer_direction_vectors": [
+        [
+          1,
+          0
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "lag_cells": [
+        1,
+        1
+      ],
+      "nlag": [
+        5,
+        5
+      ],
+      "nod": [
+        2,
+        1
+      ],
+      "orientation_label": "0 deg / 90 deg"
+    },
+    {
+      "azimuth": [
+        90,
+        180
+      ],
+      "dip": [
+        0,
+        0
+      ],
+      "displayed_dirs": [
+        1,
+        2
+      ],
+      "id": "axis_90_180",
+      "integer_direction_vectors": [
+        [
+          0,
+          1
+        ],
+        [
+          -1,
+          0
+        ]
+      ],
+      "lag_cells": [
+        1,
+        1
+      ],
+      "nlag": [
+        5,
+        5
+      ],
+      "nod": [
+        2,
+        1
+      ],
+      "orientation_label": "90 deg / 180 deg"
+    },
+    {
+      "azimuth": [
+        180,
+        270
+      ],
+      "dip": [
+        0,
+        0
+      ],
+      "displayed_dirs": [
+        1,
+        2
+      ],
+      "id": "axis_180_270",
+      "integer_direction_vectors": [
+        [
+          -1,
+          0
+        ],
+        [
+          0,
+          -1
+        ]
+      ],
+      "lag_cells": [
+        1,
+        1
+      ],
+      "nlag": [
+        5,
+        5
+      ],
+      "nod": [
+        2,
+        1
+      ],
+      "orientation_label": "180 deg / 270 deg"
+    },
+    {
+      "azimuth": [
+        270,
+        0
+      ],
+      "dip": [
+        0,
+        0
+      ],
+      "displayed_dirs": [
+        1,
+        2
+      ],
+      "id": "axis_270_0",
+      "integer_direction_vectors": [
+        [
+          0,
+          -1
+        ],
+        [
+          1,
+          0
+        ]
+      ],
+      "lag_cells": [
+        1,
+        1
+      ],
+      "nlag": [
+        5,
+        5
+      ],
+      "nod": [
+        2,
+        1
+      ],
+      "orientation_label": "270 deg / 0 deg"
+    },
+    {
+      "azimuth": [
+        45,
+        135
+      ],
+      "dip": [
+        0,
+        0
+      ],
+      "displayed_dirs": [
+        1,
+        2
+      ],
+      "id": "diag_45_135",
+      "integer_direction_vectors": [
+        [
+          1,
+          1
+        ],
+        [
+          -1,
+          1
+        ]
+      ],
+      "lag_cells": [
+        1,
+        1
+      ],
+      "nlag": [
+        5,
+        5
+      ],
+      "nod": [
+        2,
+        1
+      ],
+      "orientation_label": "45 deg / 135 deg"
+    },
+    {
+      "azimuth": [
+        135,
+        225
+      ],
+      "dip": [
+        0,
+        0
+      ],
+      "displayed_dirs": [
+        1,
+        2
+      ],
+      "id": "diag_135_225",
+      "integer_direction_vectors": [
+        [
+          -1,
+          1
+        ],
+        [
+          -1,
+          -1
+        ]
+      ],
+      "lag_cells": [
+        1,
+        1
+      ],
+      "nlag": [
+        5,
+        5
+      ],
+      "nod": [
+        2,
+        1
+      ],
+      "orientation_label": "135 deg / 225 deg"
+    },
+    {
+      "azimuth": [
+        225,
+        315
+      ],
+      "dip": [
+        0,
+        0
+      ],
+      "displayed_dirs": [
+        1,
+        2
+      ],
+      "id": "diag_225_315",
+      "integer_direction_vectors": [
+        [
+          -1,
+          -1
+        ],
+        [
+          1,
+          -1
+        ]
+      ],
+      "lag_cells": [
+        1,
+        1
+      ],
+      "nlag": [
+        5,
+        5
+      ],
+      "nod": [
+        2,
+        1
+      ],
+      "orientation_label": "225 deg / 315 deg"
+    },
+    {
+      "azimuth": [
+        315,
+        45
+      ],
+      "dip": [
+        0,
+        0
+      ],
+      "displayed_dirs": [
+        1,
+        2
+      ],
+      "id": "diag_315_45",
+      "integer_direction_vectors": [
+        [
+          1,
+          -1
+        ],
+        [
+          1,
+          1
+        ]
+      ],
+      "lag_cells": [
+        1,
+        1
+      ],
+      "nlag": [
+        5,
+        5
+      ],
+      "nod": [
+        2,
+        1
+      ],
+      "orientation_label": "315 deg / 45 deg"
+    }
+  ],
+  "effective_mode": "formal",
+  "effective_surrogate_count": 199,
+  "execution_contract": {
+    "audit_algorithm": "Bell algorithm",
+    "h2_max_relative_error": 0.1,
+    "h2_weighted_relative_rmse": 0.05,
+    "production_algorithm": "AVL Based algorithm",
+    "template_sampling": "exhaustive_integer_offsets"
+  },
+  "explicit_directions_degrees": [
+    0,
+    45,
+    90,
+    135
+  ],
+  "explicit_lags_cells": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "explicit_templates_2d": {
+    "l4": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        0,
+        1
+      ]
+    ],
+    "line4": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        2,
+        0
+      ],
+      [
+        3,
+        0
+      ]
+    ],
+    "rectangle4": [
+      [
+        0,
+        0
+      ],
+      [
+        1,
+        0
+      ],
+      [
+        0,
+        1
+      ],
+      [
+        1,
+        1
+      ]
+    ]
+  },
+  "formal_section44_protocol": {
+    "audit_algorithm": "Bell algorithm",
+    "bell_avl_max_abs": 1e-12,
+    "bell_avl_relative_l2": 1e-10,
+    "continuous_surrogate": "iaaft_then_variogram_swap",
+    "discrete_surrogate": "histogram_preserving_swap_annealing",
+    "formal_surrogates_per_dataset_property": 199,
+    "h2_max_relative_error": 0.1,
+    "h2_weighted_relative_rmse": 0.05,
+    "production_algorithm": "AVL Based algorithm",
+    "rotation_relative_l2": 1e-10,
+    "runner": "template_directional_20261010/run_template_directional_experiment.py",
+    "sampling_mode": "exhaustive_integer_offsets",
+    "section": "4.4",
+    "smoke_surrogates_per_dataset_property": 30,
+    "surrogate_maximum_duplicate_fraction": 0.0,
+    "surrogate_minimum_pair_difference_fraction": 0.001,
+    "three_dimensional_nlag": 4,
+    "two_dimensional_nlag": 5
+  },
+  "formal_section44_protocol_binding": {
+    "sha256": "7f32a574c3d16dbdd1ad69ddb42397fc97d19f89ae5d8346829e27f971135615",
+    "source_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\configs\\formal_section44.json"
+  },
+  "formal_section44_protocol_sha256": "7f32a574c3d16dbdd1ad69ddb42397fc97d19f89ae5d8346829e27f971135615",
+  "formal_section44_protocol_source_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\configs\\formal_section44.json",
+  "native_test_commands": [
+    {
+      "command": [
+        "Release/weighted_core_checks.exe"
+      ],
+      "name": "weighted_core_checks"
+    },
+    {
+      "command": [
+        "Release/window_avl_core_checks.exe"
+      ],
+      "name": "window_avl_core_checks"
+    },
+    {
+      "command": [
+        "Release/movewindow_cli.exe",
+        "tests/movewindow_cli_smoke.ini"
+      ],
+      "name": "movewindow_cli_smoke"
+    },
+    {
+      "command": [
+        "Release/template_cli.exe",
+        "tests/template_exhaustive_smoke.ini"
+      ],
+      "name": "template_cli_exhaustive_integer_smoke"
+    }
+  ],
+  "native_test_workdir": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\build_release_no_local_template",
+  "output_root": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\section_4_4",
+  "porosity_excursion_threshold": 0.25,
+  "preprocessing_manifest": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\preprocessing_manifest.json",
+  "rotation_validation": {
+    "max_absolute_error": 1e-12,
+    "max_relative_l2_error": 1e-10,
+    "pairs": [
+      {
+        "include_in_smoke": true,
+        "original_case_id": "axis_0_90",
+        "rotated_case_id": "axis_90_180"
+      },
+      {
+        "include_in_smoke": false,
+        "original_case_id": "axis_90_180",
+        "rotated_case_id": "axis_180_270"
+      },
+      {
+        "include_in_smoke": false,
+        "original_case_id": "axis_180_270",
+        "rotated_case_id": "axis_270_0"
+      },
+      {
+        "include_in_smoke": false,
+        "original_case_id": "axis_270_0",
+        "rotated_case_id": "axis_0_90"
+      },
+      {
+        "include_in_smoke": true,
+        "original_case_id": "diag_45_135",
+        "rotated_case_id": "diag_135_225"
+      },
+      {
+        "include_in_smoke": false,
+        "original_case_id": "diag_135_225",
+        "rotated_case_id": "diag_225_315"
+      },
+      {
+        "include_in_smoke": false,
+        "original_case_id": "diag_225_315",
+        "rotated_case_id": "diag_315_45"
+      },
+      {
+        "include_in_smoke": false,
+        "original_case_id": "diag_315_45",
+        "rotated_case_id": "diag_45_135"
+      }
+    ]
+  },
+  "source_spacing": [
+    50.0,
+    50.0,
+    2.0
+  ],
+  "surrogates": {
+    "formal_count": 199,
+    "iaaft_iterations": 240,
+    "max_attempts_per_id": 24,
+    "maximum_duplicate_fraction": 0.0,
+    "minimum_original_difference_fraction": 0.001,
+    "minimum_pair_difference_fraction": 0.001,
+    "seed": 20261010,
+    "smoke_count": 30,
+    "swap_iterations": 600
+  },
+  "template_cli": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\build_release_no_local_template\\Release\\template_cli.exe",
+  "template_cli_timeout_seconds": 900,
+  "template_sampling": "exhaustive_integer_offsets",
+  "three_dimensional_cases": [
+    {
+      "azimuth": [
+        0,
+        90,
+        0
+      ],
+      "dip": [
+        0,
+        0,
+        90
+      ],
+      "displayed_dirs": [
+        1,
+        2,
+        3
+      ],
+      "id": "orthogonal_xyz",
+      "integer_direction_vectors": [
+        [
+          1,
+          0,
+          0
+        ],
+        [
+          0,
+          1,
+          0
+        ],
+        [
+          0,
+          0,
+          1
+        ]
+      ],
+      "lag_cells": [
+        1,
+        1,
+        1
+      ],
+      "nlag": [
+        4,
+        4,
+        4
+      ],
+      "nod": [
+        1,
+        1,
+        1
+      ],
+      "orientation_label": "horizontal-x / horizontal-y / vertical-z"
+    }
+  ],
+  "top_level_entrypoint_id": "direct-44-46-374de37d-a8dc-49ad-a503-9ed66bc0c9ea-efe9b4ee7ea3"
+}

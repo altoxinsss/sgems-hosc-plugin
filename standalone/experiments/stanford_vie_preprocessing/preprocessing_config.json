@@ -1,0 +1,17 @@
+{
+  "porosity_path": "../../data/external/Stanford-VI-E-master/Porosity/porosity.txt",
+  "facies_path": "../../data/external/Stanford-VI-E-master/Facies/facies.dat",
+  "poro_inc_path": "../../data/external/Stanford-VI-E-master/Reservoir Simulation (Eclipse)/poro.inc",
+  "fine_shape_zyx": [200, 200, 150],
+  "expected_coarse_shape_zyx": [100, 100, 75],
+  "expected_subvolume_shape_zyx": [12, 100, 75],
+  "output_root": "../../data/r1_5_high_order_20261010",
+  "subvolumes": [[15, 26], [45, 56], [75, 86]],
+  "channel_code": 2,
+  "porosity_header_lines": 3,
+  "facies_header_lines": 3,
+  "max_poro_inc_absolute_error": 5.1e-7,
+  "coarse_spacing_xyz_m": [50.0, 50.0, 2.0],
+  "co_location_fixture_path": "co_location_fixture.json",
+  "fixture_porosity_absolute_tolerance": 1e-12
+}

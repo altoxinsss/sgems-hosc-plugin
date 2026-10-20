@@ -620,7 +620,6 @@ int GetGrid2(double** grid)
 		return -1;
 	}
 	double tempMean = 0;
-	int TRANS = 0;
 	for(int i = 1; i <= pt_Grids->ND; i++)
 	{
 		if(i == 1 || i == pt_Grids->ND)
@@ -633,22 +632,9 @@ int GetGrid2(double** grid)
 		pt_Grids->pt_Nodes[i-1].val = grid[i][3];
 		tempMean += pt_Grids->pt_Nodes[i-1].val;
 		pt_Grids->pt_Nodes[i-1].Flag_Used = false;
-		if(i == 1 && pt_Grids->pt_Nodes[i-1].x == 1)
-		{
-			pt_Grids->pt_Nodes[i-1].x--;
-			pt_Grids->pt_Nodes[i-1].y--;
-			pt_Grids->pt_Nodes[i-1].z--;
-			TRANS = 1;
-		}
-		if(i > 1 && TRANS == 1)
-		{
-			pt_Grids->pt_Nodes[i-1].x--;
-			pt_Grids->pt_Nodes[i-1].y--;
-			pt_Grids->pt_Nodes[i-1].z--;
-		}
 	}
 	tempMean /= pt_Grids->ND;
-	hosc_debug_log("GetGrid2.mean", "mean=%.17g trans=%d", tempMean, TRANS);
+	hosc_debug_log("GetGrid2.mean", "mean=%.17g coordinate_basis=zero_based", tempMean);
 	if(tempMean != 0)
 	{
 		for(int i = 0; i < pt_Grids->ND; i++)
@@ -731,7 +717,8 @@ int InitialStruct4(Keys* Key, double** grid)
 
 	if(pt_Keys->DIM == 2)
     {
-		GetMaxElem(pt_Grids->pt_Nodes, pt_Grids->ND);
+		MaxX = pt_Keys->NX;
+		MaxY = pt_Keys->NY;
 		hosc_debug_log("InitialStruct4.valuemap2d.begin", "MaxX=%d MaxY=%d", MaxX, MaxY);
         ValueMap_2D = (double**)calloc(MaxX, sizeof(double*));
         if(ValueMap_2D == NULL)
@@ -753,7 +740,8 @@ int InitialStruct4(Keys* Key, double** grid)
         }
         for(int i = 0; i < pt_Grids->ND; i++)
         {
-			if(pt_Grids->pt_Nodes[i].x >= MaxX || pt_Grids->pt_Nodes[i].y >= MaxY)
+			if(pt_Grids->pt_Nodes[i].x < 0 || pt_Grids->pt_Nodes[i].y < 0 ||
+			   pt_Grids->pt_Nodes[i].x >= MaxX || pt_Grids->pt_Nodes[i].y >= MaxY)
 			{
 				GsTLcerr << "pt_Grids->pt_Nodes[i].x" << pt_Grids->pt_Nodes[i].x << gstlIO::end;
 				GsTLcerr << "pt_Keys->NX" << pt_Keys->NX << gstlIO::end;
@@ -785,7 +773,9 @@ int InitialStruct4(Keys* Key, double** grid)
             fprintf(stderr, "Error in function GetKeys: ");
             return -1;
         }
-        GetMaxElem(pt_Grids->pt_Nodes, pt_Grids->ND);
+		MaxX = pt_Keys->NX;
+		MaxY = pt_Keys->NY;
+		MaxZ = pt_Keys->NZ;
 		hosc_debug_log("InitialStruct4.valuemap3d.begin", "MaxX=%d MaxY=%d MaxZ=%d", MaxX, MaxY, MaxZ);
         ValueMap_3D = (double***)calloc(MaxX, sizeof(double**));
         if(ValueMap_3D == NULL)
@@ -806,9 +796,15 @@ int InitialStruct4(Keys* Key, double** grid)
                 memset(ValueMap_3D[i][j], -1, MaxZ * sizeof(double));
             }
         }
-        for(int i = 0; i < pt_Grids->ND; i++)
-        {
-            ValueMap_3D[pt_Grids->pt_Nodes[i].x][pt_Grids->pt_Nodes[i].y][pt_Grids->pt_Nodes[i].z] = pt_Grids->pt_Nodes[i].val;
+		for(int i = 0; i < pt_Grids->ND; i++)
+		{
+			if(pt_Grids->pt_Nodes[i].x < 0 || pt_Grids->pt_Nodes[i].y < 0 || pt_Grids->pt_Nodes[i].z < 0 ||
+			   pt_Grids->pt_Nodes[i].x >= MaxX || pt_Grids->pt_Nodes[i].y >= MaxY || pt_Grids->pt_Nodes[i].z >= MaxZ)
+			{
+				hosc_debug_log("InitialStruct4.fail", "3D valuemap out of range i=%d node=(%d,%d,%d) Max=(%d,%d,%d)", i, pt_Grids->pt_Nodes[i].x, pt_Grids->pt_Nodes[i].y, pt_Grids->pt_Nodes[i].z, MaxX, MaxY, MaxZ);
+				return -1;
+			}
+			ValueMap_3D[pt_Grids->pt_Nodes[i].x][pt_Grids->pt_Nodes[i].y][pt_Grids->pt_Nodes[i].z] = pt_Grids->pt_Nodes[i].val;
         }
 	}
 

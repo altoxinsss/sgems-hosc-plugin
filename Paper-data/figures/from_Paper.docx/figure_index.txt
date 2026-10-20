@@ -1,9 +1,0 @@
-Images embedded in standard_paper_v1.docx
-
-This directory contains all 18 image resources embedded in the current manuscript, converted to PNG where the source resource was TIFF. The original embedded resource names are retained as image1 through image18.
-
-Important current-paper mappings:
-- image17.png: Fig. 15, the 75 x 100 template-based lag sections.
-- image18.png: Fig. 16, the spatial porosity and local-HOSC slices.
-
-The remaining images are figures or intermediate result panels used elsewhere in the manuscript. Their original order and names are retained so that they can be matched to the document without losing provenance.

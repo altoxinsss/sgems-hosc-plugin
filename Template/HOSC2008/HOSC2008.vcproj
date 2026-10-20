@@ -41,7 +41,7 @@
 			<Tool
 				Name="VCCLCompilerTool"
 				Optimization="0"
-				AdditionalIncludeDirectories="..;."
+				AdditionalIncludeDirectories="$(HOSC_SGEMS_SDK);$(HOSC_QT3_ROOT)\QtKernel;$(HOSC_QT3_ROOT)\QtTools;$(HOSC_QT3_ROOT)\QtWidgets;.;..\..\shared"
 				PreprocessorDefinitions="WIN32;_DEBUG;_CONSOLE"
 				MinimalRebuild="true"
 				BasicRuntimeChecks="3"
@@ -63,7 +63,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="coin2.lib GsTLAppli_actions.lib GsTLAppli_appli.lib GsTLAppli_extragui.lib GsTLAppli_filters.lib GsTLAppli_geostat.lib GsTLAppli_grid.lib GsTLAppli_gui.lib GsTLAppli_math.lib GsTLAppli_utils.lib GsTLwidgets.lib qwt.lib simvoleon2.lib soqt1.lib"
 				LinkIncremental="2"
-				AdditionalLibraryDirectories="$(SGEMS_ROOT)\lib"
+				AdditionalLibraryDirectories="$(HOSC_SGEMS_SDK)\lib"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				TargetMachine="1"
@@ -117,7 +117,7 @@
 				Name="VCCLCompilerTool"
 				Optimization="2"
 				EnableIntrinsicFunctions="true"
-				AdditionalIncludeDirectories="..;."
+				AdditionalIncludeDirectories="$(HOSC_SGEMS_SDK);$(HOSC_QT3_ROOT)\QtKernel;$(HOSC_QT3_ROOT)\QtTools;$(HOSC_QT3_ROOT)\QtWidgets;.;..\..\shared"
 				PreprocessorDefinitions="WIN32;NDEBUG;_CONSOLE;QT_SHARED;QT_CORE_LIB;QT_GUI_LIB;_WINDOWS"
 				RuntimeLibrary="2"
 				EnableFunctionLevelLinking="true"
@@ -139,7 +139,7 @@
 				Name="VCLinkerTool"
 				AdditionalDependencies="coin2.lib GsTLAppli_actions.lib GsTLAppli_appli.lib GsTLAppli_extragui.lib GsTLAppli_filters.lib GsTLAppli_geostat.lib GsTLAppli_grid.lib GsTLAppli_gui.lib GsTLAppli_math.lib GsTLAppli_utils.lib GsTLwidgets.lib qwt.lib simvoleon2.lib soqt1.lib"
 				LinkIncremental="1"
-				AdditionalLibraryDirectories="$(SGEMS_ROOT)\lib"
+				AdditionalLibraryDirectories="$(HOSC_SGEMS_SDK)\lib"
 				GenerateDebugInformation="true"
 				SubSystem="1"
 				OptimizeReferences="2"
@@ -210,7 +210,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\WeightedMomentCore.cpp"
+				RelativePath="..\..\shared\WeightedMomentCore.cpp"
 				>
 			</File>
 		</Filter>
@@ -252,7 +252,7 @@
 				>
 			</File>
 			<File
-				RelativePath=".\WeightedMomentCore.h"
+				RelativePath="..\..\shared\WeightedMomentCore.h"
 				>
 			</File>
 		</Filter>

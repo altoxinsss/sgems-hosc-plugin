@@ -1,0 +1,83 @@
+{
+  "checks": [
+    {
+      "details": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\logs\\cmake_release_build.log.txt",
+      "name": "release_build",
+      "passed": true
+    },
+    {
+      "details": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\logs\\python_tests.log.txt",
+      "name": "python_regression_tests",
+      "passed": true
+    },
+    {
+      "details": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\logs\\ctest.log.txt",
+      "name": "native_release_ctest",
+      "passed": true
+    },
+    {
+      "details": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\preprocessing_manifest.json",
+      "name": "stanford_preprocessing",
+      "passed": true
+    },
+    {
+      "details": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\section_4_4\\run_20261011_191125\\gate.json",
+      "gate_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\section_4_4\\run_20261011_191125\\gate.json",
+      "name": "section44",
+      "passed": true,
+      "surrogate_count": 199
+    },
+    {
+      "bootstrap_replicates": 10000,
+      "details": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\components\\controlled_positive_controls\\run_20261011_194421\\gate.json",
+      "gate_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\components\\controlled_positive_controls\\run_20261011_194421\\gate.json",
+      "name": "controlled_positive_controls",
+      "passed": true,
+      "random_seed_count": 30,
+      "windows_per_class": 2000
+    },
+    {
+      "details": "fixture=D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\cpp_python_fixture_matrix_gate.json; uniform_routes=D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\uniform_three_route_audit\\uniform_three_route_audit.json; real_input=D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\cpp_python_parity_gate.json",
+      "name": "cpp_python_parity_gate",
+      "passed": true
+    },
+    {
+      "details": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_feature_map_manifest.csv",
+      "name": "direct_cpp_map_matrix",
+      "passed": true
+    },
+    {
+      "details": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\report_artifact_contract.csv",
+      "name": "direct_report_artifacts",
+      "passed": true
+    },
+    {
+      "details": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\time_projection.json",
+      "name": "formal_time_budget_projection",
+      "passed": true
+    },
+    {
+      "details": "{\"forbidden_artifact_count\": 0, \"map_count\": 102, \"required_artifact_count\": 17, \"sealed\": false}",
+      "name": "direct_output_contract",
+      "passed": true
+    },
+    {
+      "details": "All archived files match sha256_manifest.csv after final gate serialization.",
+      "name": "sha256_manifest_recheck",
+      "passed": true
+    }
+  ],
+  "entrypoint_id": "direct-44-46-374de37d-a8dc-49ad-a503-9ed66bc0c9ea-efe9b4ee7ea3",
+  "error": null,
+  "evaluation_mode": "direct_statistics",
+  "map_counts": {
+    "dataset_count": 3,
+    "map_count": 102,
+    "primary_count": 90,
+    "section45_primary_count": 54,
+    "section46_primary_count": 36,
+    "sensitivity_count": 12
+  },
+  "mode": "formal",
+  "status": "PASS"
+}

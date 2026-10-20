@@ -1,25 +1,26 @@
-Title: Supporting data for An integrated SGeMS plugin for high-order statistics calculation
-Version: 1.0
-Source model: Stanford VI-E porosity model, Stanford Center for Earth Resources Forecasting
+Title: Supporting data for "An integrated SGeMS plugin for computing high-order spatial statistics"
+Package revision: 2026-10-20
+Current result snapshot: current_results/2026-10-12/
+Source model: Stanford VI-E, Stanford Center for Earth Resources Forecasting
 Source URL: https://github.com/SCRFpublic/Stanford-VI-E
 Code URL: https://github.com/altoxinsss/sgems-hosc-plugin
 
-Derived data:
-- Coarse source grid: 75 x 100 x 100 cells, generated from the 150 x 200 x 200 fine grid by 2 x 2 x 2 linear block averaging.
-- 2D dataset: z = 62, 7,500 cells.
-- 3D dataset: z = 10-21, 90,000 cells.
-- High-porosity-band dataset: threshold >= 0.25; 26-neighbor connected components; minimum component size 300 nodes.
+Section 4.3 source run: r1_11_scalability_20260909/run_20261012_084358
+Section 4.3 source mode: smoke=false; overall_pass=true
+Section 4.3 design: Stanford VI-E z=62 slice; 16 cases; 32 Bell/AVL routes; one warm-up and five recorded repeats per route; 160 recorded executions.
 
-Template results:
-- Fig. 15: 2D x-y lag sections for fourth-order moment, AVL-based HOSC, Bell-partition HOSC, and value-weighted HOSC.
-- Supplementary F411 files: 3D lag-volume outputs from the same complete z = 10-21 subvolume.
+Sections 4.4-4.6 source run: direct_4_4_4_6_20261011/20261012_031025/run_20261011_191032
+Sections 4.4-4.6 entrypoint: direct-44-46-374de37d-a8dc-49ad-a503-9ed66bc0c9ea-efe9b4ee7ea3
+Sections 4.4-4.6 source mode/status: formal / PASS
+Section 4.4 component run/status: run_20261011_191125 / DIAGNOSTIC (all component gates true; the study status is recorded at top level)
+Controlled component run/status: run_20261011_194421 / VALIDATION_PASS; run_kind=formal
+Conditional shape supplement: conditional_high_order_window_analysis_fixed_rank_20261012; completed post-processing of the same formal run; 2000 fixed-rank spatial-block bootstrap replicates per target; no separate gate status.
+Current 3D datasets: z15_26, z45_56, z75_86; each 75 x 100 x 12 coarse-grid cells.
+Current primary moving window: 5 x 5 x 3; Section 4.5 also includes 3 x 3 x 3 and 7 x 7 x 3.
+Current direct map count: 102 (90 primary and 12 sensitivity).
+Current evaluation: direct map statistics and paired spatial-block bootstrap; primary 2000 replicates, scale and parameter sensitivity 1000, large-block sensitivity 500.
 
-Moving-window results:
-- Fig. 16: complete 5 x 5 x 3 moving-window outputs at 71 x 96 x 10 window centers, shown as spatial local-attribute slices.
-- Figs. 11-14: complete-grid unweighted and value-weighted moving-window experiments on the z = 62 slice, including parameter sensitivity, weight normalization, and weighted-centering comparisons.
+Exact copied files and SHA-256: current_results/2026-10-12/copied_files_manifest.csv
+Derived figure-input provenance: current_results/2026-10-12/figure_inputs/derived_manifest.json
 
-Coordinate convention: one-based x, y, z coordinates; x varies fastest in row order.
-Missing values: none in the processed datasets; full-window calculations require complete windows.
-File format: SGeMS text format with tab-separated data rows.
-
-For parameter values, output dimensions, evaluator agreement, correlations, F1 scores, and error metrics, see the parameter_description.txt files and moving_window_results/revision_metrics.csv.
+This is a curated result package. Full per-cell maps, full surrogate ensembles, raw Stanford files, and full experiment binaries are omitted from this compact Paper-data snapshot; the current README records their reproduction requirements. The plugin DLLs are distributed in bin/win32/ at the repository root.

@@ -1,0 +1,519 @@
+{
+  "gate": "cpp_python_parity_5x5x3_orders_3_to_6",
+  "status": "PASS",
+  "formula_version": "2026-10-10.v2",
+  "window_size": [
+    5,
+    5,
+    3
+  ],
+  "move_step": [
+    1,
+    1,
+    1
+  ],
+  "orders": [
+    3,
+    4,
+    5,
+    6
+  ],
+  "input_grid": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z45_56\\stanford_vie_z45_56_porosity.grid",
+  "input_grid_sha256": "227fa518d2d743a7ab13c4a3180b9bbc915229de958737db009f323d5d182974",
+  "executable": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\build_release_no_local_template\\Release\\movewindow_cli.exe",
+  "executable_sha256": "57f33c0f336abb272ebfb9ceb8a5e15a103a7ab88cd35fe80630fdf3b2e7978f",
+  "implementation_sha256": {
+    "experiments/r1_5_incremental_value_20260924/cpp_python_parity_gate.py": "78269eb8f3890969318537be2556ef794c6e752f4858d7eef0383b8c82bcb9b1",
+    "experiments/r1_5_incremental_value_20260924/cli_runner.py": "7c65bae39918bb83d9dcd1529456e6cf7743a8ed4a8043da5281d089325eb70e",
+    "experiments/r1_5_incremental_value_20260924/grid_io.py": "63635d279df6cc641215d4607b764052215803ad62015d8e6bb58b41b66f6807",
+    "experiments/r1_5_incremental_value_20260924/statistics.py": "f7314805d4a0d8419cc7f25767365a7a3e38f25175f547031532ac464d839ea0",
+    "experiments/r1_5_incremental_value_20260924/weighting.py": "b76b062e141a36bca89357a6b338ded7974016f3b1358ec6105228e6df1acc92",
+    "experiments/r1_5_incremental_value_20260924/window_support.py": "5145285664c6dd9d9080ec5436f6b850e50172857a18ff9fe21252df75eab177",
+    "src/window/main.cpp": "a0946176e5b4e1de04e1cee24e4fd8c941596ccc248771f4ffc1bcbdf2b82a22",
+    "vendor/weighted_moment_core/WeightedMomentCore.cpp": "a8877ff91c5e5f15fc0f9d5263c053a3834181023dd4f5badb48ffd6f969a1e0",
+    "vendor/weighted_moment_core/WeightedMomentCore.h": "e45766f6e0cec5f384ab596482ff18618859da989a5f041cc00cf4131a0c9775"
+  },
+  "source_spacing": [
+    50.0,
+    50.0,
+    2.0
+  ],
+  "absolute_tolerance": 1e-12,
+  "relative_tolerance": 1e-10,
+  "case_count": 12,
+  "max_abs_error": 1.0072238182390336e-16,
+  "cases": [
+    {
+      "dataset_id": "z45_56",
+      "weighting": "uniform",
+      "order": 3,
+      "weight_config": {
+        "mode": "uniform"
+      },
+      "diagnostics": {
+        "window_count": 68160,
+        "weight_sum_min": 75.0,
+        "weight_sum_max": 75.0,
+        "ess_min": 75.0,
+        "ess_max": 75.0
+      },
+      "passed": true,
+      "count": 68160,
+      "failed_count": 0,
+      "max_abs_error": 1.0072238182390336e-16,
+      "max_relative_error": 7.110323070389672e-10,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\configs\\z45_56_uniform_w5x5x3_r3_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_uniform_w5x5x3_r3_weighted\\cumulant3_weighted.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_uniform_w5x5x3_r3_weighted\\cumulant3_weighted.meta.txt",
+      "sidecar_coordinate_validation": "PASS",
+      "sidecar_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_uniform_w5x5x3_r3_weighted\\cumulant3_weighted.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "fcda5ffdc4fe112df99014489356f5169248941b9f94b260190079d67fcaf41a",
+        "output_sha256": "4b7390e0fc2ed192e0daa001b91e82cc0ad0a7588d02fcb5b3f527909b573148",
+        "metadata_sha256": "811c9d7291bb4544cdfd800d249cded3aebe68eddc2bfd73b0d3cd37ba7080e2",
+        "stdout_sha256": "e4f331f3edf7500858a480ab9b73ba292f16e540c2833c5d3724a98d4a256895",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "371c4d4ce74ce31dca3c02c41e252b1fad2fec2849b2022d79e5da057a1ffa96"
+      }
+    },
+    {
+      "dataset_id": "z45_56",
+      "weighting": "uniform",
+      "order": 4,
+      "weight_config": {
+        "mode": "uniform"
+      },
+      "diagnostics": {
+        "window_count": 68160,
+        "weight_sum_min": 75.0,
+        "weight_sum_max": 75.0,
+        "ess_min": 75.0,
+        "ess_max": 75.0
+      },
+      "passed": true,
+      "count": 68160,
+      "failed_count": 0,
+      "max_abs_error": 1.0015317568334847e-16,
+      "max_relative_error": 4.6976700325627155e-11,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\configs\\z45_56_uniform_w5x5x3_r4_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_uniform_w5x5x3_r4_weighted\\cumulant4_weighted.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_uniform_w5x5x3_r4_weighted\\cumulant4_weighted.meta.txt",
+      "sidecar_coordinate_validation": "PASS",
+      "sidecar_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_uniform_w5x5x3_r4_weighted\\cumulant4_weighted.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "3169ca9716a05dbb14d0b560a39602be1c5c1f006f42698f94cbbcf684c8c009",
+        "output_sha256": "3e86e97ca8feecd48d75532b97f7909d56144d6c06a4c28eb051764d4b8f3b5d",
+        "metadata_sha256": "187bf023fd7e63a0ac967da57f1377bab712f7fa72e0257b761b9dc65d521a9d",
+        "stdout_sha256": "50ee1a90933e5ffcb0649989d87f5013bdfb3280321cef344fdc319530852015",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "371c4d4ce74ce31dca3c02c41e252b1fad2fec2849b2022d79e5da057a1ffa96"
+      }
+    },
+    {
+      "dataset_id": "z45_56",
+      "weighting": "uniform",
+      "order": 5,
+      "weight_config": {
+        "mode": "uniform"
+      },
+      "diagnostics": {
+        "window_count": 68160,
+        "weight_sum_min": 75.0,
+        "weight_sum_max": 75.0,
+        "ess_min": 75.0,
+        "ess_max": 75.0
+      },
+      "passed": true,
+      "count": 68160,
+      "failed_count": 0,
+      "max_abs_error": 1.6263032587282567e-19,
+      "max_relative_error": 4.001925461271729e-11,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\configs\\z45_56_uniform_w5x5x3_r5_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_uniform_w5x5x3_r5_weighted\\cumulant5_weighted.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_uniform_w5x5x3_r5_weighted\\cumulant5_weighted.meta.txt",
+      "sidecar_coordinate_validation": "PASS",
+      "sidecar_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_uniform_w5x5x3_r5_weighted\\cumulant5_weighted.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "a88952b02aa0cc8e0e6d5f790da46ef7606ad4be05cce354fb7f7128824653a8",
+        "output_sha256": "149a4052216905b7bc3270c0d636156f2065f8c3e3e13f36af6ebd9070b2bdcb",
+        "metadata_sha256": "937c0e117f566d8aeb24cc3bffc013105415ffecd47d3b8d9ed5b959542ae0e0",
+        "stdout_sha256": "9fa82ec70f4062b50f6598cbf82e3da0de71cebace485c29d3d68a3104e4aff1",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "371c4d4ce74ce31dca3c02c41e252b1fad2fec2849b2022d79e5da057a1ffa96"
+      }
+    },
+    {
+      "dataset_id": "z45_56",
+      "weighting": "uniform",
+      "order": 6,
+      "weight_config": {
+        "mode": "uniform"
+      },
+      "diagnostics": {
+        "window_count": 68160,
+        "weight_sum_min": 75.0,
+        "weight_sum_max": 75.0,
+        "ess_min": 75.0,
+        "ess_max": 75.0
+      },
+      "passed": true,
+      "count": 68160,
+      "failed_count": 0,
+      "max_abs_error": 9.994988777600744e-20,
+      "max_relative_error": 5.351450737073805e-10,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\configs\\z45_56_uniform_w5x5x3_r6_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_uniform_w5x5x3_r6_weighted\\cumulant6_weighted.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_uniform_w5x5x3_r6_weighted\\cumulant6_weighted.meta.txt",
+      "sidecar_coordinate_validation": "PASS",
+      "sidecar_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_uniform_w5x5x3_r6_weighted\\cumulant6_weighted.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "6bc8769665c265433b669cf23b0bd2a5e99bcad8d0fb06f2ada5300cd2298c4e",
+        "output_sha256": "c00d7d98d5bc3ab9d4e8ab34d0d28d73fa6d7628aac18c4db29f6c742dcd01b2",
+        "metadata_sha256": "e18b299a56a31d25032b11ff8def42b05d5d466a91f222dd61414e5f66854b40",
+        "stdout_sha256": "2c0e5e1f8329b53e621f95a3cc449006096b2187405fe7df33f2f8580a8c5cff",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "371c4d4ce74ce31dca3c02c41e252b1fad2fec2849b2022d79e5da057a1ffa96"
+      }
+    },
+    {
+      "dataset_id": "z45_56",
+      "weighting": "coordinate_gaussian",
+      "order": 3,
+      "weight_config": {
+        "mode": "coordinate_gaussian",
+        "bandwidth": 1.0
+      },
+      "diagnostics": {
+        "window_count": 68160,
+        "weight_sum_min": 35.0215240321101,
+        "weight_sum_max": 35.0215240321101,
+        "ess_min": 65.14816014598095,
+        "ess_max": 65.14816014598095
+      },
+      "passed": true,
+      "count": 68160,
+      "failed_count": 0,
+      "max_abs_error": 1.0028870095490916e-16,
+      "max_relative_error": 4.9430123987130263e-11,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\configs\\z45_56_coordinate_gaussian_w5x5x3_r3_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_coordinate_gaussian_w5x5x3_r3_weighted\\cumulant3_weighted.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_coordinate_gaussian_w5x5x3_r3_weighted\\cumulant3_weighted.meta.txt",
+      "sidecar_coordinate_validation": "PASS",
+      "sidecar_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_coordinate_gaussian_w5x5x3_r3_weighted\\cumulant3_weighted.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "1874cfd0dcf899f7579c8c58a2b53410e4d01bf9184f8f288705de893a2a71d5",
+        "output_sha256": "5aca90bb4e4ec48fefb2d25cbff03c644d157f4466793e0fd047454e47b34627",
+        "metadata_sha256": "277f9b27a3f126e84cbad47e8f9665051242274ee69be968828ebb55ad80a17a",
+        "stdout_sha256": "adb74eb2a950a64c97d05a76c2f846a2d8c17b21d7d97b8c133c36f4621fd6d3",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "acbd836a4bdc88bc5453133ab2a334b7646bbeaaa3f9ada18e6802fe40fcdf62"
+      }
+    },
+    {
+      "dataset_id": "z45_56",
+      "weighting": "coordinate_gaussian",
+      "order": 4,
+      "weight_config": {
+        "mode": "coordinate_gaussian",
+        "bandwidth": 1.0
+      },
+      "diagnostics": {
+        "window_count": 68160,
+        "weight_sum_min": 35.0215240321101,
+        "weight_sum_max": 35.0215240321101,
+        "ess_min": 65.14816014598095,
+        "ess_max": 65.14816014598095
+      },
+      "passed": true,
+      "count": 68160,
+      "failed_count": 0,
+      "max_abs_error": 9.999054535747565e-17,
+      "max_relative_error": 5.57183937792331e-11,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\configs\\z45_56_coordinate_gaussian_w5x5x3_r4_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_coordinate_gaussian_w5x5x3_r4_weighted\\cumulant4_weighted.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_coordinate_gaussian_w5x5x3_r4_weighted\\cumulant4_weighted.meta.txt",
+      "sidecar_coordinate_validation": "PASS",
+      "sidecar_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_coordinate_gaussian_w5x5x3_r4_weighted\\cumulant4_weighted.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "85879e1fb343c3e112566308b3c783988e34426a42ff269c0d01d59d42eeb71f",
+        "output_sha256": "c957c8f0cb042ad38c6af24eb924e1a75af95d5f7a64319e1e79adad347c0cdb",
+        "metadata_sha256": "3a441660aafdcad14ca036ae62cd3526c6e2de256849bce49b2274b20978040e",
+        "stdout_sha256": "51f9e731fc1adae46ce26483e5a437d4827d46de829d7e94ea009a1eb656a40a",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "acbd836a4bdc88bc5453133ab2a334b7646bbeaaa3f9ada18e6802fe40fcdf62"
+      }
+    },
+    {
+      "dataset_id": "z45_56",
+      "weighting": "coordinate_gaussian",
+      "order": 5,
+      "weight_config": {
+        "mode": "coordinate_gaussian",
+        "bandwidth": 1.0
+      },
+      "diagnostics": {
+        "window_count": 68160,
+        "weight_sum_min": 35.0215240321101,
+        "weight_sum_max": 35.0215240321101,
+        "ess_min": 65.14816014598095,
+        "ess_max": 65.14816014598095
+      },
+      "passed": true,
+      "count": 68160,
+      "failed_count": 0,
+      "max_abs_error": 4.30970363562988e-18,
+      "max_relative_error": 1.505576694171881e-11,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\configs\\z45_56_coordinate_gaussian_w5x5x3_r5_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_coordinate_gaussian_w5x5x3_r5_weighted\\cumulant5_weighted.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_coordinate_gaussian_w5x5x3_r5_weighted\\cumulant5_weighted.meta.txt",
+      "sidecar_coordinate_validation": "PASS",
+      "sidecar_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_coordinate_gaussian_w5x5x3_r5_weighted\\cumulant5_weighted.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "00c693bd6d6e0a1f7ed1bee2e9e2d3c5dde8b7ff5bdc79731d27d5d73fe15755",
+        "output_sha256": "2ff1687df1f058646d950f4df9ab83aa4287a8acbc462f3de625a2db40a85439",
+        "metadata_sha256": "fe3c2fcc74651390aa46d55ac97311692cc3b7abd5870ab23d3813c4dfd2ff25",
+        "stdout_sha256": "84db8904924c3456e18453dfcb2698313d269b8147dfad9d5ce5c0dbdb3565c3",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "acbd836a4bdc88bc5453133ab2a334b7646bbeaaa3f9ada18e6802fe40fcdf62"
+      }
+    },
+    {
+      "dataset_id": "z45_56",
+      "weighting": "coordinate_gaussian",
+      "order": 6,
+      "weight_config": {
+        "mode": "coordinate_gaussian",
+        "bandwidth": 1.0
+      },
+      "diagnostics": {
+        "window_count": 68160,
+        "weight_sum_min": 35.0215240321101,
+        "weight_sum_max": 35.0215240321101,
+        "ess_min": 65.14816014598095,
+        "ess_max": 65.14816014598095
+      },
+      "passed": true,
+      "count": 68160,
+      "failed_count": 0,
+      "max_abs_error": 1.1180834903756764e-19,
+      "max_relative_error": 4.496573740369984e-11,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\configs\\z45_56_coordinate_gaussian_w5x5x3_r6_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_coordinate_gaussian_w5x5x3_r6_weighted\\cumulant6_weighted.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_coordinate_gaussian_w5x5x3_r6_weighted\\cumulant6_weighted.meta.txt",
+      "sidecar_coordinate_validation": "PASS",
+      "sidecar_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_coordinate_gaussian_w5x5x3_r6_weighted\\cumulant6_weighted.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "e992191c535eac06e4320ef2a4096b3ce3d2d1cf0406f7e78bd1b639add2418f",
+        "output_sha256": "437d80f63d4b2dbceb7025f6765516e82497cafec7906b730c799112c409a7a4",
+        "metadata_sha256": "780d3e0e5ddcd0ecca073036cd4d3c9e3c80379abfacb39d71e324ce95f3bbad",
+        "stdout_sha256": "7c9cb29736468926c2a555f41c5c608e08ecf6a2b19caa5cdcb382fbbbb5dfaa",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "acbd836a4bdc88bc5453133ab2a334b7646bbeaaa3f9ada18e6802fe40fcdf62"
+      }
+    },
+    {
+      "dataset_id": "z45_56",
+      "weighting": "soft_high_porosity",
+      "order": 3,
+      "weight_config": {
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.02,
+        "soft_weight_strength": 0.8
+      },
+      "diagnostics": {
+        "window_count": 68160,
+        "weight_sum_min": 15.001025128295248,
+        "weight_sum_max": 67.80189839373669,
+        "ess_min": 43.38297965109296,
+        "ess_max": 74.99999999123355
+      },
+      "passed": true,
+      "count": 68160,
+      "failed_count": 0,
+      "max_abs_error": 1.005733040251866e-16,
+      "max_relative_error": 3.456302982581108e-10,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\configs\\z45_56_soft_high_porosity_w5x5x3_r3_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_soft_high_porosity_w5x5x3_r3_weighted\\cumulant3_weighted.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_soft_high_porosity_w5x5x3_r3_weighted\\cumulant3_weighted.meta.txt",
+      "sidecar_coordinate_validation": "PASS",
+      "sidecar_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_soft_high_porosity_w5x5x3_r3_weighted\\cumulant3_weighted.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "667820188ea7b88d4590077ee97fecc04a92ce28e8af7ffcdbf744404eff3f05",
+        "output_sha256": "3c9a2f4b484231fadd13e282d29ab902eac5353122b02d79f15f5f7fafc10f8f",
+        "metadata_sha256": "b01258846e32b60fcae22a2cc3252192d285f0d850422a6a999673e56a1f2d68",
+        "stdout_sha256": "8103fa2830cfa36e8988712b29ed1be8f22f9a3582081123016ba7a29152314e",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "d76f6d3185168328720edc24a33f742d830a322f080b3ab318919a51488a7a2d"
+      }
+    },
+    {
+      "dataset_id": "z45_56",
+      "weighting": "soft_high_porosity",
+      "order": 4,
+      "weight_config": {
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.02,
+        "soft_weight_strength": 0.8
+      },
+      "diagnostics": {
+        "window_count": 68160,
+        "weight_sum_min": 15.001025128295248,
+        "weight_sum_max": 67.80189839373669,
+        "ess_min": 43.38297965109296,
+        "ess_max": 74.99999999123355
+      },
+      "passed": true,
+      "count": 68160,
+      "failed_count": 0,
+      "max_abs_error": 1.0018028073766061e-16,
+      "max_relative_error": 4.13861065762915e-11,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\configs\\z45_56_soft_high_porosity_w5x5x3_r4_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_soft_high_porosity_w5x5x3_r4_weighted\\cumulant4_weighted.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_soft_high_porosity_w5x5x3_r4_weighted\\cumulant4_weighted.meta.txt",
+      "sidecar_coordinate_validation": "PASS",
+      "sidecar_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_soft_high_porosity_w5x5x3_r4_weighted\\cumulant4_weighted.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "3f668e5eaf8dccc852f7451a18777caf61e54879e677d4ceda77b7e3e4f91352",
+        "output_sha256": "30dd1fe1b43283e68391af359fed2a40c06dca2c3951b1f9079d1aff010c7e24",
+        "metadata_sha256": "26febf9e761ef1001ae4a67c545531f5c8ec2f724ec58733258c22186cca46f3",
+        "stdout_sha256": "b4310f702c00f4e989937713b5109059c8a6b1ddb0a965d58c480ecf9741b094",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "d76f6d3185168328720edc24a33f742d830a322f080b3ab318919a51488a7a2d"
+      }
+    },
+    {
+      "dataset_id": "z45_56",
+      "weighting": "soft_high_porosity",
+      "order": 5,
+      "weight_config": {
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.02,
+        "soft_weight_strength": 0.8
+      },
+      "diagnostics": {
+        "window_count": 68160,
+        "weight_sum_min": 15.001025128295248,
+        "weight_sum_max": 67.80189839373669,
+        "ess_min": 43.38297965109296,
+        "ess_max": 74.99999999123355
+      },
+      "passed": true,
+      "count": 68160,
+      "failed_count": 0,
+      "max_abs_error": 2.303929616531697e-19,
+      "max_relative_error": 3.773899225114762e-11,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\configs\\z45_56_soft_high_porosity_w5x5x3_r5_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_soft_high_porosity_w5x5x3_r5_weighted\\cumulant5_weighted.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_soft_high_porosity_w5x5x3_r5_weighted\\cumulant5_weighted.meta.txt",
+      "sidecar_coordinate_validation": "PASS",
+      "sidecar_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_soft_high_porosity_w5x5x3_r5_weighted\\cumulant5_weighted.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "b760acbab74a5c634d66dcd6803304797dd5a461840f22fbda080f5c86956d2d",
+        "output_sha256": "edf01a306481d446caf523cda2d3baf5438c8737f2b9a4159306bd88d74905f5",
+        "metadata_sha256": "cb1b6eff79a833d2f17343c896c1f940ddaf36bb3779f2e3043dd02ba5c47a70",
+        "stdout_sha256": "78505fa3f83d49f046abff7a3b82a4463d9deb2421b423f34b4d4e11845f1d34",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "d76f6d3185168328720edc24a33f742d830a322f080b3ab318919a51488a7a2d"
+      }
+    },
+    {
+      "dataset_id": "z45_56",
+      "weighting": "soft_high_porosity",
+      "order": 6,
+      "weight_config": {
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.02,
+        "soft_weight_strength": 0.8
+      },
+      "diagnostics": {
+        "window_count": 68160,
+        "weight_sum_min": 15.001025128295248,
+        "weight_sum_max": 67.80189839373669,
+        "ess_min": 43.38297965109296,
+        "ess_max": 74.99999999123355
+      },
+      "passed": true,
+      "count": 68160,
+      "failed_count": 0,
+      "max_abs_error": 1.4230153513872246e-19,
+      "max_relative_error": 1.1185034884875529e-10,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\configs\\z45_56_soft_high_porosity_w5x5x3_r6_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_soft_high_porosity_w5x5x3_r6_weighted\\cumulant6_weighted.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_soft_high_porosity_w5x5x3_r6_weighted\\cumulant6_weighted.meta.txt",
+      "sidecar_coordinate_validation": "PASS",
+      "sidecar_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_parity\\maps\\cpp\\z45_56_soft_high_porosity_w5x5x3_r6_weighted\\cumulant6_weighted.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "751bc704d0cf30a5f2b2cc6e2cf9a71415177f3b151513568e52b66ce609c4c8",
+        "output_sha256": "046db3e3cfbeadad3c92c28eca68bb092fb6456fef3d0d468bbff195212213b7",
+        "metadata_sha256": "1a70c40b592d2a31b69c91a0e1ac3f3946f929fc97d60371265500134d26ef19",
+        "stdout_sha256": "d64f2fe2708e804de495aa5c47357368729105e38fd6170dd3fe598d9181ca54",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "d76f6d3185168328720edc24a33f742d830a322f080b3ab318919a51488a7a2d"
+      }
+    }
+  ]
+}

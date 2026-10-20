@@ -1,0 +1,10 @@
+{
+  "all_processes_pass": true,
+  "all_bell_avl_accuracy_checks_pass": true,
+  "overall_pass": true,
+  "case_count": 16,
+  "route_count": 32,
+  "recorded_run_count": 160,
+  "failed_cases": [],
+  "evidence_root": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\r1_11_scalability_20260909\\run_20261012_084358"
+}

@@ -1,0 +1,44 @@
+{
+  "created_local": "2026-10-12T08:43:58",
+  "platform": "Windows-10-10.0.19043-SP0",
+  "machine": "AMD64",
+  "processor": "Intel64 Family 6 Model 158 Stepping 13, GenuineIntel",
+  "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]",
+  "repo_root": "D:\\Development\\DLL\\DLL\\WithoutSGeMS",
+  "build_dir": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\build_r1_11_release_o2_20260909",
+  "cmake_cache": {
+    "CMAKE_BUILD_TYPE": "Release",
+    "CMAKE_CXX_COMPILER": "D:/VisualStudio/vs2022/BuildTools/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe",
+    "CMAKE_CXX_FLAGS": "/DWIN32 /D_WINDOWS /EHsc",
+    "CMAKE_CXX_FLAGS_RELEASE": "/O2 /DNDEBUG",
+    "CMAKE_GENERATOR": "Ninja"
+  },
+  "data": "D:\\Development\\DockerMountPoint\\HOSC_\\HOSIM2026_HOSC\\HOSIM2010_like_data\\exhaustive_image_z62.txt",
+  "paper_read_only": "D:\\School\\Paper\\MoveWindow\\revision0903\\paper_revised_from_origin_0904.docx",
+  "repeats": 5,
+  "warmups": 1,
+  "timeout_s": 1800.0,
+  "seed": 20260909,
+  "smoke": false,
+  "atol": 1e-12,
+  "rtol": 1e-10,
+  "sgems_compatibility": {
+    "require_full_window": true,
+    "require_complete_window": true,
+    "require_anchor_present": true,
+    "skip_missing_samples": false,
+    "output_at_window_center": true,
+    "source_origin": [
+      0,
+      0,
+      0
+    ],
+    "source_spacing": [
+      1,
+      1,
+      1
+    ],
+    "invert_window_output": false,
+    "enable_percentile_clipping": false
+  }
+}

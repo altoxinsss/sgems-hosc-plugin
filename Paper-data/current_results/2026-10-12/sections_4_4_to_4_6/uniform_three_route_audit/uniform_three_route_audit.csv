@@ -1,0 +1,7 @@
+order,passed,max_abs_error,all_one_weight_diagnostics,formula_version,formula_version_matches,error
+1,True,0.0,True,2026-10-10.v2,True,
+2,True,0.0,True,2026-10-10.v2,True,
+3,True,6.776263578034403e-21,True,2026-10-10.v2,True,
+4,True,1.6940658945086007e-21,True,2026-10-10.v2,True,
+5,True,1.852884572118782e-22,True,2026-10-10.v2,True,
+6,True,4.301339185275744e-23,True,2026-10-10.v2,True,

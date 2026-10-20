@@ -1,9 +1,0 @@
-case,window_size,reference_value,bandwidth,normalize_weights,zero_first_order_moment,correlation_with_porosity,high_porosity_f1,contrast,max_abs_route_difference,route_difference_rmse
-Unweighted baseline,3 x 3,,,N/A,Yes,0.017,0.266,0.030,,
-Weighted main case,3 x 3,0.26,0.08,Yes,Yes,0.683,0.638,1.757,,
-Weighted sensitivity,3 x 3,0.27,0.08,Yes,Yes,0.682,0.638,1.755,,
-Weighted sensitivity,3 x 3,0.28,0.10,Yes,Yes,0.684,0.633,1.764,,
-Weighted without first-order suppression,3 x 3,0.28,0.03,Yes,No,0.164,0.328,0.447,,
-Weighted large-window case,11 x 11,0.26,0.04,Yes,No,0.164,0.330,0.429,,
-Fig. 4.10 evaluator agreement,,,,,,,,,8.470329472543003e-22,4.9219734876932726e-23
-Fig. 4.11 evaluator agreement,,,,,,,,,4.235164736271502e-22,2.0252034867307976e-23

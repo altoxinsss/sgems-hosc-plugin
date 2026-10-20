@@ -2,18 +2,42 @@
 #define HOSC_DEBUG_LOGGER_H
 
 #include <stdio.h>
+#include <string.h>
 #include <stdarg.h>
 #include <time.h>
 #include <direct.h>
+#ifndef NOMINMAX
+#define NOMINMAX
+#endif
+#include <windows.h>
+#ifdef min
+#undef min
+#endif
+#ifdef max
+#undef max
+#endif
+#ifdef interface
+#undef interface
+#endif
 
 inline const char* hosc_debug_log_dir()
 {
-    return "D:\\Development\\DLL\\WithSGeMS\\Template\\log";
+    static char directory[MAX_PATH] = "";
+    if(directory[0] == '\0') {
+        const DWORD count = GetTempPathA(MAX_PATH, directory);
+        if(count == 0 || count >= MAX_PATH) strcpy(directory, ".\\");
+    }
+    return directory;
 }
 
 inline const char* hosc_debug_log_file()
 {
-    return "D:\\Development\\DLL\\WithSGeMS\\Template\\log\\HOSC_AVL_debug.log";
+    static char filename[MAX_PATH] = "";
+    if(filename[0] == '\0') {
+        _snprintf(filename, sizeof(filename) - 1, "%sHOSC_TEMPLATE_debug.log", hosc_debug_log_dir());
+        filename[sizeof(filename) - 1] = '\0';
+    }
+    return filename;
 }
 
 inline void hosc_debug_log(const char* stage, const char* fmt, ...)

@@ -19,7 +19,7 @@
 
 
 #include "FunctionCall.h"
-#include "WeightedMomentCore.h"
+#include "../../shared/WeightedMomentCore.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -112,6 +112,8 @@ public:
 	double source_spacing_x_;
 	double source_spacing_y_;
 	double source_spacing_z_;
+	string source_grid_name_;
+	string source_property_name_;
 	std::vector<unsigned char> source_present_;
 
 
@@ -157,9 +159,20 @@ public:
 	GridShape myWindowShape;
 	bool invertWindowOutput;
 	bool enablePercentileClipping;
+	bool outputDiagnostics;
+	bool centerCumulantInputForOrderGE2;
+	bool outputStandardizedCumulant;
+	bool writeAuditSidecar;
 	double percentileClipMin;
 	double percentileClipMax;
+	double varianceEpsilon;
+	string auditOutputDirectory;
+	string auditRunDirectory;
+	string runId_;
+	unsigned long processId_;
+	unsigned long runSequence_;
 	bool useWeightedMoment;
+	bool coordinateWeightUsesWindowCenter;
 	weighted_moment_core::WeightedMomentOptions weightedOptions;
 
 

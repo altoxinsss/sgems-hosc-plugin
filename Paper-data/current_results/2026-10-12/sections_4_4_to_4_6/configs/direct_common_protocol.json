@@ -1,0 +1,58 @@
+{
+  "evaluation_mode": "direct_statistics",
+  "datasets": [
+    {
+      "id": "z15_26",
+      "porosity": "../../data/r1_5_high_order_20261010/z15_26/stanford_vie_z15_26_porosity.grid",
+      "label": "../../data/r1_5_high_order_20261010/z15_26/stanford_vie_z15_26_channel_strict_majority.grid",
+      "label_valid": "../../data/r1_5_high_order_20261010/z15_26/stanford_vie_z15_26_channel_label_valid.grid",
+      "occupancy": "../../data/r1_5_high_order_20261010/z15_26/stanford_vie_z15_26_channel_occupancy.grid",
+      "representative_z": 20
+    },
+    {
+      "id": "z45_56",
+      "porosity": "../../data/r1_5_high_order_20261010/z45_56/stanford_vie_z45_56_porosity.grid",
+      "label": "../../data/r1_5_high_order_20261010/z45_56/stanford_vie_z45_56_channel_strict_majority.grid",
+      "label_valid": "../../data/r1_5_high_order_20261010/z45_56/stanford_vie_z45_56_channel_label_valid.grid",
+      "occupancy": "../../data/r1_5_high_order_20261010/z45_56/stanford_vie_z45_56_channel_occupancy.grid",
+      "representative_z": 50
+    },
+    {
+      "id": "z75_86",
+      "porosity": "../../data/r1_5_high_order_20261010/z75_86/stanford_vie_z75_86_porosity.grid",
+      "label": "../../data/r1_5_high_order_20261010/z75_86/stanford_vie_z75_86_channel_strict_majority.grid",
+      "label_valid": "../../data/r1_5_high_order_20261010/z75_86/stanford_vie_z75_86_channel_label_valid.grid",
+      "occupancy": "../../data/r1_5_high_order_20261010/z75_86/stanford_vie_z75_86_channel_occupancy.grid",
+      "representative_z": 80
+    }
+  ],
+  "source_spacing_xyz_m": [50.0, 50.0, 2.0],
+  "move_step": [1, 1, 1],
+  "high_porosity_threshold": 0.25,
+  "variance_epsilon": 1e-12,
+  "lambda4_independent_audit_absolute_tolerance": 2e-6,
+  "lambda4_independent_audit_relative_tolerance": 1e-6,
+  "minimum_ess_order_6": 12.0,
+  "block_shape_primary_xyz": [8, 13, 6],
+  "block_shape_large_xyz": [12, 20, 6],
+  "formal_time_budget_seconds": 21600,
+  "bootstrap": {
+    "primary_replicates": 2000,
+    "scale_replicates": 1000,
+    "large_block_replicates": 500,
+    "seed": 20261011
+  },
+  "movewindow_cli": "../../build_release_no_local_template/Release/movewindow_cli.exe",
+  "template_cli": "../../build_release_no_local_template/Release/template_cli.exe",
+  "cmake_build_dir": "../../build_release_no_local_template",
+  "ctest_executable": "D:/VisualStudio/vs2022/BuildTools/Common7/IDE/CommonExtensions/Microsoft/CMake/CMake/bin/ctest.exe",
+  "preprocessing_config": "../stanford_vie_preprocessing/preprocessing_config.json",
+  "template_component_config": "../template_directional_20261010/experiment_config.json",
+  "controlled_config": "../controlled_moment_experiments_20261010/experiment_config.json",
+  "python_test_paths": [
+    "../r1_5_incremental_value_20260924/tests",
+    "../stanford_vie_preprocessing/tests",
+    "../template_directional_20261010/tests",
+    "../controlled_moment_experiments_20261010/tests"
+  ]
+}

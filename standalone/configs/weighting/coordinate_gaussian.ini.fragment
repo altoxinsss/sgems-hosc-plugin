@@ -1,0 +1,14 @@
+[sliding_window]
+center_cumulant_input_for_order_ge_2=true
+
+[weighted_moment]
+enable_weighted_moment=true
+weight_mode=coordinate_gaussian
+enable_coordinate_gaussian=true
+enable_soft_high_porosity=false
+normalize_weights=true
+zero_first_order_moment=false
+weight_center_mode=window_center
+; Formal primary value; the experiment JSON remains authoritative.
+bandwidth=1.0
+min_weight=0.0

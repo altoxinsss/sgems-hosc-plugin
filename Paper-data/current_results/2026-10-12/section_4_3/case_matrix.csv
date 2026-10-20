@@ -1,0 +1,17 @@
+﻿case_id,group,mode,order_r,direction_count,occurrence_vector,workload,workload_label,nod,nlag,lag,azm,displayed_dirs,fixed_positions,window_size
+template_workload_r4_d3_a1-1-1_10x10,template_workload,template,4,3,"1,1,1",100,10x10,"1,1,1","6,10,10","3,3,3","180,90,0","2,3",1,0
+template_workload_r4_d3_a1-1-1_15x15,template_workload,template,4,3,"1,1,1",225,15x15,"1,1,1","6,15,15","3,3,3","180,90,0","2,3",1,0
+template_order_r4_d3_a1-1-1,template_order_extension,template,4,3,"1,1,1",400,20x20,"1,1,1","6,20,20","3,3,3","180,90,0","2,3",1,0
+template_workload_r4_d3_a1-1-1_25x25,template_workload,template,4,3,"1,1,1",625,25x25,"1,1,1","6,25,25","3,3,3","180,90,0","2,3",1,0
+window_r4_w5,window_order_size,window,4,0,,25,5x5,,,,,,,5
+window_r4_w9,window_order_size,window,4,0,,81,9x9,,,,,,,9
+window_r4_w13,window_order_size,window,4,0,,169,13x13,,,,,,,13
+template_order_r5_d3_a2-1-1,template_order_extension,template,5,3,"2,1,1",400,20x20,"2,1,1","6,20,20","3,3,3","180,90,0","2,3",1,0
+template_order_r6_d3_a2-2-1,template_order_extension,template,6,3,"2,2,1",400,20x20,"2,2,1","6,20,20","3,3,3","180,90,0","2,3",1,0
+template_order_r7_d3_a2-2-2,template_order_extension,template,7,3,"2,2,2",400,20x20,"2,2,2","6,20,20","3,3,3","180,90,0","2,3",1,0
+template_order_r8_d3_a3-2-2,template_order_extension,template,8,3,"3,2,2",400,20x20,"3,2,2","6,20,20","3,3,3","180,90,0","2,3",1,0
+template_direction_r6_d2_a3-2,template_direction_count,template,6,2,"3,2",400,20x20,"3,2","20,20","3,3","180,90","1,2",,0
+template_direction_r6_d4_a2-1-1-1,template_direction_count,template,6,4,"2,1,1,1",400,20x20,"2,1,1,1","6,6,20,20","3,3,3,3","180,90,0,45","3,4","1,1",0
+template_occurrence_r6_d3_a3-1-1,template_occurrence_distribution,template,6,3,"3,1,1",400,20x20,"3,1,1","6,20,20","3,3,3","180,90,0","2,3",1,0
+template_occurrence_r6_d3_a1-3-1,template_occurrence_distribution,template,6,3,"1,3,1",400,20x20,"1,3,1","6,20,20","3,3,3","180,90,0","2,3",1,0
+template_occurrence_r6_d3_a1-1-3,template_occurrence_distribution,template,6,3,"1,1,3",400,20x20,"1,1,3","6,20,20","3,3,3","180,90,0","2,3",1,0

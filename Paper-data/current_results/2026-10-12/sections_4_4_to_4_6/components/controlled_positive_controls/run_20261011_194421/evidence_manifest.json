@@ -1,0 +1,112 @@
+{
+  "config": {
+    "bootstrap_replicates": 10000,
+    "high_threshold": 0.25,
+    "random_seeds": [
+      0,
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29
+    ],
+    "variance_epsilon": 1e-15,
+    "window_sample_counts": [
+      27,
+      75,
+      147
+    ],
+    "windows_per_class": 2000
+  },
+  "config_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\controlled_moment_experiments_20261010\\experiment_config.json",
+  "config_sha256": "5346c352c16abe399c3546ad9155da5fc9da58b1f0f32b38216c0d741bf35d02",
+  "environment": {
+    "numpy": "2.3.5",
+    "platform": "Windows-10-10.0.19043-SP0",
+    "python": "3.12.14 (main, Aug 25 2026, 14:01:42) [MSC v.1944 64 bit (AMD64)]"
+  },
+  "gates": {
+    "actual_result_rows": 1620,
+    "all_metrics_finite": true,
+    "analytic_moment_checks_pass": true,
+    "complete_execution_pass": true,
+    "component_execution": "COMPLETE",
+    "expected_result_rows": 1620,
+    "matched_lower_order_diagnostic_mean_abs_delta": 1.0187553860263997e-05,
+    "overall_pass": true,
+    "run_kind": "formal",
+    "status": "VALIDATION_PASS",
+    "target_order_detection_pass": true
+  },
+  "generated_utc": "2026-10-11T19:45:01.810410+00:00",
+  "output_files": [
+    {
+      "path": "direct_per_seed_estimates.csv",
+      "sha256": "f5ec828abcd7a42c123724c73fe52380634883e6cbeca1eff452029772e93267"
+    },
+    {
+      "path": "direct_summary.csv",
+      "sha256": "ffeb8492c3fae230db6b2f5248385b3c453db95e6892ec01b59b15cec27dcc7f"
+    },
+    {
+      "path": "gate.json",
+      "sha256": "7b44457bc6832204ec6acf8e83c20149a9fb777b96cf22c03a52fa268f7913e0"
+    },
+    {
+      "path": "population_moments.csv",
+      "sha256": "d83ed5e54fd60236f8ac607ebd605e1e3950207a3abaad866d8a199592bf0ea0"
+    },
+    {
+      "path": "run_config.json",
+      "sha256": "c64964206288c88f0e467ebdb396e5803f951f0e1ed9e7f49e4f2c8b9fb96018"
+    },
+    {
+      "path": "RUN_REPORT.md",
+      "sha256": "649d249f612b5d2fcfa6467366cd4cd38c1b12e0bb134f560ea9da3fdbaa798c"
+    }
+  ],
+  "run_kind": "formal",
+  "schema_version": "direct-controlled-moment-evidence.v1",
+  "source_files": [
+    {
+      "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\controlled_moment_experiments_20261010\\controlled_distributions.py",
+      "sha256": "14dea7d3914bef179145fe674a0b5b20b880f002c73a55678950385b1a809574"
+    },
+    {
+      "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\controlled_moment_experiments_20261010\\direct_evaluation.py",
+      "sha256": "92610988c7bd6f418d1e6d0f5d47b0d06cd3f07ac8938245dc6993ada01954c0"
+    },
+    {
+      "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\controlled_moment_experiments_20261010\\run_direct_controlled_moment_experiment.py",
+      "sha256": "59926a0ec6a9bc118d845e2fbaeaa39d32a5df2f28d9bcfc050f87d3ba2f4afc"
+    },
+    {
+      "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\controlled_moment_experiments_20261010\\experiment_config.json",
+      "sha256": "5346c352c16abe399c3546ad9155da5fc9da58b1f0f32b38216c0d741bf35d02"
+    }
+  ]
+}

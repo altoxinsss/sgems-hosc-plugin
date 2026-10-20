@@ -1,0 +1,237 @@
+[
+    {
+        "path":  "compat/vc71/intrin.h",
+        "bytes":  968,
+        "sha256":  "09203c8bb2dbc8e543a22e3b5a7ceed99b6cf3fe739eab39a0c70ad0ba87645d"
+    },
+    {
+        "path":  "MoveWindow/HOSCWindow/AVL.cpp",
+        "bytes":  16013,
+        "sha256":  "37d87e5af9ef3974aa46962293b4b8560edc5eb257f98eed1cbd870f821de908"
+    },
+    {
+        "path":  "MoveWindow/HOSCWindow/AVL.h",
+        "bytes":  1407,
+        "sha256":  "f87620d9dd47a105b8d49254440e4bd9088008190d9cfcf55234c641b2f8f924"
+    },
+    {
+        "path":  "MoveWindow/HOSCWindow/CumulantCal.cpp",
+        "bytes":  52869,
+        "sha256":  "a2f2c2af3b0a16c574ebea1d8e5b8a5b282de1401eee2a2efc134ee964da6dcc"
+    },
+    {
+        "path":  "MoveWindow/HOSCWindow/CumulantCal.h",
+        "bytes":  919,
+        "sha256":  "339783036bfba9c9ac7f42a11bba9137c4bf6b92f98d46f61c6c203e5c79f983"
+    },
+    {
+        "path":  "MoveWindow/HOSCWindow/ExplainCounters.h",
+        "bytes":  1064,
+        "sha256":  "73b7c95f4c4e1313618c976d16d026624f1efe089c661b7a8519d164f764c614"
+    },
+    {
+        "path":  "MoveWindow/HOSCWindow/FunctionCall.cpp",
+        "bytes":  11404,
+        "sha256":  "fc55c79842f4758bbbbe4ab29046d543e99231f838ae14c09abe36cf698be4cc"
+    },
+    {
+        "path":  "MoveWindow/HOSCWindow/FunctionCall.h",
+        "bytes":  640,
+        "sha256":  "f4f7704a3800e8a3a51c9ed94ec6418127506863768417c239048517cd399b69"
+    },
+    {
+        "path":  "MoveWindow/HOSCWindow/Initialization.cpp",
+        "bytes":  19895,
+        "sha256":  "a1e5e699d095937064704d4865dcab75e99bc21acca15ff01e76144965aa4905"
+    },
+    {
+        "path":  "MoveWindow/HOSCWindow/Initialization.h",
+        "bytes":  2654,
+        "sha256":  "c448c876206a7bd2cee44f2302bbe19bd1475e9d28416e681a711d057d7f1b6e"
+    },
+    {
+        "path":  "MoveWindow/HOSCWindow/PCA.cpp",
+        "bytes":  5811,
+        "sha256":  "48cbef9415fe933546c379bbc0ba0e6b4bf25d6cfb02be3867c90f64831ebee2"
+    },
+    {
+        "path":  "MoveWindow/HOSCWindow/PCA.h",
+        "bytes":  1113,
+        "sha256":  "43eecd3433568b2ba283290c88b276c4514e16147d1ec9f2c6cf6cea5cc8b4d4"
+    },
+    {
+        "path":  "MoveWindow/HOSCWindow/Plugin.cpp",
+        "bytes":  122236,
+        "sha256":  "c1eff431f2e724cb59869cdfcd57ed25cf8f9ac388a34e4b26e86008a1c2161d"
+    },
+    {
+        "path":  "MoveWindow/HOSCWindow/Plugin.h",
+        "bytes":  4718,
+        "sha256":  "01b1add0602676f9a314534bd03d97bdb2cc85e9d9ad360fabca5abfbce790fe"
+    },
+    {
+        "path":  "MoveWindow/HOSCWindow/SearchNode.cpp",
+        "bytes":  59497,
+        "sha256":  "bb27e6a73da8f76b90cde8dae90577f910d0b81da86ffb694d661871f45b9dce"
+    },
+    {
+        "path":  "MoveWindow/HOSCWindow/SearchNode.h",
+        "bytes":  1155,
+        "sha256":  "d376e642fb73d3d679c8543970ca5be92c3360b21c674d86c2156ae0b1236314"
+    },
+    {
+        "path":  "MoveWindow/HOSCWindow/Tools.cpp",
+        "bytes":  35269,
+        "sha256":  "6b039de68fcc4e244d9e800887e26aea0d8e0493d4b365688a1d602ccd3310ab"
+    },
+    {
+        "path":  "MoveWindow/HOSCWindow/Tools.h",
+        "bytes":  1793,
+        "sha256":  "d5f0233d6f94a8ad902384da0350cea996848cbf3b2be47e17fd16640d616a05"
+    },
+    {
+        "path":  "MoveWindow/HOSCWindow/WeightedMomentCore.cpp",
+        "bytes":  12011,
+        "sha256":  "d40b41e3c500c88fe721fa6faf5a04fd4a66dd19105721f49ecc2ef6558a2582"
+    },
+    {
+        "path":  "MoveWindow/HOSCWindow/WeightedMomentCore.h",
+        "bytes":  1955,
+        "sha256":  "a32ac94da0305436ea77fb16d9dd625a0e59f2b83e759770ba01e64bab7e2123"
+    },
+    {
+        "path":  "shared/ValidationFeedback.h",
+        "bytes":  10349,
+        "sha256":  "22321ce98045404c80c576ca4d8f035ba923277ae46fdbcc37513630ec204838"
+    },
+    {
+        "path":  "shared/WeightedMomentCore.cpp",
+        "bytes":  19563,
+        "sha256":  "1bc9e787ca6eb62bf6e466644325dc7b184c5a133a2b9415f8fe91b5a84f6897"
+    },
+    {
+        "path":  "shared/WeightedMomentCore.h",
+        "bytes":  3547,
+        "sha256":  "486c650feadcb377dbc119df88930f2ca2524480d8b6ce43e138e271fcd9ea1a"
+    },
+    {
+        "path":  "Template/HOSC2008/AVL.cpp",
+        "bytes":  16013,
+        "sha256":  "37d87e5af9ef3974aa46962293b4b8560edc5eb257f98eed1cbd870f821de908"
+    },
+    {
+        "path":  "Template/HOSC2008/AVL.h",
+        "bytes":  1407,
+        "sha256":  "f87620d9dd47a105b8d49254440e4bd9088008190d9cfcf55234c641b2f8f924"
+    },
+    {
+        "path":  "Template/HOSC2008/CumulantCal.cpp",
+        "bytes":  63326,
+        "sha256":  "d26e7b8be18a27b02e1f7951547dbf426e08a62279f1e78d980117c10b875eeb"
+    },
+    {
+        "path":  "Template/HOSC2008/CumulantCal.h",
+        "bytes":  1135,
+        "sha256":  "7e2161d17b6a0967b48b2ab08a5cb078c79b5999aadb240dcfd70883519c9b88"
+    },
+    {
+        "path":  "Template/HOSC2008/DebugLogger.h",
+        "bytes":  2289,
+        "sha256":  "e6062b2b5ac19a48baead28f1b8bb57c8769fb065561f59d0b36407fb300794e"
+    },
+    {
+        "path":  "Template/HOSC2008/ExplainCounters.h",
+        "bytes":  1064,
+        "sha256":  "73b7c95f4c4e1313618c976d16d026624f1efe089c661b7a8519d164f764c614"
+    },
+    {
+        "path":  "Template/HOSC2008/FunctionCall.cpp",
+        "bytes":  52008,
+        "sha256":  "0c7eb88a9c8a023c4103ce81f06ee501c7b401ab20556d093ab2b87b8e38d0a4"
+    },
+    {
+        "path":  "Template/HOSC2008/FunctionCall.h",
+        "bytes":  1499,
+        "sha256":  "7e6bd65508f659a916c5b1740104e60f8473d7e7638a825f9a26d56204858f2d"
+    },
+    {
+        "path":  "Template/HOSC2008/Initialization.cpp",
+        "bytes":  22316,
+        "sha256":  "86e2acefe52cb9784b7bc15749ed7d9e8aebd5a08cb92bbc0fc45d4e5716697e"
+    },
+    {
+        "path":  "Template/HOSC2008/Initialization.h",
+        "bytes":  2651,
+        "sha256":  "e0d1939212ad4d0fbd7a4d8f24eff53c5f8300306310574170bf3ea6a3bc03ca"
+    },
+    {
+        "path":  "Template/HOSC2008/PCA.cpp",
+        "bytes":  5811,
+        "sha256":  "48cbef9415fe933546c379bbc0ba0e6b4bf25d6cfb02be3867c90f64831ebee2"
+    },
+    {
+        "path":  "Template/HOSC2008/PCA.h",
+        "bytes":  1113,
+        "sha256":  "43eecd3433568b2ba283290c88b276c4514e16147d1ec9f2c6cf6cea5cc8b4d4"
+    },
+    {
+        "path":  "Template/HOSC2008/Plugin.cpp",
+        "bytes":  106887,
+        "sha256":  "e66fca284740a3b9d5052dbe2916fe8dffc3b0785a3291d9697eae7e0298b22d"
+    },
+    {
+        "path":  "Template/HOSC2008/Plugin.h",
+        "bytes":  5232,
+        "sha256":  "89ad77f80c51af93552979fad69dad5ea4a45c89fc1b9b5c718310d174717777"
+    },
+    {
+        "path":  "Template/HOSC2008/SearchNode.cpp",
+        "bytes":  60032,
+        "sha256":  "c2def1f460cca76900e7aec2de302b58ec293bf3fca7f4bef5a56bd26b12758e"
+    },
+    {
+        "path":  "Template/HOSC2008/SearchNode.h",
+        "bytes":  1155,
+        "sha256":  "d376e642fb73d3d679c8543970ca5be92c3360b21c674d86c2156ae0b1236314"
+    },
+    {
+        "path":  "Template/HOSC2008/Tools.cpp",
+        "bytes":  35269,
+        "sha256":  "6b039de68fcc4e244d9e800887e26aea0d8e0493d4b365688a1d602ccd3310ab"
+    },
+    {
+        "path":  "Template/HOSC2008/Tools.h",
+        "bytes":  1793,
+        "sha256":  "d5f0233d6f94a8ad902384da0350cea996848cbf3b2be47e17fd16640d616a05"
+    },
+    {
+        "path":  "Template/HOSC2008/WeightedMomentCore.cpp",
+        "bytes":  12011,
+        "sha256":  "d40b41e3c500c88fe721fa6faf5a04fd4a66dd19105721f49ecc2ef6558a2582"
+    },
+    {
+        "path":  "Template/HOSC2008/WeightedMomentCore.h",
+        "bytes":  1955,
+        "sha256":  "a32ac94da0305436ea77fb16d9dd625a0e59f2b83e759770ba01e64bab7e2123"
+    },
+    {
+        "path":  "tests/validation_feedback_checks.cpp",
+        "bytes":  7575,
+        "sha256":  "d66c68138365cba9987a8d4b7cf6d224604dd28324aeda5441c5a1833f54c76d"
+    },
+    {
+        "path":  "tests/vc9_core_checks.cpp",
+        "bytes":  8573,
+        "sha256":  "432a0bf776eeab1f0e047e9e9f2904d71b650218fd2ef29753962edc209d8837"
+    },
+    {
+        "path":  "ui/HOSC_TEMPLATE.ui",
+        "bytes":  78308,
+        "sha256":  "e8d5b6744acc24a8415b0f80aae6f60b79c155469e24467b28b68105bb1f4dd7"
+    },
+    {
+        "path":  "ui/HOSC_WINDOW.ui",
+        "bytes":  72566,
+        "sha256":  "081c3ca4949a42dbd9c3917a97bd00bb64da7fab263e71a4842abd0d772dbf47"
+    }
+]

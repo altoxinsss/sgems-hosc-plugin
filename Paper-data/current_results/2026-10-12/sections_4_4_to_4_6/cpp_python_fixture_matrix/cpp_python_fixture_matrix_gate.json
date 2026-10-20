@@ -1,0 +1,2909 @@
+{
+  "gate": "cpp_python_fixture_matrix_windows_3_5_7_orders_1_to_6",
+  "status": "PASS",
+  "formula_version": "2026-10-10.v2",
+  "fixture_grid": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\cpp_python_fixture_9x9x5.grid",
+  "fixture_grid_sha256": "af2e1a795a8b5a793e295445b3a68371d6d24987c1c141fec0183397bebc1613",
+  "fixture_shape_zyx": [
+    5,
+    9,
+    9
+  ],
+  "executable": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\build_release_no_local_template\\Release\\movewindow_cli.exe",
+  "executable_sha256": "57f33c0f336abb272ebfb9ceb8a5e15a103a7ab88cd35fe80630fdf3b2e7978f",
+  "implementation_sha256": {
+    "experiments/r1_5_incremental_value_20260924/cpp_python_parity_gate.py": "78269eb8f3890969318537be2556ef794c6e752f4858d7eef0383b8c82bcb9b1",
+    "experiments/r1_5_incremental_value_20260924/cli_runner.py": "7c65bae39918bb83d9dcd1529456e6cf7743a8ed4a8043da5281d089325eb70e",
+    "experiments/r1_5_incremental_value_20260924/grid_io.py": "63635d279df6cc641215d4607b764052215803ad62015d8e6bb58b41b66f6807",
+    "experiments/r1_5_incremental_value_20260924/statistics.py": "f7314805d4a0d8419cc7f25767365a7a3e38f25175f547031532ac464d839ea0",
+    "experiments/r1_5_incremental_value_20260924/weighting.py": "b76b062e141a36bca89357a6b338ded7974016f3b1358ec6105228e6df1acc92",
+    "experiments/r1_5_incremental_value_20260924/window_support.py": "5145285664c6dd9d9080ec5436f6b850e50172857a18ff9fe21252df75eab177",
+    "src/window/main.cpp": "a0946176e5b4e1de04e1cee24e4fd8c941596ccc248771f4ffc1bcbdf2b82a22",
+    "vendor/weighted_moment_core/WeightedMomentCore.cpp": "a8877ff91c5e5f15fc0f9d5263c053a3834181023dd4f5badb48ffd6f969a1e0",
+    "vendor/weighted_moment_core/WeightedMomentCore.h": "e45766f6e0cec5f384ab596482ff18618859da989a5f041cc00cf4131a0c9775"
+  },
+  "primary_windows": [
+    [
+      3,
+      3,
+      3
+    ],
+    [
+      5,
+      5,
+      3
+    ],
+    [
+      7,
+      7,
+      3
+    ]
+  ],
+  "primary_orders": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "primary_weight_configs": [
+    {
+      "mode": "uniform"
+    },
+    {
+      "mode": "coordinate_gaussian",
+      "bandwidth": 1.0
+    },
+    {
+      "mode": "soft_high_porosity",
+      "high_porosity_threshold": 0.25,
+      "soft_transition_width": 0.02,
+      "soft_weight_strength": 0.8
+    }
+  ],
+  "sensitivity_weight_configs": [
+    {
+      "id": "coordinate_gaussian_sigma_0.75",
+      "mode": "coordinate_gaussian",
+      "bandwidth": 0.75
+    },
+    {
+      "id": "coordinate_gaussian_sigma_1.25",
+      "mode": "coordinate_gaussian",
+      "bandwidth": 1.25
+    },
+    {
+      "id": "soft_high_porosity_width_0.01",
+      "mode": "soft_high_porosity",
+      "high_porosity_threshold": 0.25,
+      "soft_transition_width": 0.01,
+      "soft_weight_strength": 0.8
+    },
+    {
+      "id": "soft_high_porosity_width_0.04",
+      "mode": "soft_high_porosity",
+      "high_porosity_threshold": 0.25,
+      "soft_transition_width": 0.04,
+      "soft_weight_strength": 0.8
+    },
+    {
+      "id": "soft_high_porosity_strength_0.60",
+      "mode": "soft_high_porosity",
+      "high_porosity_threshold": 0.25,
+      "soft_transition_width": 0.02,
+      "soft_weight_strength": 0.6
+    },
+    {
+      "id": "soft_high_porosity_strength_1.00",
+      "mode": "soft_high_porosity",
+      "high_porosity_threshold": 0.25,
+      "soft_transition_width": 0.02,
+      "soft_weight_strength": 1.0
+    }
+  ],
+  "source_spacing": [
+    50.0,
+    50.0,
+    2.0
+  ],
+  "absolute_tolerance": 1e-12,
+  "relative_tolerance": 1e-10,
+  "expected_case_count": 60,
+  "case_count": 60,
+  "max_abs_error": 3.885780586188048e-16,
+  "cases": [
+    {
+      "parameter_role": "primary",
+      "weighting": "uniform",
+      "window_size": [
+        3,
+        3,
+        3
+      ],
+      "order": 1,
+      "passed": true,
+      "parameter_id": "uniform",
+      "weight_config": {
+        "mode": "uniform"
+      },
+      "algorithm": "AVL",
+      "count": 147,
+      "failed_count": 0,
+      "max_abs_error": 1.6653345369377348e-16,
+      "max_relative_error": 5.762517335085584e-16,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "none",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 147,
+        "weight_sum_max_abs_error": 0.0,
+        "weight_squared_sum_max_abs_error": 0.0,
+        "effective_sample_size_max_abs_error": 0.0
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_uniform_w3x3x3_kappa1_avl.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w3x3x3_kappa1_avl\\kappa1.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w3x3x3_kappa1_avl\\kappa1.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w3x3x3_kappa1_avl\\kappa1.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "11f01d5c0d200c742c9927f015b7b2a1f27020f78f1e17bc978f09f6bc9de7ca",
+        "output_sha256": "85e977bacf373f1d85abea2807c68c274478dd0a0fda846d0177d8b39006638a",
+        "metadata_sha256": "1d5cc22f4d63e525466fc35f2908d6822fa473e3d2979c593e9028fb38a0090b",
+        "stdout_sha256": "13787fce833bb4d63a06f36a29568682c3a70090ab3e68262c0aaaf0d2b9fced",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "c0f6447cda2b4476e749079686f8bef6bf668ce9faab2fc00dcf498812f6a8d9"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "uniform",
+      "window_size": [
+        3,
+        3,
+        3
+      ],
+      "order": 2,
+      "passed": true,
+      "parameter_id": "uniform",
+      "weight_config": {
+        "mode": "uniform"
+      },
+      "algorithm": "AVL",
+      "count": 147,
+      "failed_count": 0,
+      "max_abs_error": 9.969238976004213e-17,
+      "max_relative_error": 3.2387598129031454e-13,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 147,
+        "weight_sum_max_abs_error": 0.0,
+        "weight_squared_sum_max_abs_error": 0.0,
+        "effective_sample_size_max_abs_error": 0.0
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_uniform_w3x3x3_kappa2_avl.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w3x3x3_kappa2_avl\\kappa2.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w3x3x3_kappa2_avl\\kappa2.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w3x3x3_kappa2_avl\\kappa2.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "dacf9a3b37c1fa3079a4541caa1b61280119c71a1850d3ba2478118262b1d1e1",
+        "output_sha256": "b2982512c5589eeb232ff5f47be3f43cc82cf9f1cc6e48f8a34d43fb34b60196",
+        "metadata_sha256": "50bd62ee9415900c49463548271f271dcf4f6fd01ea42fde4205e8f3ece6b225",
+        "stdout_sha256": "614ad26f1eebd957b006c9cd7cd3d3b8dc65e9fd1b78117a24bfa91f04cf0b50",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "c0f6447cda2b4476e749079686f8bef6bf668ce9faab2fc00dcf498812f6a8d9"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "uniform",
+      "window_size": [
+        3,
+        3,
+        3
+      ],
+      "order": 3,
+      "passed": true,
+      "parameter_id": "uniform",
+      "weight_config": {
+        "mode": "uniform"
+      },
+      "algorithm": "AVL",
+      "count": 147,
+      "failed_count": 0,
+      "max_abs_error": 3.8963515573697816e-20,
+      "max_relative_error": 8.889560510740822e-14,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 147,
+        "weight_sum_max_abs_error": 0.0,
+        "weight_squared_sum_max_abs_error": 0.0,
+        "effective_sample_size_max_abs_error": 0.0
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_uniform_w3x3x3_kappa3_avl.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w3x3x3_kappa3_avl\\kappa3.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w3x3x3_kappa3_avl\\kappa3.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w3x3x3_kappa3_avl\\kappa3.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "9863df598d6c164efe7136afb9d4c01e3eaa08a27283a2670d3f42cd3a7df040",
+        "output_sha256": "2fe3a3fc95319746ff959fb02a52ea05f9b2b2a593e9956fcb859038042388a7",
+        "metadata_sha256": "201a12fb154d3e71a330e626b21a7ece9eef1a19b7072f4a4bcd7c3993be08e5",
+        "stdout_sha256": "c324dbf32bee0511620adca573b4b041e9d53ee8f954822f0b85b1ce57f369f0",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "c0f6447cda2b4476e749079686f8bef6bf668ce9faab2fc00dcf498812f6a8d9"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "uniform",
+      "window_size": [
+        3,
+        3,
+        3
+      ],
+      "order": 4,
+      "passed": true,
+      "parameter_id": "uniform",
+      "weight_config": {
+        "mode": "uniform"
+      },
+      "algorithm": "AVL",
+      "count": 147,
+      "failed_count": 0,
+      "max_abs_error": 1.7999450129153882e-21,
+      "max_relative_error": 8.713148335335934e-15,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 147,
+        "weight_sum_max_abs_error": 0.0,
+        "weight_squared_sum_max_abs_error": 0.0,
+        "effective_sample_size_max_abs_error": 0.0
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_uniform_w3x3x3_kappa4_avl.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w3x3x3_kappa4_avl\\kappa4.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w3x3x3_kappa4_avl\\kappa4.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w3x3x3_kappa4_avl\\kappa4.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "119206ad426173db6457faccdbe5e7e0c0fc741603fbaefbbe2744f20ad906c7",
+        "output_sha256": "94ed9725eccbd39468103072a8cee6ea7681b7a4b125e725c016edb5687d9b1f",
+        "metadata_sha256": "aecc694cd04ef15846738e0bd57210220ea74a20686b40b0ff72dc9556e2a7f3",
+        "stdout_sha256": "24424e02afcf1ca2350b6f156d8f6d3a57c210faf6a984b2274f5471582c86ab",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "c0f6447cda2b4476e749079686f8bef6bf668ce9faab2fc00dcf498812f6a8d9"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "uniform",
+      "window_size": [
+        3,
+        3,
+        3
+      ],
+      "order": 5,
+      "passed": true,
+      "parameter_id": "uniform",
+      "weight_config": {
+        "mode": "uniform"
+      },
+      "algorithm": "AVL",
+      "count": 147,
+      "failed_count": 0,
+      "max_abs_error": 1.2490427249550718e-22,
+      "max_relative_error": 6.893549423122877e-13,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 147,
+        "weight_sum_max_abs_error": 0.0,
+        "weight_squared_sum_max_abs_error": 0.0,
+        "effective_sample_size_max_abs_error": 0.0
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_uniform_w3x3x3_kappa5_avl.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w3x3x3_kappa5_avl\\kappa5.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w3x3x3_kappa5_avl\\kappa5.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w3x3x3_kappa5_avl\\kappa5.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "e9921b391cea8e0303d8e7603148ce718b60826d177152ad05301676ae4c4797",
+        "output_sha256": "67c96bea5067dec749393f08b5b8974425068e6195709e21639b4cdca64ef941",
+        "metadata_sha256": "cec1d1128671b2fa79a41b6b3d9c1178b8ed4acb9765dbca039d2c9e55b2c425",
+        "stdout_sha256": "71b255c41d67a90306d69363bce53c4ada85adde5100ab8f1b3a60f451fb1dc6",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "c0f6447cda2b4476e749079686f8bef6bf668ce9faab2fc00dcf498812f6a8d9"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "uniform",
+      "window_size": [
+        3,
+        3,
+        3
+      ],
+      "order": 6,
+      "passed": true,
+      "parameter_id": "uniform",
+      "weight_config": {
+        "mode": "uniform"
+      },
+      "algorithm": "AVL",
+      "count": 147,
+      "failed_count": 0,
+      "max_abs_error": 1.3234889800848443e-23,
+      "max_relative_error": 3.897956636403925e-14,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 147,
+        "weight_sum_max_abs_error": 0.0,
+        "weight_squared_sum_max_abs_error": 0.0,
+        "effective_sample_size_max_abs_error": 0.0
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_uniform_w3x3x3_kappa6_avl.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w3x3x3_kappa6_avl\\kappa6.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w3x3x3_kappa6_avl\\kappa6.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w3x3x3_kappa6_avl\\kappa6.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "9a541da4d456d0d80ed7cf7473a971cfde41afeeeca19cbe67c8627738be045f",
+        "output_sha256": "1fbd3beb5f543cb15edb59e090522288cad66e661fe0c111abf6ff271f66aff8",
+        "metadata_sha256": "f93aea32cf50e7e68b5bd37f42c2c8d80853f3a652bdbbf1ad21d116cc6c9b34",
+        "stdout_sha256": "4d2609e6dad15d8b6b5cb8dc5a26381fdebd12f3a0f4f7aa1d1e1d2addf92bf5",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "c0f6447cda2b4476e749079686f8bef6bf668ce9faab2fc00dcf498812f6a8d9"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "coordinate_gaussian",
+      "window_size": [
+        3,
+        3,
+        3
+      ],
+      "order": 1,
+      "passed": true,
+      "parameter_id": "coordinate_gaussian",
+      "weight_config": {
+        "mode": "coordinate_gaussian",
+        "bandwidth": 1.0
+      },
+      "algorithm": "Weighted moment",
+      "count": 147,
+      "failed_count": 0,
+      "max_abs_error": 1.6653345369377348e-16,
+      "max_relative_error": 4.45922846297175e-16,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "none",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 147,
+        "weight_sum_max_abs_error": 0.0,
+        "weight_squared_sum_max_abs_error": 1.7763568394002505e-15,
+        "effective_sample_size_max_abs_error": 7.105427357601002e-15
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_coordinate_gaussian_w3x3x3_kappa1_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w3x3x3_kappa1_weighted\\kappa1.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w3x3x3_kappa1_weighted\\kappa1.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w3x3x3_kappa1_weighted\\kappa1.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "48afab6a40e875688ec4144d717e2966fd717d3324c4068a915bfc0961198c4f",
+        "output_sha256": "c8808d84f70b84317eec47c4561b2f8ba5d94d336230aa638b908ed133ad34e2",
+        "metadata_sha256": "7f4b525dcc0fd9c48ae3a21c9d25432626d12b99d9f3cb5f33ab14f1417d37d2",
+        "stdout_sha256": "89dfcf521d94dd6e0003d6a5d95592144a43113bb41123dbfe450c2b8b6f666b",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "05fce58e82b57f94476db0348d56c4d31c2ebad1afcdd98f69a897cead751694"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "coordinate_gaussian",
+      "window_size": [
+        3,
+        3,
+        3
+      ],
+      "order": 2,
+      "passed": true,
+      "parameter_id": "coordinate_gaussian",
+      "weight_config": {
+        "mode": "coordinate_gaussian",
+        "bandwidth": 1.0
+      },
+      "algorithm": "Weighted moment",
+      "count": 147,
+      "failed_count": 0,
+      "max_abs_error": 9.947554932554503e-17,
+      "max_relative_error": 3.7547360954235204e-13,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 147,
+        "weight_sum_max_abs_error": 0.0,
+        "weight_squared_sum_max_abs_error": 1.7763568394002505e-15,
+        "effective_sample_size_max_abs_error": 7.105427357601002e-15
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_coordinate_gaussian_w3x3x3_kappa2_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w3x3x3_kappa2_weighted\\kappa2.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w3x3x3_kappa2_weighted\\kappa2.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w3x3x3_kappa2_weighted\\kappa2.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "56fc4224f31a837efe2c559bc51297a3e55151f9f2eedf1b3b2885d625c71a7a",
+        "output_sha256": "a1095d4a901b74037c668584da9183ca3353fc44d7e69882b416a3323c019ba8",
+        "metadata_sha256": "9c8231c38ce5c3b31589d3667e0ea3ad22f0d8533af53967f70a98c40dce4886",
+        "stdout_sha256": "ad8f5563aaa41c589dc9619eb05669b6ffd9acf89e6826709c3f67b3f3f07465",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "05fce58e82b57f94476db0348d56c4d31c2ebad1afcdd98f69a897cead751694"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "coordinate_gaussian",
+      "window_size": [
+        3,
+        3,
+        3
+      ],
+      "order": 3,
+      "passed": true,
+      "parameter_id": "coordinate_gaussian",
+      "weight_config": {
+        "mode": "coordinate_gaussian",
+        "bandwidth": 1.0
+      },
+      "algorithm": "Weighted moment",
+      "count": 147,
+      "failed_count": 0,
+      "max_abs_error": 3.2610768469290563e-20,
+      "max_relative_error": 9.508453585029716e-14,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 147,
+        "weight_sum_max_abs_error": 0.0,
+        "weight_squared_sum_max_abs_error": 1.7763568394002505e-15,
+        "effective_sample_size_max_abs_error": 7.105427357601002e-15
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_coordinate_gaussian_w3x3x3_kappa3_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w3x3x3_kappa3_weighted\\kappa3.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w3x3x3_kappa3_weighted\\kappa3.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w3x3x3_kappa3_weighted\\kappa3.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "0e30a499830dbe9813ebee9ad07e8fda56b683fcd44fa168851c0b5b606b92f8",
+        "output_sha256": "7f98cc1dd6c37ea75280423883ef0293518e696791b8f56bb7a8239483b8ca92",
+        "metadata_sha256": "79267a5e7cb486ad1ac16f7cdff11c2b131acd2f8b90e9ab3cc248e38fc59293",
+        "stdout_sha256": "b04b14b08bb7c35af772484b0e705ddc0f7487db3c58464fd9baacbffafbc544",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "05fce58e82b57f94476db0348d56c4d31c2ebad1afcdd98f69a897cead751694"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "coordinate_gaussian",
+      "window_size": [
+        3,
+        3,
+        3
+      ],
+      "order": 4,
+      "passed": true,
+      "parameter_id": "coordinate_gaussian",
+      "weight_config": {
+        "mode": "coordinate_gaussian",
+        "bandwidth": 1.0
+      },
+      "algorithm": "Weighted moment",
+      "count": 147,
+      "failed_count": 0,
+      "max_abs_error": 1.9587636905255695e-21,
+      "max_relative_error": 1.5834256406246858e-14,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 147,
+        "weight_sum_max_abs_error": 0.0,
+        "weight_squared_sum_max_abs_error": 1.7763568394002505e-15,
+        "effective_sample_size_max_abs_error": 7.105427357601002e-15
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_coordinate_gaussian_w3x3x3_kappa4_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w3x3x3_kappa4_weighted\\kappa4.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w3x3x3_kappa4_weighted\\kappa4.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w3x3x3_kappa4_weighted\\kappa4.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "695f799ee0fff00bb6d4b2f0ab0ec2d6e0e455871674b0904b102585337a8766",
+        "output_sha256": "d99d16512676c93130e2dbcea02c36c16df75af5a93aa85f4bdcc1e206ee3c11",
+        "metadata_sha256": "425cc420a4f1ef15f930d9a5431aa12434a9574e726a5183359732fe37c70741",
+        "stdout_sha256": "a3c121e54f2e573d57ae0b7ed5c742ee229084531f5497737c7a048a3693555e",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "05fce58e82b57f94476db0348d56c4d31c2ebad1afcdd98f69a897cead751694"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "coordinate_gaussian",
+      "window_size": [
+        3,
+        3,
+        3
+      ],
+      "order": 5,
+      "passed": true,
+      "parameter_id": "coordinate_gaussian",
+      "weight_config": {
+        "mode": "coordinate_gaussian",
+        "bandwidth": 1.0
+      },
+      "algorithm": "Weighted moment",
+      "count": 147,
+      "failed_count": 0,
+      "max_abs_error": 1.402071138277382e-22,
+      "max_relative_error": 1.7951952101735064e-12,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 147,
+        "weight_sum_max_abs_error": 0.0,
+        "weight_squared_sum_max_abs_error": 1.7763568394002505e-15,
+        "effective_sample_size_max_abs_error": 7.105427357601002e-15
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_coordinate_gaussian_w3x3x3_kappa5_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w3x3x3_kappa5_weighted\\kappa5.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w3x3x3_kappa5_weighted\\kappa5.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w3x3x3_kappa5_weighted\\kappa5.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "60314c99760dd9e82434884460869846eea5c92a6626a213936032c62181fc2b",
+        "output_sha256": "3f64824664ae55531c4f71709402684c4ea10c9470a7abe478e3cd12276b5ad9",
+        "metadata_sha256": "590c76b08d83123118ac59d1af2f3d22338149d9765d5526136b5b814ee686ab",
+        "stdout_sha256": "100d31fe0709f817ea8ed2af691374d445b126c79cdee5ac6b80730bc64ec75e",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "05fce58e82b57f94476db0348d56c4d31c2ebad1afcdd98f69a897cead751694"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "coordinate_gaussian",
+      "window_size": [
+        3,
+        3,
+        3
+      ],
+      "order": 6,
+      "passed": true,
+      "parameter_id": "coordinate_gaussian",
+      "weight_config": {
+        "mode": "coordinate_gaussian",
+        "bandwidth": 1.0
+      },
+      "algorithm": "Weighted moment",
+      "count": 147,
+      "failed_count": 0,
+      "max_abs_error": 1.27179019180028e-23,
+      "max_relative_error": 8.219817578584213e-14,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 147,
+        "weight_sum_max_abs_error": 0.0,
+        "weight_squared_sum_max_abs_error": 1.7763568394002505e-15,
+        "effective_sample_size_max_abs_error": 7.105427357601002e-15
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_coordinate_gaussian_w3x3x3_kappa6_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w3x3x3_kappa6_weighted\\kappa6.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w3x3x3_kappa6_weighted\\kappa6.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w3x3x3_kappa6_weighted\\kappa6.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "6aac107eb8649e518a97a6ddb878055d1317268ef78c5ab33b95cf086a25c1ef",
+        "output_sha256": "677e9f3b3be589e34ce88c07c257f975cb7c4b3f02c886cce056e648a8052628",
+        "metadata_sha256": "12532137b0995548a2a2cf1f33eed7bc4a4039b15a8f19e497aba141b86039eb",
+        "stdout_sha256": "ec3472e6e0aec00d05ced9cfa3f37b72644347f0bd7601651e488ae25033c0c6",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "05fce58e82b57f94476db0348d56c4d31c2ebad1afcdd98f69a897cead751694"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "soft_high_porosity",
+      "window_size": [
+        3,
+        3,
+        3
+      ],
+      "order": 1,
+      "passed": true,
+      "parameter_id": "soft_high_porosity",
+      "weight_config": {
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.02,
+        "soft_weight_strength": 0.8
+      },
+      "algorithm": "Weighted moment",
+      "count": 147,
+      "failed_count": 0,
+      "max_abs_error": 2.220446049250313e-16,
+      "max_relative_error": 8.239841713810046e-16,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "none",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 147,
+        "weight_sum_max_abs_error": 1.7763568394002505e-14,
+        "weight_squared_sum_max_abs_error": 2.1316282072803006e-14,
+        "effective_sample_size_max_abs_error": 2.842170943040401e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_soft_high_porosity_w3x3x3_kappa1_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w3x3x3_kappa1_weighted\\kappa1.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w3x3x3_kappa1_weighted\\kappa1.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w3x3x3_kappa1_weighted\\kappa1.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "bf03b30ef6f57574dc6cf8def5b5e942e3999ab87ee1ca82aae02cc95347437e",
+        "output_sha256": "5efe60d1d643a4a57fbf94a1bb9fa26f367aa36318ddf47e8e3581b40522839e",
+        "metadata_sha256": "3a7ba57037896c8d234c8ab04da0c5ccc2d4995741062c20133046ce2aa529e3",
+        "stdout_sha256": "4e510a93bc6cbb8e486fec11b76054bd022723d47c682e01e9ae7d2fd1c308d6",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "5894d03deb33d0baf0cecb8e907c513e655de5a7fa92d9c778a401c185c4e44e"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "soft_high_porosity",
+      "window_size": [
+        3,
+        3,
+        3
+      ],
+      "order": 2,
+      "passed": true,
+      "parameter_id": "soft_high_porosity",
+      "weight_config": {
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.02,
+        "soft_weight_strength": 0.8
+      },
+      "algorithm": "Weighted moment",
+      "count": 147,
+      "failed_count": 0,
+      "max_abs_error": 9.849976737030808e-17,
+      "max_relative_error": 3.17241981876582e-13,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 147,
+        "weight_sum_max_abs_error": 1.7763568394002505e-14,
+        "weight_squared_sum_max_abs_error": 2.1316282072803006e-14,
+        "effective_sample_size_max_abs_error": 2.842170943040401e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_soft_high_porosity_w3x3x3_kappa2_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w3x3x3_kappa2_weighted\\kappa2.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w3x3x3_kappa2_weighted\\kappa2.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w3x3x3_kappa2_weighted\\kappa2.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "72dfb4ad1faa82874349e4f3d52811d6246a7acfbdc1eb0808818c0f1eeb0be2",
+        "output_sha256": "c85b4b36547aa36521750a75323d2461ac3a6d73c800e58ce71fceda047ada22",
+        "metadata_sha256": "a2fef9d79b2ab819851f09f367fbd62339456d6b0917a3438f76959e05d46368",
+        "stdout_sha256": "128dc11cc009e79149da07e55d5831516dfd79135e8974fba78de105ff0de810",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "5894d03deb33d0baf0cecb8e907c513e655de5a7fa92d9c778a401c185c4e44e"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "soft_high_porosity",
+      "window_size": [
+        3,
+        3,
+        3
+      ],
+      "order": 3,
+      "passed": true,
+      "parameter_id": "soft_high_porosity",
+      "weight_config": {
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.02,
+        "soft_weight_strength": 0.8
+      },
+      "algorithm": "Weighted moment",
+      "count": 147,
+      "failed_count": 0,
+      "max_abs_error": 3.621065849512134e-20,
+      "max_relative_error": 1.5758789995637814e-12,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 147,
+        "weight_sum_max_abs_error": 1.7763568394002505e-14,
+        "weight_squared_sum_max_abs_error": 2.1316282072803006e-14,
+        "effective_sample_size_max_abs_error": 2.842170943040401e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_soft_high_porosity_w3x3x3_kappa3_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w3x3x3_kappa3_weighted\\kappa3.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w3x3x3_kappa3_weighted\\kappa3.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w3x3x3_kappa3_weighted\\kappa3.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "e486416137c3c312e265dcba17bdb4719d2b4805f59649b8acb859e1ec14934b",
+        "output_sha256": "c0d26b53a7b2e005f04567d3e5b6fedbf6eb8340d977694548fff3a895f59092",
+        "metadata_sha256": "ee9e0f25653c248301f6e69c8a3a31bdf1187517b6a11ef30ef4a5c5cc89fc2f",
+        "stdout_sha256": "2370ca1390e797ea3ed1d9fbd0b951041e3be887d423776065c9a5fa479463e3",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "5894d03deb33d0baf0cecb8e907c513e655de5a7fa92d9c778a401c185c4e44e"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "soft_high_porosity",
+      "window_size": [
+        3,
+        3,
+        3
+      ],
+      "order": 4,
+      "passed": true,
+      "parameter_id": "soft_high_porosity",
+      "weight_config": {
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.02,
+        "soft_weight_strength": 0.8
+      },
+      "algorithm": "Weighted moment",
+      "count": 147,
+      "failed_count": 0,
+      "max_abs_error": 2.6469779601696886e-21,
+      "max_relative_error": 1.1692285546188075e-14,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 147,
+        "weight_sum_max_abs_error": 1.7763568394002505e-14,
+        "weight_squared_sum_max_abs_error": 2.1316282072803006e-14,
+        "effective_sample_size_max_abs_error": 2.842170943040401e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_soft_high_porosity_w3x3x3_kappa4_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w3x3x3_kappa4_weighted\\kappa4.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w3x3x3_kappa4_weighted\\kappa4.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w3x3x3_kappa4_weighted\\kappa4.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "bdf42d55618f2a77fb23cac829525912a47f69109d12c26bdac5d47df9755b75",
+        "output_sha256": "534979950364d08dbeec21293b08090dbed95dc88d6a13f6880c9422b9fa3ed0",
+        "metadata_sha256": "a1ea5f59567abf5a60e633ca3ae687d70906ed16b47f2c995224155984f7ee6e",
+        "stdout_sha256": "9772dba862a2f3e3582f55817e800c5bb20745400ad86cc71444dcfee4a6fd21",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "5894d03deb33d0baf0cecb8e907c513e655de5a7fa92d9c778a401c185c4e44e"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "soft_high_porosity",
+      "window_size": [
+        3,
+        3,
+        3
+      ],
+      "order": 5,
+      "passed": true,
+      "parameter_id": "soft_high_porosity",
+      "weight_config": {
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.02,
+        "soft_weight_strength": 0.8
+      },
+      "algorithm": "Weighted moment",
+      "count": 147,
+      "failed_count": 0,
+      "max_abs_error": 1.2324991127040112e-22,
+      "max_relative_error": 2.2293845133030943e-12,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 147,
+        "weight_sum_max_abs_error": 1.7763568394002505e-14,
+        "weight_squared_sum_max_abs_error": 2.1316282072803006e-14,
+        "effective_sample_size_max_abs_error": 2.842170943040401e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_soft_high_porosity_w3x3x3_kappa5_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w3x3x3_kappa5_weighted\\kappa5.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w3x3x3_kappa5_weighted\\kappa5.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w3x3x3_kappa5_weighted\\kappa5.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "c8a77e789f7a8a5b81ff39175cef5ee347a875534737099232fe57c76868c933",
+        "output_sha256": "81e5c1aa73eb5473b07acfb530343d9fad3a82e6c4ef53407624f8da6de87315",
+        "metadata_sha256": "78c45f865fab2a5aaaa4156402d22f1878ac5beadfaecbc17de0abc0e6a10c5d",
+        "stdout_sha256": "9538b16233f58d195c1a7453d2f0af40295e10755758475175659df40050ef5f",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "5894d03deb33d0baf0cecb8e907c513e655de5a7fa92d9c778a401c185c4e44e"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "soft_high_porosity",
+      "window_size": [
+        3,
+        3,
+        3
+      ],
+      "order": 6,
+      "passed": true,
+      "parameter_id": "soft_high_porosity",
+      "weight_config": {
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.02,
+        "soft_weight_strength": 0.8
+      },
+      "algorithm": "Weighted moment",
+      "count": 147,
+      "failed_count": 0,
+      "max_abs_error": 2.088631046696395e-23,
+      "max_relative_error": 6.909358997134768e-14,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 147,
+        "weight_sum_max_abs_error": 1.7763568394002505e-14,
+        "weight_squared_sum_max_abs_error": 2.1316282072803006e-14,
+        "effective_sample_size_max_abs_error": 2.842170943040401e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_soft_high_porosity_w3x3x3_kappa6_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w3x3x3_kappa6_weighted\\kappa6.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w3x3x3_kappa6_weighted\\kappa6.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w3x3x3_kappa6_weighted\\kappa6.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "56c72f850829518acd75f17cf78340ffa94fdc781d5de515d424d125f2b4f195",
+        "output_sha256": "a9eba759684a81d2ccab71504a824a42af2413a41430518a32717faf1c8f94ee",
+        "metadata_sha256": "7738980672b1745b11e91b0e9f58b1da0f03505aefdb4115398de9a4d25f08fc",
+        "stdout_sha256": "e7c5a4a17da14bf589a89b49d698fa318facc9944a98d9c38d7e3415ecdf07b1",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "5894d03deb33d0baf0cecb8e907c513e655de5a7fa92d9c778a401c185c4e44e"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "uniform",
+      "window_size": [
+        5,
+        5,
+        3
+      ],
+      "order": 1,
+      "passed": true,
+      "parameter_id": "uniform",
+      "weight_config": {
+        "mode": "uniform"
+      },
+      "algorithm": "AVL",
+      "count": 75,
+      "failed_count": 0,
+      "max_abs_error": 2.220446049250313e-16,
+      "max_relative_error": 8.0014117931611785e-16,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "none",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 75,
+        "weight_sum_max_abs_error": 0.0,
+        "weight_squared_sum_max_abs_error": 0.0,
+        "effective_sample_size_max_abs_error": 0.0
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_uniform_w5x5x3_kappa1_avl.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w5x5x3_kappa1_avl\\kappa1.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w5x5x3_kappa1_avl\\kappa1.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w5x5x3_kappa1_avl\\kappa1.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "f55b82e33c8a58bb21d3631a36604e8c43c897c10fbff92ec0b676eb3dea8601",
+        "output_sha256": "7eb13c1f12735e1ed0c75458636cf39e0403f6c065f1b6d4002bd897b62228d1",
+        "metadata_sha256": "d03fa86154243dd6ac134b149a72fc045fc248689eab498d95fa4de6d940fd6a",
+        "stdout_sha256": "7aa5334222362e03efa81af06ac58227b311861130a0246734a400dcfc5eb273",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "62dd965850c3d4f5ad57aa63d0b5ffc056d67c1fa2c0efd6156413142dfe7db3"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "uniform",
+      "window_size": [
+        5,
+        5,
+        3
+      ],
+      "order": 2,
+      "passed": true,
+      "parameter_id": "uniform",
+      "weight_config": {
+        "mode": "uniform"
+      },
+      "algorithm": "AVL",
+      "count": 75,
+      "failed_count": 0,
+      "max_abs_error": 9.90960785651751e-17,
+      "max_relative_error": 1.2456570675756551e-13,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 75,
+        "weight_sum_max_abs_error": 0.0,
+        "weight_squared_sum_max_abs_error": 0.0,
+        "effective_sample_size_max_abs_error": 0.0
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_uniform_w5x5x3_kappa2_avl.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w5x5x3_kappa2_avl\\kappa2.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w5x5x3_kappa2_avl\\kappa2.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w5x5x3_kappa2_avl\\kappa2.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "e918a30089594596ddcf316f7d553a712622df8d84f4057cc287c8638e27b8ad",
+        "output_sha256": "7aa30abb3fafb56c6abe2a472edf1caebc0cbef90e8dfc920fec961b4c485712",
+        "metadata_sha256": "2d5186f00871a0e446af3773e51afbb60a6506e95e13eeaadb754789c913ed8f",
+        "stdout_sha256": "32316ebdc1cdb38bb5e3a07be33f60554fd9e26009732cf72ef4b962b21ebd29",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "62dd965850c3d4f5ad57aa63d0b5ffc056d67c1fa2c0efd6156413142dfe7db3"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "uniform",
+      "window_size": [
+        5,
+        5,
+        3
+      ],
+      "order": 3,
+      "passed": true,
+      "parameter_id": "uniform",
+      "weight_config": {
+        "mode": "uniform"
+      },
+      "algorithm": "AVL",
+      "count": 75,
+      "failed_count": 0,
+      "max_abs_error": 4.0657581468206416e-20,
+      "max_relative_error": 2.2727328994728626e-14,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 75,
+        "weight_sum_max_abs_error": 0.0,
+        "weight_squared_sum_max_abs_error": 0.0,
+        "effective_sample_size_max_abs_error": 0.0
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_uniform_w5x5x3_kappa3_avl.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w5x5x3_kappa3_avl\\kappa3.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w5x5x3_kappa3_avl\\kappa3.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w5x5x3_kappa3_avl\\kappa3.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "ef640cb569ef14358a956460a824255476a66f435ea33c10621c634511aabc0c",
+        "output_sha256": "420a5983cf2308389b9d515840b0f48bf71b70a716c68dc59b1ee0f2fe83af3a",
+        "metadata_sha256": "f0c41099ebd22eb29101880275cd0c6966dbda59da82aabd0e40b046658c6abb",
+        "stdout_sha256": "e502292ad9b860a478d1ee499577c36bc0bb23c305c9b0158acee8da982e7827",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "62dd965850c3d4f5ad57aa63d0b5ffc056d67c1fa2c0efd6156413142dfe7db3"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "uniform",
+      "window_size": [
+        5,
+        5,
+        3
+      ],
+      "order": 4,
+      "passed": true,
+      "parameter_id": "uniform",
+      "weight_config": {
+        "mode": "uniform"
+      },
+      "algorithm": "AVL",
+      "count": 75,
+      "failed_count": 0,
+      "max_abs_error": 1.1011428314305904e-20,
+      "max_relative_error": 1.1868233871026737e-14,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 75,
+        "weight_sum_max_abs_error": 0.0,
+        "weight_squared_sum_max_abs_error": 0.0,
+        "effective_sample_size_max_abs_error": 0.0
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_uniform_w5x5x3_kappa4_avl.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w5x5x3_kappa4_avl\\kappa4.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w5x5x3_kappa4_avl\\kappa4.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w5x5x3_kappa4_avl\\kappa4.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "77d93d01f4264d814cf8d35720bab8c2e68500477e96a2a82c6121816db00481",
+        "output_sha256": "fa70ef817130c049d21307d681a40cc5825d5b43d694ba6d0e9593c0f4343bbe",
+        "metadata_sha256": "f560969a878b734449dba8d8787f4f84a1b4e7759e369baf1f2c73c95d3067d8",
+        "stdout_sha256": "0a6ea2338935a7808b57fec436fd85178d453754e7394bab190703aa9ef5813f",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "62dd965850c3d4f5ad57aa63d0b5ffc056d67c1fa2c0efd6156413142dfe7db3"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "uniform",
+      "window_size": [
+        5,
+        5,
+        3
+      ],
+      "order": 5,
+      "passed": true,
+      "parameter_id": "uniform",
+      "weight_config": {
+        "mode": "uniform"
+      },
+      "algorithm": "AVL",
+      "count": 75,
+      "failed_count": 0,
+      "max_abs_error": 6.617444900424221e-22,
+      "max_relative_error": 2.0850192409550102e-14,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 75,
+        "weight_sum_max_abs_error": 0.0,
+        "weight_squared_sum_max_abs_error": 0.0,
+        "effective_sample_size_max_abs_error": 0.0
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_uniform_w5x5x3_kappa5_avl.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w5x5x3_kappa5_avl\\kappa5.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w5x5x3_kappa5_avl\\kappa5.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w5x5x3_kappa5_avl\\kappa5.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "4951bc60fa9ed93b0f424681143c2b7b29de4f26ca626423250f0fb2ed2720d0",
+        "output_sha256": "62abae67359f0154921251367575692f012477fe0714ad4b780b83d88c21faf7",
+        "metadata_sha256": "f4f4038e8906cec6926b2c471909526a1f4f81b9241ccd234fdff62de2d26de8",
+        "stdout_sha256": "9ce9ae19299117fb53ddbc4f4ec616dc7c1891a67b81e6cac64d44507c85339c",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "62dd965850c3d4f5ad57aa63d0b5ffc056d67c1fa2c0efd6156413142dfe7db3"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "uniform",
+      "window_size": [
+        5,
+        5,
+        3
+      ],
+      "order": 6,
+      "passed": true,
+      "parameter_id": "uniform",
+      "weight_config": {
+        "mode": "uniform"
+      },
+      "algorithm": "AVL",
+      "count": 75,
+      "failed_count": 0,
+      "max_abs_error": 2.0844951436336297e-22,
+      "max_relative_error": 3.93360126134302e-12,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 75,
+        "weight_sum_max_abs_error": 0.0,
+        "weight_squared_sum_max_abs_error": 0.0,
+        "effective_sample_size_max_abs_error": 0.0
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_uniform_w5x5x3_kappa6_avl.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w5x5x3_kappa6_avl\\kappa6.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w5x5x3_kappa6_avl\\kappa6.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w5x5x3_kappa6_avl\\kappa6.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "6ad04efd1674dddc515ce784f39287cc0ddce4ceef8190de2acd565bd09e5a47",
+        "output_sha256": "f7823a6073b5f00498f103fbe1bcd0f99b98c80c90a52c844c89309a1d551ad0",
+        "metadata_sha256": "a636c53bcf6b741931fbdde9d2eeea46c134fdd7a940aecb352c94ef3ed63fb4",
+        "stdout_sha256": "9043f96eaada62d00037f3a2795c376c870404c662b945f761f524ca561eaa9d",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "62dd965850c3d4f5ad57aa63d0b5ffc056d67c1fa2c0efd6156413142dfe7db3"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "coordinate_gaussian",
+      "window_size": [
+        5,
+        5,
+        3
+      ],
+      "order": 1,
+      "passed": true,
+      "parameter_id": "coordinate_gaussian",
+      "weight_config": {
+        "mode": "coordinate_gaussian",
+        "bandwidth": 1.0
+      },
+      "algorithm": "Weighted moment",
+      "count": 75,
+      "failed_count": 0,
+      "max_abs_error": 3.885780586188048e-16,
+      "max_relative_error": 1.2068199586934215e-15,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "none",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 75,
+        "weight_sum_max_abs_error": 1.4210854715202004e-14,
+        "weight_squared_sum_max_abs_error": 0.0,
+        "effective_sample_size_max_abs_error": 5.684341886080802e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_coordinate_gaussian_w5x5x3_kappa1_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w5x5x3_kappa1_weighted\\kappa1.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w5x5x3_kappa1_weighted\\kappa1.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w5x5x3_kappa1_weighted\\kappa1.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "ce6c346af8256b7535bcadd8bbbfeb37fdc59a0f66a1a45ac1187b9727f6f31d",
+        "output_sha256": "02e25fd359d10b4954d0561cf797868bdf28532a8195af6a79b83ba2470cedb5",
+        "metadata_sha256": "0c8210bf29b4eff89b7013436b2d233c56f0d7c37df3fc639db735a8f49d2147",
+        "stdout_sha256": "10756aeced689ff5399e6110e5287c4d2b9700dee2550935d1f8d0780fef3125",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "26b9f122dfbe3e3ff64e2819a051f416f46e77e07585336cc0121d64ec4ff4fb"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "coordinate_gaussian",
+      "window_size": [
+        5,
+        5,
+        3
+      ],
+      "order": 2,
+      "passed": true,
+      "parameter_id": "coordinate_gaussian",
+      "weight_config": {
+        "mode": "coordinate_gaussian",
+        "bandwidth": 1.0
+      },
+      "algorithm": "Weighted moment",
+      "count": 75,
+      "failed_count": 0,
+      "max_abs_error": 9.833713704443525e-17,
+      "max_relative_error": 1.5097402510877737e-13,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 75,
+        "weight_sum_max_abs_error": 1.4210854715202004e-14,
+        "weight_squared_sum_max_abs_error": 0.0,
+        "effective_sample_size_max_abs_error": 5.684341886080802e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_coordinate_gaussian_w5x5x3_kappa2_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w5x5x3_kappa2_weighted\\kappa2.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w5x5x3_kappa2_weighted\\kappa2.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w5x5x3_kappa2_weighted\\kappa2.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "95ccda2c45200a013db9583795b906753599ff2a7d07ff890fe7c20ec80b820e",
+        "output_sha256": "11a86d1dc5b9e7fbbe59ba01f94b0dc6baf38fc696ab0171a463f96412331fe4",
+        "metadata_sha256": "5bc094185f7792c9a5dd5a84f117b96301f59b81ecca903f2b225fe0dc3802e4",
+        "stdout_sha256": "2440e639350d25f400e7dc885d8dba0509a208d9d920b942776b43bb8da89288",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "26b9f122dfbe3e3ff64e2819a051f416f46e77e07585336cc0121d64ec4ff4fb"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "coordinate_gaussian",
+      "window_size": [
+        5,
+        5,
+        3
+      ],
+      "order": 3,
+      "passed": true,
+      "parameter_id": "coordinate_gaussian",
+      "weight_config": {
+        "mode": "coordinate_gaussian",
+        "bandwidth": 1.0
+      },
+      "algorithm": "Weighted moment",
+      "count": 75,
+      "failed_count": 0,
+      "max_abs_error": 3.049318610115481e-20,
+      "max_relative_error": 5.141234384816375e-14,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 75,
+        "weight_sum_max_abs_error": 1.4210854715202004e-14,
+        "weight_squared_sum_max_abs_error": 0.0,
+        "effective_sample_size_max_abs_error": 5.684341886080802e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_coordinate_gaussian_w5x5x3_kappa3_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w5x5x3_kappa3_weighted\\kappa3.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w5x5x3_kappa3_weighted\\kappa3.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w5x5x3_kappa3_weighted\\kappa3.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "569bd41b4cc62d43433539c7648099b94f3b488c3857cab6684d4148caf04691",
+        "output_sha256": "d33d27316cc2440ec2ed88dba11a9d5e3455b63ba630030241d483e269b88bfc",
+        "metadata_sha256": "23c25c54d51e5ac6c46584cbbdfda304a54138e8715de958fc4bb6c41af623e7",
+        "stdout_sha256": "c011d32285ef5f632b90d17ad1f19ed8a05fc7b60fda905e511212321def79ef",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "26b9f122dfbe3e3ff64e2819a051f416f46e77e07585336cc0121d64ec4ff4fb"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "coordinate_gaussian",
+      "window_size": [
+        5,
+        5,
+        3
+      ],
+      "order": 4,
+      "passed": true,
+      "parameter_id": "coordinate_gaussian",
+      "weight_config": {
+        "mode": "coordinate_gaussian",
+        "bandwidth": 1.0
+      },
+      "algorithm": "Weighted moment",
+      "count": 75,
+      "failed_count": 0,
+      "max_abs_error": 8.470329472543003e-21,
+      "max_relative_error": 1.5299792307572984e-14,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 75,
+        "weight_sum_max_abs_error": 1.4210854715202004e-14,
+        "weight_squared_sum_max_abs_error": 0.0,
+        "effective_sample_size_max_abs_error": 5.684341886080802e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_coordinate_gaussian_w5x5x3_kappa4_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w5x5x3_kappa4_weighted\\kappa4.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w5x5x3_kappa4_weighted\\kappa4.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w5x5x3_kappa4_weighted\\kappa4.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "f172e0da2dfca4120a05ed1d38f1980b2edc43c04f02b150a7d98c5f5a2a8db9",
+        "output_sha256": "e77052cbbbab293af292633ba1c2dc61abd762e44364b45d7ddbb0439cbcd864",
+        "metadata_sha256": "508f19d57e3e15613fa57db37376e95dc670fc28192ff547fceb7b73f8e31c2b",
+        "stdout_sha256": "d6c8c7b64ec7fd0284e608208b64a45a401abdd492523b00985a43155f6b848b",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "26b9f122dfbe3e3ff64e2819a051f416f46e77e07585336cc0121d64ec4ff4fb"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "coordinate_gaussian",
+      "window_size": [
+        5,
+        5,
+        3
+      ],
+      "order": 5,
+      "passed": true,
+      "parameter_id": "coordinate_gaussian",
+      "weight_config": {
+        "mode": "coordinate_gaussian",
+        "bandwidth": 1.0
+      },
+      "algorithm": "Weighted moment",
+      "count": 75,
+      "failed_count": 0,
+      "max_abs_error": 4.235164736271502e-22,
+      "max_relative_error": 6.697588600761165e-14,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 75,
+        "weight_sum_max_abs_error": 1.4210854715202004e-14,
+        "weight_squared_sum_max_abs_error": 0.0,
+        "effective_sample_size_max_abs_error": 5.684341886080802e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_coordinate_gaussian_w5x5x3_kappa5_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w5x5x3_kappa5_weighted\\kappa5.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w5x5x3_kappa5_weighted\\kappa5.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w5x5x3_kappa5_weighted\\kappa5.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "e74b02d9fe05d480a59b2515c9bab54059292ff09492ec1d1a712e88e1a07ee5",
+        "output_sha256": "03ff96c91385540cd532a1680d84f3aff822c93cc9d83532b5ce437285e8aae7",
+        "metadata_sha256": "0d42f966604cf83f74db804480a8007df126527dead21c1ac5567c2276358605",
+        "stdout_sha256": "1316ab89f6863833eb30e4d3a45593c8ffd16ab48228f0baee9f6d51cebf6d75",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "26b9f122dfbe3e3ff64e2819a051f416f46e77e07585336cc0121d64ec4ff4fb"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "coordinate_gaussian",
+      "window_size": [
+        5,
+        5,
+        3
+      ],
+      "order": 6,
+      "passed": true,
+      "parameter_id": "coordinate_gaussian",
+      "weight_config": {
+        "mode": "coordinate_gaussian",
+        "bandwidth": 1.0
+      },
+      "algorithm": "Weighted moment",
+      "count": 75,
+      "failed_count": 0,
+      "max_abs_error": 1.8694281843698425e-22,
+      "max_relative_error": 7.767985534761105e-13,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 75,
+        "weight_sum_max_abs_error": 1.4210854715202004e-14,
+        "weight_squared_sum_max_abs_error": 0.0,
+        "effective_sample_size_max_abs_error": 5.684341886080802e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_coordinate_gaussian_w5x5x3_kappa6_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w5x5x3_kappa6_weighted\\kappa6.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w5x5x3_kappa6_weighted\\kappa6.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w5x5x3_kappa6_weighted\\kappa6.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "441ebe2da97fa8b712778ae1371e8b9db764c730d0a0bcc7d22c7d666e93abbf",
+        "output_sha256": "e2c9f9c8971e2846a1bf651f6f2c5c5d559cb2567bed5c638e6a3acb8b3098e8",
+        "metadata_sha256": "2cafdc8bc974dcd99ddf51c1e89afdf85131dade51ed24e36247ef7d8c640e2a",
+        "stdout_sha256": "66d78e8d4b8e67a126897974b03fbeac375c81778af6aebc0626e5a453d355c3",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "26b9f122dfbe3e3ff64e2819a051f416f46e77e07585336cc0121d64ec4ff4fb"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "soft_high_porosity",
+      "window_size": [
+        5,
+        5,
+        3
+      ],
+      "order": 1,
+      "passed": true,
+      "parameter_id": "soft_high_porosity",
+      "weight_config": {
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.02,
+        "soft_weight_strength": 0.8
+      },
+      "algorithm": "Weighted moment",
+      "count": 75,
+      "failed_count": 0,
+      "max_abs_error": 2.220446049250313e-16,
+      "max_relative_error": 8.019346307655727e-16,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "none",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 75,
+        "weight_sum_max_abs_error": 4.263256414560601e-14,
+        "weight_squared_sum_max_abs_error": 4.973799150320701e-14,
+        "effective_sample_size_max_abs_error": 7.105427357601002e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_soft_high_porosity_w5x5x3_kappa1_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w5x5x3_kappa1_weighted\\kappa1.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w5x5x3_kappa1_weighted\\kappa1.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w5x5x3_kappa1_weighted\\kappa1.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "a414989bdd0c8a99fe1e4c735a9a3c015bc08001c33ee71ffa2b651bb226f9d9",
+        "output_sha256": "01951da16c6a47be06b8679ea8d06c038a836120fcbe01fdd18e412f3699aa11",
+        "metadata_sha256": "1a18280cdc092bb95d12d14477c3bcb4aec2aeb27a513f2dfc0927d5a2ab7339",
+        "stdout_sha256": "354f852e335ea918e48e71885f5da1b3421abd61e73b101dfe75743224a3d66b",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "4c176a375651e4b64800ef0a012cd96683e7cd6f7056094144f629296a53bfba"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "soft_high_porosity",
+      "window_size": [
+        5,
+        5,
+        3
+      ],
+      "order": 2,
+      "passed": true,
+      "parameter_id": "soft_high_porosity",
+      "weight_config": {
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.02,
+        "soft_weight_strength": 0.8
+      },
+      "algorithm": "Weighted moment",
+      "count": 75,
+      "failed_count": 0,
+      "max_abs_error": 9.84455572616838e-17,
+      "max_relative_error": 1.3393154082896802e-13,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 75,
+        "weight_sum_max_abs_error": 4.263256414560601e-14,
+        "weight_squared_sum_max_abs_error": 4.973799150320701e-14,
+        "effective_sample_size_max_abs_error": 7.105427357601002e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_soft_high_porosity_w5x5x3_kappa2_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w5x5x3_kappa2_weighted\\kappa2.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w5x5x3_kappa2_weighted\\kappa2.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w5x5x3_kappa2_weighted\\kappa2.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "3da34800cd51f2563f3b670516a8a6bd5b1a13f45f5f047e301acd61175a3be7",
+        "output_sha256": "d6750c4969e1bf6f7ee3a77fbb9a06e02285322fa47a81e323f979dd6c4506f8",
+        "metadata_sha256": "6093e786bcb3e2e08d6ffdd780de0a7ca7f26d0320cdefd7c3b6bbc2ed8bfaa8",
+        "stdout_sha256": "3d8ecdfd6c8db223eee5df7fa74511e3552a9dc4e3902475b73afab888c6ce35",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "4c176a375651e4b64800ef0a012cd96683e7cd6f7056094144f629296a53bfba"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "soft_high_porosity",
+      "window_size": [
+        5,
+        5,
+        3
+      ],
+      "order": 3,
+      "passed": true,
+      "parameter_id": "soft_high_porosity",
+      "weight_config": {
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.02,
+        "soft_weight_strength": 0.8
+      },
+      "algorithm": "Weighted moment",
+      "count": 75,
+      "failed_count": 0,
+      "max_abs_error": 4.404571325722362e-20,
+      "max_relative_error": 6.185316764235014e-14,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 75,
+        "weight_sum_max_abs_error": 4.263256414560601e-14,
+        "weight_squared_sum_max_abs_error": 4.973799150320701e-14,
+        "effective_sample_size_max_abs_error": 7.105427357601002e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_soft_high_porosity_w5x5x3_kappa3_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w5x5x3_kappa3_weighted\\kappa3.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w5x5x3_kappa3_weighted\\kappa3.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w5x5x3_kappa3_weighted\\kappa3.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "ef93f3e5bbc076b13d751b4b0a66e144acb8aa47254c55b941e07d67f275beec",
+        "output_sha256": "f266a368c7c320375a20d911be1ce46d52ce91e017ee4f8eddd6da183f0774e4",
+        "metadata_sha256": "e99cc19687b5ad5c16927febf7ece7b0c23c285c88bc3977e0b6da2fd8ed836d",
+        "stdout_sha256": "3838bab4101a94c82bdb56f74cffb58e1b4e8b5216f2963c4ccf708e01ca7e7c",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "4c176a375651e4b64800ef0a012cd96683e7cd6f7056094144f629296a53bfba"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "soft_high_porosity",
+      "window_size": [
+        5,
+        5,
+        3
+      ],
+      "order": 4,
+      "passed": true,
+      "parameter_id": "soft_high_porosity",
+      "weight_config": {
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.02,
+        "soft_weight_strength": 0.8
+      },
+      "algorithm": "Weighted moment",
+      "count": 75,
+      "failed_count": 0,
+      "max_abs_error": 9.740878893424454e-21,
+      "max_relative_error": 1.1051965335342245e-14,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 75,
+        "weight_sum_max_abs_error": 4.263256414560601e-14,
+        "weight_squared_sum_max_abs_error": 4.973799150320701e-14,
+        "effective_sample_size_max_abs_error": 7.105427357601002e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_soft_high_porosity_w5x5x3_kappa4_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w5x5x3_kappa4_weighted\\kappa4.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w5x5x3_kappa4_weighted\\kappa4.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w5x5x3_kappa4_weighted\\kappa4.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "53ce4d86b7760588579037c759c5a75ae69f3a2808e17e67c988f0294d8c6f50",
+        "output_sha256": "b1dfaa47e1eb1500acab1e3cb7b47e57941b3d950776df2bde4e010d1daf6906",
+        "metadata_sha256": "795f21ea887a7c53b4c9fdefb13a6f2f3993d04ee1421b626d386e806e13f567",
+        "stdout_sha256": "34e421468bd7dc535c6667b8e70cd45c050ce79b8eee5b10632ab905c3ae4389",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "4c176a375651e4b64800ef0a012cd96683e7cd6f7056094144f629296a53bfba"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "soft_high_porosity",
+      "window_size": [
+        5,
+        5,
+        3
+      ],
+      "order": 5,
+      "passed": true,
+      "parameter_id": "soft_high_porosity",
+      "weight_config": {
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.02,
+        "soft_weight_strength": 0.8
+      },
+      "algorithm": "Weighted moment",
+      "count": 75,
+      "failed_count": 0,
+      "max_abs_error": 3.705769144237564e-22,
+      "max_relative_error": 8.960308370084369e-13,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 75,
+        "weight_sum_max_abs_error": 4.263256414560601e-14,
+        "weight_squared_sum_max_abs_error": 4.973799150320701e-14,
+        "effective_sample_size_max_abs_error": 7.105427357601002e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_soft_high_porosity_w5x5x3_kappa5_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w5x5x3_kappa5_weighted\\kappa5.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w5x5x3_kappa5_weighted\\kappa5.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w5x5x3_kappa5_weighted\\kappa5.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "676f2b809f58f52f24c96c6e0258f3c92206f685812a4c1036f7fa67ac9dfbe2",
+        "output_sha256": "8555244509c16cdda89a975311a84f7a1e7af0ee807cf305a35fb6335fe77709",
+        "metadata_sha256": "a351d2c20707b2c8aa197626c4a3a97613ad30aa1ebf97213115087d3f599e7b",
+        "stdout_sha256": "94808d8899ef68147ede0ca9cfc7653eca4332f68f68915e60473b0ef4fecded",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "4c176a375651e4b64800ef0a012cd96683e7cd6f7056094144f629296a53bfba"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "soft_high_porosity",
+      "window_size": [
+        5,
+        5,
+        3
+      ],
+      "order": 6,
+      "passed": true,
+      "parameter_id": "soft_high_porosity",
+      "weight_config": {
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.02,
+        "soft_weight_strength": 0.8
+      },
+      "algorithm": "Weighted moment",
+      "count": 75,
+      "failed_count": 0,
+      "max_abs_error": 1.2904017555827232e-22,
+      "max_relative_error": 1.4018658881795138e-13,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 75,
+        "weight_sum_max_abs_error": 4.263256414560601e-14,
+        "weight_squared_sum_max_abs_error": 4.973799150320701e-14,
+        "effective_sample_size_max_abs_error": 7.105427357601002e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_soft_high_porosity_w5x5x3_kappa6_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w5x5x3_kappa6_weighted\\kappa6.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w5x5x3_kappa6_weighted\\kappa6.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w5x5x3_kappa6_weighted\\kappa6.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "9a7a63025d4da10947f9003a5c55bb640782c285dafeca07f040427eef0d1968",
+        "output_sha256": "9bbf4fad691361f06973c85317ec84d8d3e147d2806bf7bc6feb661eff44f925",
+        "metadata_sha256": "a88da6518a8548e3fefb5fdee0ce5f0e4a2652ffc3fffa781cb8097de30b20dd",
+        "stdout_sha256": "2cd10019e9353a15b368a6194e5b268d4999f06de99e86db9adbd44adc996076",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "4c176a375651e4b64800ef0a012cd96683e7cd6f7056094144f629296a53bfba"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "uniform",
+      "window_size": [
+        7,
+        7,
+        3
+      ],
+      "order": 1,
+      "passed": true,
+      "parameter_id": "uniform",
+      "weight_config": {
+        "mode": "uniform"
+      },
+      "algorithm": "AVL",
+      "count": 27,
+      "failed_count": 0,
+      "max_abs_error": 2.220446049250313e-16,
+      "max_relative_error": 9.352400093021715e-16,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "none",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 27,
+        "weight_sum_max_abs_error": 0.0,
+        "weight_squared_sum_max_abs_error": 0.0,
+        "effective_sample_size_max_abs_error": 0.0
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_uniform_w7x7x3_kappa1_avl.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w7x7x3_kappa1_avl\\kappa1.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w7x7x3_kappa1_avl\\kappa1.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w7x7x3_kappa1_avl\\kappa1.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "f962d36500ee8a809af0fea878791e1afa07efa415464d2c5af22e2b4754465d",
+        "output_sha256": "2fdceb833778ce72cdc4698078c1d9d73a674eeb6cd7557236bfe76f926f5354",
+        "metadata_sha256": "c56ca8ade6202f399c93d8381ec6a0d70e53ec3a859f571e338bd78d139f0c2f",
+        "stdout_sha256": "9dd4021f3f7065b9115441a8b86cd86d634a51c92328bc80b4bc2272de8444d1",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "443afab699d445312f941ac759c1ea42e83120cc093ca6196f6e25a4cc00538b"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "uniform",
+      "window_size": [
+        7,
+        7,
+        3
+      ],
+      "order": 2,
+      "passed": true,
+      "parameter_id": "uniform",
+      "weight_config": {
+        "mode": "uniform"
+      },
+      "algorithm": "AVL",
+      "count": 27,
+      "failed_count": 0,
+      "max_abs_error": 9.974659986866641e-17,
+      "max_relative_error": 5.074609369668135e-14,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 27,
+        "weight_sum_max_abs_error": 0.0,
+        "weight_squared_sum_max_abs_error": 0.0,
+        "effective_sample_size_max_abs_error": 0.0
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_uniform_w7x7x3_kappa2_avl.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w7x7x3_kappa2_avl\\kappa2.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w7x7x3_kappa2_avl\\kappa2.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w7x7x3_kappa2_avl\\kappa2.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "af6661043821c54d0277d416eba68163b558c48957479e152fb3c055c966ec2d",
+        "output_sha256": "38e47f4e59123f4dfd28275304f8ad102db6743485f5db8b824ae6aa5518a3f2",
+        "metadata_sha256": "2ad7495d92a3dfe3befa05dd6adf168456ad99901b5eb370d7a37df170346866",
+        "stdout_sha256": "1e95ea429a8368066d1a090d1ba734ecec9df6bb61f9ab7ccbb7f7beaf8e0fbe",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "443afab699d445312f941ac759c1ea42e83120cc093ca6196f6e25a4cc00538b"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "uniform",
+      "window_size": [
+        7,
+        7,
+        3
+      ],
+      "order": 3,
+      "passed": true,
+      "parameter_id": "uniform",
+      "weight_config": {
+        "mode": "uniform"
+      },
+      "algorithm": "AVL",
+      "count": 27,
+      "failed_count": 0,
+      "max_abs_error": 8.131516293641283e-20,
+      "max_relative_error": 1.6997447948279197e-15,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 27,
+        "weight_sum_max_abs_error": 0.0,
+        "weight_squared_sum_max_abs_error": 0.0,
+        "effective_sample_size_max_abs_error": 0.0
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_uniform_w7x7x3_kappa3_avl.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w7x7x3_kappa3_avl\\kappa3.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w7x7x3_kappa3_avl\\kappa3.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w7x7x3_kappa3_avl\\kappa3.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "febb81288d13f27ad2a743eb2649381dbe1f45459e82469387c5c80f137db0e1",
+        "output_sha256": "03947274afe7dd82765dde88be561a64299afe2d4c950c9c3fc035c9668cbe4b",
+        "metadata_sha256": "955ae0aa8fefcad75c4ca1612d684e761778bb6936c31d6dfcd0a890efaf2c26",
+        "stdout_sha256": "2aeac83b1958b0c2e41bfd6ff8ae54c89a00ab87d3c10991587fbfcb034c57d9",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "443afab699d445312f941ac759c1ea42e83120cc093ca6196f6e25a4cc00538b"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "uniform",
+      "window_size": [
+        7,
+        7,
+        3
+      ],
+      "order": 4,
+      "passed": true,
+      "parameter_id": "uniform",
+      "weight_config": {
+        "mode": "uniform"
+      },
+      "algorithm": "AVL",
+      "count": 27,
+      "failed_count": 0,
+      "max_abs_error": 2.837560373301906e-20,
+      "max_relative_error": 2.1112938569648503e-14,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 27,
+        "weight_sum_max_abs_error": 0.0,
+        "weight_squared_sum_max_abs_error": 0.0,
+        "effective_sample_size_max_abs_error": 0.0
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_uniform_w7x7x3_kappa4_avl.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w7x7x3_kappa4_avl\\kappa4.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w7x7x3_kappa4_avl\\kappa4.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w7x7x3_kappa4_avl\\kappa4.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "8923add20304732dd4489d26948cc34e32a18a6eb84a5fd1226aba7c2b786aeb",
+        "output_sha256": "8382984a47ca9deef378d98bce9696ab20b5b2a2c5ece4e599e2e3812b29474c",
+        "metadata_sha256": "75b23ead1624c6a083d97ff927e1c52afefb3da0ae5448eb2d8ed14817a9cfeb",
+        "stdout_sha256": "06d8b10071cbe9a99f8ee024d71fb6f2f55fbbec7aa8a6780dc23945db62eda5",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "443afab699d445312f941ac759c1ea42e83120cc093ca6196f6e25a4cc00538b"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "uniform",
+      "window_size": [
+        7,
+        7,
+        3
+      ],
+      "order": 5,
+      "passed": true,
+      "parameter_id": "uniform",
+      "weight_config": {
+        "mode": "uniform"
+      },
+      "algorithm": "AVL",
+      "count": 27,
+      "failed_count": 0,
+      "max_abs_error": 1.9058241313221758e-21,
+      "max_relative_error": 4.360924958117584e-15,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 27,
+        "weight_sum_max_abs_error": 0.0,
+        "weight_squared_sum_max_abs_error": 0.0,
+        "effective_sample_size_max_abs_error": 0.0
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_uniform_w7x7x3_kappa5_avl.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w7x7x3_kappa5_avl\\kappa5.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w7x7x3_kappa5_avl\\kappa5.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w7x7x3_kappa5_avl\\kappa5.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "bc28e438fc926c23f8ec6ce4e423fcd4f505fe291f88d78b46b5b8b656d79be3",
+        "output_sha256": "2366478388e2522aa3648f591cdb3cae7e3d53ca78d71635278d020d8f00baa5",
+        "metadata_sha256": "439f0bd6172c965a0560c135df79487cb7b45610062df5a852f930691163cffb",
+        "stdout_sha256": "13cd207333784f05253dfe6b81802ae13af8c577c235420cc9ac06204adeddf3",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "443afab699d445312f941ac759c1ea42e83120cc093ca6196f6e25a4cc00538b"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "uniform",
+      "window_size": [
+        7,
+        7,
+        3
+      ],
+      "order": 6,
+      "passed": true,
+      "parameter_id": "uniform",
+      "weight_config": {
+        "mode": "uniform"
+      },
+      "algorithm": "AVL",
+      "count": 27,
+      "failed_count": 0,
+      "max_abs_error": 8.635765595053609e-22,
+      "max_relative_error": 7.800728587343805e-13,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 27,
+        "weight_sum_max_abs_error": 0.0,
+        "weight_squared_sum_max_abs_error": 0.0,
+        "effective_sample_size_max_abs_error": 0.0
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_uniform_w7x7x3_kappa6_avl.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w7x7x3_kappa6_avl\\kappa6.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w7x7x3_kappa6_avl\\kappa6.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_uniform_w7x7x3_kappa6_avl\\kappa6.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "d82291992e650f30e985c486f7cacd1fd4d1d84db30c9afa306683d93f955be2",
+        "output_sha256": "bebc74a19b17bab9cb15a2a0068672e26eb2cb6ff857f5007b7daee674ca8fca",
+        "metadata_sha256": "2beb404d4e0d47087a994b2ee6aebccc61bc99381e78a7580289325b91c0e6d1",
+        "stdout_sha256": "eab4fad0ec038fdf4c05ab4fb9e09378d5cd6afaed412c576a199f6c20c264e2",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "443afab699d445312f941ac759c1ea42e83120cc093ca6196f6e25a4cc00538b"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "coordinate_gaussian",
+      "window_size": [
+        7,
+        7,
+        3
+      ],
+      "order": 1,
+      "passed": true,
+      "parameter_id": "coordinate_gaussian",
+      "weight_config": {
+        "mode": "coordinate_gaussian",
+        "bandwidth": 1.0
+      },
+      "algorithm": "Weighted moment",
+      "count": 27,
+      "failed_count": 0,
+      "max_abs_error": 2.7755575615628914e-16,
+      "max_relative_error": 1.0262687912085002e-15,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "none",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 27,
+        "weight_sum_max_abs_error": 2.842170943040401e-14,
+        "weight_squared_sum_max_abs_error": 7.105427357601002e-15,
+        "effective_sample_size_max_abs_error": 8.526512829121202e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_coordinate_gaussian_w7x7x3_kappa1_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w7x7x3_kappa1_weighted\\kappa1.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w7x7x3_kappa1_weighted\\kappa1.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w7x7x3_kappa1_weighted\\kappa1.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "f1f7260aefd4d15ec7d21e9c196a562c1849fce6db001ea551e4d2f90f645044",
+        "output_sha256": "a0ac5e047d61b912631188ed52c7c6fb0d885d661ee6cdf063c496a2411b244c",
+        "metadata_sha256": "5d8c8f024a02374118f7f65883ead6aba90cfc5c53395075d14c1e77b5b2c45e",
+        "stdout_sha256": "f44cad6a5673ddec800f2309829eca1b1a6e311bca2493009f0da4a9efb3b36a",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "68a1767f81914e8ad93e214cfbd527b11844d14dfc126196cb4c66d541ac6e2a"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "coordinate_gaussian",
+      "window_size": [
+        7,
+        7,
+        3
+      ],
+      "order": 2,
+      "passed": true,
+      "parameter_id": "coordinate_gaussian",
+      "weight_config": {
+        "mode": "coordinate_gaussian",
+        "bandwidth": 1.0
+      },
+      "algorithm": "Weighted moment",
+      "count": 27,
+      "failed_count": 0,
+      "max_abs_error": 9.93129189996722e-17,
+      "max_relative_error": 7.484285558749791e-14,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 27,
+        "weight_sum_max_abs_error": 2.842170943040401e-14,
+        "weight_squared_sum_max_abs_error": 7.105427357601002e-15,
+        "effective_sample_size_max_abs_error": 8.526512829121202e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_coordinate_gaussian_w7x7x3_kappa2_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w7x7x3_kappa2_weighted\\kappa2.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w7x7x3_kappa2_weighted\\kappa2.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w7x7x3_kappa2_weighted\\kappa2.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "27f8e0bc645d61149264f9277ef621dadef60eae8053874a45007051e53585bb",
+        "output_sha256": "cbb3c1b044465afb59d9548bcad28ac144acf935aa3edf9b8e89646f905fd8f5",
+        "metadata_sha256": "def41342701be543fe9afc487b0c6903af852a6b722656c180d87f1f327fc4fc",
+        "stdout_sha256": "9b3079f584bbe4bbbaf05cee6018c31ebb19e395ab4072159ad05e504f03b6ca",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "68a1767f81914e8ad93e214cfbd527b11844d14dfc126196cb4c66d541ac6e2a"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "coordinate_gaussian",
+      "window_size": [
+        7,
+        7,
+        3
+      ],
+      "order": 3,
+      "passed": true,
+      "parameter_id": "coordinate_gaussian",
+      "weight_config": {
+        "mode": "coordinate_gaussian",
+        "bandwidth": 1.0
+      },
+      "algorithm": "Weighted moment",
+      "count": 27,
+      "failed_count": 0,
+      "max_abs_error": 4.743384504624082e-20,
+      "max_relative_error": 1.5527811396748516e-15,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 27,
+        "weight_sum_max_abs_error": 2.842170943040401e-14,
+        "weight_squared_sum_max_abs_error": 7.105427357601002e-15,
+        "effective_sample_size_max_abs_error": 8.526512829121202e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_coordinate_gaussian_w7x7x3_kappa3_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w7x7x3_kappa3_weighted\\kappa3.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w7x7x3_kappa3_weighted\\kappa3.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w7x7x3_kappa3_weighted\\kappa3.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "ce13e3d768afc6b1008b0011af501599a6cd3b2e58966e6b91ef58d5e0a46df3",
+        "output_sha256": "e15adf63b8f2f67d211f340018c79eb2ff880deb6887a8c2c810d9bd3a21e6ff",
+        "metadata_sha256": "63c032866a032050e0d1ed8435c737d39f393d5d596a2962f2bd09d0dd8d3356",
+        "stdout_sha256": "3b933384ffb2e60c2b85437bfec94a3da5addb367ae6d0b584520b05b0a7f0dc",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "68a1767f81914e8ad93e214cfbd527b11844d14dfc126196cb4c66d541ac6e2a"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "coordinate_gaussian",
+      "window_size": [
+        7,
+        7,
+        3
+      ],
+      "order": 4,
+      "passed": true,
+      "parameter_id": "coordinate_gaussian",
+      "weight_config": {
+        "mode": "coordinate_gaussian",
+        "bandwidth": 1.0
+      },
+      "algorithm": "Weighted moment",
+      "count": 27,
+      "failed_count": 0,
+      "max_abs_error": 3.5575383784680614e-20,
+      "max_relative_error": 2.0185057816550312e-13,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 27,
+        "weight_sum_max_abs_error": 2.842170943040401e-14,
+        "weight_squared_sum_max_abs_error": 7.105427357601002e-15,
+        "effective_sample_size_max_abs_error": 8.526512829121202e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_coordinate_gaussian_w7x7x3_kappa4_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w7x7x3_kappa4_weighted\\kappa4.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w7x7x3_kappa4_weighted\\kappa4.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w7x7x3_kappa4_weighted\\kappa4.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "92816f9a20f5ac500069d00032135e9f3f8a8243d7d033b3e473bd3e02dd0573",
+        "output_sha256": "a01572e20cc1d6c05eaaf4a8f959ae996d9a51b2432132d5e15aa22533e773af",
+        "metadata_sha256": "1d1459e31c92797676cfae5593d6d7c66a677a65aad50d4102ed9a4634855e48",
+        "stdout_sha256": "c9e94a586a341c7d294f3eff623ffb3fe06d237ae4d45cf8388db211cf5bc432",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "68a1767f81914e8ad93e214cfbd527b11844d14dfc126196cb4c66d541ac6e2a"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "coordinate_gaussian",
+      "window_size": [
+        7,
+        7,
+        3
+      ],
+      "order": 5,
+      "passed": true,
+      "parameter_id": "coordinate_gaussian",
+      "weight_config": {
+        "mode": "coordinate_gaussian",
+        "bandwidth": 1.0
+      },
+      "algorithm": "Weighted moment",
+      "count": 27,
+      "failed_count": 0,
+      "max_abs_error": 2.117582368135751e-21,
+      "max_relative_error": 5.4171751023241936e-15,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 27,
+        "weight_sum_max_abs_error": 2.842170943040401e-14,
+        "weight_squared_sum_max_abs_error": 7.105427357601002e-15,
+        "effective_sample_size_max_abs_error": 8.526512829121202e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_coordinate_gaussian_w7x7x3_kappa5_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w7x7x3_kappa5_weighted\\kappa5.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w7x7x3_kappa5_weighted\\kappa5.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w7x7x3_kappa5_weighted\\kappa5.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "4cfd379a23d4fc6fe77f61424fe6ceeb580433b4d10ac8e0e563851688258354",
+        "output_sha256": "6c304fbc55ce06f5a1372c853702b8427e7e3d064cce91aa18079c91e9a2926b",
+        "metadata_sha256": "2cdd034d198526be09d099781e9519154c4d50d1eeda732c88517b9969f90f83",
+        "stdout_sha256": "4db56685ae6381e83770b29af205da8e069c36796798e081a81111f569ba7942",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "68a1767f81914e8ad93e214cfbd527b11844d14dfc126196cb4c66d541ac6e2a"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "coordinate_gaussian",
+      "window_size": [
+        7,
+        7,
+        3
+      ],
+      "order": 6,
+      "passed": true,
+      "parameter_id": "coordinate_gaussian",
+      "weight_config": {
+        "mode": "coordinate_gaussian",
+        "bandwidth": 1.0
+      },
+      "algorithm": "Weighted moment",
+      "count": 27,
+      "failed_count": 0,
+      "max_abs_error": 6.592629482047631e-22,
+      "max_relative_error": 1.2179124206552282e-12,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 27,
+        "weight_sum_max_abs_error": 2.842170943040401e-14,
+        "weight_squared_sum_max_abs_error": 7.105427357601002e-15,
+        "effective_sample_size_max_abs_error": 8.526512829121202e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_coordinate_gaussian_w7x7x3_kappa6_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w7x7x3_kappa6_weighted\\kappa6.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w7x7x3_kappa6_weighted\\kappa6.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_coordinate_gaussian_w7x7x3_kappa6_weighted\\kappa6.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "a827cbabf0d9f0405ecf1c5a99423800fbf7d1506efee962cea0d8fbcf2a847b",
+        "output_sha256": "4fcfd4b00ac0286bba9d790b5aa551cc574d6dc07a30f144123e92f23bbab51d",
+        "metadata_sha256": "b7eb15784c9ecee82e16b81686330c3aeba3402d2d677f3cf0de88ba039c1a7d",
+        "stdout_sha256": "3fedd001b016d3d49d8442a451d4574b1f7d13d2e3391dbd8578325f3cab0b9d",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "68a1767f81914e8ad93e214cfbd527b11844d14dfc126196cb4c66d541ac6e2a"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "soft_high_porosity",
+      "window_size": [
+        7,
+        7,
+        3
+      ],
+      "order": 1,
+      "passed": true,
+      "parameter_id": "soft_high_porosity",
+      "weight_config": {
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.02,
+        "soft_weight_strength": 0.8
+      },
+      "algorithm": "Weighted moment",
+      "count": 27,
+      "failed_count": 0,
+      "max_abs_error": 2.220446049250313e-16,
+      "max_relative_error": 8.004777559200925e-16,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "none",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 27,
+        "weight_sum_max_abs_error": 7.105427357601002e-14,
+        "weight_squared_sum_max_abs_error": 8.526512829121202e-14,
+        "effective_sample_size_max_abs_error": 1.7053025658242404e-13
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_soft_high_porosity_w7x7x3_kappa1_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w7x7x3_kappa1_weighted\\kappa1.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w7x7x3_kappa1_weighted\\kappa1.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w7x7x3_kappa1_weighted\\kappa1.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "f55c8637ea960df6c55addc42d1e36f9a288335cbc4927794cc4f8fdb9226612",
+        "output_sha256": "64c1fdc1d4e17919b0058bf3cca8b7045773b817c6f98c6ad7da1f4050156307",
+        "metadata_sha256": "0eaead3cc0ac1485bfca2f948c890dd1129a5676f26028d142b8fd17c3ed2357",
+        "stdout_sha256": "5d6f057fb6a05f031f95342c0aa5d941628a478f32457806b38c0e2b99ac93e8",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "512590b848a0fa6e10282af89aeae64d212e363b6148a52571e498007d4f3b9f"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "soft_high_porosity",
+      "window_size": [
+        7,
+        7,
+        3
+      ],
+      "order": 2,
+      "passed": true,
+      "parameter_id": "soft_high_porosity",
+      "weight_config": {
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.02,
+        "soft_weight_strength": 0.8
+      },
+      "algorithm": "Weighted moment",
+      "count": 27,
+      "failed_count": 0,
+      "max_abs_error": 9.345822726825048e-17,
+      "max_relative_error": 5.672242955780323e-14,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 27,
+        "weight_sum_max_abs_error": 7.105427357601002e-14,
+        "weight_squared_sum_max_abs_error": 8.526512829121202e-14,
+        "effective_sample_size_max_abs_error": 1.7053025658242404e-13
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_soft_high_porosity_w7x7x3_kappa2_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w7x7x3_kappa2_weighted\\kappa2.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w7x7x3_kappa2_weighted\\kappa2.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w7x7x3_kappa2_weighted\\kappa2.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "891811c76c6fb36f254562a3368d06cdd2566d785180ea679bafe89ca30fcc28",
+        "output_sha256": "530f22e3b43a73f5ac7ff5c02fcbca91139dab5df39e50239ed7269beace2ce9",
+        "metadata_sha256": "16236b229dac3a9e3ad6177f0ee61a882711c99a4246bbed60b195bbed78a51f",
+        "stdout_sha256": "3c80d8a3014b0cfb197a53888f6b88f263aa37a9f6b0f90f04e31e1f89976181",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "512590b848a0fa6e10282af89aeae64d212e363b6148a52571e498007d4f3b9f"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "soft_high_porosity",
+      "window_size": [
+        7,
+        7,
+        3
+      ],
+      "order": 3,
+      "passed": true,
+      "parameter_id": "soft_high_porosity",
+      "weight_config": {
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.02,
+        "soft_weight_strength": 0.8
+      },
+      "algorithm": "Weighted moment",
+      "count": 27,
+      "failed_count": 0,
+      "max_abs_error": 7.792703114739563e-20,
+      "max_relative_error": 2.660193065555224e-14,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 27,
+        "weight_sum_max_abs_error": 7.105427357601002e-14,
+        "weight_squared_sum_max_abs_error": 8.526512829121202e-14,
+        "effective_sample_size_max_abs_error": 1.7053025658242404e-13
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_soft_high_porosity_w7x7x3_kappa3_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w7x7x3_kappa3_weighted\\kappa3.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w7x7x3_kappa3_weighted\\kappa3.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w7x7x3_kappa3_weighted\\kappa3.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "0c021d6472f1958c44db5c0701f3c1b62822a519f23b565147673dec1f3e4fee",
+        "output_sha256": "e85185686e1959020c4082d1dd5d7619d6480a736ba1f2ac360d856086f219fd",
+        "metadata_sha256": "39d9fc9907f8f98b3dc52078f8c0905d73f0183b7b8fb77c264ca0085b7eb3ed",
+        "stdout_sha256": "4049575ff39c591cd3f1952b83b12ec8797b4627ce5233224ed9a99548ee2cb7",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "512590b848a0fa6e10282af89aeae64d212e363b6148a52571e498007d4f3b9f"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "soft_high_porosity",
+      "window_size": [
+        7,
+        7,
+        3
+      ],
+      "order": 4,
+      "passed": true,
+      "parameter_id": "soft_high_porosity",
+      "weight_config": {
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.02,
+        "soft_weight_strength": 0.8
+      },
+      "algorithm": "Weighted moment",
+      "count": 27,
+      "failed_count": 0,
+      "max_abs_error": 2.964615315390051e-20,
+      "max_relative_error": 1.0677696638657977e-14,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 27,
+        "weight_sum_max_abs_error": 7.105427357601002e-14,
+        "weight_squared_sum_max_abs_error": 8.526512829121202e-14,
+        "effective_sample_size_max_abs_error": 1.7053025658242404e-13
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_soft_high_porosity_w7x7x3_kappa4_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w7x7x3_kappa4_weighted\\kappa4.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w7x7x3_kappa4_weighted\\kappa4.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w7x7x3_kappa4_weighted\\kappa4.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "89131215906e0c48d9ceff32ef25f0aaf0cad913811cbf7907abc44168106b1d",
+        "output_sha256": "5123878dffb012ab74e94e58fb76b955462f415f0aab24e6bbaf27433446ed63",
+        "metadata_sha256": "6a838010488c631e06b4068911432c65c24bfb12ad9d7935a7a44e2b8bc3b908",
+        "stdout_sha256": "625b002a9abf3f2e71a2bcea9c8b155b462e49ff680f7c68b13e83e13351f637",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "512590b848a0fa6e10282af89aeae64d212e363b6148a52571e498007d4f3b9f"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "soft_high_porosity",
+      "window_size": [
+        7,
+        7,
+        3
+      ],
+      "order": 5,
+      "passed": true,
+      "parameter_id": "soft_high_porosity",
+      "weight_config": {
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.02,
+        "soft_weight_strength": 0.8
+      },
+      "algorithm": "Weighted moment",
+      "count": 27,
+      "failed_count": 0,
+      "max_abs_error": 1.0058516248644817e-21,
+      "max_relative_error": 3.27334085629143e-14,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 27,
+        "weight_sum_max_abs_error": 7.105427357601002e-14,
+        "weight_squared_sum_max_abs_error": 8.526512829121202e-14,
+        "effective_sample_size_max_abs_error": 1.7053025658242404e-13
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_soft_high_porosity_w7x7x3_kappa5_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w7x7x3_kappa5_weighted\\kappa5.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w7x7x3_kappa5_weighted\\kappa5.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w7x7x3_kappa5_weighted\\kappa5.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "1c516558ec44740d7243fedc59178002d7bf30f81f7e2cdac276e650a0aff6d5",
+        "output_sha256": "e5374036eda0c8b3bc097777c00ca482d1cdd5818facdfc882d3b43560c0c984",
+        "metadata_sha256": "a31323128a6450241504c03f68950b2e772aa2d39609f48e1499573c2055d90e",
+        "stdout_sha256": "71eadc85901f82a557c7e420afea3577e6e15f159f94de82d59ce7ea9e336f8b",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "512590b848a0fa6e10282af89aeae64d212e363b6148a52571e498007d4f3b9f"
+      }
+    },
+    {
+      "parameter_role": "primary",
+      "weighting": "soft_high_porosity",
+      "window_size": [
+        7,
+        7,
+        3
+      ],
+      "order": 6,
+      "passed": true,
+      "parameter_id": "soft_high_porosity",
+      "weight_config": {
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.02,
+        "soft_weight_strength": 0.8
+      },
+      "algorithm": "Weighted moment",
+      "count": 27,
+      "failed_count": 0,
+      "max_abs_error": 6.253485430900889e-22,
+      "max_relative_error": 5.193225075650461e-12,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 27,
+        "weight_sum_max_abs_error": 7.105427357601002e-14,
+        "weight_squared_sum_max_abs_error": 8.526512829121202e-14,
+        "effective_sample_size_max_abs_error": 1.7053025658242404e-13
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_primary_soft_high_porosity_w7x7x3_kappa6_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w7x7x3_kappa6_weighted\\kappa6.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w7x7x3_kappa6_weighted\\kappa6.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_primary_soft_high_porosity_w7x7x3_kappa6_weighted\\kappa6.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "25610b926e774241a092d57e968a23a1c1ea2cb9835631c6c46e8b18a9a264bc",
+        "output_sha256": "ca8b564343364390464f99f5fb1e45119b7083672ea8ee8c1cc8a0d6e374afb4",
+        "metadata_sha256": "98615e52a83b430b9eb98aeafbf78c905834ce0dc9b42d0bc1df20d26d9b80bd",
+        "stdout_sha256": "2db1d46a73538903633cccd369e02915dd8d91db00a9866a0a8b454ed8480315",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "512590b848a0fa6e10282af89aeae64d212e363b6148a52571e498007d4f3b9f"
+      }
+    },
+    {
+      "parameter_role": "sensitivity",
+      "weighting": "coordinate_gaussian",
+      "window_size": [
+        5,
+        5,
+        3
+      ],
+      "order": 6,
+      "passed": true,
+      "parameter_id": "coordinate_gaussian_sigma_0.75",
+      "weight_config": {
+        "id": "coordinate_gaussian_sigma_0.75",
+        "mode": "coordinate_gaussian",
+        "bandwidth": 0.75
+      },
+      "algorithm": "Weighted moment",
+      "count": 75,
+      "failed_count": 0,
+      "max_abs_error": 1.1994118882018901e-22,
+      "max_relative_error": 1.5717138457878604e-12,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 75,
+        "weight_sum_max_abs_error": 3.552713678800501e-15,
+        "weight_squared_sum_max_abs_error": 7.105427357601002e-15,
+        "effective_sample_size_max_abs_error": 2.1316282072803006e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_sensitivity_coordinate_gaussian_sigma_0.75_w5x5x3_kappa6_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_sensitivity_coordinate_gaussian_sigma_0.75_w5x5x3_kappa6_weighted\\kappa6.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_sensitivity_coordinate_gaussian_sigma_0.75_w5x5x3_kappa6_weighted\\kappa6.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_sensitivity_coordinate_gaussian_sigma_0.75_w5x5x3_kappa6_weighted\\kappa6.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "af82c2a644ffe26b83aed663de32bd88290d927ff625aa2f8f001c7ad3e26ad6",
+        "output_sha256": "80158379948c3d28865d2b9f8cb467ff9bb3813614526f2ad434defe5cf80c70",
+        "metadata_sha256": "44f609b36b438cb3b6795a308d9ce40746f82a26c72e384ea19ed85b714f9da8",
+        "stdout_sha256": "6c1670090aaf43f79fc4a7c9e57b25b4e06ef0f5dd30143fdf32a48a6af3ab11",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "b8d5015cbeda1d3730f7435fd2d946e0ee7cf584835b775774a74b514ef8765f"
+      }
+    },
+    {
+      "parameter_role": "sensitivity",
+      "weighting": "coordinate_gaussian",
+      "window_size": [
+        5,
+        5,
+        3
+      ],
+      "order": 6,
+      "passed": true,
+      "parameter_id": "coordinate_gaussian_sigma_1.25",
+      "weight_config": {
+        "id": "coordinate_gaussian_sigma_1.25",
+        "mode": "coordinate_gaussian",
+        "bandwidth": 1.25
+      },
+      "algorithm": "Weighted moment",
+      "count": 75,
+      "failed_count": 0,
+      "max_abs_error": 3.044024654195142e-22,
+      "max_relative_error": 5.898383619875252e-13,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 75,
+        "weight_sum_max_abs_error": 3.552713678800501e-14,
+        "weight_squared_sum_max_abs_error": 1.7763568394002505e-14,
+        "effective_sample_size_max_abs_error": 7.105427357601002e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_sensitivity_coordinate_gaussian_sigma_1.25_w5x5x3_kappa6_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_sensitivity_coordinate_gaussian_sigma_1.25_w5x5x3_kappa6_weighted\\kappa6.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_sensitivity_coordinate_gaussian_sigma_1.25_w5x5x3_kappa6_weighted\\kappa6.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_sensitivity_coordinate_gaussian_sigma_1.25_w5x5x3_kappa6_weighted\\kappa6.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "d7b65ca111b5b44249e8e524579931b540153f1f7b5870dd59cc57d8aea9995e",
+        "output_sha256": "69a0a66ead2361b26b81dd27ba9de2b08b1d922c922d5fdc29ca446bcf97e0e7",
+        "metadata_sha256": "7010fd8d1409af7e47b369c479dcd3d38a103e7e4d3feb4669f42f1c9fd726c3",
+        "stdout_sha256": "868c2a79631b7bbc714b40af53260d640d5c33857f8c23617df7922f760cc72d",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "a187800d6133f533e859d7857aede1fbfeec1b1f588e9e2f2a98ee219dffd564"
+      }
+    },
+    {
+      "parameter_role": "sensitivity",
+      "weighting": "soft_high_porosity",
+      "window_size": [
+        5,
+        5,
+        3
+      ],
+      "order": 6,
+      "passed": true,
+      "parameter_id": "soft_high_porosity_width_0.01",
+      "weight_config": {
+        "id": "soft_high_porosity_width_0.01",
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.01,
+        "soft_weight_strength": 0.8
+      },
+      "algorithm": "Weighted moment",
+      "count": 75,
+      "failed_count": 0,
+      "max_abs_error": 1.7205356741102976e-22,
+      "max_relative_error": 2.477574335713652e-12,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 75,
+        "weight_sum_max_abs_error": 4.263256414560601e-14,
+        "weight_squared_sum_max_abs_error": 4.973799150320701e-14,
+        "effective_sample_size_max_abs_error": 7.105427357601002e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_sensitivity_soft_high_porosity_width_0.01_w5x5x3_kappa6_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_sensitivity_soft_high_porosity_width_0.01_w5x5x3_kappa6_weighted\\kappa6.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_sensitivity_soft_high_porosity_width_0.01_w5x5x3_kappa6_weighted\\kappa6.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_sensitivity_soft_high_porosity_width_0.01_w5x5x3_kappa6_weighted\\kappa6.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "9ce1695bee35186be6da3c4cf5a3c8741cd74715f362c53bbf04f246e0a57081",
+        "output_sha256": "2a99ec77967e64fd8b6faeb3aa50032efd3e86f3bfb6865f155604dfd41885e9",
+        "metadata_sha256": "2bfbe98bed157504d68f7f55ad16ab0966c817187ab833ce8238c4a116746349",
+        "stdout_sha256": "7d01e749e9d00e725f63a177b1fcdd0083aa384cd013cbc43e55a227b262f32b",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "dc8a2cf70ff28da51decbc4bb85048a2806cdd66c6c680cb5aa9b526909d9d64"
+      }
+    },
+    {
+      "parameter_role": "sensitivity",
+      "weighting": "soft_high_porosity",
+      "window_size": [
+        5,
+        5,
+        3
+      ],
+      "order": 6,
+      "passed": true,
+      "parameter_id": "soft_high_porosity_width_0.04",
+      "weight_config": {
+        "id": "soft_high_porosity_width_0.04",
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.04,
+        "soft_weight_strength": 0.8
+      },
+      "algorithm": "Weighted moment",
+      "count": 75,
+      "failed_count": 0,
+      "max_abs_error": 2.3822801641527197e-22,
+      "max_relative_error": 1.100968551168264e-13,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 75,
+        "weight_sum_max_abs_error": 4.973799150320701e-14,
+        "weight_squared_sum_max_abs_error": 4.263256414560601e-14,
+        "effective_sample_size_max_abs_error": 8.526512829121202e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_sensitivity_soft_high_porosity_width_0.04_w5x5x3_kappa6_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_sensitivity_soft_high_porosity_width_0.04_w5x5x3_kappa6_weighted\\kappa6.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_sensitivity_soft_high_porosity_width_0.04_w5x5x3_kappa6_weighted\\kappa6.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_sensitivity_soft_high_porosity_width_0.04_w5x5x3_kappa6_weighted\\kappa6.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "66bbac9dde7fad4b173752fb2173e6195d32c84d03ac69c94f15f56bc1e2e347",
+        "output_sha256": "931457236c115d3fc47f8e6a754a8f3311dad26a46e62e0d2ff6cce1b243b949",
+        "metadata_sha256": "7ed346f6f7aab814249d0ba46ceead24570ede36062afa487bc76a07de479e03",
+        "stdout_sha256": "ba838ce32d69beee15db90dad5c8fe0ecd6061de551a87461d11acf629cf081b",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "7756521fe7c68698498fb69bbd3b7c2780142cebce06b7116e4ca54d5ba7d98e"
+      }
+    },
+    {
+      "parameter_role": "sensitivity",
+      "weighting": "soft_high_porosity",
+      "window_size": [
+        5,
+        5,
+        3
+      ],
+      "order": 6,
+      "passed": true,
+      "parameter_id": "soft_high_porosity_strength_0.60",
+      "weight_config": {
+        "id": "soft_high_porosity_strength_0.60",
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.02,
+        "soft_weight_strength": 0.6
+      },
+      "algorithm": "Weighted moment",
+      "count": 75,
+      "failed_count": 0,
+      "max_abs_error": 3.077111878697263e-22,
+      "max_relative_error": 1.760921212382302e-12,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 75,
+        "weight_sum_max_abs_error": 4.263256414560601e-14,
+        "weight_squared_sum_max_abs_error": 4.263256414560601e-14,
+        "effective_sample_size_max_abs_error": 1.1368683772161603e-13
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_sensitivity_soft_high_porosity_strength_0.60_w5x5x3_kappa6_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_sensitivity_soft_high_porosity_strength_0.60_w5x5x3_kappa6_weighted\\kappa6.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_sensitivity_soft_high_porosity_strength_0.60_w5x5x3_kappa6_weighted\\kappa6.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_sensitivity_soft_high_porosity_strength_0.60_w5x5x3_kappa6_weighted\\kappa6.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "54f5dd66bf3884b5300e3764e87ad7c5b8fadc0031fdec8ead321cc58ebe4124",
+        "output_sha256": "e56c3952d8494c2b884d4820c051a7afc5d34d7d7ec18cd22af55e1e90d6c249",
+        "metadata_sha256": "0cdf2ed0393db66ccd0f42d1152db55134de1c3ae2ebc657c747101fb0896664",
+        "stdout_sha256": "463d1ffb59e16f5d2488889f4010524f909b608bbf6eeb5a3fbea91b38bdbbcc",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "a4e29aca769bcde7dd142c8632246ee3de8d2b65923d14d827bc584202174f19"
+      }
+    },
+    {
+      "parameter_role": "sensitivity",
+      "weighting": "soft_high_porosity",
+      "window_size": [
+        5,
+        5,
+        3
+      ],
+      "order": 6,
+      "passed": true,
+      "parameter_id": "soft_high_porosity_strength_1.00",
+      "weight_config": {
+        "id": "soft_high_porosity_strength_1.00",
+        "mode": "soft_high_porosity",
+        "high_porosity_threshold": 0.25,
+        "soft_transition_width": 0.02,
+        "soft_weight_strength": 1.0
+      },
+      "algorithm": "Weighted moment",
+      "count": 75,
+      "failed_count": 0,
+      "max_abs_error": 1.9521462456251453e-22,
+      "max_relative_error": 1.9458031419474014e-13,
+      "formula_version": "2026-10-10.v2",
+      "formula_version_matches": true,
+      "cumulant_centering": "weighted_window_mean",
+      "cumulant_centering_version": "order_ge_2.v1",
+      "cumulant_centering_matches": true,
+      "sidecar": {
+        "passed": true,
+        "coordinate_validation": "PASS",
+        "sidecar_node_count": 75,
+        "weight_sum_max_abs_error": 4.973799150320701e-14,
+        "weight_squared_sum_max_abs_error": 4.973799150320701e-14,
+        "effective_sample_size_max_abs_error": 8.526512829121202e-14
+      },
+      "cli_config": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\configs\\fixture_sensitivity_soft_high_porosity_strength_1.00_w5x5x3_kappa6_weighted.ini",
+      "cli_output": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_sensitivity_soft_high_porosity_strength_1.00_w5x5x3_kappa6_weighted\\kappa6.txt",
+      "cli_metadata": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_sensitivity_soft_high_porosity_strength_1.00_w5x5x3_kappa6_weighted\\kappa6.meta.txt",
+      "cli_sidecar": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\cpp_python_fixture_matrix\\maps\\cpp\\fixture_sensitivity_soft_high_porosity_strength_1.00_w5x5x3_kappa6_weighted\\kappa6.window_support.csv",
+      "artifacts": {
+        "ini_sha256": "a7aa7e98ff9516de6250d5c2ac9e82b71594cb9a7fc156c034fc3bb6d00e0dde",
+        "output_sha256": "7e0fe106ca71096cfa0c02cee0ea705c651c8b3e6b7d01b34cc4aa3443611e63",
+        "metadata_sha256": "00d4d47054a960696ce24b68a26c1ac6a9a74f1de98aa2fbfd3109b5a0b85070",
+        "stdout_sha256": "0bf91375e14a0a8940a406f164f51c2ba136722bb2edd44c4db0e85411935afb",
+        "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "window_support_sha256": "edbdb5ad8b9a576187425bde94f957e59fbf343686d349ff7121a62f9f4db195"
+      }
+    }
+  ]
+}

@@ -3,7 +3,6 @@
 #include <algorithm>
 #include <cmath>
 #include <GsTLAppli/geostat/parameters_handler.h>
-#include <GsTLAppli/geostat/parameters_handler_impl.h>
 #include <GsTLAppli/utils/string_manipulation.h>
 #include <GsTLAppli/utils/error_messages_handler.h>
 #include <GsTLAppli/utils/gstl_plugins.h>
@@ -27,6 +26,7 @@
 #include <ctype.h>
 #include <direct.h>
 #include <exception>
+#include <errno.h>
 #include <limits.h>
 #include <new>
 #include <stdarg.h>
@@ -34,13 +34,29 @@
 #include <fstream>
 #include <time.h>
 #include <excpt.h>
+#include <windows.h>
+// Windows headers define `interface` as a macro for COM declarations.  The
+// legacy SGeMS API has a real `interface()` member function, so preserve that
+// C++ identifier after obtaining the Win32 process/thread APIs.
+#ifdef interface
+#undef interface
+#endif
 
 #include "Plugin.h"
 #include "PCA.h"
+#include "../../shared/ValidationFeedback.h"
 
 namespace wmc = weighted_moment_core;
 
 namespace {
+static volatile LONG hosc_window_trace_sequence = 0;
+static volatile LONG hosc_window_run_sequence = 0;
+
+unsigned long next_hosc_window_run_sequence()
+{
+	return (unsigned long)InterlockedIncrement(&hosc_window_run_sequence);
+}
+
 std::string parameter_value_compat(const Parameters_handler* parameters, const char* name)
 {
     if(parameters == NULL || name == NULL)
@@ -48,48 +64,10 @@ std::string parameter_value_compat(const Parameters_handler* parameters, const c
         return std::string();
     }
 
-
-
-
-
-
-    struct Parameters_handler_xml_layout
-    {
-        void* vptr;
-        long references;
-        bool is_ready;
-        unsigned char padding[3];
-        QDomDocument document;
-        QDomElement root;
-    };
-
-    const Parameters_handler_xml_layout* xml =
-        reinterpret_cast<const Parameters_handler_xml_layout*>(parameters);
-    const char* dot = strchr(name, '.');
-    if(dot == NULL || dot == name || dot[1] == '\0')
-    {
-        return std::string();
-    }
-
-    char element_name[128];
-    const size_t element_length = (size_t)(dot - name);
-    if(element_length >= sizeof(element_name))
-    {
-        return std::string();
-    }
-    memcpy(element_name, name, element_length);
-    element_name[element_length] = '\0';
-
-    const QDomNodeList nodes =
-        xml->document.elementsByTagName(QString(element_name));
-    if(nodes.count() <= 0 || !nodes.item(0).isElement())
-    {
-        return std::string();
-    }
-    const QDomElement element = nodes.item(0).toElement();
-    const QString value = element.attribute(QString(dot + 1));
-    const char* latin = value.latin1();
-    return latin == NULL ? std::string() : std::string(latin);
+    // Parameters_handler is the stable host boundary.  Accessing the XML
+    // implementation's Qt DOM members directly tied this plugin to a private
+    // object layout and required unavailable Qt headers.
+    return parameters->value(std::string(name));
 }
 
 void append_hosc_window_trace(const char* message)
@@ -99,7 +77,14 @@ void append_hosc_window_trace(const char* message)
     {
         return;
     }
-    fprintf(trace, "%ld %s\n", (long)time(NULL), message == NULL ? "" : message);
+	fprintf(
+		trace,
+		"%ld pid=%lu tid=%lu trace_sequence=%ld %s\n",
+		(long)time(NULL),
+		(unsigned long)GetCurrentProcessId(),
+		(unsigned long)GetCurrentThreadId(),
+		(long)InterlockedIncrement(&hosc_window_trace_sequence),
+		message == NULL ? "" : message);
     fclose(trace);
 }
 
@@ -116,6 +101,18 @@ void append_hosc_window_tracef(const char* format, ...)
     buffer[sizeof(buffer) - 1] = '\0';
     va_end(args);
     append_hosc_window_trace(buffer);
+}
+
+void append_hosc_window_instance_trace(
+	const void* instance,
+	unsigned long run_sequence,
+	const char* stage)
+{
+	append_hosc_window_tracef(
+		"run_sequence=%lu instance=%p stage=%s",
+		run_sequence,
+		instance,
+		stage == NULL ? "" : stage);
 }
 
 std::string normalize_algorithm_text(const std::string& text)
@@ -154,6 +151,84 @@ bool parse_bool_text(const std::string& text, bool fallback)
         return false;
     }
     return fallback;
+}
+
+bool parse_strict_bool_text(const std::string& text, bool* value)
+{
+    if(value == NULL)
+    {
+        return false;
+    }
+    const std::string normalized = normalize_algorithm_text(text);
+    if(normalized == "1" || normalized == "true" || normalized == "yes" ||
+       normalized == "on" || normalized == "checked" || normalized == "enable" ||
+       normalized == "enabled")
+    {
+        *value = true;
+        return true;
+    }
+    if(normalized == "0" || normalized == "false" || normalized == "no" ||
+       normalized == "off" || normalized == "unchecked" || normalized == "disable" ||
+       normalized == "disabled")
+    {
+        *value = false;
+        return true;
+    }
+    return false;
+}
+
+bool parse_strict_double_text(const std::string& text, double* value)
+{
+    const char* start = text.c_str();
+    char* end = NULL;
+    double parsed = 0.0;
+    if(value == NULL || start == NULL || *start == '\0')
+    {
+        return false;
+    }
+    errno = 0;
+    parsed = strtod(start, &end);
+    if(end == start || errno == ERANGE || !wmc::is_finite_number(parsed))
+    {
+        return false;
+    }
+    while(end != NULL && *end != '\0' && isspace((unsigned char)*end))
+    {
+        ++end;
+    }
+    if(end == NULL || *end != '\0')
+    {
+        return false;
+    }
+    *value = parsed;
+    return true;
+}
+
+bool parse_strict_int_text(const std::string& text, int* value)
+{
+    const char* start = text.c_str();
+    char* end = NULL;
+    long parsed = 0;
+    if(value == NULL || start == NULL || *start == '\0')
+    {
+        return false;
+    }
+    errno = 0;
+    parsed = strtol(start, &end, 10);
+    if(end == start || errno == ERANGE || parsed < INT_MIN || parsed > INT_MAX)
+    {
+        return false;
+    }
+    while(end != NULL && *end != '\0' && isspace((unsigned char)*end))
+    {
+        ++end;
+    }
+    if(end == NULL || *end != '\0')
+    {
+        return false;
+    }
+    *value = (int)parsed;
+    return true;
 }
 
 double clamp_double_value(double value, double lower, double upper)
@@ -195,18 +270,30 @@ double percentile_value(std::vector<double> values, double percentile)
     return values[lower_index] * (1.0 - fraction) + values[upper_index] * fraction;
 }
 
-wmc::WeightMode parse_weight_mode_text(const std::string& text)
+bool parse_weight_mode_text(const std::string& text, wmc::WeightMode* mode)
 {
     const std::string normalized = normalize_algorithm_text(text);
+    if(mode == NULL)
+    {
+        return false;
+    }
+    if(normalized == "uniform")
+    {
+        *mode = wmc::WeightMode_Uniform;
+        return true;
+    }
     if(normalized == "coordinate_gaussian" || normalized == "coordinate gaussian" || normalized == "spatial_gaussian" || normalized == "spatial gaussian" || normalized == "coordinate" || normalized == "coord" || normalized == "coord_gauss")
     {
-        return wmc::WeightMode_CoordinateGaussian;
+        *mode = wmc::WeightMode_CoordinateGaussian;
+        return true;
     }
-    if(normalized == "value_gaussian" || normalized == "value gaussian" || normalized == "value" || normalized == "value_gauss")
+    if(normalized == "soft_high_porosity" || normalized == "soft high porosity" ||
+       normalized == "soft_high" || normalized == "soft")
     {
-        return wmc::WeightMode_ValueGaussian;
+        *mode = wmc::WeightMode_SoftHighPorosity;
+        return true;
     }
-    return wmc::WeightMode_Uniform;
+    return false;
 }
 
 std::string sanitize_grid_name_base(const std::string& raw)
@@ -330,7 +417,7 @@ const char* weight_name_token(wmc::WeightMode mode)
     switch(mode)
     {
     case wmc::WeightMode_CoordinateGaussian: return "WCG";
-    case wmc::WeightMode_ValueGaussian: return "WVG";
+    case wmc::WeightMode_SoftHighPorosity: return "WSH";
     case wmc::WeightMode_Uniform:
     default:
         return "WU";
@@ -412,6 +499,31 @@ bool safe_get_weighted_moment_options(HOSC_WINDOW* self, const Parameters_handle
     }
 }
 
+bool safe_get_windows_moment(HOSC_WINDOW* self, const Parameters_handler* parameters, Error_messages_handler* error_mesgs, unsigned long* exception_code)
+{
+    if(exception_code != NULL)
+    {
+        *exception_code = 0;
+    }
+    __try
+    {
+        append_hosc_window_trace("safe_get_Windows_Moment.before_call");
+        const bool ok = self->get_Windows_Moment(parameters, error_mesgs);
+        append_hosc_window_tracef("safe_get_Windows_Moment.after_call ok=%d", ok ? 1 : 0);
+        return ok;
+    }
+    __except(EXCEPTION_EXECUTE_HANDLER)
+    {
+        const unsigned long code = (unsigned long)GetExceptionCode;
+        if(exception_code != NULL)
+        {
+            *exception_code = code;
+        }
+        append_hosc_window_tracef("safe_get_Windows_Moment.exception code=0x%08lx", code);
+        return false;
+    }
+}
+
 int safe_calculate_moment_window(HOSC_WINDOW* self, unsigned long* exception_code)
 {
     if(exception_code != NULL)
@@ -422,13 +534,12 @@ int safe_calculate_moment_window(HOSC_WINDOW* self, unsigned long* exception_cod
     {
         return self->calculateMomentWindow();
     }
-    __except(EXCEPTION_EXECUTE_HANDLER)
+    // A structured exception can follow heap corruption.  Do not turn it into
+    // a normal plugin failure and leave the host process running.  The audit
+    // directory remains in its last durable state (normally "started") for
+    // the debugger/PDB-assisted investigation.
+    __except(EXCEPTION_CONTINUE_SEARCH)
     {
-        if(exception_code != NULL)
-        {
-            *exception_code = 1;
-        }
-        append_hosc_window_trace("safe_calculateMomentWindow.exception");
         return -1;
     }
 }
@@ -587,6 +698,250 @@ double calculate_window_moment_from_samples(const std::vector<double>& samples, 
     return (double)(sum / (long double)samples.size());
 }
 
+bool calculate_window_avl_cumulant_from_samples(const std::vector<double>& samples, int order, double* result);
+
+bool calculate_window_cumulant_from_samples(
+	const std::vector<double>& samples, int order, Algorithm algorithm, double* result)
+{
+	if(result == NULL)
+	{
+		return false;
+	}
+	if(algorithm == Bell)
+	{
+		*result = calculate_window_bell_cumulant_from_samples(samples, order);
+		return wmc::is_finite_number(*result);
+	}
+	return calculate_window_avl_cumulant_from_samples(samples, order, result);
+}
+
+std::vector<double> centered_unweighted_samples(const std::vector<double>& samples)
+{
+	std::vector<double> centered(samples);
+	long double sum = 0.0;
+	if(samples.empty())
+	{
+		return centered;
+	}
+	for(size_t i = 0; i < samples.size(); i++)
+	{
+		sum += (long double)samples[i];
+	}
+	const double mean = (double)(sum / (long double)samples.size());
+	for(size_t i = 0; i < centered.size(); i++)
+	{
+		centered[i] -= mean;
+	}
+	return centered;
+}
+
+bool is_float_representable(double value)
+{
+	const double limit = (double)std::numeric_limits<float>::max();
+	return wmc::is_finite_number(value) && value >= -limit && value <= limit;
+}
+
+const char* const HOSC_WINDOW_BUILD_ID = "hosc_window_20261020_r7_repeat_diagnostic";
+
+bool create_window_audit_directory(
+	const std::string& base_directory,
+	unsigned long process_id,
+	unsigned long run_sequence,
+	std::string* run_directory)
+{
+	if(run_directory == NULL || base_directory.empty())
+	{
+		return false;
+	}
+	if(_mkdir(base_directory.c_str()) != 0 && errno != EEXIST)
+	{
+		return false;
+	}
+	char suffix[160];
+	const long now = (long)time(NULL);
+	const unsigned long tick = (unsigned long)clock();
+	_snprintf(
+		suffix,
+		sizeof(suffix) - 1,
+		"HOSC_WINDOW_%ld_pid%lu_seq%lu_tick%lu",
+		now,
+		process_id,
+		run_sequence,
+		tick);
+	suffix[sizeof(suffix) - 1] = '\0';
+	*run_directory = base_directory;
+	if(!run_directory->empty() && (*run_directory)[run_directory->size() - 1] != '\\' && (*run_directory)[run_directory->size() - 1] != '/')
+	{
+		*run_directory += "\\";
+	}
+	*run_directory += suffix;
+	if(_mkdir(run_directory->c_str()) != 0)
+	{
+		return false;
+	}
+	return true;
+}
+
+bool write_window_audit_status(
+	const std::string& run_directory,
+	const std::string& run_id,
+	unsigned long process_id,
+	unsigned long run_sequence,
+	const char* state,
+	const char* detail)
+{
+	if(run_directory.empty() || state == NULL)
+	{
+		return false;
+	}
+	std::ofstream status((run_directory + "\\run_status.txt").c_str(), std::ios::out | std::ios::trunc);
+	if(!status)
+	{
+		return false;
+	}
+	status << "schema_version=hosc_window_run_status.v1\n";
+	status << "build_id=" << HOSC_WINDOW_BUILD_ID << "\n";
+	status << "run_id=" << run_id << "\n";
+	status << "process_id=" << process_id << "\n";
+	status << "run_sequence=" << run_sequence << "\n";
+	status << "state=" << state << "\n";
+	status << "detail=" << (detail == NULL ? "" : detail) << "\n";
+	status << "updated_epoch=" << (long)time(NULL) << "\n";
+	return status.good();
+}
+
+bool write_window_audit_sidecar(
+	const std::string& run_directory,
+	const std::string& output_name,
+	const std::string& source_grid_name,
+	const std::string& source_property_name,
+	int target,
+	Algorithm algorithm,
+	bool weighted,
+	const wmc::WeightedMomentOptions& weights,
+	bool center_cumulant,
+	bool output_standardized,
+	bool output_diagnostics,
+	bool invert_output,
+	bool enable_percentile_clipping,
+	double percentile_vmin,
+	double percentile_vmax,
+	double variance_epsilon,
+	const std::string& run_id,
+	unsigned long process_id,
+	unsigned long run_sequence,
+	int order,
+	int window_x,
+	int window_y,
+	int window_z,
+	int step_x,
+	int step_y,
+	int step_z,
+	double origin_x,
+	double origin_y,
+	double origin_z,
+	double spacing_x,
+	double spacing_y,
+	double spacing_z,
+	int out_x,
+	int out_y,
+	int out_z,
+	const std::vector<double>& values,
+	const std::vector<double>& support,
+	const std::vector<double>& ess,
+	const std::vector<double>& numeric_valid,
+	const std::vector<double>& display_valid,
+	const std::vector<double>& kappa2,
+	const std::vector<double>& lambda,
+	const std::vector<double>& lambda_valid)
+{
+	if(run_directory.empty())
+	{
+		return false;
+	}
+	std::ofstream config((run_directory + "\\resolved_config.txt").c_str(), std::ios::out | std::ios::trunc);
+	if(!config)
+	{
+		return false;
+	}
+	config.precision(17);
+	config << "schema_version=hosc_window_audit.v3\n";
+	config << "build_id=" << HOSC_WINDOW_BUILD_ID << "\n";
+	config << "run_id=" << run_id << "\n";
+	config << "process_id=" << process_id << "\n";
+	config << "run_sequence=" << run_sequence << "\n";
+	config << "weighting_formula_version=" << wmc::weighting_formula_version() << "\n";
+	config << "source_grid=" << source_grid_name << "\n";
+	config << "source_property=" << source_property_name << "\n";
+	config << "output_property=" << output_name << "\n";
+	config << "target=" << (target == 4 ? "Cumulant" : "Moment") << "\n";
+	config << "unweighted_algorithm=" << (algorithm == Bell ? "Bell" : "AVL") << "\n";
+	config << "weighted_route=" << (weighted ? "shared_weighted_recurrence" : "none") << "\n";
+	config << "weight_mode=" << wmc::weight_mode_name(weights.mode) << "\n";
+	config << "normalize_weights=" << (weights.normalize_weights ? "true" : "false") << "\n";
+	config << "weight_bandwidth=" << weights.bandwidth << "\n";
+	config << "coordinate_center_mode=" << (weights.mode == wmc::WeightMode_CoordinateGaussian ? "window_center" : "not_applicable") << "\n";
+	config << "high_porosity_threshold=" << weights.high_porosity_threshold << "\n";
+	config << "soft_transition_width=" << weights.soft_transition_width << "\n";
+	config << "soft_weight_strength=" << weights.soft_weight_strength << "\n";
+	config << "min_weight=" << weights.min_weight << "\n";
+	config << "zero_first_order_moment=" << (weights.zero_first_order_moment ? "true" : "false") << "\n";
+	config << "center_cumulant_input_for_order_ge_2=" << (center_cumulant ? "true" : "false") << "\n";
+	config << "output_standardized_cumulant=" << (output_standardized ? "true" : "false") << "\n";
+	config << "output_diagnostics=" << (output_diagnostics ? "true" : "false") << "\n";
+	config << "invert_window_output=" << (invert_output ? "true" : "false") << "\n";
+	config << "enable_percentile_clipping=" << (enable_percentile_clipping ? "true" : "false") << "\n";
+	config << "percentile_vmin=" << percentile_vmin << "\n";
+	config << "percentile_vmax=" << percentile_vmax << "\n";
+	config << "variance_epsilon=" << variance_epsilon << "\n";
+	config << "moment_order=" << order << "\n";
+	config << "window=" << window_x << "," << window_y << "," << window_z << "\n";
+	config << "step=" << step_x << "," << step_y << "," << step_z << "\n";
+	config << "source_origin=" << origin_x << "," << origin_y << "," << origin_z << "\n";
+	config << "source_spacing=" << spacing_x << "," << spacing_y << "," << spacing_z << "\n";
+	config << "output_dimensions=" << out_x << "," << out_y << "," << out_z << "\n";
+	config.close();
+
+	std::ofstream rows((run_directory + "\\window_results.csv").c_str(), std::ios::out | std::ios::trunc);
+	if(!rows)
+	{
+		return false;
+	}
+	rows.precision(17);
+	rows << "node_id,start_x,start_y,start_z,center_x,center_y,center_z,raw_value,kappa2,lambda,support,ess,numeric_valid,lambda_requested,lambda_valid,display_valid,reason\n";
+	const size_t row_count = values.size();
+	for(size_t index = 0; index < row_count; ++index)
+	{
+		const int node = (int)index;
+		const int ox = node % out_x;
+		const int oy = (node / out_x) % out_y;
+		const int oz = node / (out_x * out_y);
+		const int start_x = ox * step_x;
+		const int start_y = oy * step_y;
+		const int start_z = oz * step_z;
+		const double center_x = origin_x + ((double)start_x + 0.5 * (double)(window_x - 1)) * spacing_x;
+		const double center_y = origin_y + ((double)start_y + 0.5 * (double)(window_y - 1)) * spacing_y;
+		const double center_z = origin_z + ((double)start_z + 0.5 * (double)(window_z - 1)) * spacing_z;
+		const bool numeric = index < numeric_valid.size() && numeric_valid[index] != 0.0;
+		const bool displayed = index < display_valid.size() && display_valid[index] != 0.0;
+		const bool standardized = index < lambda_valid.size() && lambda_valid[index] != 0.0;
+		const bool lambda_requested = output_standardized && target == 4;
+		const char* reason = !numeric ? "incomplete_or_invalid_support" :
+			(!displayed ? "float_overflow" :
+			 (!lambda_requested ? "lambda_not_requested" :
+			  (!standardized ? "variance_below_epsilon_or_lambda_nonfinite" : "ok")));
+		rows << node << "," << start_x << "," << start_y << "," << start_z << ","
+			 << center_x << "," << center_y << "," << center_z << ","
+			 << values[index] << ","
+			 << (index < kappa2.size() ? kappa2[index] : 0.0) << ","
+			 << (index < lambda.size() ? lambda[index] : 0.0) << ","
+			 << (index < support.size() ? support[index] : 0.0) << ","
+			 << (index < ess.size() ? ess[index] : 0.0) << ","
+			 << (numeric ? 1 : 0) << "," << (lambda_requested ? 1 : 0) << "," << (standardized ? 1 : 0) << "," << (displayed ? 1 : 0) << "," << reason << "\n";
+	}
+	return rows.good();
+}
+
 void reset_window_moment_workspace()
 {
     if(G_Moment != NULL)
@@ -716,12 +1071,14 @@ bool is_effective_2d_grid(const RGrid* grid_obj)
     {
         return true;
     }
-    return grid_obj->nx() <= 1 || grid_obj->ny() <= 1 || grid_obj->nz() <= 1;
+	return grid_obj->nz() <= 1;
 }
 
 bool is_effective_2d_dims(int nx, int ny, int nz)
 {
-    return nx <= 1 || ny <= 1 || nz <= 1;
+	(void)nx;
+	(void)ny;
+	return nz <= 1;
 }
 
 int round_grid_coordinate(double value)
@@ -826,7 +1183,6 @@ bool write_sgems_pointset_file(
 
 HOSC_WINDOW::HOSC_WINDOW()
 {
-	append_hosc_window_trace("HOSC_WINDOW.ctor build=movewindow_full_window_cartesian_20260726");
     source_grid_ = 0;
 	source_rgrid_ = 0;
     source_x = 0;
@@ -840,6 +1196,8 @@ HOSC_WINDOW::HOSC_WINDOW()
 	source_nx_ = 0;
 	source_ny_ = 0;
 	source_nz_ = 0;
+	source_grid_name_.clear();
+	source_property_name_.clear();
 	source_min_x_ = 1;
 	source_min_y_ = 1;
 	source_min_z_ = 1;
@@ -863,24 +1221,37 @@ HOSC_WINDOW::HOSC_WINDOW()
 	stepZ = 0;
 	invertWindowOutput = false;
 	enablePercentileClipping = false;
+	outputDiagnostics = true;
+	centerCumulantInputForOrderGE2 = true;
+	outputStandardizedCumulant = false;
+	writeAuditSidecar = false;
 	percentileClipMin = 2.0;
 	percentileClipMax = 98.0;
+	varianceEpsilon = 1.0e-12;
+	auditOutputDirectory.clear();
+	auditRunDirectory.clear();
+	runId_.clear();
+	processId_ = (unsigned long)GetCurrentProcessId();
+	runSequence_ = 0;
 	useWeightedMoment = false;
+	coordinateWeightUsesWindowCenter = true;
 	weightedOptions = wmc::WeightedMomentOptions();
 
 	G_CalculateTarget = -1;
 	G_TargetDimension = 0;
-
-
-
-
+	append_hosc_window_tracef(
+		"HOSC_WINDOW.ctor build=%s instance=%p",
+		HOSC_WINDOW_BUILD_ID,
+		this);
 }
 
 HOSC_WINDOW::~HOSC_WINDOW()
 {
+	append_hosc_window_instance_trace(this, runSequence_, "dtor.body.begin");
 	append_hosc_window_tracef(
-		"HOSC_WINDOW.dtor.begin this=%p grid=%p rows=%d source_grid=%p auto_grid=%p auto_property=%p",
+		"HOSC_WINDOW.dtor.resources instance=%p run_sequence=%lu grid=%p rows=%d source_grid=%p auto_grid=%p auto_property=%p",
 		this,
+		runSequence_,
 		grid,
 		grid_alloc_rows_,
 		source_grid_,
@@ -901,7 +1272,7 @@ HOSC_WINDOW::~HOSC_WINDOW()
 	auto_grid_registered_ = false;
 	current_project_ = NULL;
 	Key = NULL;
-	append_hosc_window_tracef("HOSC_WINDOW.dtor.end this=%p", this);
+	append_hosc_window_instance_trace(this, runSequence_, "dtor.body.end.members_and_base_destruction_next");
 }
 
 std::string HOSC_WINDOW::build_output_grid_base_name(const GridShape* tempGridShape, bool pointset) const
@@ -915,9 +1286,9 @@ std::string HOSC_WINDOW::build_output_grid_base_name(const GridShape* tempGridSh
 		{
 			weight_token = 'C';
 		}
-		else if(weightedOptions.mode == wmc::WeightMode_ValueGaussian)
+		else if(weightedOptions.mode == wmc::WeightMode_SoftHighPorosity)
 		{
-			weight_token = 'V';
+			weight_token = 'S';
 		}
 		else
 		{
@@ -974,9 +1345,25 @@ void HOSC_WINDOW::release_source_grid_cache()
 bool HOSC_WINDOW::initialize( const Parameters_handler* parameters,
 							   Error_messages_handler* error_mesgs )
 {
+	hosc_validation::FeedbackGuard feedback(error_mesgs, "hosc_window_validation_summary");
+	processId_ = (unsigned long)GetCurrentProcessId();
+	runSequence_ = next_hosc_window_run_sequence();
+	char run_id_buffer[96];
+	_snprintf(
+		run_id_buffer,
+		sizeof(run_id_buffer) - 1,
+		"pid%lu_seq%lu",
+		processId_,
+		runSequence_);
+	run_id_buffer[sizeof(run_id_buffer) - 1] = '\0';
+	runId_ = run_id_buffer;
+	append_hosc_window_instance_trace(this, runSequence_, "initialize.begin");
 	GsTLlog << "HOSC_WINDOW initialize start" << gstlIO::end;
-	append_hosc_window_trace("initialize.begin");
-	get_Calculate_Target(parameters, error_mesgs);
+	if(!get_Calculate_Target(parameters, error_mesgs))
+	{
+		append_hosc_window_trace("initialize.fail target");
+		return false;
+	}
 	append_hosc_window_tracef("initialize.after_target target=%d", G_CalculateTarget);
 	if(!get_Calculate_Algorithm(parameters, error_mesgs))
 	{
@@ -1006,7 +1393,9 @@ bool HOSC_WINDOW::initialize( const Parameters_handler* parameters,
         return false;
 	}
 	append_hosc_window_trace("initialize.after_source_data");
+	append_hosc_window_instance_trace(this, runSequence_, "source_ready.host_log.begin");
 	GsTLlog << "HOSC_WINDOW source ready: nx=" << source_nx_ << ", ny=" << source_ny_ << ", nz=" << source_nz_ << gstlIO::end;
+	append_hosc_window_instance_trace(this, runSequence_, "source_ready.host_log.end");
 	append_hosc_window_tracef(
 		"initialize.source_ready nx=%d ny=%d nz=%d nxyz=%d raw_nxyz=%d grid=%p source_val=%p",
 		source_nx_,
@@ -1027,12 +1416,35 @@ bool HOSC_WINDOW::initialize( const Parameters_handler* parameters,
 
 
 
-	if( !get_Windows_Moment(parameters, error_mesgs))
+	append_hosc_window_instance_trace(this, runSequence_, "window_params.call.begin");
+	unsigned long window_parameters_exception = 0;
+	const bool window_parameters_ok = safe_get_windows_moment(
+		this,
+		parameters,
+		error_mesgs,
+		&window_parameters_exception);
+	append_hosc_window_tracef(
+		"run_sequence=%lu instance=%p stage=window_params.call.returned ok=%d exception=0x%08lx",
+		runSequence_,
+		this,
+		window_parameters_ok ? 1 : 0,
+		window_parameters_exception);
+	if(!window_parameters_ok)
 	{
 		append_hosc_window_trace("initialize.fail windows_moment");
 		return false;
 	}
+	if(error_mesgs == NULL)
+	{
+		append_hosc_window_trace("initialize.fail error_messages_null");
+		return false;
+	}
+	append_hosc_window_tracef(
+		"initialize.after_window_params error_messages_empty=%d",
+		error_mesgs->empty() ? 1 : 0);
+	append_hosc_window_instance_trace(this, runSequence_, "window_ready.host_log.begin");
 	GsTLlog << "HOSC_WINDOW window ready: wx=" << momentWindowL << ", wy=" << momentWindowW << ", wz=" << momentWindowH << ", order=" << momentOrder << ", out_nx=" << myWindowShape.nx << ", out_ny=" << myWindowShape.ny << ", out_nz=" << myWindowShape.nz << gstlIO::end;
+	append_hosc_window_instance_trace(this, runSequence_, "window_ready.host_log.end");
 	append_hosc_window_tracef(
 		"initialize.window_ready order=%d window=%d,%d,%d step=%d,%d,%d out=%d,%d,%d",
 		momentOrder,
@@ -1094,6 +1506,16 @@ int HOSC_WINDOW::execute( GsTL_project* proj )
 	{
 
 		append_hosc_window_trace("execute.fail grid_null");
+		if(writeAuditSidecar && !auditRunDirectory.empty())
+		{
+			write_window_audit_status(
+				auditRunDirectory,
+				runId_,
+				processId_,
+				runSequence_,
+				"failed",
+				"execute_grid_null");
+		}
 		return 1;
 	}
 
@@ -1123,6 +1545,16 @@ int HOSC_WINDOW::execute( GsTL_project* proj )
 		{
 			GsTLcerr << "failed to calculate moment window" << gstlIO::end;
 			append_hosc_window_tracef("execute.fail calculateMomentWindow exception=0x%08lx", calc_exception);
+			if(writeAuditSidecar && !auditRunDirectory.empty())
+			{
+				write_window_audit_status(
+					auditRunDirectory,
+					runId_,
+					processId_,
+					runSequence_,
+					"failed",
+					"calculate_moment_window_failed");
+			}
 			return -1;
 		}
 		if(current_project_ != NULL && !auto_grid_name_.empty() && !auto_grid_registered_)
@@ -1139,26 +1571,6 @@ int HOSC_WINDOW::execute( GsTL_project* proj )
 			}
 		}
 		append_hosc_window_trace("execute.after_calculateMomentWindow");
-		 FILE* file = fopen("tempData.txt", "w");
-		if(file == NULL)
-		{
-			append_hosc_window_trace("execute.warn tempData_open_failed");
-			return 0;
-		}
-		fprintf(file, "Order%d\n", momentOrder);
-		fprintf(file, "%d\n", 5);
-		fprintf(file, "index\n");
-		fprintf(file, "x\ny\nz\nvalue\n");
-		for(int i = 0; i < auto_grid_->size(); i++)
-		{
-			fprintf(file, "%d    ", i);
-			Geostat_grid::location_type loc = auto_grid_->location(i);
-			fprintf(file, "%.15lf    ", (double)loc.x());
-			fprintf(file, "%.15lf    ", (double)loc.y());
-			fprintf(file, "%.15lf    ", (double)loc.z());
-			fprintf(file, "%.15lf\n", (double)auto_property_->get_value(i));
-		}
-		fclose(file);
 	}
 
 	append_hosc_window_trace("execute.end success");
@@ -1179,6 +1591,8 @@ bool HOSC_WINDOW::get_Source_Data(const Parameters_handler* parameters,
     source_nx_ = 0;
     source_ny_ = 0;
     source_nz_ = 0;
+	source_grid_name_.clear();
+	source_property_name_.clear();
     source_min_x_ = 1;
     source_min_y_ = 1;
     source_min_z_ = 1;
@@ -1203,7 +1617,8 @@ bool HOSC_WINDOW::get_Source_Data(const Parameters_handler* parameters,
                             gridModels_manager + "/" + grid_name);
     source_grid_ = dynamic_cast<Geostat_grid*>(source_ni.raw_ptr());
     source_rgrid_ = dynamic_cast<RGrid*>(source_ni.raw_ptr());
-    const bool source_is_regular = source_rgrid_ != NULL;
+    Cartesian_grid* source_cartesian = dynamic_cast<Cartesian_grid*>(source_ni.raw_ptr());
+    const bool source_is_regular = source_cartesian != NULL;
     if(!source_grid_)
     {
         std::ostringstream error_stream;
@@ -1212,24 +1627,20 @@ bool HOSC_WINDOW::get_Source_Data(const Parameters_handler* parameters,
         append_hosc_window_trace("get_Source_Data.fail invalid_geostat_grid");
         return false;
     }
+	if(source_cartesian == NULL)
+	{
+		error_mesgs->report("Source_Grid", "HOSC_WINDOW requires a Cartesian_grid; point sets and irregular grids are not supported");
+		append_hosc_window_trace("get_Source_Data.fail non_cartesian_source");
+		return false;
+	}
     append_hosc_window_tracef(
         "get_Source_Data.grid class=%s is_regular=%d raw_size=%d",
         source_grid_->classname().c_str(),
         source_is_regular ? 1 : 0,
         source_grid_->size());
 
-    source_x = source_grid_->select_property("x");
-    if(source_x == NULL)
-        source_x = source_grid_->select_property("X");
-    source_y = source_grid_->select_property("y");
-    if(source_y == NULL)
-        source_y = source_grid_->select_property("Y");
-    source_z = source_grid_->select_property("z");
-    if(source_z == NULL)
-        source_z = source_grid_->select_property("Z");
-
     string prop_name = parameter_value_compat(parameters, "Source_Property.value");
-    append_hosc_window_tracef("get_Source_Data.props requested=%s has_x=%d has_y=%d has_z=%d", prop_name.c_str(), source_x != NULL, source_y != NULL, source_z != NULL);
+    append_hosc_window_tracef("get_Source_Data.props requested=%s", prop_name.c_str());
     if(prop_name.empty())
     {
         error_mesgs->report("Source_Property", "No source property specified");
@@ -1243,12 +1654,6 @@ bool HOSC_WINDOW::get_Source_Data(const Parameters_handler* parameters,
         append_hosc_window_trace("get_Source_Data.fail missing_source_value_property");
         return false;
     }
-    if(prop_name == "z" || prop_name == "Z")
-    {
-        source_z = NULL;
-        append_hosc_window_trace("get_Source_Data.info source property z treated as value column; spatial z derived from regular grid index");
-    }
-
     const int input_count = source_grid_->size();
     if(input_count <= 0)
     {
@@ -1257,15 +1662,12 @@ bool HOSC_WINDOW::get_Source_Data(const Parameters_handler* parameters,
         return false;
     }
 
-    const bool has_explicit_coords = source_x != NULL && source_y != NULL && source_z != NULL;
-	Cartesian_grid* source_cartesian = dynamic_cast<Cartesian_grid*>(source_rgrid_);
-	if(source_cartesian != NULL && !has_explicit_coords)
 	{
-		const GsTLPoint source_origin = source_cartesian->origin();
+		const Geostat_grid::location_type first_location = source_grid_->location(0);
 		const GsTLCoordVector source_spacing = source_cartesian->cell_dimensions();
-		source_origin_x_ = source_origin.x();
-		source_origin_y_ = source_origin.y();
-		source_origin_z_ = source_origin.z();
+		source_origin_x_ = first_location.x();
+		source_origin_y_ = first_location.y();
+		source_origin_z_ = first_location.z();
 		source_spacing_x_ = source_spacing.x();
 		source_spacing_y_ = source_spacing.y();
 		source_spacing_z_ = source_spacing.z();
@@ -1276,9 +1678,17 @@ bool HOSC_WINDOW::get_Source_Data(const Parameters_handler* parameters,
     int max_x = INT_MIN;
     int max_y = INT_MIN;
     int max_z = INT_MIN;
-    const int safe_raw_nx = (source_rgrid_ != NULL && source_rgrid_->nx() > 0) ? source_rgrid_->nx() : 1;
-    const int safe_raw_ny = (source_rgrid_ != NULL && source_rgrid_->ny() > 0) ? source_rgrid_->ny() : 1;
+    const int safe_raw_nx = source_cartesian->nx();
+    const int safe_raw_ny = source_cartesian->ny();
     const int raw_xy = safe_raw_nx * safe_raw_ny;
+    const int safe_raw_nz = source_cartesian->nz();
+    if(safe_raw_nx <= 0 || safe_raw_ny <= 0 || safe_raw_nz <= 0 ||
+       safe_raw_nx * safe_raw_ny * safe_raw_nz != input_count)
+    {
+        error_mesgs->report("Source_Grid", "Cartesian grid dimensions do not match its node count");
+        append_hosc_window_trace("get_Source_Data.fail inconsistent_cartesian_geometry");
+        return false;
+    }
 
     for(int i = 0; i < input_count; i++)
     {
@@ -1286,19 +1696,6 @@ bool HOSC_WINDOW::get_Source_Data(const Parameters_handler* parameters,
         int x = zero_index % safe_raw_nx + 1;
         int y = (zero_index / safe_raw_nx) % safe_raw_ny + 1;
         int z = raw_xy > 0 ? zero_index / raw_xy + 1 : 1;
-        if(!source_is_regular)
-        {
-            const Geostat_grid::location_type loc = source_grid_->location(i);
-            x = round_grid_coordinate(loc.x());
-            y = round_grid_coordinate(loc.y());
-            z = round_grid_coordinate(loc.z());
-        }
-        else if(has_explicit_coords)
-        {
-            x = (int)source_x->get_value(i);
-            y = (int)source_y->get_value(i);
-            z = (int)source_z->get_value(i);
-        }
         if(x < min_x) min_x = x;
         if(y < min_y) min_y = y;
         if(z < min_z) min_z = z;
@@ -1320,15 +1717,6 @@ bool HOSC_WINDOW::get_Source_Data(const Parameters_handler* parameters,
     source_min_x_ = min_x;
     source_min_y_ = min_y;
     source_min_z_ = min_z;
-	if(source_cartesian == NULL || has_explicit_coords)
-	{
-		source_origin_x_ = (double)min_x;
-		source_origin_y_ = (double)min_y;
-		source_origin_z_ = (double)min_z;
-		source_spacing_x_ = 1.0;
-		source_spacing_y_ = 1.0;
-		source_spacing_z_ = 1.0;
-	}
     const int dense_count = source_nx_ * source_ny_ * source_nz_;
     if(source_nx_ <= 0 || source_ny_ <= 0 || source_nz_ <= 0 || dense_count <= 0)
     {
@@ -1338,11 +1726,10 @@ bool HOSC_WINDOW::get_Source_Data(const Parameters_handler* parameters,
     }
 
     append_hosc_window_tracef(
-        "get_Source_Data.densify inferred=%d,%d,%d dense_count=%d input_count=%d min=%d,%d,%d max=%d,%d,%d explicit_coords=%d non_regular=%d",
+        "get_Source_Data.cartesian dimensions=%d,%d,%d dense_count=%d input_count=%d first_location=%.17g,%.17g,%.17g spacing=%.17g,%.17g,%.17g",
         source_nx_, source_ny_, source_nz_, dense_count, input_count,
-        min_x, min_y, min_z, max_x, max_y, max_z,
-        has_explicit_coords ? 1 : 0,
-        source_is_regular ? 0 : 1);
+        source_origin_x_, source_origin_y_, source_origin_z_,
+        source_spacing_x_, source_spacing_y_, source_spacing_z_);
 
     grid = new (std::nothrow) double*[1 + dense_count];
     if(grid == NULL)
@@ -1394,32 +1781,13 @@ bool HOSC_WINDOW::get_Source_Data(const Parameters_handler* parameters,
 			continue;
 		}
         const int zero_index = i;
-        int raw_x = zero_index % safe_raw_nx + 1;
-        int raw_y = (zero_index / safe_raw_nx) % safe_raw_ny + 1;
-        int raw_z = raw_xy > 0 ? zero_index / raw_xy + 1 : 1;
-        if(!source_is_regular)
-        {
-            const Geostat_grid::location_type loc = source_grid_->location(i);
-            raw_x = round_grid_coordinate(loc.x());
-            raw_y = round_grid_coordinate(loc.y());
-            raw_z = round_grid_coordinate(loc.z());
-        }
-        else if(has_explicit_coords)
-        {
-            raw_x = (int)source_x->get_value(i);
-            raw_y = (int)source_y->get_value(i);
-            raw_z = (int)source_z->get_value(i);
-        }
-        const int local_x = raw_x - min_x;
-        const int local_y = raw_y - min_y;
-        const int local_z = raw_z - min_z;
-        if(local_x < 0 || local_x >= source_nx_ || local_y < 0 || local_y >= source_ny_ || local_z < 0 || local_z >= source_nz_)
-        {
-            append_hosc_window_tracef("get_Source_Data.skip_oob raw=%d,%d,%d local=%d,%d,%d", raw_x, raw_y, raw_z, local_x, local_y, local_z);
-            continue;
-        }
-        const int dense_index = local_z * source_nx_ * source_ny_ + local_y * source_nx_ + local_x + 1;
-        grid[dense_index][3] = (double)source_val->get_value(i);
+		const double source_value = (double)source_val->get_value(i);
+		if(!wmc::is_finite_number(source_value))
+		{
+			continue;
+		}
+        const int dense_index = zero_index + 1;
+        grid[dense_index][3] = source_value;
         source_present_[(size_t)(dense_index - 1)] = 1;
         filled_count++;
     }
@@ -1427,6 +1795,14 @@ bool HOSC_WINDOW::get_Source_Data(const Parameters_handler* parameters,
 	{
 		error_mesgs->report("Source_Property", "Selected source property has no informed values");
 		append_hosc_window_trace("get_Source_Data.fail no_informed_values");
+		return false;
+	}
+	source_grid_name_ = grid_name;
+	source_property_name_ = prop_name;
+	if((source_nx_ == 1 || source_ny_ == 1) && source_nz_ > 1)
+	{
+		error_mesgs->report("Source_Grid", "HOSC_WINDOW currently supports XY single-layer or full 3D Cartesian grids; XZ/YZ degenerate grids are not supported");
+		append_hosc_window_tracef("get_Source_Data.fail unsupported_degenerate_axes dims=%d,%d,%d", source_nx_, source_ny_, source_nz_);
 		return false;
 	}
 
@@ -1680,7 +2056,11 @@ bool HOSC_WINDOW::get_Calculate_Target(const Parameters_handler* parameters, Err
 	else if(Calculate_Target == "Cumulant")
 		G_CalculateTarget = 4;
 	else
-		append_hosc_window_trace("get_Calculate_Target.warn unknown_target");
+	{
+		error_mesgs->report("Target_Button", "Expected Moment or Cumulant");
+		append_hosc_window_trace("get_Calculate_Target.fail unknown_target");
+		return false;
+	}
 
 	return true;
 }
@@ -1693,8 +2073,14 @@ bool HOSC_WINDOW::get_Calculate_Algorithm(const Parameters_handler* parameters, 
 	append_hosc_window_tracef("get_Calculate_Algorithm.raw_length=%d", (int)Calculate_Algorithm.size());
 	if(Calculate_Algorithm == "Bell" || Calculate_Algorithm == "bell" || Calculate_Algorithm.find("Bell") != string::npos || Calculate_Algorithm.find("bell") != string::npos)
 		al = Bell;
-	else
+	else if(Calculate_Algorithm == "AVL" || Calculate_Algorithm == "avl" || Calculate_Algorithm.find("AVL") != string::npos || Calculate_Algorithm.find("avl") != string::npos)
 		al = AVL;
+	else
+	{
+		error_mesgs->report("Algorithm_Button", "Expected Bell or AVL");
+		append_hosc_window_trace("get_Calculate_Algorithm.fail unknown_algorithm");
+		return false;
+	}
 	append_hosc_window_tracef("get_Calculate_Algorithm.parsed algorithm=%d", (int)al);
 	append_hosc_window_trace("get_Calculate_Algorithm.before_return");
 	return true;
@@ -1705,72 +2091,139 @@ bool HOSC_WINDOW::get_Weighted_Moment_Options(const Parameters_handler* paramete
 	append_hosc_window_trace("get_Weighted_Moment_Options.begin");
 	weightedOptions = wmc::WeightedMomentOptions();
 	useWeightedMoment = false;
+	coordinateWeightUsesWindowCenter = true;
 
 	string enabled = parameter_value_compat(parameters, "enable_weighted_moment.value");
 	if(enabled.empty())
 	{
 		enabled = parameter_value_compat(parameters, "Use_Weighted_Moment.value");
 	}
-	useWeightedMoment = parse_bool_text(enabled, false);
+	if(!enabled.empty() && !parse_strict_bool_text(enabled, &useWeightedMoment))
+	{
+		error_mesgs->report("enable_weighted_moment", "Expected a boolean value");
+		return false;
+	}
 
 	const string mode = parameter_value_compat(parameters, "weight_mode.value");
-	if(!mode.empty())
+	if(!mode.empty() && !parse_weight_mode_text(mode, &weightedOptions.mode))
 	{
-		weightedOptions.mode = parse_weight_mode_text(mode);
+		error_mesgs->report("weight_mode", "Supported modes are uniform, coordinate_gaussian, and soft_high_porosity");
+		return false;
+	}
+	if(!useWeightedMoment && weightedOptions.mode != wmc::WeightMode_Uniform)
+	{
+		error_mesgs->report("enable_weighted_moment", "A non-uniform weight mode requires weighted calculation to be enabled");
+		return false;
 	}
 
 	const string bandwidth = parameter_value_compat(parameters, "weight_bandwidth.value");
-	if(!bandwidth.empty())
+	if(!bandwidth.empty() && !parse_strict_double_text(bandwidth, &weightedOptions.bandwidth))
 	{
-		weightedOptions.bandwidth = atof(bandwidth.c_str());
+		error_mesgs->report("weight_bandwidth", "Expected a finite number");
+		return false;
 	}
-
-	const string reference_value = parameter_value_compat(parameters, "weight_reference_value.value");
-	if(!reference_value.empty())
+	if(weightedOptions.mode == wmc::WeightMode_CoordinateGaussian &&
+	   weightedOptions.bandwidth <= 0.0)
 	{
-		weightedOptions.reference_value = atof(reference_value.c_str());
+		error_mesgs->report("weight_bandwidth", "Coordinate Gaussian sigma must be greater than zero");
+		return false;
 	}
-
-	const string center_x = parameter_value_compat(parameters, "weight_center_x.value");
-	const string center_y = parameter_value_compat(parameters, "weight_center_y.value");
-	const string center_z = parameter_value_compat(parameters, "weight_center_z.value");
-	if(!center_x.empty()) weightedOptions.center_x = atof(center_x.c_str());
-	if(!center_y.empty()) weightedOptions.center_y = atof(center_y.c_str());
-	if(!center_z.empty()) weightedOptions.center_z = atof(center_z.c_str());
 
 	const string min_weight = parameter_value_compat(parameters, "min_weight.value");
-	if(!min_weight.empty())
+	if(!min_weight.empty() && !parse_strict_double_text(min_weight, &weightedOptions.min_weight))
 	{
-		weightedOptions.min_weight = atof(min_weight.c_str());
-	}
-
-	const string normalize = parameter_value_compat(parameters, "normalize_weights.value");
-	if(!normalize.empty())
-	{
-		weightedOptions.normalize_weights = parse_bool_text(normalize, true);
-	}
-
-	const string zero_first = parameter_value_compat(parameters, "zero_first_order_moment.value");
-	if(!zero_first.empty())
-	{
-		weightedOptions.zero_first_order_moment = parse_bool_text(zero_first, false);
-	}
-
-	if(weightedOptions.bandwidth <= 0.0)
-	{
-		append_hosc_window_trace("get_Weighted_Moment_Options.warn bandwidth<=0 reset_to_1");
-		weightedOptions.bandwidth = 1.0;
+		error_mesgs->report("min_weight", "Expected a finite number");
+		return false;
 	}
 	if(weightedOptions.min_weight < 0.0)
 	{
-		weightedOptions.min_weight = 0.0;
+		error_mesgs->report("min_weight", "Minimum weight must not be negative");
+		return false;
+	}
+
+	const string normalize = parameter_value_compat(parameters, "normalize_weights.value");
+	if(!normalize.empty() && !parse_strict_bool_text(normalize, &weightedOptions.normalize_weights))
+	{
+		error_mesgs->report("normalize_weights", "Expected a boolean value");
+		return false;
+	}
+	if(useWeightedMoment && !weightedOptions.normalize_weights)
+	{
+		error_mesgs->report("normalize_weights", "Normalized weights are required for the supported weighted statistics");
+		return false;
+	}
+
+	const string zero_first = parameter_value_compat(parameters, "zero_first_order_moment.value");
+	if(!zero_first.empty() && !parse_strict_bool_text(zero_first, &weightedOptions.zero_first_order_moment))
+	{
+		error_mesgs->report("zero_first_order_moment", "Expected a boolean value");
+		return false;
+	}
+	if(weightedOptions.zero_first_order_moment)
+	{
+		error_mesgs->report("zero_first_order_moment", "Legacy zero-first-order centering is not supported; use center_cumulant_input_for_order_ge_2 for cumulants");
+		return false;
+	}
+
+	const string center_mode = parameter_value_compat(parameters, "weight_center_mode.value");
+	if(weightedOptions.mode == wmc::WeightMode_CoordinateGaussian)
+	{
+		const string normalized_center_mode = normalize_algorithm_text(center_mode);
+		if(normalized_center_mode.empty() || normalized_center_mode == "window_center" ||
+		   normalized_center_mode == "window center")
+		{
+			coordinateWeightUsesWindowCenter = true;
+		}
+		else if(normalized_center_mode == "parameter")
+		{
+			error_mesgs->report("weight_center_mode", "Parameter center mode is not supported by the relative-window coordinate Gaussian; use window_center");
+			append_hosc_window_trace("get_Weighted_Moment_Options.fail parameter_center_rejected");
+			return false;
+		}
+		else
+		{
+			error_mesgs->report("weight_center_mode", "Expected window_center or parameter");
+			return false;
+		}
+	}
+
+	if(weightedOptions.mode == wmc::WeightMode_SoftHighPorosity)
+	{
+		const string threshold = parameter_value_compat(parameters, "high_porosity_threshold.value");
+		const string transition = parameter_value_compat(parameters, "soft_transition_width.value");
+		const string strength = parameter_value_compat(parameters, "soft_weight_strength.value");
+		if(!threshold.empty() && !parse_strict_double_text(threshold, &weightedOptions.high_porosity_threshold))
+		{
+			error_mesgs->report("high_porosity_threshold", "Expected a finite number");
+			return false;
+		}
+		if(!transition.empty() && !parse_strict_double_text(transition, &weightedOptions.soft_transition_width))
+		{
+			error_mesgs->report("soft_transition_width", "Expected a finite number");
+			return false;
+		}
+		if(!strength.empty() && !parse_strict_double_text(strength, &weightedOptions.soft_weight_strength))
+		{
+			error_mesgs->report("soft_weight_strength", "Expected a finite number");
+			return false;
+		}
+		if(weightedOptions.soft_transition_width <= 0.0 ||
+		   weightedOptions.soft_weight_strength < 0.0 ||
+		   weightedOptions.soft_weight_strength > 1.0)
+		{
+			error_mesgs->report("soft_weight_strength", "Soft weighting requires transition width > 0 and strength in [0, 1]");
+			return false;
+		}
 	}
 	append_hosc_window_tracef(
-		"get_Weighted_Moment_Options.end enabled=%d mode=%d bandwidth=%.17g reference=%.17g min=%.17g normalize=%d zero_first=%d",
+		"get_Weighted_Moment_Options.end enabled=%d mode=%d window_center=%d bandwidth=%.17g threshold=%.17g transition=%.17g strength=%.17g min=%.17g normalize=%d zero_first=%d",
 		useWeightedMoment ? 1 : 0,
 		(int)weightedOptions.mode,
+		coordinateWeightUsesWindowCenter ? 1 : 0,
 		weightedOptions.bandwidth,
-		weightedOptions.reference_value,
+		weightedOptions.high_porosity_threshold,
+		weightedOptions.soft_transition_width,
+		weightedOptions.soft_weight_strength,
 		weightedOptions.min_weight,
 		weightedOptions.normalize_weights ? 1 : 0,
 		weightedOptions.zero_first_order_moment ? 1 : 0);
@@ -1819,13 +2272,88 @@ bool HOSC_WINDOW::get_Windows_Moment(const Parameters_handler* parameters, Error
 	string sy = parameter_value_compat(parameters, "stepy.value");
 	string sz = parameter_value_compat(parameters, "stepz.value");
 	string invert_output = parameter_value_compat(parameters, "invert_window_output.value");
-	invertWindowOutput = parse_bool_text(invert_output, false);
 	string enable_clip = parameter_value_compat(parameters, "enable_percentile_clipping.value");
 	string clip_min = parameter_value_compat(parameters, "percentile_vmin.value");
 	string clip_max = parameter_value_compat(parameters, "percentile_vmax.value");
-	enablePercentileClipping = parse_bool_text(enable_clip, false);
-	percentileClipMin = clip_min.empty() ? 2.0 : atof(clip_min.c_str());
-	percentileClipMax = clip_max.empty() ? 98.0 : atof(clip_max.c_str());
+	string diagnostics = parameter_value_compat(parameters, "output_diagnostics.value");
+	string center_cumulant = parameter_value_compat(parameters, "center_cumulant_input_for_order_ge_2.value");
+	string standardized = parameter_value_compat(parameters, "output_standardized_cumulant.value");
+	string variance_epsilon = parameter_value_compat(parameters, "variance_epsilon.value");
+	string write_audit_sidecar = parameter_value_compat(parameters, "write_audit_sidecar.value");
+	string audit_output_directory = parameter_value_compat(parameters, "audit_output_directory.value");
+	invertWindowOutput = false;
+	enablePercentileClipping = false;
+	outputDiagnostics = true;
+	centerCumulantInputForOrderGE2 = true;
+	outputStandardizedCumulant = false;
+	writeAuditSidecar = false;
+	percentileClipMin = 2.0;
+	percentileClipMax = 98.0;
+	varianceEpsilon = 1.0e-12;
+	auditOutputDirectory.clear();
+	auditRunDirectory.clear();
+	if(!invert_output.empty() && !parse_strict_bool_text(invert_output, &invertWindowOutput))
+	{
+		error_mesgs->report("invert_window_output", "Expected a boolean value");
+		return false;
+	}
+	if(invertWindowOutput)
+	{
+		error_mesgs->report("invert_window_output", "Inverting the primary statistic is not supported; use the raw cumulant output");
+		return false;
+	}
+	if(!enable_clip.empty() && !parse_strict_bool_text(enable_clip, &enablePercentileClipping))
+	{
+		error_mesgs->report("enable_percentile_clipping", "Expected a boolean value");
+		return false;
+	}
+	if(!diagnostics.empty() && !parse_strict_bool_text(diagnostics, &outputDiagnostics))
+	{
+		error_mesgs->report("output_diagnostics", "Expected a boolean value");
+		return false;
+	}
+	if(!center_cumulant.empty() && !parse_strict_bool_text(center_cumulant, &centerCumulantInputForOrderGE2))
+	{
+		error_mesgs->report("center_cumulant_input_for_order_ge_2", "Expected a boolean value");
+		return false;
+	}
+	if(!standardized.empty() && !parse_strict_bool_text(standardized, &outputStandardizedCumulant))
+	{
+		error_mesgs->report("output_standardized_cumulant", "Expected a boolean value");
+		return false;
+	}
+	if(!write_audit_sidecar.empty() && !parse_strict_bool_text(write_audit_sidecar, &writeAuditSidecar))
+	{
+		error_mesgs->report("write_audit_sidecar", "Expected a boolean value");
+		return false;
+	}
+	auditOutputDirectory = audit_output_directory;
+	auditRunDirectory.clear();
+	if(writeAuditSidecar && auditOutputDirectory.empty())
+	{
+		error_mesgs->report("audit_output_directory", "An audit output directory is required when write_audit_sidecar is true");
+		return false;
+	}
+	if(!variance_epsilon.empty() && !parse_strict_double_text(variance_epsilon, &varianceEpsilon))
+	{
+		error_mesgs->report("variance_epsilon", "Expected a finite number");
+		return false;
+	}
+	if(varianceEpsilon < 0.0)
+	{
+		error_mesgs->report("variance_epsilon", "Variance epsilon must not be negative");
+		return false;
+	}
+	if(!clip_min.empty() && !parse_strict_double_text(clip_min, &percentileClipMin))
+	{
+		error_mesgs->report("percentile_vmin", "Expected a finite number");
+		return false;
+	}
+	if(!clip_max.empty() && !parse_strict_double_text(clip_max, &percentileClipMax))
+	{
+		error_mesgs->report("percentile_vmax", "Expected a finite number");
+		return false;
+	}
 	append_hosc_window_tracef(
 		"get_Windows_Moment.raw window=%s,%s,%s order=%s step=%s,%s,%s invert=%s clip=%s clip_range=%s,%s",
 		wl.c_str(), ww.c_str(), wh.c_str(), order.c_str(), sx.c_str(), sy.c_str(), sz.c_str(), invert_output.c_str(), enable_clip.c_str(), clip_min.c_str(), clip_max.c_str());
@@ -1841,15 +2369,19 @@ bool HOSC_WINDOW::get_Windows_Moment(const Parameters_handler* parameters, Error
 		return false;
 	}
 
-	int iwl = atoi(wl.c_str());
-	int iww = atoi(ww.c_str());
-	int iwh = atoi(wh.c_str());
-
-	int io = atoi(order.c_str());
-
-	stepX = atoi(sx.c_str());
-	stepY = atoi(sy.c_str());
-	stepZ = atoi(sz.c_str());
+	int iwl = 0;
+	int iww = 0;
+	int iwh = 0;
+	int io = 0;
+	if(!parse_strict_int_text(wl, &iwl) || !parse_strict_int_text(ww, &iww) ||
+	   !parse_strict_int_text(wh, &iwh) || !parse_strict_int_text(order, &io) ||
+	   !parse_strict_int_text(sx, &stepX) || !parse_strict_int_text(sy, &stepY) ||
+	   !parse_strict_int_text(sz, &stepZ))
+	{
+		error_mesgs->report("moment_order", "Window sizes, order, and move steps must be complete integers");
+		append_hosc_window_trace("get_Windows_Moment.fail non_integer_parameter");
+		return false;
+	}
 
 	if(iwl <= 0 || iww <= 0)
 	{
@@ -1877,7 +2409,7 @@ bool HOSC_WINDOW::get_Windows_Moment(const Parameters_handler* parameters, Error
 	}
 
 
-	if(source_nx_ == 1 || source_ny_ == 1 || source_nz_ == 1)
+	if(source_nz_ == 1)
 	{
 		if((iwh != 1 && iwh != 0))
 		{
@@ -1905,10 +2437,15 @@ bool HOSC_WINDOW::get_Windows_Moment(const Parameters_handler* parameters, Error
 		percentileClipMin = percentileClipMax;
 		percentileClipMax = temp_percentile;
 	}
-	if(momentOrder < 0)
+	if(momentOrder < 1 || momentOrder > 8)
 	{
-		error_mesgs->report("moment_order","No less than 0");
+		error_mesgs->report("moment_order","Supported orders are integers from 1 through 8");
 		append_hosc_window_tracef("get_Windows_Moment.fail invalid_order order=%d", momentOrder);
+		return false;
+	}
+	if(outputStandardizedCumulant && G_CalculateTarget != 4)
+	{
+		error_mesgs->report("output_standardized_cumulant", "Standardized cumulant output requires Target_Button=Cumulant");
 		return false;
 	}
 
@@ -1955,18 +2492,40 @@ bool HOSC_WINDOW::get_Windows_Moment(const Parameters_handler* parameters, Error
 
 
 	myWindowShape = tempShape;
-
-
-
-
-
-
-
-
-
+	if(writeAuditSidecar)
+	{
+		if(!create_window_audit_directory(
+			auditOutputDirectory,
+			processId_,
+			runSequence_,
+			&auditRunDirectory))
+		{
+			error_mesgs->report("audit_output_directory", "Unable to create a unique audit run directory");
+			append_hosc_window_instance_trace(this, runSequence_, "audit.start_directory_failed");
+			return false;
+		}
+		if(!write_window_audit_status(
+			auditRunDirectory,
+			runId_,
+			processId_,
+			runSequence_,
+			"started",
+			"parameters_validated"))
+		{
+			error_mesgs->report("audit_output_directory", "Unable to write the audit run status");
+			append_hosc_window_instance_trace(this, runSequence_, "audit.start_status_failed");
+			return false;
+		}
+		append_hosc_window_tracef(
+			"run_sequence=%lu instance=%p stage=audit.started directory=%s",
+			runSequence_,
+			this,
+			auditRunDirectory.c_str());
+	}
 	append_hosc_window_tracef(
-		"get_Windows_Moment.end target_prop=%s parsed_window=%d,%d,%d parsed_step=%d,%d,%d output=%d,%d,%d invert=%d clip=%d clip_percentiles=%.17g,%.17g",
-		auto_prop_name_.c_str(), momentWindowL, momentWindowW, momentWindowH, stepX, stepY, stepZ, myWindowShape.nx, myWindowShape.ny, myWindowShape.nz, invertWindowOutput ? 1 : 0, enablePercentileClipping ? 1 : 0, percentileClipMin, percentileClipMax);
+		"get_Windows_Moment.end target_prop=%s parsed_window=%d,%d,%d parsed_step=%d,%d,%d output=%d,%d,%d invert=%d clip=%d diagnostics=%d center_cumulant=%d standardized=%d variance_epsilon=%.17g clip_percentiles=%.17g,%.17g",
+		auto_prop_name_.c_str(), momentWindowL, momentWindowW, momentWindowH, stepX, stepY, stepZ, myWindowShape.nx, myWindowShape.ny, myWindowShape.nz, invertWindowOutput ? 1 : 0, enablePercentileClipping ? 1 : 0, outputDiagnostics ? 1 : 0, centerCumulantInputForOrderGE2 ? 1 : 0, outputStandardizedCumulant ? 1 : 0, varianceEpsilon, percentileClipMin, percentileClipMax);
+	append_hosc_window_instance_trace(this, runSequence_, "window_params.body.end.locals_destroy_next");
 	return true;
 }
 
@@ -2026,7 +2585,21 @@ int HOSC_WINDOW::calculateMomentWindow()
 	int block = 0;
 	int kept_count = 0;
 	std::vector<double> output_values;
+	std::vector<double> output_support;
+	std::vector<double> output_ess;
+	std::vector<double> output_numeric_valid;
+	std::vector<double> output_display_valid;
+	std::vector<double> output_kappa2;
+	std::vector<double> output_lambda;
+	std::vector<double> output_lambda_valid;
 	output_values.assign((size_t)gridSize, 0.0);
+	output_support.assign((size_t)gridSize, 0.0);
+	output_ess.assign((size_t)gridSize, 0.0);
+	output_numeric_valid.assign((size_t)gridSize, 0.0);
+	output_display_valid.assign((size_t)gridSize, 0.0);
+	output_kappa2.assign((size_t)gridSize, 0.0);
+	output_lambda.assign((size_t)gridSize, 0.0);
+	output_lambda_valid.assign((size_t)gridSize, 0.0);
 	output_keep_mask_.assign((size_t)gridSize, 0);
 	for(int anchor_z = 0; anchor_z < out_nz; anchor_z++)
 	{
@@ -2040,6 +2613,23 @@ int HOSC_WINDOW::calculateMomentWindow()
 				const int length = momentWindowL;
 				const int width = momentWindowW;
 				const int height = is_2d ? 1 : momentWindowH;
+				wmc::WeightedMomentOptions window_weight_options = weightedOptions;
+				if(useWeightedMoment &&
+				   weightedOptions.mode == wmc::WeightMode_CoordinateGaussian &&
+				   coordinateWeightUsesWindowCenter)
+				{
+					// Coordinate Gaussian is defined in relative window coordinates.
+					// Each window therefore has its own geometric center and half-width.
+					if(!wmc::configure_relative_window_coordinate_gaussian(
+						&window_weight_options,
+						source_origin_x_, source_origin_y_, source_origin_z_,
+						source_spacing_x_, source_spacing_y_, source_spacing_z_,
+						start_x, start_y, start_z, length, width, height))
+					{
+						append_hosc_window_tracef("calculateMomentWindow.invalid_coordinate_geometry block=%d", block);
+						return -1;
+					}
+				}
 				if(length <= 0 || width <= 0 || height <= 0 || block >= gridSize)
 				{
 					append_hosc_window_tracef(
@@ -2089,21 +2679,52 @@ int HOSC_WINDOW::calculateMomentWindow()
 								weighted_sample.x = source_origin_x_ + (double)gx * source_spacing_x_;
 								weighted_sample.y = source_origin_y_ + (double)gy * source_spacing_y_;
 								weighted_sample.z = source_origin_z_ + (double)gz * source_spacing_z_;
-								weights.push_back(wmc::compute_weight(weighted_sample, weightedOptions));
+								weights.push_back(wmc::compute_weight(weighted_sample, window_weight_options));
 							}
 						}
 					}
 				}
 				if(!complete_data_window || samples.empty())
 				{
+					output_support[(size_t)block] = (double)samples.size();
 					output_values[(size_t)block] = 0.0;
 					block++;
 					continue;
 				}
-				output_keep_mask_[(size_t)block] = 1;
-				kept_count++;
+				output_support[(size_t)block] = (double)samples.size();
+				if(useWeightedMoment)
+				{
+					const wmc::WeightDiagnostics weight_diagnostics =
+						wmc::compute_weight_diagnostics(&weights[0], (int)weights.size());
+					output_ess[(size_t)block] = weight_diagnostics.effective_sample_size;
+					if(weight_diagnostics.positive_weight_count <= 0 ||
+					   !wmc::is_finite_number(weight_diagnostics.weight_sum) ||
+					   !wmc::is_finite_number(weight_diagnostics.effective_sample_size))
+					{
+						append_hosc_window_tracef("calculateMomentWindow.invalid_weights block=%d", block);
+						output_values[(size_t)block] = 0.0;
+						block++;
+						continue;
+					}
+				}
+				else
+				{
+					output_ess[(size_t)block] = (double)samples.size();
+				}
 
+				const bool cumulant_centering =
+					G_CalculateTarget == 4 && momentOrder >= 2 && centerCumulantInputForOrderGE2;
+				std::vector<double> centered_samples;
+				const std::vector<double>* unweighted_cumulant_samples = &samples;
+				if(!useWeightedMoment && cumulant_centering)
+				{
+					centered_samples = centered_unweighted_samples(samples);
+					unweighted_cumulant_samples = &centered_samples;
+				}
 				double value = 0.0;
+				double raw_cumulant = 0.0;
+				double kappa2 = 0.0;
+				bool lambda_valid = false;
 				if(useWeightedMoment)
 				{
 					try
@@ -2112,13 +2733,14 @@ int HOSC_WINDOW::calculateMomentWindow()
 						{
 							value = wmc::weighted_univariate_moment(
 								&samples[0], &weights[0], (int)samples.size(), momentOrder,
-								weightedOptions.normalize_weights, weightedOptions.zero_first_order_moment);
+								window_weight_options.normalize_weights, window_weight_options.zero_first_order_moment);
 						}
 						else if(G_CalculateTarget == 4)
 						{
-							value = wmc::weighted_univariate_cumulant(
+							raw_cumulant = wmc::weighted_univariate_cumulant(
 								&samples[0], &weights[0], (int)samples.size(), momentOrder,
-								weightedOptions.normalize_weights, weightedOptions.zero_first_order_moment);
+								window_weight_options.normalize_weights, cumulant_centering);
+							value = raw_cumulant;
 						}
 						else
 						{
@@ -2138,18 +2760,12 @@ int HOSC_WINDOW::calculateMomentWindow()
 				}
 				else if(G_CalculateTarget == 4)
 				{
-					if(al == Bell)
+					if(!calculate_window_cumulant_from_samples(*unweighted_cumulant_samples, momentOrder, al, &raw_cumulant))
 					{
-						value = calculate_window_bell_cumulant_from_samples(samples, momentOrder);
+						append_hosc_window_tracef("calculateMomentWindow.unweighted_cumulant_failed block=%d sample_count=%d", block, (int)samples.size());
+						return -1;
 					}
-					else
-					{
-						if(!calculate_window_avl_cumulant_from_samples(samples, momentOrder, &value))
-						{
-							append_hosc_window_tracef("calculateMomentWindow.avl_failed block=%d sample_count=%d", block, (int)samples.size());
-							return -1;
-						}
-					}
+					value = raw_cumulant;
 				}
 				else
 				{
@@ -2157,16 +2773,65 @@ int HOSC_WINDOW::calculateMomentWindow()
 					return -1;
 				}
 
-				if(invertWindowOutput)
+				if(outputStandardizedCumulant && G_CalculateTarget == 4)
 				{
-					value = -value;
+					try
+					{
+						if(useWeightedMoment)
+						{
+							kappa2 = wmc::weighted_univariate_cumulant(
+								&samples[0], &weights[0], (int)samples.size(), 2,
+								window_weight_options.normalize_weights, cumulant_centering);
+						}
+						else if(!calculate_window_cumulant_from_samples(*unweighted_cumulant_samples, 2, al, &kappa2))
+						{
+							append_hosc_window_tracef("calculateMomentWindow.kappa2_failed block=%d", block);
+							return -1;
+						}
+					}
+					catch(const std::exception& e)
+					{
+						append_hosc_window_tracef("calculateMomentWindow.kappa2_exception block=%d message=%s", block, e.what());
+						return -1;
+					}
+					output_kappa2[(size_t)block] = kappa2;
+					if(wmc::is_finite_number(raw_cumulant) && wmc::is_finite_number(kappa2) && kappa2 > varianceEpsilon)
+					{
+						const double lambda = raw_cumulant / pow(kappa2, 0.5 * (double)momentOrder);
+						if(wmc::is_finite_number(lambda))
+						{
+							output_lambda[(size_t)block] = lambda;
+							output_lambda_valid[(size_t)block] = 1.0;
+							lambda_valid = true;
+						}
+					}
 				}
+
+				if(!wmc::is_finite_number(value))
+				{
+					append_hosc_window_tracef("calculateMomentWindow.nonfinite_result block=%d", block);
+					output_values[(size_t)block] = 0.0;
+					block++;
+					continue;
+				}
+
+				output_keep_mask_[(size_t)block] = 1;
+				output_numeric_valid[(size_t)block] = 1.0;
+				if(is_float_representable(value))
+				{
+					output_display_valid[(size_t)block] = 1.0;
+				}
+				else
+				{
+					append_hosc_window_tracef("calculateMomentWindow.float_overflow block=%d value=%.17g", block, value);
+				}
+				kept_count++;
 
 				if(block == 0)
 				{
 					append_hosc_window_tracef(
-						"calculateMomentWindow.first_block start=%d,%d,%d size=%d,%d,%d samples=%d weights=%d value=%.17g",
-						start_x, start_y, start_z, length, width, height, (int)samples.size(), (int)weights.size(), value);
+						"calculateMomentWindow.first_block start=%d,%d,%d size=%d,%d,%d samples=%d weights=%d ess=%.17g value=%.17g kappa2=%.17g lambda_valid=%d lambda=%.17g",
+						start_x, start_y, start_z, length, width, height, (int)samples.size(), (int)weights.size(), output_ess[(size_t)block], value, kappa2, lambda_valid ? 1 : 0, output_lambda[(size_t)block]);
 				}
 				output_values[(size_t)block] = value;
 				block++;
@@ -2189,6 +2854,69 @@ int HOSC_WINDOW::calculateMomentWindow()
 		block,
 		kept_count,
 		gridSize);
+	if(writeAuditSidecar)
+	{
+		if(auditRunDirectory.empty() ||
+		   !write_window_audit_sidecar(
+			   auditRunDirectory,
+			   auto_prop_name_,
+			   source_grid_name_,
+			   source_property_name_,
+			   G_CalculateTarget,
+			   al,
+			   useWeightedMoment,
+			   weightedOptions,
+			   centerCumulantInputForOrderGE2,
+			   outputStandardizedCumulant,
+			   outputDiagnostics,
+			   invertWindowOutput,
+			   enablePercentileClipping,
+			   percentileClipMin,
+			   percentileClipMax,
+			   varianceEpsilon,
+			   runId_,
+			   processId_,
+			   runSequence_,
+			   momentOrder,
+			   momentWindowL,
+			   momentWindowW,
+			   momentWindowH,
+			   stepX,
+			   stepY,
+			   is_2d ? 0 : stepZ,
+			   source_origin_x_,
+			   source_origin_y_,
+			   source_origin_z_,
+			   source_spacing_x_,
+			   source_spacing_y_,
+			   source_spacing_z_,
+			   out_nx,
+			   out_ny,
+			   out_nz,
+			   output_values,
+			   output_support,
+			   output_ess,
+			   output_numeric_valid,
+			   output_display_valid,
+			   output_kappa2,
+			   output_lambda,
+			   output_lambda_valid))
+		{
+			append_hosc_window_trace("calculateMomentWindow.fail audit_sidecar");
+			if(!auditRunDirectory.empty())
+			{
+				write_window_audit_status(
+					auditRunDirectory,
+					runId_,
+					processId_,
+					runSequence_,
+					"failed",
+					"audit_sidecar_write_failed");
+			}
+			return -1;
+		}
+		append_hosc_window_tracef("calculateMomentWindow.audit_written directory=%s", auditRunDirectory.c_str());
+	}
 
 	std::vector<double> clipped_values = output_values;
 	if(enablePercentileClipping && block > 0)
@@ -2246,10 +2974,59 @@ int HOSC_WINDOW::calculateMomentWindow()
 		const int value_count = (output_size < gridSize) ? output_size : gridSize;
 		for(int i = 0; i < value_count; i++)
 		{
-			if(i < (int)output_keep_mask_.size() && output_keep_mask_[(size_t)i] != 0)
+			if(i < (int)output_display_valid.size() && output_display_valid[(size_t)i] != 0)
 				auto_property_->set_value(output_values[(size_t)i], i);
 			else
 				auto_property_->set_not_informed(i);
+		}
+		if(outputDiagnostics)
+		{
+			const string support_name = auto_prop_name_ + "_support";
+			const string ess_name = auto_prop_name_ + "_ess";
+			const string valid_name = auto_prop_name_ + "_numeric_valid";
+			const string display_valid_name = auto_prop_name_ + "_display_valid";
+			GsTLGridProperty* support_property = geostat_utils::add_property_to_grid(auto_grid_, support_name);
+			GsTLGridProperty* ess_property = geostat_utils::add_property_to_grid(auto_grid_, ess_name);
+			GsTLGridProperty* valid_property = geostat_utils::add_property_to_grid(auto_grid_, valid_name);
+			GsTLGridProperty* display_valid_property = geostat_utils::add_property_to_grid(auto_grid_, display_valid_name);
+			if(support_property == NULL || ess_property == NULL || valid_property == NULL || display_valid_property == NULL)
+			{
+				append_hosc_window_trace("calculateMomentWindow.fail diagnostic_property_creation");
+				return -1;
+			}
+			for(int i = 0; i < value_count; i++)
+			{
+				support_property->set_value(output_support[(size_t)i], i);
+				ess_property->set_value(output_ess[(size_t)i], i);
+				valid_property->set_value(output_numeric_valid[(size_t)i], i);
+				display_valid_property->set_value(output_display_valid[(size_t)i], i);
+			}
+		}
+		if(outputStandardizedCumulant && G_CalculateTarget == 4)
+		{
+			const string kappa2_name = auto_prop_name_ + "_kappa2";
+			const string lambda_name = auto_prop_name_ + "_lambda";
+			const string lambda_valid_name = auto_prop_name_ + "_lambda_valid";
+			GsTLGridProperty* kappa2_property = geostat_utils::add_property_to_grid(auto_grid_, kappa2_name);
+			GsTLGridProperty* lambda_property = geostat_utils::add_property_to_grid(auto_grid_, lambda_name);
+			GsTLGridProperty* lambda_valid_property = geostat_utils::add_property_to_grid(auto_grid_, lambda_valid_name);
+			if(kappa2_property == NULL || lambda_property == NULL || lambda_valid_property == NULL)
+			{
+				append_hosc_window_trace("calculateMomentWindow.fail standardized_property_creation");
+				return -1;
+			}
+			for(int i = 0; i < value_count; i++)
+			{
+				if(output_keep_mask_[(size_t)i] != 0 && is_float_representable(output_kappa2[(size_t)i]))
+					kappa2_property->set_value(output_kappa2[(size_t)i], i);
+				else
+					kappa2_property->set_not_informed(i);
+				if(output_lambda_valid[(size_t)i] != 0 && is_float_representable(output_lambda[(size_t)i]))
+					lambda_property->set_value(output_lambda[(size_t)i], i);
+				else
+					lambda_property->set_not_informed(i);
+				lambda_valid_property->set_value(output_lambda_valid[(size_t)i], i);
+			}
 		}
 		if(enablePercentileClipping)
 		{
@@ -2259,10 +3036,15 @@ int HOSC_WINDOW::calculateMomentWindow()
 			{
 				for(int i = 0; i < value_count; i++)
 				{
-					if(i < (int)output_keep_mask_.size() && output_keep_mask_[(size_t)i] != 0)
+					if(i < (int)output_keep_mask_.size() && output_keep_mask_[(size_t)i] != 0 &&
+					   is_float_representable(clipped_values[(size_t)i]))
 						clipped_property->set_value(clipped_values[(size_t)i], i);
 					else
+					{
+						if(i < (int)output_keep_mask_.size() && output_keep_mask_[(size_t)i] != 0)
+							append_hosc_window_tracef("calculateMomentWindow.clipped_float_overflow block=%d value=%.17g", i, clipped_values[(size_t)i]);
 						clipped_property->set_not_informed(i);
+					}
 				}
 			}
 		}
@@ -2273,6 +3055,18 @@ int HOSC_WINDOW::calculateMomentWindow()
 			value_count,
 			auto_property_);
 		append_hosc_window_tracef("calculateMomentWindow.end blocks=%d cartesian_output=%d", block, value_count);
+		if(writeAuditSidecar &&
+		   !write_window_audit_status(
+			   auditRunDirectory,
+			   runId_,
+			   processId_,
+			   runSequence_,
+			   "completed",
+			   "host_properties_written"))
+		{
+			append_hosc_window_instance_trace(this, runSequence_, "audit.complete_status_failed");
+			return -1;
+		}
 		return 0;
 	}
 
@@ -2607,11 +3401,16 @@ Geostat_grid* HOSC_WINDOW::CreateSparseOutputPointSet(
 		return NULL;
 	}
 
-	_mkdir("D:/Development/DLL/WithSGeMS/MoveWindow/log");
-	std::ostringstream tmp_stream;
-	tmp_stream << "D:/Development/DLL/WithSGeMS/MoveWindow/log/"
-		<< unique_name << "_" << (long)time(NULL) << ".sgems";
-	const std::string tmp_filename = tmp_stream.str();
+	char temp_directory[MAX_PATH] = "";
+	char temp_file[MAX_PATH] = "";
+	const DWORD temp_length = GetTempPathA(MAX_PATH, temp_directory);
+	if(temp_length == 0 || temp_length >= MAX_PATH ||
+	   GetTempFileNameA(temp_directory, "hsc", 0, temp_file) == 0)
+	{
+		append_hosc_window_trace("CreateSparseOutputPointSet.fail temporary_path");
+		return NULL;
+	}
+	const std::string tmp_filename(temp_file);
 	if(!write_sgems_pointset_file(tmp_filename, unique_name, auto_prop_name_, point_locations, point_values))
 	{
 		append_hosc_window_trace("CreateSparseOutputPointSet.fail write_sgems");

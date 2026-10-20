@@ -1,6 +1,9 @@
 #include "FunctionCall.h"
 #include "DebugLogger.h"
 #include "time.h"
+#include <algorithm>
+#include <limits.h>
+#include <limits>
 #include <vector>
 
 namespace wmc = weighted_moment_core;
@@ -391,7 +394,7 @@ static double** SaveSelectedResult2GridForDLL(
 
     for(int i = 0; i < rowsNum; i++)
     {
-        targetGrid[i] = (double*)calloc(DirectionNum + 1, sizeof(double));
+        targetGrid[i] = (double*)calloc(DirectionNum + 3, sizeof(double));
         if(targetGrid[i] == NULL)
         {
             for(int j = 0; j < i; j++)
@@ -411,6 +414,288 @@ static double** SaveSelectedResult2GridForDLL(
     }
 
     return targetGrid;
+}
+
+static bool ExactLagMatchesCrossSectionForDLL(
+    const Keys* key,
+    const int* lag,
+    const int* crossection,
+    int crossectionCount)
+{
+    if(key == NULL || lag == NULL)
+    {
+        return false;
+    }
+    for(int i = 0; i < crossectionCount; ++i)
+    {
+        if(crossection == NULL || crossection[i] < 0 || crossection[i] >= key->NLAG[i] ||
+           lag[i] != crossection[i] * key->LAG[i])
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+static void FreeExactTemplatesForDLL(Template** templates, int templateCount)
+{
+    if(templates == NULL || *templates == NULL)
+    {
+        return;
+    }
+    for(int i = 0; i < templateCount; ++i)
+    {
+        free((*templates)[i].Value);
+        free((*templates)[i].Lag);
+    }
+    free((*templates)[0].index);
+    free(*templates);
+    *templates = NULL;
+    G_Template = NULL;
+    G_TemplateNum = 0;
+}
+
+static Template* BuildExactTemplatesForDLL(
+    const Keys* key,
+    const std::vector<ExactTemplateDirection>& directions,
+    const int* lag,
+    int* templateCount)
+{
+    if(key == NULL || lag == NULL || templateCount == NULL || pt_Grids == NULL ||
+       (int)directions.size() != key->NDIR || key->NX <= 0 || key->NY <= 0 || key->NZ <= 0)
+    {
+        return NULL;
+    }
+    const int variableCount = key->NDIR + 1;
+    std::vector<int> offsetX(key->NDIR, 0);
+    std::vector<int> offsetY(key->NDIR, 0);
+    std::vector<int> offsetZ(key->NDIR, 0);
+    int minX = 0, minY = 0, minZ = 0;
+    int maxX = 0, maxY = 0, maxZ = 0;
+    for(int direction = 0; direction < key->NDIR; ++direction)
+    {
+        offsetX[direction] = directions[direction].x * lag[direction];
+        offsetY[direction] = directions[direction].y * lag[direction];
+        offsetZ[direction] = directions[direction].z * lag[direction];
+        minX = std::min(minX, offsetX[direction]);
+        minY = std::min(minY, offsetY[direction]);
+        minZ = std::min(minZ, offsetZ[direction]);
+        maxX = std::max(maxX, offsetX[direction]);
+        maxY = std::max(maxY, offsetY[direction]);
+        maxZ = std::max(maxZ, offsetZ[direction]);
+    }
+    const int validX = key->NX - maxX + minX;
+    const int validY = key->NY - maxY + minY;
+    const int validZ = key->NZ - maxZ + minZ;
+    if(validX <= 0 || validY <= 0 || validZ <= 0)
+    {
+        *templateCount = 0;
+        return NULL;
+    }
+    const long capacityLong = (long)validX * (long)validY * (long)validZ;
+    if(capacityLong <= 0 || capacityLong > INT_MAX)
+    {
+        *templateCount = 0;
+        return NULL;
+    }
+    const int capacity = (int)capacityLong;
+    const long denseCountLong = (long)key->NX * (long)key->NY * (long)key->NZ;
+    if(denseCountLong <= 0 || denseCountLong > INT_MAX)
+    {
+        return NULL;
+    }
+    const int denseCount = (int)denseCountLong;
+    std::vector<double> dense((size_t)denseCount, std::numeric_limits<double>::quiet_NaN());
+    for(int node = 0; node < pt_Grids->ND; ++node)
+    {
+        const Nodes& source = pt_Grids->pt_Nodes[node];
+        if(source.x < 0 || source.x >= key->NX || source.y < 0 || source.y >= key->NY || source.z < 0 || source.z >= key->NZ ||
+           !wmc::is_finite_number(source.val))
+        {
+            continue;
+        }
+        dense[(size_t)((source.z * key->NY + source.y) * key->NX + source.x)] = source.val;
+    }
+    Template* templates = (Template*)calloc((size_t)capacity, sizeof(Template));
+    if(templates == NULL)
+    {
+        return NULL;
+    }
+    int count = 0;
+    for(int z = -minZ; z < key->NZ - maxZ; ++z)
+    {
+        for(int y = -minY; y < key->NY - maxY; ++y)
+        {
+            for(int x = -minX; x < key->NX - maxX; ++x)
+            {
+                bool complete = true;
+                std::vector<double> values((size_t)variableCount, 0.0);
+                values[0] = dense[(size_t)((z * key->NY + y) * key->NX + x)];
+                if(!wmc::is_finite_number(values[0]))
+                {
+                    continue;
+                }
+                for(int direction = 0; direction < key->NDIR; ++direction)
+                {
+                    const int nx = x + offsetX[direction];
+                    const int ny = y + offsetY[direction];
+                    const int nz = z + offsetZ[direction];
+                    const double value = dense[(size_t)((nz * key->NY + ny) * key->NX + nx)];
+                    if(!wmc::is_finite_number(value))
+                    {
+                        complete = false;
+                        break;
+                    }
+                    values[direction + 1] = value;
+                }
+                if(!complete)
+                {
+                    continue;
+                }
+                templates[count].Value = (double*)calloc((size_t)variableCount + 1, sizeof(double));
+                templates[count].Lag = (int*)calloc((size_t)variableCount + 1, sizeof(int));
+                if(templates[count].Value == NULL || templates[count].Lag == NULL)
+                {
+                    FreeExactTemplatesForDLL(&templates, count + 1);
+                    return NULL;
+                }
+                for(int variable = 0; variable < variableCount; ++variable)
+                {
+                    templates[count].Value[variable + 1] = values[variable];
+                }
+                count++;
+            }
+        }
+    }
+    if(count == 0)
+    {
+        free(templates);
+        *templateCount = 0;
+        return NULL;
+    }
+    for(int variable = 1; variable <= variableCount; ++variable)
+    {
+        long double sum = 0.0;
+        for(int row = 0; row < count; ++row)
+        {
+            sum += (long double)templates[row].Value[variable];
+        }
+        const double mean = (double)(sum / (long double)count);
+        for(int row = 0; row < count; ++row)
+        {
+            templates[row].Value[variable] -= mean;
+        }
+    }
+    templates[0].index = (int*)calloc((size_t)variableCount + 1, sizeof(int));
+    if(templates[0].index == NULL)
+    {
+        FreeExactTemplatesForDLL(&templates, count);
+        return NULL;
+    }
+    int jointOrder = 1;
+    templates[0].index[1] = 1;
+    for(int direction = 0; direction < key->NDIR; ++direction)
+    {
+        if(key->NOD[direction] <= 0)
+        {
+            FreeExactTemplatesForDLL(&templates, count);
+            return NULL;
+        }
+        templates[0].index[direction + 2] = key->NOD[direction];
+        jointOrder += key->NOD[direction];
+    }
+    templates[0].index[0] = jointOrder;
+    *templateCount = count;
+    return templates;
+}
+
+double** ExactRecCalculation4DLL(
+    Keys* Key,
+    double**& grid,
+    int* getGridSize,
+    int* crossection,
+    int crossectionCount,
+    const std::vector<ExactTemplateDirection>& directions,
+    bool bell)
+{
+    if(Key == NULL || grid == NULL || getGridSize == NULL || (int)directions.size() != Key->NDIR)
+    {
+        return NULL;
+    }
+    if(InitialStruct4(Key, grid) == -1)
+    {
+        grid = NULL;
+        return NULL;
+    }
+    grid = NULL;
+    int** lags = NULL;
+    int lagCount = 0;
+    if(InitialLagMat(&lags, &lagCount) != 0)
+    {
+        Destruction();
+        return NULL;
+    }
+    std::vector<int> selected;
+    for(int row = 0; row < lagCount; ++row)
+    {
+        if(ExactLagMatchesCrossSectionForDLL(pt_Keys, lags[row], crossection, crossectionCount))
+        {
+            selected.push_back(row);
+        }
+    }
+    if(selected.empty() || (*getGridSize > 0 && (int)selected.size() != *getGridSize))
+    {
+        Free2DVec_int(&lags, lagCount);
+        Destruction();
+        return NULL;
+    }
+    std::vector<double> results(selected.size(), std::numeric_limits<double>::quiet_NaN());
+    std::vector<int> supportCounts(selected.size(), 0);
+    for(size_t row = 0; row < selected.size(); ++row)
+    {
+        int support = 0;
+        Template* templates = BuildExactTemplatesForDLL(pt_Keys, directions, lags[selected[row]], &support);
+        supportCounts[row] = support;
+        if(templates == NULL || support <= 0)
+        {
+            continue;
+        }
+        G_Template = templates;
+        G_TemplateNum = support;
+        double value = myEmpty;
+        if(bell)
+        {
+			memset(g_all_partitions, 0, sizeof(Partition) * MAX_PARTITIONS);
+			g_total_partitions = 0;
+            value = BellCumulantFromMultiplicityIndex(templates[0].index, pt_Keys->ORDER);
+        }
+        else if(PrecomputeMomentsForIndex(templates[0].index, pt_Keys->ORDER) != myEmpty &&
+                InitAVLWorkspaceForDLL(pt_Keys->ORDER) == 0)
+        {
+            value = BetterRecCumulant3(templates[0].index, pt_Keys->ORDER);
+        }
+        ClearOneEvaluationWorkspaceForDLL(pt_Keys->ORDER);
+		memset(g_all_partitions, 0, sizeof(Partition) * MAX_PARTITIONS);
+		g_total_partitions = 0;
+        FreeExactTemplatesForDLL(&templates, support);
+        if(value != myEmpty && wmc::is_finite_number(value))
+        {
+            results[row] = value;
+        }
+    }
+    *getGridSize = (int)selected.size();
+    double** target = SaveSelectedResult2GridForDLL(&results[0], lags, selected, pt_Keys->NDIR);
+	if(target != NULL)
+	{
+		for(size_t row = 0; row < selected.size(); ++row)
+		{
+			target[row][pt_Keys->NDIR + 1] = (double)supportCounts[row];
+			target[row][pt_Keys->NDIR + 2] = wmc::is_finite_number(results[row]) ? 1.0 : 0.0;
+		}
+	}
+    Free2DVec_int(&lags, lagCount);
+    Destruction();
+    return target;
 }
 
 
@@ -726,6 +1011,10 @@ double** RecCalculation4DLL2(Keys* Key, double**& grid, int* getGridSize, int* c
         Free2DVec_int(&LAGS, LagNum);
         return NULL;
     }
+	for(size_t row = 0; row < selectedLagPositions.size(); ++row)
+	{
+		CumulantResult[row] = std::numeric_limits<double>::quiet_NaN();
+	}
 
     double** targetGrid = NULL;
     const clock_t start = clock();
@@ -864,6 +1153,10 @@ double** Moment4Dll(Keys* Key, double**& grid, int* getGridSize, int* crossectio
         Free2DVec_int(&LAGS, LagNum);
         return NULL;
     }
+	for(size_t row = 0; row < selectedLagPositions.size(); ++row)
+	{
+		MomentResult[row] = std::numeric_limits<double>::quiet_NaN();
+	}
 
     const clock_t start = clock();
     bool NotfoundTemplate = true;
@@ -1009,6 +1302,10 @@ double** RecCalculation4DLL3(Keys* Key, double**& grid, int* getGridSize, int* c
         Free2DVec_int(&LAGS, LagNum);
         return NULL;
     }
+	for(size_t row = 0; row < selectedLagPositions.size(); ++row)
+	{
+		CumulantResult[row] = std::numeric_limits<double>::quiet_NaN();
+	}
 
     bool NotfoundTemplate = true;
     for(int i = static_cast<int>(selectedLagPositions.size()) - 1; i >= 0; i--)
@@ -1147,6 +1444,10 @@ double** WeightedMoment4Dll(
         Destruction();
         return NULL;
     }
+	for(size_t row = 0; row < selectedLagPositions.size(); ++row)
+	{
+		resultValues[row] = std::numeric_limits<double>::quiet_NaN();
+	}
 
     for(int row = static_cast<int>(selectedLagPositions.size()) - 1; row >= 0; --row)
     {
@@ -1256,6 +1557,10 @@ double** WeightedRecCalculation4DLL2(
         Destruction();
         return NULL;
     }
+	for(size_t row = 0; row < selectedLagPositions.size(); ++row)
+	{
+		resultValues[row] = std::numeric_limits<double>::quiet_NaN();
+	}
 
     for(int row = static_cast<int>(selectedLagPositions.size()) - 1; row >= 0; --row)
     {

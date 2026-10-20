@@ -1,0 +1,22 @@
+{
+  "formal_section44_protocol_sha256": "7f32a574c3d16dbdd1ad69ddb42397fc97d19f89ae5d8346829e27f971135615",
+  "gates": {
+    "bell_avl_max_absolute_error": true,
+    "bell_avl_relative_l2_error": true,
+    "frozen_section44_protocol_binding": true,
+    "native_core_checks": true,
+    "preprocessing_axis_mapping_and_fixture_verified": true,
+    "preprocessing_manifest_inputs_verified": true,
+    "required_figures": true,
+    "rotation_signed_direction_max_absolute_error": true,
+    "rotation_signed_direction_relative_l2_error": true,
+    "surrogate_count_complete": true,
+    "surrogate_diversity": true,
+    "surrogate_h2_gate": true,
+    "template_sampling_is_exhaustive_integer_offsets": true
+  },
+  "mode": "formal",
+  "status": "DIAGNOSTIC",
+  "surrogate_count": 199,
+  "top_level_entrypoint_id": "direct-44-46-374de37d-a8dc-49ad-a503-9ed66bc0c9ea-efe9b4ee7ea3"
+}

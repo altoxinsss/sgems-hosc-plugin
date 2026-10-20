@@ -1,0 +1,29 @@
+{
+  "schema_version": 1,
+  "source_base": "D:/Development/DLL/DLL/WithoutSGeMS/output",
+  "sources": [
+    {
+      "id": "section_4_3",
+      "run": "r1_11_scalability_20260909/run_20261012_084358",
+      "files": ["bell_avl_accuracy.csv", "case_matrix.csv", "environment.json", "gate.json", "pair_summary.csv", "raw_runs.csv", "route_summary.csv", "RUN_REPORT.md", "sha256_manifest.csv"],
+      "directories": ["configs"]
+    },
+    {
+      "id": "sections_4_4_to_4_6",
+      "run": "direct_4_4_4_6_20261011/20261012_031025/run_20261011_191032",
+      "files": ["bootstrap_summary.csv", "common_support_manifest.csv", "cpp_feature_map_manifest.csv", "direct_effects.csv", "direct_feature_summary.csv", "evidence_manifest.json", "gate.json", "lambda4_independent_audit.csv", "parameter_sensitivity_contrasts.csv", "report_artifact_contract.csv", "RESULTS_INDEX.md", "run_manifest.json", "RUN_REPORT.md", "single_map_advantages.csv", "support_summary.csv", "time_projection.json", "uniform_feature_map_manifest.csv", "weighted_feature_map_manifest.csv", "weighting_effects.csv", "weighting_mechanism_diagnostics.csv", "preprocessing/preprocessing_manifest.json", "cpp_python_fixture_matrix/cpp_python_fixture_matrix_gate.csv", "cpp_python_fixture_matrix/cpp_python_fixture_matrix_gate.json", "cpp_python_parity/cpp_python_parity_gate.csv", "cpp_python_parity/cpp_python_parity_gate.json", "uniform_three_route_audit/uniform_three_route_audit.csv", "uniform_three_route_audit/uniform_three_route_audit.json"],
+      "directories": ["configs", "tables", "figures", "components/controlled_positive_controls/run_20261011_194421"],
+      "component": {
+        "prefix": "section_4_4/run_20261011_191125",
+        "files": ["COMPONENT_RESULTS_INDEX.md", "effective_experiment_config.json", "experiment_config.json", "gate.json", "RUN_REPORT.md", "tables/bell_avl_accuracy.csv", "tables/connectivity_metrics.csv", "tables/dataset_inventory.csv", "tables/H2_offsets.csv", "tables/multiplicity_decisions.csv", "tables/rotation_validation_long.csv", "tables/surrogate_diversity.csv", "tables/surrogate_response_summary.csv", "tables/template_3d_response_long.csv", "tables/template_definitions.csv"],
+        "directories": ["figures"]
+      }
+    },
+    {
+      "id": "conditional_shape_supplement",
+      "run": "conditional_high_order_window_analysis_fixed_rank_20261012",
+      "files": ["conditional_ecdf_contrasts_bootstrap.csv", "conditional_ecdf.csv", "conditional_rank_association_diagnostics.csv", "conditional_rank_associations.csv", "conditional_residual_balance.csv", "conditional_residual_summary.csv", "conditional_tail_contrasts_bootstrap.csv", "conditional_tail_summary.csv", "illustrative_conditional_pairs.csv", "numerical_support.csv", "reconstruction_parity_audit.csv", "RUN_REPORT.md", "sha256_manifest.csv", "source_hashes.json"],
+      "directories": ["figures"]
+    }
+  ]
+}

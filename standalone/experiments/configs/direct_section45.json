@@ -1,0 +1,9 @@
+{
+  "datasets": ["z15_26", "z45_56", "z75_86"],
+  "windows": [[3, 3, 3], [5, 5, 3], [7, 7, 3]],
+  "primary_window": [5, 5, 3],
+  "weightings": [{"id": "uniform", "mode": "uniform"}],
+  "orders": [1, 2, 3, 4, 5, 6],
+  "simple_baselines": ["mean", "variance", "high_fraction", "lambda3", "lambda4"],
+  "reported_high_orders": ["kappa4", "lambda5", "lambda6"]
+}

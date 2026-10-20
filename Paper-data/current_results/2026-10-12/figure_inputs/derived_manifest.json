@@ -1,0 +1,27 @@
+{
+  "schema_version": 1,
+  "files": [
+    {
+      "file": "direct_representative_z50.csv",
+      "bytes": 11616361,
+      "sha256": "98597fdd30155e6b6df2841d2b61c2ddac500d8851dcd837731de58dbd775115",
+      "source_file": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\direct_analysis_values.csv",
+      "source_sha256": "25af0f82e9e8eb5ab45238ac868e47ffe10a050fae5425aa209d12a45629b91e",
+      "source_rows": 1227120,
+      "selected_rows": 27264,
+      "selection": "z45_56, z=50, 5x5x3, primary: Section 4.5 uniform and Section 4.6 three primary weightings",
+      "transformation": "Row selection only; all columns and scalar strings preserved."
+    },
+    {
+      "file": "template_2d_original_and_rotated.csv",
+      "bytes": 1347415,
+      "sha256": "a65e073b49247ad6d0d8132dceb807636f2ec64a9980d8f03b88d991d1e4b22b",
+      "source_file": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\section_4_4\\run_20261011_191125\\tables\\template_2d_response_long.csv",
+      "source_sha256": "08dae3b8743324695ebed23c9a5c998c2029f43711f4550d6b84c8767fd2025e",
+      "source_rows": 242688,
+      "selected_rows": 3888,
+      "selection": "All original and rotated90 rows, all datasets/properties/templates/algorithms; surrogate rows omitted",
+      "transformation": "Row selection only; all columns and scalar strings preserved."
+    }
+  ]
+}

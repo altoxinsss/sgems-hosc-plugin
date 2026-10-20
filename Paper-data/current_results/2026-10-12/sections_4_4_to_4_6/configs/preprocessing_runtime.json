@@ -1,0 +1,46 @@
+{
+  "channel_code": 2,
+  "co_location_fixture_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\stanford_vie_preprocessing\\co_location_fixture.json",
+  "coarse_spacing_xyz_m": [
+    50.0,
+    50.0,
+    2.0
+  ],
+  "expected_coarse_shape_zyx": [
+    100,
+    100,
+    75
+  ],
+  "expected_subvolume_shape_zyx": [
+    12,
+    100,
+    75
+  ],
+  "facies_header_lines": 3,
+  "facies_path": "D:\\Development\\DockerMountPoint\\Stanford-VI-E-master\\Facies\\facies.dat",
+  "fine_shape_zyx": [
+    200,
+    200,
+    150
+  ],
+  "fixture_porosity_absolute_tolerance": 1e-12,
+  "max_poro_inc_absolute_error": 5.1e-07,
+  "output_root": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing",
+  "poro_inc_path": "D:\\Development\\DockerMountPoint\\Stanford-VI-E-master\\Reservoir Simulation (Eclipse)\\poro.inc",
+  "porosity_header_lines": 3,
+  "porosity_path": "D:\\Development\\DockerMountPoint\\Stanford-VI-E-master\\Porosity\\porosity.txt",
+  "subvolumes": [
+    [
+      15,
+      26
+    ],
+    [
+      45,
+      56
+    ],
+    [
+      75,
+      86
+    ]
+  ]
+}

@@ -1,0 +1,4 @@
+family_id,hypothesis_id,role,test_type,estimate,p_raw,active_cell_count,constant_cell_count,numerical_floor,inference_status,holm_rank,p_holm,reject_holm_0_05
+section44_primary,porosity_omnibus_D,primary,symmetric_response_omnibus,718.6136194066598,0.005,96,0,1.8339671116572033e-14,evaluated,,,
+section44_secondary,channel_occupancy_omnibus_D,key_secondary,symmetric_response_omnibus,1681.724533192134,0.005,96,0,3.147963136516328e-14,evaluated,1,0.01,True
+section44_secondary,channel_strict_majority_largest_component_D,key_secondary,symmetric_connectivity_omnibus,31.827192769273168,0.01,3,0,1.4210854715202004e-14,evaluated,2,0.01,True

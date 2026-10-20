@@ -1,0 +1,13 @@
+# Rebuildable native artifacts and local Python environments.
+/build*/
+/.venv/
+
+# Raw external inputs, processed maps, machine-local config, and run evidence.
+/data/
+/output/
+*.local.json
+*.local.ini
+
+__pycache__/
+.pytest_cache/
+*.pyc

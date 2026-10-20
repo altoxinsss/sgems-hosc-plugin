@@ -1,0 +1,36 @@
+{
+  "entrypoint_id": "direct-44-46-374de37d-a8dc-49ad-a503-9ed66bc0c9ea-efe9b4ee7ea3",
+  "entrypoint_path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\run_direct_sections_44_46.py",
+  "frozen_config_files": {
+    "controlled_component_config": {
+      "path": "configs\\controlled_component_config.json",
+      "sha256": "5346c352c16abe399c3546ad9155da5fc9da58b1f0f32b38216c0d741bf35d02"
+    },
+    "direct_common_protocol": {
+      "path": "configs\\direct_common_protocol.json",
+      "sha256": "29a28bf63507cea7ba7dd0b054c3fbe3b38ac303df6f623a938de16beea9e2fe"
+    },
+    "direct_section45": {
+      "path": "configs\\direct_section45.json",
+      "sha256": "8ffafe1e27e82d42ac4bc2d9069ae3061cacfb4bdf853fc024f6f0311350fb84"
+    },
+    "direct_section46": {
+      "path": "configs\\direct_section46.json",
+      "sha256": "55e3d0009f27b47b273649da026a30cf6a669766e47a1f06ede5e9c8d53c5480"
+    },
+    "formal_section44": {
+      "path": "configs\\formal_section44.json",
+      "sha256": "7f32a574c3d16dbdd1ad69ddb42397fc97d19f89ae5d8346829e27f971135615"
+    },
+    "preprocessing_config": {
+      "path": "configs\\preprocessing_config.json",
+      "sha256": "001e675d8f937161f26f76fe6097f82ea8dee1020df4abe88ec0ae5fb84c3516"
+    },
+    "template_component_config": {
+      "path": "configs\\template_component_config.json",
+      "sha256": "a9d0e14a9568afe16c9a2e777faf8efa86fbcea80fac246a4abdea58390d352a"
+    }
+  },
+  "frozen_config_sha256": "efe9b4ee7ea3b6e105411ee81bd49415c400e5a3cb894d6cc8d8af1ae1b378b9",
+  "mode": "formal"
+}

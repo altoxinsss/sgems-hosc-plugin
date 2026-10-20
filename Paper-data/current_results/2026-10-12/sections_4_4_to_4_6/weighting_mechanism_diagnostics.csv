@@ -1,0 +1,17 @@
+diagnostic_type,section,dataset_id,window,weighting,parameter_set,axis,axis_index,normalized_offset,weight,tail_weight_fraction,analysis_window_count,sample_count
+coordinate_gaussian_central_axis_profile,4.6,window_definition,5x5x3,coordinate_gaussian,coordinate_gaussian_sigma_1.00,x,0.0,-1.0,0.6065306597126334,,,
+coordinate_gaussian_central_axis_profile,4.6,window_definition,5x5x3,coordinate_gaussian,coordinate_gaussian_sigma_1.00,x,1.0,-0.5,0.8824969025845955,,,
+coordinate_gaussian_central_axis_profile,4.6,window_definition,5x5x3,coordinate_gaussian,coordinate_gaussian_sigma_1.00,x,2.0,0.0,1.0,,,
+coordinate_gaussian_central_axis_profile,4.6,window_definition,5x5x3,coordinate_gaussian,coordinate_gaussian_sigma_1.00,x,3.0,0.5,0.8824969025845955,,,
+coordinate_gaussian_central_axis_profile,4.6,window_definition,5x5x3,coordinate_gaussian,coordinate_gaussian_sigma_1.00,x,4.0,1.0,0.6065306597126334,,,
+coordinate_gaussian_central_axis_profile,4.6,window_definition,5x5x3,coordinate_gaussian,coordinate_gaussian_sigma_1.00,y,0.0,-1.0,0.6065306597126334,,,
+coordinate_gaussian_central_axis_profile,4.6,window_definition,5x5x3,coordinate_gaussian,coordinate_gaussian_sigma_1.00,y,1.0,-0.5,0.8824969025845955,,,
+coordinate_gaussian_central_axis_profile,4.6,window_definition,5x5x3,coordinate_gaussian,coordinate_gaussian_sigma_1.00,y,2.0,0.0,1.0,,,
+coordinate_gaussian_central_axis_profile,4.6,window_definition,5x5x3,coordinate_gaussian,coordinate_gaussian_sigma_1.00,y,3.0,0.5,0.8824969025845955,,,
+coordinate_gaussian_central_axis_profile,4.6,window_definition,5x5x3,coordinate_gaussian,coordinate_gaussian_sigma_1.00,y,4.0,1.0,0.6065306597126334,,,
+coordinate_gaussian_central_axis_profile,4.6,window_definition,5x5x3,coordinate_gaussian,coordinate_gaussian_sigma_1.00,z,0.0,-1.0,0.6065306597126334,,,
+coordinate_gaussian_central_axis_profile,4.6,window_definition,5x5x3,coordinate_gaussian,coordinate_gaussian_sigma_1.00,z,1.0,0.0,1.0,,,
+coordinate_gaussian_central_axis_profile,4.6,window_definition,5x5x3,coordinate_gaussian,coordinate_gaussian_sigma_1.00,z,2.0,1.0,0.6065306597126334,,,
+soft_high_porosity_upper_tail_weight_fraction,4.6,z15_26,5x5x3,soft_high_porosity,soft_high_porosity_width_0.02_strength_0.80,,,,,0.4670994865128222,67332.0,5049900.0
+soft_high_porosity_upper_tail_weight_fraction,4.6,z45_56,5x5x3,soft_high_porosity,soft_high_porosity_width_0.02_strength_0.80,,,,,0.3784943706333467,66485.0,4986375.0
+soft_high_porosity_upper_tail_weight_fraction,4.6,z75_86,5x5x3,soft_high_porosity,soft_high_porosity_width_0.02_strength_0.80,,,,,0.32815408649178446,63463.0,4759725.0

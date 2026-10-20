@@ -1,0 +1,15 @@
+[sliding_window]
+center_cumulant_input_for_order_ge_2=true
+
+[weighted_moment]
+enable_weighted_moment=true
+weight_mode=soft_high_porosity
+enable_coordinate_gaussian=false
+enable_soft_high_porosity=true
+; Formal primary values; the experiment JSON remains authoritative.
+high_porosity_threshold=0.25
+soft_transition_width=0.02
+soft_weight_strength=0.8
+min_weight=0
+normalize_weights=true
+zero_first_order_moment=false

@@ -1,0 +1,7 @@
+dataset_id,property_id,minimum_original_difference_fraction,required_minimum_pair_difference_fraction,maximum_duplicate_fraction,field_count,unique_field_count,duplicate_count,duplicate_fraction,minimum_pair_difference_fraction,mean_pair_difference_fraction
+stanford_vie_z15_26,porosity,0.9989333333333333,0.001,0.0,199,199,0,0.0,0.9988,0.9998048085545573
+stanford_vie_z15_26,channel_occupancy,0.017028288931612196,0.001,0.0,199,199,0,0.0,0.03213333333333333,0.0387237602152175
+stanford_vie_z45_56,porosity,0.9992,0.001,0.0,199,199,0,0.0,0.9988,0.9997893981692978
+stanford_vie_z45_56,channel_occupancy,0.009732360097323601,0.001,0.0,199,199,0,0.0,0.018133333333333335,0.023952279918109064
+stanford_vie_z75_86,porosity,0.9993333333333333,0.001,0.0,199,199,0,0.0,0.9990666666666667,0.999832177723635
+stanford_vie_z75_86,channel_occupancy,0.06302943287867911,0.001,0.0,199,199,0,0.0,0.11413333333333334,0.13348154239209514

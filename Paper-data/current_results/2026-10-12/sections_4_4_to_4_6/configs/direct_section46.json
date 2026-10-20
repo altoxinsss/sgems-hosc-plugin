@@ -1,0 +1,51 @@
+{
+  "datasets": ["z15_26", "z45_56", "z75_86"],
+  "primary_window": [5, 5, 3],
+  "primary_weightings": [
+    {"id": "uniform", "mode": "uniform"},
+    {"id": "coordinate_gaussian_sigma_1.00", "mode": "coordinate_gaussian", "bandwidth": 1.0},
+    {
+      "id": "soft_high_porosity_width_0.02_strength_0.80",
+      "mode": "soft_high_porosity",
+      "high_porosity_threshold": 0.25,
+      "soft_transition_width": 0.02,
+      "soft_weight_strength": 0.8
+    }
+  ],
+  "sensitivity_dataset_id": "z45_56",
+  "sensitivity_orders": [2, 6],
+  "sensitivity_weightings": [
+    {"id": "coordinate_gaussian_sigma_0.75", "mode": "coordinate_gaussian", "bandwidth": 0.75},
+    {"id": "coordinate_gaussian_sigma_1.25", "mode": "coordinate_gaussian", "bandwidth": 1.25},
+    {
+      "id": "soft_high_porosity_width_0.01_strength_0.80",
+      "mode": "soft_high_porosity",
+      "high_porosity_threshold": 0.25,
+      "soft_transition_width": 0.01,
+      "soft_weight_strength": 0.8
+    },
+    {
+      "id": "soft_high_porosity_width_0.04_strength_0.80",
+      "mode": "soft_high_porosity",
+      "high_porosity_threshold": 0.25,
+      "soft_transition_width": 0.04,
+      "soft_weight_strength": 0.8
+    },
+    {
+      "id": "soft_high_porosity_width_0.02_strength_0.60",
+      "mode": "soft_high_porosity",
+      "high_porosity_threshold": 0.25,
+      "soft_transition_width": 0.02,
+      "soft_weight_strength": 0.6
+    },
+    {
+      "id": "soft_high_porosity_width_0.02_strength_1.00",
+      "mode": "soft_high_porosity",
+      "high_porosity_threshold": 0.25,
+      "soft_transition_width": 0.02,
+      "soft_weight_strength": 1.0
+    }
+  ],
+  "simple_baselines": ["mean", "variance", "high_fraction", "lambda3", "lambda4"],
+  "reported_high_orders": ["kappa4", "lambda5", "lambda6"]
+}

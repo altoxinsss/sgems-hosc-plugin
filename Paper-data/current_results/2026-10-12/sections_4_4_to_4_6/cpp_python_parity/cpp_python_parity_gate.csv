@@ -1,0 +1,13 @@
+dataset_id,weighting,order,passed,count,failed_count,max_abs_error,max_relative_error,formula_version,formula_version_matches,cumulant_centering,cumulant_centering_version,cumulant_centering_matches,error
+z45_56,uniform,3,True,68160,0,1.0072238182390336e-16,7.110323070389672e-10,2026-10-10.v2,True,weighted_window_mean,order_ge_2.v1,True,
+z45_56,uniform,4,True,68160,0,1.0015317568334847e-16,4.6976700325627155e-11,2026-10-10.v2,True,weighted_window_mean,order_ge_2.v1,True,
+z45_56,uniform,5,True,68160,0,1.6263032587282567e-19,4.001925461271729e-11,2026-10-10.v2,True,weighted_window_mean,order_ge_2.v1,True,
+z45_56,uniform,6,True,68160,0,9.994988777600744e-20,5.351450737073805e-10,2026-10-10.v2,True,weighted_window_mean,order_ge_2.v1,True,
+z45_56,coordinate_gaussian,3,True,68160,0,1.0028870095490916e-16,4.9430123987130263e-11,2026-10-10.v2,True,weighted_window_mean,order_ge_2.v1,True,
+z45_56,coordinate_gaussian,4,True,68160,0,9.999054535747565e-17,5.57183937792331e-11,2026-10-10.v2,True,weighted_window_mean,order_ge_2.v1,True,
+z45_56,coordinate_gaussian,5,True,68160,0,4.30970363562988e-18,1.505576694171881e-11,2026-10-10.v2,True,weighted_window_mean,order_ge_2.v1,True,
+z45_56,coordinate_gaussian,6,True,68160,0,1.1180834903756764e-19,4.496573740369984e-11,2026-10-10.v2,True,weighted_window_mean,order_ge_2.v1,True,
+z45_56,soft_high_porosity,3,True,68160,0,1.005733040251866e-16,3.456302982581108e-10,2026-10-10.v2,True,weighted_window_mean,order_ge_2.v1,True,
+z45_56,soft_high_porosity,4,True,68160,0,1.0018028073766061e-16,4.13861065762915e-11,2026-10-10.v2,True,weighted_window_mean,order_ge_2.v1,True,
+z45_56,soft_high_porosity,5,True,68160,0,2.303929616531697e-19,3.773899225114762e-11,2026-10-10.v2,True,weighted_window_mean,order_ge_2.v1,True,
+z45_56,soft_high_porosity,6,True,68160,0,1.4230153513872246e-19,1.1185034884875529e-10,2026-10-10.v2,True,weighted_window_mean,order_ge_2.v1,True,

@@ -1,7 +1,8 @@
 #ifndef __FUNCTIONCALL_H__
 #define __FUNCTIONCALL_H__
 #include "CumulantCal.h"
-#include "WeightedMomentCore.h"
+#include "../../shared/WeightedMomentCore.h"
+#include <vector>
 
 #ifdef __cplusplus
 extern "C" {
@@ -26,6 +27,13 @@ double** RecCalculation4DLL3(Keys* Key, double**& grid, int* gridSize, int* cros
 #endif
 
 #ifdef __cplusplus
+struct ExactTemplateDirection
+{
+    int x;
+    int y;
+    int z;
+};
+
 double** WeightedMoment4Dll(
     Keys* Key,
     double**& grid,
@@ -43,6 +51,15 @@ double** WeightedRecCalculation4DLL2(
     int crossectionCount,
     const weighted_moment_core::WeightedMomentOptions& options,
     bool momentTarget);
+
+double** ExactRecCalculation4DLL(
+    Keys* Key,
+    double**& grid,
+    int* gridSize,
+    int* crossection,
+    int crossectionCount,
+    const std::vector<ExactTemplateDirection>& directions,
+    bool bell);
 #endif
 
 #endif

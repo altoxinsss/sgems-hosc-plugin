@@ -1,0 +1,66 @@
+{
+  "schema_version": "stanford-vie-co-location-fixture.v1",
+  "coordinate_order": ["x", "y", "z"],
+  "fixtures": [
+    {
+      "coordinate": [1, 1, 15],
+      "expected": {
+        "porosity": 0.0941,
+        "channel_count": 0,
+        "channel_occupancy": 0.0,
+        "channel_strict_majority": 0,
+        "channel_label_valid": 1
+      }
+    },
+    {
+      "coordinate": [65, 1, 15],
+      "expected": {
+        "porosity": 0.2502625,
+        "channel_count": 4,
+        "channel_occupancy": 0.5,
+        "channel_strict_majority": 0,
+        "channel_label_valid": 0
+      }
+    },
+    {
+      "coordinate": [50, 50, 45],
+      "expected": {
+        "porosity": 0.27045,
+        "channel_count": 5,
+        "channel_occupancy": 0.625,
+        "channel_strict_majority": 1,
+        "channel_label_valid": 1
+      }
+    },
+    {
+      "coordinate": [25, 1, 45],
+      "expected": {
+        "porosity": 0.1336,
+        "channel_count": 4,
+        "channel_occupancy": 0.5,
+        "channel_strict_majority": 0,
+        "channel_label_valid": 0
+      }
+    },
+    {
+      "coordinate": [75, 100, 86],
+      "expected": {
+        "porosity": 0.243,
+        "channel_count": 8,
+        "channel_occupancy": 1.0,
+        "channel_strict_majority": 1,
+        "channel_label_valid": 1
+      }
+    },
+    {
+      "coordinate": [5, 1, 75],
+      "expected": {
+        "porosity": 0.1802,
+        "channel_count": 4,
+        "channel_occupancy": 0.5,
+        "channel_strict_majority": 0,
+        "channel_label_valid": 0
+      }
+    }
+  ]
+}

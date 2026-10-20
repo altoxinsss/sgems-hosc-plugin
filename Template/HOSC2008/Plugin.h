@@ -18,7 +18,7 @@
 
 
 #include "FunctionCall.h"
-#include "WeightedMomentCore.h"
+#include "../../shared/WeightedMomentCore.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -49,6 +49,18 @@ typedef struct
 	double dz;
 } GridShape;
 
+// This layout is frozen after direction reordering and before the calculator
+// takes ownership of Key. Result writers must not read calculator-owned arrays
+// because legacy and exact calculation paths release them before returning.
+typedef struct
+{
+	bool valid;
+	int displayed_direction_count;
+	int row_column[3];
+	int lag_step[3];
+	int dimensions[3];
+} TemplateOutputLayout;
+
 class __declspec(dllexport) HOSC_TEMPLATE : public Geostat_algo
 {
 public:
@@ -71,6 +83,7 @@ public:
 	bool get_Calculate_Target(const Parameters_handler* parameters, Error_messages_handler* error_mesgs);
 	bool get_Calculate_Algorithm(const Parameters_handler* parameters, Error_messages_handler* error_mesgs);
 	bool get_Weighted_Options(const Parameters_handler* parameters, Error_messages_handler* error_mesgs);
+	bool get_Template_Sampling(const Parameters_handler* parameters, Error_messages_handler* error_mesgs);
 	bool get_My_Shape(const Parameters_handler* parameters, Error_messages_handler* error_mesgs);
 	bool get_Output_Slice_Options(const Parameters_handler* parameters, Error_messages_handler* error_mesgs);
 	bool get_Output_Slice_Target(const Parameters_handler* parameters, Error_messages_handler* error_mesgs);
@@ -93,6 +106,8 @@ public:
 	bool create_3d_slice_output();
 	bool create_3d_slice_output_from_selected_grid();
 	int set_MyGrid_Data(double** targetGrid, int gridSize, int valuePos);
+	bool write_Template_Output_Validity(double** targetGrid, int gridSize, int valuePos);
+	bool write_Template_Exact_Support(double** targetGrid, int gridSize, int valuePos);
 
 
 
@@ -128,6 +143,7 @@ public:
 	string slice_grid_name_;
 	GsTL_project* current_project_;
 	GridShape myGridShape;
+	TemplateOutputLayout output_layout_;
 
 
 
@@ -140,6 +156,8 @@ public:
 
 	enum Algorithm al;
 	bool weighted_enabled_;
+	bool template_sampling_exact_;
+	std::vector<ExactTemplateDirection> integer_direction_vectors_;
 	weighted_moment_core::WeightedMomentOptions weighted_options_;
 	int crossection[10];
 	int crossectionNum;

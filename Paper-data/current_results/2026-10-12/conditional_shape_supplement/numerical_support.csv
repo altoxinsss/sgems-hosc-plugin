@@ -1,0 +1,4 @@
+dataset_id,structural_rows,nonfinite_excluded,cpp_invalid_excluded,effective_sample_size_not_75_excluded,variance_at_or_below_epsilon_excluded,formal_analysis_variance_flag_disagreement,reference_variance,variance_epsilon,required_effective_sample_size,numerical_windows,window_samples,minimum_ess,maximum_ess,minimum_kappa2_retained,minimum_variance_retained,maximum_variance_retained,label_fields_used
+z15_26,68160,0,0,0,0,0,0.007517608758404953,7.517608758404952e-11,75,68160,75,75.0,75.0,5.965297888888879e-06,5.965297888888879e-06,0.0122725483487222,False
+z45_56,68160,0,0,0,0,0,0.006645234264241945,6.645234264241945e-11,75,68160,75,75.0,75.0,8.977363166666665e-06,8.977363166666665e-06,0.0130367519472222,False
+z75_86,68160,0,0,0,0,0,0.006065063612806557,6.065063612806557e-11,75,68160,75,75.0,75.0,1.7183184722222227e-05,1.7183184722222227e-05,0.0106280615999999,False

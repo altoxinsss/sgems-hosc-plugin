@@ -152,10 +152,6 @@ int SaveTemplateResult(Template* Templates, int Order, int TemplateNum)
         return -1;
     }
     FILE* file = fopen("Template.txt", "w");
-	if(_isnan(Templates[0].Value[2]))
-	{
-		fprintf(file, "fuck\n");
-	}
     if(file == NULL)
     {
         perror("Error opening file");

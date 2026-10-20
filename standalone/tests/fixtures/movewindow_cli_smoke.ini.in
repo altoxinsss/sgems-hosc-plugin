@@ -1,0 +1,15 @@
+[general]
+calculate_target=Cumulant
+calculate_algorithm=Bell
+source_grid=@MOVING_WINDOW_FIXTURE_DIR@/window_3x3.grid
+source_property=value
+coordinate_dimensions=3
+target_property=smoke_cumulant
+
+[sliding_window]
+window_size=2,2,1
+move_step=1,1,0
+moment_order=2
+
+[runtime]
+output_dir=@MOVING_WINDOW_SMOKE_OUTPUT_DIR@

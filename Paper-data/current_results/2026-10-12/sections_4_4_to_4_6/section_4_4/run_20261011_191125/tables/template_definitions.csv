@@ -1,0 +1,13 @@
+dimension,template_id,NOD,NLAG,lag_cells,integer_direction_vectors,role,offsets
+2d,axis_0_90,"[2, 1]","[5, 5]","[1, 1]","[[1, 0], [0, 1]]",confirmatory_production,
+2d,axis_90_180,"[2, 1]","[5, 5]","[1, 1]","[[0, 1], [-1, 0]]",rotation_audit,
+2d,axis_180_270,"[2, 1]","[5, 5]","[1, 1]","[[-1, 0], [0, -1]]",rotation_audit,
+2d,axis_270_0,"[2, 1]","[5, 5]","[1, 1]","[[0, -1], [1, 0]]",rotation_audit,
+2d,diag_45_135,"[2, 1]","[5, 5]","[1, 1]","[[1, 1], [-1, 1]]",confirmatory_production,
+2d,diag_135_225,"[2, 1]","[5, 5]","[1, 1]","[[-1, 1], [-1, -1]]",rotation_audit,
+2d,diag_225_315,"[2, 1]","[5, 5]","[1, 1]","[[-1, -1], [1, -1]]",rotation_audit,
+2d,diag_315_45,"[2, 1]","[5, 5]","[1, 1]","[[1, -1], [1, 1]]",rotation_audit,
+3d,orthogonal_xyz,"[1, 1, 1]","[4, 4, 4]","[1, 1, 1]","[[1, 0, 0], [0, 1, 0], [0, 0, 1]]",rotation_audit,
+2d,l4,,,,,exploratory_explicit,"[[0, 0], [1, 0], [2, 0], [0, 1]]"
+2d,line4,,,,,exploratory_explicit,"[[0, 0], [1, 0], [2, 0], [3, 0]]"
+2d,rectangle4,,,,,exploratory_explicit,"[[0, 0], [1, 0], [0, 1], [1, 1]]"

@@ -1,0 +1,343 @@
+{
+  "axis_mapping": {
+    "coarse_shape_zyx": [
+      100,
+      100,
+      75
+    ],
+    "fine_shape_zyx": [
+      200,
+      200,
+      150
+    ],
+    "input_array_order": [
+      "z",
+      "y",
+      "x"
+    ],
+    "output_array_order": [
+      "z",
+      "y",
+      "x"
+    ],
+    "output_coordinate_to_index": {
+      "x": "x_index = x_coordinate - 1",
+      "y": "y_index = y_coordinate - 1",
+      "z": "z_index = z_coordinate - 1"
+    },
+    "reduction": "contiguous_2x2x2_blocks; porosity=mean; facies=channel_count",
+    "source_reduced_to_output_index": {
+      "x": "output_x_index = source_reduced_x_index",
+      "y": "output_y_index = 99 - source_reduced_y_index",
+      "z": "output_z_index = 99 - source_reduced_z_index"
+    }
+  },
+  "channel_occupancy_definition": "channel_count / 8",
+  "co_location_fixture": {
+    "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\stanford_vie_preprocessing\\co_location_fixture.json",
+    "results": [
+      {
+        "coordinate_xyz": [
+          1,
+          1,
+          15
+        ],
+        "observed": {
+          "channel_count": 0,
+          "channel_label_valid": 1,
+          "channel_occupancy": 0.0,
+          "channel_strict_majority": 0,
+          "porosity": 0.09409999999999999
+        },
+        "status": "PASS"
+      },
+      {
+        "coordinate_xyz": [
+          65,
+          1,
+          15
+        ],
+        "observed": {
+          "channel_count": 4,
+          "channel_label_valid": 0,
+          "channel_occupancy": 0.5,
+          "channel_strict_majority": 0,
+          "porosity": 0.2502625
+        },
+        "status": "PASS"
+      },
+      {
+        "coordinate_xyz": [
+          50,
+          50,
+          45
+        ],
+        "observed": {
+          "channel_count": 5,
+          "channel_label_valid": 1,
+          "channel_occupancy": 0.625,
+          "channel_strict_majority": 1,
+          "porosity": 0.27044999999999997
+        },
+        "status": "PASS"
+      },
+      {
+        "coordinate_xyz": [
+          25,
+          1,
+          45
+        ],
+        "observed": {
+          "channel_count": 4,
+          "channel_label_valid": 0,
+          "channel_occupancy": 0.5,
+          "channel_strict_majority": 0,
+          "porosity": 0.1336
+        },
+        "status": "PASS"
+      },
+      {
+        "coordinate_xyz": [
+          75,
+          100,
+          86
+        ],
+        "observed": {
+          "channel_count": 8,
+          "channel_label_valid": 1,
+          "channel_occupancy": 1.0,
+          "channel_strict_majority": 1,
+          "porosity": 0.243
+        },
+        "status": "PASS"
+      },
+      {
+        "coordinate_xyz": [
+          5,
+          1,
+          75
+        ],
+        "observed": {
+          "channel_count": 4,
+          "channel_label_valid": 0,
+          "channel_occupancy": 0.5,
+          "channel_strict_majority": 0,
+          "porosity": 0.18019999999999997
+        },
+        "status": "PASS"
+      }
+    ],
+    "sha256": "cb0807ebcd07db8b0f64ceccc1e67799b10979ab3ae0683fdc653aef2360aa53"
+  },
+  "coarse_spacing_xyz_m": [
+    50.0,
+    50.0,
+    2.0
+  ],
+  "config": {
+    "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\configs\\preprocessing_runtime.json",
+    "sha256": "f1abeb491a736448b70c8088517a3d5977522d2df075d91a3a89d959e35f76f8"
+  },
+  "global_counts": {
+    "excluded_ties": 27905,
+    "valid_voxels": 722095
+  },
+  "inputs": {
+    "facies_path": {
+      "path": "D:\\Development\\DockerMountPoint\\Stanford-VI-E-master\\Facies\\facies.dat",
+      "sha256": "ef1dd93797ebb16ad8a4a1851a70d648b91d393391674550f8ffd10763cc6cc3"
+    },
+    "poro_inc_path": {
+      "path": "D:\\Development\\DockerMountPoint\\Stanford-VI-E-master\\Reservoir Simulation (Eclipse)\\poro.inc",
+      "sha256": "4cb54141637de7a127dde18e050c17454057681bbf275073110b76d4813654b3"
+    },
+    "porosity_path": {
+      "path": "D:\\Development\\DockerMountPoint\\Stanford-VI-E-master\\Porosity\\porosity.txt",
+      "sha256": "440dafe3b189142fdefa75caa09710f216bce2c286ded8271df2fa08b868a6d1"
+    }
+  },
+  "poro_inc_max_absolute_error": 5.00000000069889e-07,
+  "preprocessing_script": {
+    "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\stanford_vie_preprocessing\\prepare_stanford_vie.py",
+    "sha256": "89014f6af01991b320b0c7c256d74f88f8f53ff2d82ef37aad41174315db49b3"
+  },
+  "schema_version": "stanford-vie-preprocessing.v2",
+  "strict_majority_rule": "channel_count>4 positive; channel_count<4 negative; channel_count==4 excluded",
+  "subvolumes": [
+    {
+      "coordinate_range": {
+        "x": [
+          1,
+          75
+        ],
+        "y": [
+          1,
+          100
+        ],
+        "z": [
+          15,
+          26
+        ]
+      },
+      "negative_count": 72230,
+      "outputs": [
+        {
+          "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z15_26\\stanford_vie_z15_26_porosity.grid",
+          "property_name": "porosity",
+          "row_count": 90000,
+          "sha256": "209f78e6edd798de3bc8079ffcc7b2df0d10eb15d3407b9622ca191d31217142"
+        },
+        {
+          "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z15_26\\stanford_vie_z15_26_channel_count.grid",
+          "property_name": "channel_count",
+          "row_count": 90000,
+          "sha256": "60e1456b24ff242b842333bd3abd8b836dc263161d27fba359aee9ea69982aff"
+        },
+        {
+          "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z15_26\\stanford_vie_z15_26_channel_occupancy.grid",
+          "property_name": "channel_occupancy",
+          "row_count": 90000,
+          "sha256": "ea52986b10ca041c866713c4f3095d12da7fd3aa1f8e26fbe24e111ae19ce34a"
+        },
+        {
+          "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z15_26\\stanford_vie_z15_26_channel_strict_majority.grid",
+          "property_name": "channel_strict_majority",
+          "row_count": 90000,
+          "sha256": "ba6a612dc3f56b84e2056c7a00e37c201c29b691330258bf433ea09732ab21af"
+        },
+        {
+          "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z15_26\\stanford_vie_z15_26_channel_label_valid.grid",
+          "property_name": "channel_label_valid",
+          "row_count": 90000,
+          "sha256": "611afb4a5c1a8eb0678a0b4aeed171968643abafff004149aac17b6122dd5e50"
+        }
+      ],
+      "positive_count": 16811,
+      "row_count": 90000,
+      "shape_zyx": [
+        12,
+        100,
+        75
+      ],
+      "subvolume_id": "z15_26",
+      "tie_count": 959
+    },
+    {
+      "coordinate_range": {
+        "x": [
+          1,
+          75
+        ],
+        "y": [
+          1,
+          100
+        ],
+        "z": [
+          45,
+          56
+        ]
+      },
+      "negative_count": 77581,
+      "outputs": [
+        {
+          "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z45_56\\stanford_vie_z45_56_porosity.grid",
+          "property_name": "porosity",
+          "row_count": 90000,
+          "sha256": "227fa518d2d743a7ab13c4a3180b9bbc915229de958737db009f323d5d182974"
+        },
+        {
+          "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z45_56\\stanford_vie_z45_56_channel_count.grid",
+          "property_name": "channel_count",
+          "row_count": 90000,
+          "sha256": "9f86a2e7e6ae643ae711f6027f805f375adcd04fd79287b491df78f690e58535"
+        },
+        {
+          "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z45_56\\stanford_vie_z45_56_channel_occupancy.grid",
+          "property_name": "channel_occupancy",
+          "row_count": 90000,
+          "sha256": "9a96c226f4e2daac79bc4d9be1bb63256d68ab77923f25c303b3751939e2e20a"
+        },
+        {
+          "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z45_56\\stanford_vie_z45_56_channel_strict_majority.grid",
+          "property_name": "channel_strict_majority",
+          "row_count": 90000,
+          "sha256": "52571782157428b37ab47d66564b3ec2a15c53f1eef4632a96f4b7cb20299d7d"
+        },
+        {
+          "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z45_56\\stanford_vie_z45_56_channel_label_valid.grid",
+          "property_name": "channel_label_valid",
+          "row_count": 90000,
+          "sha256": "6c5f89722512e495bc2354a1708a770e4c7a1a73b8611aa69d4cc384d5a493ee"
+        }
+      ],
+      "positive_count": 10423,
+      "row_count": 90000,
+      "shape_zyx": [
+        12,
+        100,
+        75
+      ],
+      "subvolume_id": "z45_56",
+      "tie_count": 1996
+    },
+    {
+      "coordinate_range": {
+        "x": [
+          1,
+          75
+        ],
+        "y": [
+          1,
+          100
+        ],
+        "z": [
+          75,
+          86
+        ]
+      },
+      "negative_count": 45668,
+      "outputs": [
+        {
+          "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z75_86\\stanford_vie_z75_86_porosity.grid",
+          "property_name": "porosity",
+          "row_count": 90000,
+          "sha256": "8e2e50ad2d4d126e0fe48998711105b7c4743f54fade908e6575d424564bb1d4"
+        },
+        {
+          "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z75_86\\stanford_vie_z75_86_channel_count.grid",
+          "property_name": "channel_count",
+          "row_count": 90000,
+          "sha256": "7f65632f729dbcf2685a8dbf112871ce3027d6e1994220ee8fc4939c21dd669e"
+        },
+        {
+          "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z75_86\\stanford_vie_z75_86_channel_occupancy.grid",
+          "property_name": "channel_occupancy",
+          "row_count": 90000,
+          "sha256": "765f27092b63eb5a88034414b2c5c6e351e9ba3c80284712e362b9687c3189c5"
+        },
+        {
+          "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z75_86\\stanford_vie_z75_86_channel_strict_majority.grid",
+          "property_name": "channel_strict_majority",
+          "row_count": 90000,
+          "sha256": "9fb19b0c4375b7cf0969b11da825dc757c520de86895a759b9e2bceeac5401de"
+        },
+        {
+          "path": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032\\preprocessing\\z75_86\\stanford_vie_z75_86_channel_label_valid.grid",
+          "property_name": "channel_label_valid",
+          "row_count": 90000,
+          "sha256": "0e99963eb90a06fac382f296dafe91496d4fef54b6fd92ce04c9ddc2e2a571b3"
+        }
+      ],
+      "positive_count": 38105,
+      "row_count": 90000,
+      "shape_zyx": [
+        12,
+        100,
+        75
+      ],
+      "subvolume_id": "z75_86",
+      "tie_count": 6227
+    }
+  ],
+  "transform": "reshape(z,y,x)->mean_or_count_2x2x2->reverse_z_and_y"
+}

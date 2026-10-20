@@ -1,0 +1,84 @@
+{
+  "analysis_utc": "2026-10-11T23:11:57.565903+00:00",
+  "conditional_association_protocol": {
+    "bootstrap_refits_rank_ols": true,
+    "bootstrap_resampling_unit": "centre_coordinate_spatial_block",
+    "primary_metrics": {
+      "lambda5": [
+        "tail_imbalance"
+      ],
+      "lambda6": [
+        "outer_tail_probability",
+        "outer_span_q05_q95"
+      ]
+    },
+    "rank_transform_scope": "complete_subvolume_fixed"
+  },
+  "direct_analysis_values": {
+    "run_relative_path": "direct_analysis_values.csv",
+    "sha256": "25af0f82e9e8eb5ab45238ac868e47ffe10a050fae5425aa209d12a45629b91e"
+  },
+  "formal_evidence_manifest": {
+    "run_relative_path": "evidence_manifest.json",
+    "sha256": "01bc348b461c8dbfd47d1b45762167a6071b5363df0000a3a4508137ec09b678"
+  },
+  "formal_gate": {
+    "run_relative_path": "gate.json",
+    "sha256": "bbddf101e2e99e6ffda586d5ea590f059db5772fdd359f37183296ba23a3ef8c"
+  },
+  "formal_run_directory": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\output\\direct_4_4_4_6_20261011\\20261012_031025\\run_20261011_191032",
+  "formal_sha256_inventory": {
+    "run_relative_path": "sha256_manifest.csv",
+    "sha256": "4be44c0d125a76fe97a3d27a825112b400d656c571a9c53bac222bc5fb7b0013"
+  },
+  "frozen_common_protocol": {
+    "run_relative_path": "configs/direct_common_protocol.json",
+    "sha256": "29a28bf63507cea7ba7dd0b054c3fbe3b38ac303df6f623a938de16beea9e2fe"
+  },
+  "frozen_section45_protocol": {
+    "run_relative_path": "configs/direct_section45.json",
+    "sha256": "8ffafe1e27e82d42ac4bc2d9069ae3061cacfb4bdf853fc024f6f0311350fb84"
+  },
+  "high_porosity_threshold": 0.25,
+  "preprocessing_manifest": {
+    "run_relative_path": "preprocessing/preprocessing_manifest.json",
+    "sha256": "83f6945a893c6870070e5b8df0a646fed20c8484113a9955819e19c197a3c439"
+  },
+  "required_effective_sample_size": 75,
+  "run_local_porosity_grids": {
+    "z15_26": {
+      "reference_variance": 0.007517608758404953,
+      "run_relative_path": "preprocessing/z15_26/stanford_vie_z15_26_porosity.grid",
+      "sha256": "209f78e6edd798de3bc8079ffcc7b2df0d10eb15d3407b9622ca191d31217142",
+      "variance_epsilon": 7.517608758404952e-11
+    },
+    "z45_56": {
+      "reference_variance": 0.006645234264241945,
+      "run_relative_path": "preprocessing/z45_56/stanford_vie_z45_56_porosity.grid",
+      "sha256": "227fa518d2d743a7ab13c4a3180b9bbc915229de958737db009f323d5d182974",
+      "variance_epsilon": 6.645234264241945e-11
+    },
+    "z75_86": {
+      "reference_variance": 0.006065063612806557,
+      "run_relative_path": "preprocessing/z75_86/stanford_vie_z75_86_porosity.grid",
+      "sha256": "8e2e50ad2d4d126e0fe48998711105b7c4743f54fade908e6575d424564bb1d4",
+      "variance_epsilon": 6.065063612806557e-11
+    }
+  },
+  "run_manifest": {
+    "run_relative_path": "run_manifest.json",
+    "sha256": "da0db4358af6b5ec773e9a09fba56401fbf4572a58de7372748884ca1a1cbb5c"
+  },
+  "script": "D:\\Development\\DLL\\DLL\\WithoutSGeMS\\experiments\\r1_5_incremental_value_20260924\\conditional_high_order_window_analysis.py",
+  "script_sha256": "043d066f163c4220ed1e12a16729caba0becb0c76c832c476f454038f0d44bc2",
+  "spatial_block_shape_xyz": [
+    8,
+    13,
+    6
+  ],
+  "uniform_window": [
+    5,
+    5,
+    3
+  ]
+}
