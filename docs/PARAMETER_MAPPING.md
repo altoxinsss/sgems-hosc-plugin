@@ -20,23 +20,30 @@ selected property's grid-node order directly; ordinary properties named `x`,
 | `center_cumulant_input_for_order_ge_2.value` | stable cumulant translation | Boolean; default true; applies only to Cumulant order >=2 |
 | `output_standardized_cumulant.value` | derive lambda output | Boolean; Cumulant only |
 | `variance_epsilon.value` | minimum kappa2 for lambda | Finite value >=0; default `1e-12` |
-| `invert_window_output.value` | invert primary output | Only `false` is supported; `true` is rejected to preserve the kappa/lambda definition |
-| `zero_first_order_moment.value` | legacy weighted-moment centering | Only `false` is supported; `true` is rejected; use `center_cumulant_input_for_order_ge_2` for cumulants |
 | `write_audit_sidecar.value` | write unique double audit sidecar | Boolean; default false |
 | `audit_output_directory.value` | audit base directory | Required when `write_audit_sidecar=true`; must be an existing writable directory |
 | `enable_weighted_moment.value` | weight route switch | Boolean |
 | `weight_mode.value` | weighting scheme | `uniform`, `coordinate_gaussian`, or `soft_high_porosity` |
-| `normalize_weights.value` | normalized weighted statistic | Must be true when weighting is enabled |
 | `weight_bandwidth.value` | coordinate Gaussian sigma | Finite and greater than zero |
-| `weight_center_mode.value` | coordinate center choice | `window_center` by default; `parameter` is rejected |
 | `high_porosity_threshold.value` | soft-weight threshold | Finite value; UI default 0.25 |
 | `soft_transition_width.value` | soft-weight transition width | Finite and greater than zero; UI default 0.02 |
 | `soft_weight_strength.value` | soft-weight strength | Finite value in [0, 1]; UI default 0.8 |
 
+The following settings are fixed in the backend and are absent from the UI.
+They are listed only for compatibility with old parameter files; new files
+can omit them. Conflicting explicit values are rejected before calculation.
+
+| Legacy XML key | Fixed value |
+|---|---|
+| `normalize_weights.value` | `true`, including when weighting is disabled |
+| `invert_window_output.value` | `false` |
+| `zero_first_order_moment.value` | `false` |
+| `weight_center_mode.value` | `window_center` |
+
 For `coordinate_gaussian`, the implementation resolves a separate geometric
 center for each output window. Per-axis scale is half the window extent in
 that axis. Singleton axes contribute zero normalized distance. Parameter-center
-mode is not supported in this build.
+mode is rejected when present in an old parameter file.
 
 The weighted route uses the shared weighted recurrence. The `Bell`/`AVL`
 selection describes the unweighted cumulant evaluator and is not represented
@@ -57,9 +64,10 @@ statistic, or float32 display overflow. Standardized output also adds
 | `integer_direction_vectors.value` | signed integer offsets | Exact mode: one nonzero `dx,dy[,dz]` vector per configured direction, separated by semicolons |
 | `NOD/NLAG/LAG/LTOL/...` | direction records | All fields, including LTOL, move together when directions are rearranged for output; `LAG>0`; origin plus occurrence counts must be at most order 8 |
 
-The published `HOSC_TEMPLATE` UI exposes uniform weighting only. Its legacy
-weighted implementation remains source-compatible with historic XML files but
-is not a formal UI route. `exhaustive_integer_offsets` accepts unweighted
+All public `HOSC_TEMPLATE` calculation routes use equal tuple contributions.
+The UI has no weighting tab. Old parameter files may omit `Weighted_Enable`
+or set it to `Disable`; an enabled value is rejected for both `legacy_search`
+and `exhaustive_integer_offsets`. `exhaustive_integer_offsets` accepts
 Cumulant only, applies complete-support sampling, uses fixed zero-based source
 coordinates, and leaves a lag without complete translations uninformed rather
 than exporting zero. Result lag rows are written to the x-fastest SGeMS output

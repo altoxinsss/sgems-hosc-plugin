@@ -1218,118 +1218,6 @@
             </widget>
             <widget class="QWidget">
                 <property name="name">
-                    <cstring>weighted_tab</cstring>
-                </property>
-                <attribute name="title">
-                    <string>Weighted Moment</string>
-                </attribute>
-                <vbox>
-                    <property name="name">
-                        <cstring>unnamed</cstring>
-                    </property>
-                    <widget class="GsTLGroupBox">
-                        <property name="name">
-                            <cstring>weighted_group</cstring>
-                        </property>
-                        <property name="title">
-                            <string>Template weighting compatibility</string>
-                        </property>
-                        <property name="displayed" stdset="0">
-                            <bool>true</bool>
-                        </property>
-                        <vbox>
-                            <property name="name">
-                                <cstring>unnamed</cstring>
-                            </property>
-                            <widget class="QLabel">
-                                <property name="name"><cstring>weighted_enable_label</cstring></property>
-                                <property name="text"><string>Enable Weighted Cumulant</string></property>
-                            </widget>
-                            <widget class="QComboBox">
-                                <item><property name="text"><string>Disable</string></property></item>
-                                <item><property name="text"><string>Enable</string></property></item>
-                                <property name="name"><cstring>Weighted_Enable</cstring></property>
-                            </widget>
-                            <widget class="QLabel">
-                                <property name="name"><cstring>weight_mode_label</cstring></property>
-                                <property name="text"><string>Weight Mode</string></property>
-                            </widget>
-                            <widget class="QComboBox">
-                                <item><property name="text"><string>uniform</string></property></item>
-                                <property name="name"><cstring>Weight_Mode</cstring></property>
-                            </widget>
-                            <widget class="QLabel">
-                                <property name="name"><cstring>normalize_weights_label</cstring></property>
-                                <property name="text"><string>Normalize Weights</string></property>
-                            </widget>
-                            <widget class="QComboBox">
-                                <item><property name="text"><string>true</string></property></item>
-                                <item><property name="text"><string>false</string></property></item>
-                                <property name="name"><cstring>Normalize_Weights</cstring></property>
-                            </widget>
-                            <widget class="QLabel">
-                                <property name="name"><cstring>zero_first_order_label</cstring></property>
-                                <property name="text"><string>Zero First-order Moment</string></property>
-                            </widget>
-                            <widget class="QComboBox">
-                                <item><property name="text"><string>false</string></property></item>
-                                <item><property name="text"><string>true</string></property></item>
-                                <property name="name"><cstring>Zero_First_Order_Moment</cstring></property>
-                            </widget>
-                            <widget class="QLabel">
-                                <property name="name"><cstring>weight_bandwidth_label</cstring></property>
-                                <property name="text"><string>Bandwidth</string></property>
-                            </widget>
-                            <widget class="QLineEdit">
-                                <property name="name"><cstring>Weight_Bandwidth</cstring></property>
-                                <property name="text"><string>1.0</string></property>
-                            </widget>
-                            <widget class="QLabel">
-                                <property name="name"><cstring>weight_minimum_label</cstring></property>
-                                <property name="text"><string>Minimum Weight</string></property>
-                            </widget>
-                            <widget class="QLineEdit">
-                                <property name="name"><cstring>Weight_Minimum</cstring></property>
-                                <property name="text"><string>0.0</string></property>
-                            </widget>
-                            <widget class="QLabel">
-                                <property name="name"><cstring>weight_reference_value_label</cstring></property>
-                                <property name="text"><string>Reference Value</string></property>
-                            </widget>
-                            <widget class="QLineEdit">
-                                <property name="name"><cstring>Weight_Reference_Value</cstring></property>
-                                <property name="text"><string>0.0</string></property>
-                            </widget>
-                            <widget class="QLabel">
-                                <property name="name"><cstring>weight_center_x_label</cstring></property>
-                                <property name="text"><string>Center X</string></property>
-                            </widget>
-                            <widget class="QLineEdit">
-                                <property name="name"><cstring>Weight_Center_X</cstring></property>
-                                <property name="text"><string>0.0</string></property>
-                            </widget>
-                            <widget class="QLabel">
-                                <property name="name"><cstring>weight_center_y_label</cstring></property>
-                                <property name="text"><string>Center Y</string></property>
-                            </widget>
-                            <widget class="QLineEdit">
-                                <property name="name"><cstring>Weight_Center_Y</cstring></property>
-                                <property name="text"><string>0.0</string></property>
-                            </widget>
-                            <widget class="QLabel">
-                                <property name="name"><cstring>weight_center_z_label</cstring></property>
-                                <property name="text"><string>Center Z</string></property>
-                            </widget>
-                            <widget class="QLineEdit">
-                                <property name="name"><cstring>Weight_Center_Z</cstring></property>
-                                <property name="text"><string>0.0</string></property>
-                            </widget>
-                        </vbox>
-                    </widget>
-                </vbox>
-            </widget>
-            <widget class="QWidget">
-                <property name="name">
                     <cstring>exact_template_tab</cstring>
                 </property>
                 <attribute name="title">
@@ -1398,7 +1286,7 @@
                     </widget>
                     <widget class="QLabel">
                         <property name="name"><cstring>exact_template_note</cstring></property>
-                        <property name="text"><string>3D grids require exhaustive_integer_offsets, Cumulant, and weighting Disable. Enter one dx,dy,dz vector per direction; 2D exact uses dx,dy. Errors are listed above.</string></property>
+                        <property name="text"><string>3D grids require exhaustive_integer_offsets and Cumulant. Enter one dx,dy,dz vector per direction; 2D exact uses dx,dy. Errors are listed above.</string></property>
                         <property name="sizePolicy">
                             <sizepolicy>
                                 <hsizetype>1</hsizetype>

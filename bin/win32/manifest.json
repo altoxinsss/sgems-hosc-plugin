@@ -1,67 +1,67 @@
 {
-    "schema_version":  1,
-    "package_version":  "2026.10.20",
-    "built_at_utc":  "2026-10-20T09:29:34.7994576Z",
-    "files":  [
-                  {
-                      "name":  "HOSC2008.dll",
-                      "sha256":  "5b98eba21ee4e46307f712a3160ad9bb92b5b6fe27b4fe95afe0e3868eda572d"
-                  },
-                  {
-                      "name":  "HOSCWindow.dll",
-                      "sha256":  "dbf265caabec37f87938c0b9dc368c1b3d80f2f7e5f345ec732c9ced087d6ba9"
-                  },
-                  {
-                      "name":  "HOSC_TEMPLATE.ui",
-                      "sha256":  "e8d5b6744acc24a8415b0f80aae6f60b79c155469e24467b28b68105bb1f4dd7"
-                  },
-                  {
-                      "name":  "HOSC_WINDOW.ui",
-                      "sha256":  "081c3ca4949a42dbd9c3917a97bd00bb64da7fab263e71a4842abd0d772dbf47"
-                  }
-              ],
-    "runtime":  {
-                    "machine":  "x86",
-                    "compiler":  "VC7.1",
-                    "qt":  "3.3.5",
-                    "required_files":  [
-                                           {
-                                               "name":  "MSVCR71.dll"
-                                           },
-                                           {
-                                               "name":  "MSVCP71.dll"
-                                           },
-                                           {
-                                               "name":  "qt-mt335.dll"
-                                           }
-                                       ]
-                },
-    "tested_host":  [
-                        {
-                            "name":  "sgems.exe",
-                            "sha256":  "8a3e2311b0ec2a52024068718843301c8d3ad13c78c3cc351e1cb27bb402cb4c"
-                        },
-                        {
-                            "name":  "qt-mt335.dll",
-                            "sha256":  "8135397dc749a9303873b18baddce5e8a913b01d1ae47936d4ff4991cbb67512"
-                        },
-                        {
-                            "name":  "GsTLAppli_grid.dll",
-                            "sha256":  "45c95b240dc0556daa0ee121122c02467c63475a5fc01987a29dc335f191c6a0"
-                        },
-                        {
-                            "name":  "GsTLAppli_utils.dll",
-                            "sha256":  "8af7b60aa3b3db74906cf7839d76244354a11c902faf2b81c0c309f69e1655a6"
-                        },
-                        {
-                            "name":  "MSVCR71.dll",
-                            "sha256":  "2299cc0583db870d89b37fd70a66bb0f7e76575ce5abc199238a716d3c57b858"
-                        },
-                        {
-                            "name":  "MSVCP71.dll",
-                            "sha256":  "df96156f6a548fd6fe5672918de5ae4509d3c810a57bffd2a91de45a3ed5b23b"
-                        }
-                    ],
-    "source_manifest":  "build_source_manifest.json",
-    "source_manifest_note":  "Compiled C++/header/UI inputs, verified against this checkout; host hashes identify the tested distribution."
+  "schema_version": 1,
+  "package_version": "2026.11.02",
+  "built_at_utc": "2026-11-01T20:23:29.4367943Z",
+  "files": [
+    {
+      "name": "HOSC2008.dll",
+      "sha256": "7df0c0af505eac15af9797e597e524cc257ffeec932bc6a568b882721a3fc5f0"
+    },
+    {
+      "name": "HOSCWindow.dll",
+      "sha256": "5c3c09e72a13364352624bed0cf3a40c3263e10a60188029467823f9f9da09cb"
+    },
+    {
+      "name": "HOSC_TEMPLATE.ui",
+      "sha256": "5b65c1653275702b968a2178c35571e06d38805f61c2922df45adb7bc78f80c3"
+    },
+    {
+      "name": "HOSC_WINDOW.ui",
+      "sha256": "8d51e7e96d02ed74b2a305f40e92553c73410af2eb0b14c407362cbc704d6f14"
+    }
+  ],
+  "runtime": {
+    "machine": "x86",
+    "compiler": "VC7.1",
+    "qt": "3.3.5",
+    "required_files": [
+      {
+        "name": "MSVCR71.dll"
+      },
+      {
+        "name": "MSVCP71.dll"
+      },
+      {
+        "name": "qt-mt335.dll"
+      }
+    ]
+  },
+  "tested_host": [
+    {
+      "name": "sgems.exe",
+      "sha256": "8a3e2311b0ec2a52024068718843301c8d3ad13c78c3cc351e1cb27bb402cb4c"
+    },
+    {
+      "name": "qt-mt335.dll",
+      "sha256": "8135397dc749a9303873b18baddce5e8a913b01d1ae47936d4ff4991cbb67512"
+    },
+    {
+      "name": "GsTLAppli_grid.dll",
+      "sha256": "45c95b240dc0556daa0ee121122c02467c63475a5fc01987a29dc335f191c6a0"
+    },
+    {
+      "name": "GsTLAppli_utils.dll",
+      "sha256": "8af7b60aa3b3db74906cf7839d76244354a11c902faf2b81c0c309f69e1655a6"
+    },
+    {
+      "name": "MSVCR71.dll",
+      "sha256": "2299cc0583db870d89b37fd70a66bb0f7e76575ce5abc199238a716d3c57b858"
+    },
+    {
+      "name": "MSVCP71.dll",
+      "sha256": "df96156f6a548fd6fe5672918de5ae4509d3c810a57bffd2a91de45a3ed5b23b"
+    }
+  ],
+  "source_manifest": "build_source_manifest.json",
+  "source_manifest_note": "Compiled C++/header/UI inputs, verified against this checkout; host hashes identify the tested distribution."
 }

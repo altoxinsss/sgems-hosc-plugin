@@ -12,13 +12,13 @@ The moving-window route requires every member of a window to be informed and fin
 
 The primary result property stores raw kappa_r. When `output_standardized_cumulant=true`, the plugin also writes `<output>_kappa2`, `<output>_lambda`, and `<output>_lambda_valid`, where `lambda_r = kappa_r / kappa_2^(r/2)`. The numerator and denominator use the same complete support and normalized weights. `lambda_valid` is zero when kappa_2 is non-finite or no greater than `variance_epsilon`; the lambda property is then uninformed. Raw kappa_r is retained whenever it is numerically valid.
 
-`invert_window_output` is not a supported statistical transformation and must be false. A true value is rejected before calculation so that the primary kappa, the derived lambda, and the audit sidecar retain one definition. `zero_first_order_moment` is a retired compatibility switch and must also be false. Stable cumulant translation is controlled only by `center_cumulant_input_for_order_ge_2`.
+Primary-statistic inversion and legacy first-moment centering are fixed to false in the backend and have no UI controls. Old parameter files may omit `invert_window_output` and `zero_first_order_moment`, or specify false; explicit true values are rejected before calculation. Stable cumulant translation is controlled only by `center_cumulant_input_for_order_ge_2`.
 
 ## Weighting
 
-The supported moving-window modes are `uniform`, `coordinate_gaussian`, and `soft_high_porosity`. Non-uniform modes require `enable_weighted_moment=true` and `normalize_weights=true`.
+The supported moving-window modes are `uniform`, `coordinate_gaussian`, and `soft_high_porosity`. Non-uniform modes require `enable_weighted_moment=true`. Weight normalization is fixed to true in the backend and has no UI control. Old parameter files may omit `normalize_weights` or specify true; an explicit false value is rejected before calculation, including when weighting is disabled.
 
-`coordinate_gaussian` uses `weight_center_mode=window_center`. For every window, its geometric center and per-axis half-window extent define the relative coordinate Gaussian. Singleton axes contribute zero normalized distance. `weight_center_mode=parameter` is explicitly rejected because no unambiguous scale/unit contract is supplied for that legacy form.
+`coordinate_gaussian` always uses the window center. For every window, its geometric center and per-axis half-window extent define the relative coordinate Gaussian. Singleton axes contribute zero normalized distance. The fixed center policy has no UI control. Old parameter files may omit `weight_center_mode` or specify `window_center`; conflicting explicit values are rejected before calculation.
 
 `soft_high_porosity` uses `(1-eta) + eta * sigmoid((value-threshold)/transition_width)` with the configured threshold, transition width, and strength.
 
@@ -26,7 +26,9 @@ The supported moving-window modes are `uniform`, `coordinate_gaussian`, and `sof
 
 The template input boundary is fixed at zero-based Cartesian node indices; missing source nodes do not alter that basis. After direction reordering and before calculation begins, the plugin freezes the displayed direction count, result-row columns, lag steps, and output dimensions. Result properties use SGeMS x-fastest node order, with every result row placed from this frozen layout rather than from the internal lag-enumeration order or calculator-owned `Keys` arrays. Three selected display directions remain a three-direction layout even when the third output dimension is one.
 
-`HOSC_TEMPLATE` retains `template_sampling=legacy_search` only for 2D Cartesian grids. Three-dimensional template calculations require `template_sampling=exhaustive_integer_offsets`. The exact route is an unweighted cumulant path: it requires one signed nonzero integer vector per configured direction in `integer_direction_vectors`, constructs offsets from the selected lag cell, and evaluates all complete translations of that fixed template. `LAG` is a positive cell step, individual selected lag indices may be zero, and the total joint cumulant order (origin plus all direction occurrences) is at most eight. A lag with no complete translations is uninformed rather than zero.
+All public `HOSC_TEMPLATE` calculation routes are unweighted, and the interface has no weighting tab. Old parameter files may omit `Weighted_Enable` or specify `Disable`; enabling it is rejected before either legacy or exact sampling. This also applies when a legacy file selects a uniform weight mode.
+
+`HOSC_TEMPLATE` retains `template_sampling=legacy_search` only for 2D Cartesian grids. Three-dimensional template calculations require `template_sampling=exhaustive_integer_offsets`. The exact route is a cumulant path: it requires one signed nonzero integer vector per configured direction in `integer_direction_vectors`, constructs offsets from the selected lag cell, and evaluates all complete translations of that fixed template. `LAG` is a positive cell step, individual selected lag indices may be zero, and the total joint cumulant order (origin plus all direction occurrences) is at most eight. A lag with no complete translations is uninformed rather than zero.
 
 ## Output and audit rules
 

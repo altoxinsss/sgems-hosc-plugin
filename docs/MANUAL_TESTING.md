@@ -23,13 +23,15 @@ and `spike`. Their definitions, using zero-based indices, are:
 Check that both algorithms open. In Window, scroll to the audit-directory
 input. In Template, the Exact Template fields should stay together near the
 top when the panel is resized. Save and reload a set of nondefault parameters
-and confirm that all values, including the final field, are restored.
+and confirm that all values, including the final field, are restored. The
+Window interface must not show inversion, normalization, legacy centering,
+or coordinate-center-mode controls. Template must not show a weighting tab.
 
 ## Moving window
 
 Select HOSC_WINDOW, Cumulant, Bell, selftest_3d/phi. Enter a unique Target
 Property. Set order=4, window=3,3,3, steps=1,1,1. Disable weighting and use
-uniform; normalize=true, legacy centering=false, input centering=true,
+uniform; input centering=true,
 standardized output=true, epsilon=1e-12, diagnostics=true, clipping=false.
 Enable the audit sidecar and select an existing writable test directory.
 
@@ -44,7 +46,7 @@ Repeat these actions with a distinct output name each time:
 |---|---|
 | Switch Bell to AVL | Same values, supports, and centers |
 | Enable weighting with uniform | Same values through the shared weighted path |
-| Set coordinate_gaussian, sigma=1, min_weight=0, window_center | ESS about 22.4642796081; compare all rows with expected_window.csv |
+| Set coordinate_gaussian, sigma=1, min_weight=0 | ESS about 22.4642796081; compare all rows with expected_window.csv |
 | Set soft_high_porosity, threshold=.25, width=.02, strength=.8 | Compare all rows with expected_window.csv |
 | Set soft strength=0 | Recovers uniform results |
 | Select spike and run orders1–8 | Compare nonzero odd/even cumulants with the reference; disable lambda for order1 |
@@ -74,8 +76,8 @@ Suggested tolerances for these small fixtures are
 
 ## Exact templates
 
-Select HOSC_TEMPLATE, Cumulant, Bell, property phi. Disable both weighted
-calculation and 3D Slice. Choose exhaustive_integer_offsets. Use order
+Select HOSC_TEMPLATE, Cumulant, Bell, property phi. Disable 3D Slice.
+Choose exhaustive_integer_offsets. Use order
 occurrences NOD=1,1,1, LAG=1,1,1. Fill all seven remaining angle/tolerance
 lists (LTOL, AZM, ATOL, BANDWH, DIP, DTOL, BANDWD) with 0,0,0.
 
@@ -110,13 +112,30 @@ afterward. Check for a readable error, preservation of source/existing results,
 and the ability to run the valid case again.
 
 - Window: order0/9/3.5; window larger than source; stepX0; 3D stepZ0;
-  2D stepZ1; nonuniform weighting while disabled; normalization=false while
-  enabled; sigma0; soft width0 or strength1.1; negative epsilon; Moment with
+  2D stepZ1; nonuniform weighting while disabled; sigma0; soft width0 or
+  strength1.1; negative epsilon; Moment with
   lambda enabled; blank output name or required audit path.
-- Template: 3D legacy_search; exact Moment or exact weighted; inconsistent
+- Template: 3D legacy_search; exact Moment; inconsistent
   list lengths; zero LAG; zero/fractional/wrong-count direction vectors;
   duplicate display directions; invalid hidden Position; order above8.
 - Both algorithms: point-set input is unsupported.
+
+For legacy-file compatibility checks, submit XML directly through a SGeMS
+command file, because removed fields are no longer represented by UI widgets.
+Do not rely on Load Parameters retaining an unknown XML element.
+
+| Parameter-file action | Expected check |
+|---|---|
+| Run the current window examples without the four fixed fields | Same values as the reference fixtures |
+| Add `normalize_weights=true`, `invert_window_output=false`, `zero_first_order_moment=false`, and `weight_center_mode=window_center` | Same values as the example with the fields absent |
+| Set `normalize_weights=false`, with weighting both enabled and disabled | Rejected before calculation in both cases |
+| Set `invert_window_output=true` or `zero_first_order_moment=true`, one at a time | Rejected before calculation |
+| Set `weight_center_mode=parameter`, with uniform and coordinate-Gaussian modes | Rejected before calculation in both cases |
+| Run a template with `Weighted_Enable` absent, then with `Disable` | Same results |
+| Set `Weighted_Enable=Enable` for a valid 2D legacy template, then a valid exact template | Rejected before calculation in both cases, including with `Weight_Mode=uniform` |
+
+After each rejected legacy-file case, submit the valid parameters again in
+the same process and verify the expected numerical output.
 
 Save parameters, alter them, reload, and rerun. Save a project containing valid
 and uninformed results, close SGeMS, reopen, and check masks/values/coordinates.

@@ -37,7 +37,7 @@ New-Item -ItemType Directory -Path $targetDir -Force | Out-Null
 foreach ($name in $artifactNames) { Copy-Item -LiteralPath (Join-Path $StageDir $name) -Destination $targetDir -Force }
 $manifest = [ordered]@{
     schema_version = 1
-    package_version = '2026.10.20'
+    package_version = '2026.11.02'
     built_at_utc = [DateTime]::UtcNow.ToString('o')
     files = @($artifactNames | ForEach-Object { [ordered]@{name=$_;sha256=(Get-HoscSha256 (Join-Path $targetDir $_))} })
     runtime = [ordered]@{

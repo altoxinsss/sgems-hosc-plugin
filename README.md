@@ -34,6 +34,8 @@ For example, from a PowerShell window opened in this repository:
 
 [Quick start](docs/QUICKSTART.md) provides the complete interface settings,
 expected values, data-import instructions, and output descriptions.
+[Interface guide](docs/UI_GUIDE.md) shows the current panels and explains
+which controls apply to each calculation.
 [Troubleshooting](docs/TROUBLESHOOTING.md) covers host compatibility,
 installation, and parameter errors.
 [Release validation](docs/RELEASE_VALIDATION.md) records the completed build,
@@ -71,7 +73,10 @@ the shared weighted recurrence.
   and upstream reservoir-data instructions.
 
 The synthetic examples verify software behavior. The scientific results are
-provided separately under `Paper-data/current_results/2026-10-12/`.
+provided separately under `Paper-data/current_results/2026-10-12/`. The
+[current Supplementary Data S1](Paper-data/supplementary_data_s1/README.md)
+adds the manuscript table mappings and matched-window evidence for Fig. 8,
+Table 4, Supplementary Table S11, and Fig. S16.
 
 Source rebuilding is optional. Plugin source builds require a matching
 VC7.1/SGeMS/Qt3 development environment; the standalone programs use a modern

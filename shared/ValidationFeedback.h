@@ -112,7 +112,11 @@ inline QString field_title(QWidget* field, const std::string& name)
     else if(name == "Algorithm_Mode" || name == "Algorithm_Button") label = "Calculate Algorithm";
     else if(name == "template_sampling") label = "Sampling mode";
     else if(name == "integer_direction_vectors") label = "Integer direction vectors";
-    else if(name == "Weighted_Enable") label = "Enable Weighted Cumulant";
+    else if(name == "Weighted_Enable") label = "Parameter file / template weighting";
+    else if(name == "normalize_weights") label = "Parameter file / weight normalization";
+    else if(name == "zero_first_order_moment") label = "Parameter file / legacy centering";
+    else if(name == "invert_window_output") label = "Parameter file / primary-statistic inversion";
+    else if(name == "weight_center_mode") label = "Parameter file / coordinate weight center";
     else if(name == "NOD") label = "Number of occurrences";
     else if(name == "NLAG") label = "Number of lags";
     else if(name == "LAG") label = "Lag separation";

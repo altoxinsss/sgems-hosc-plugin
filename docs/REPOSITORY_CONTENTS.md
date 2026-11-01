@@ -42,6 +42,7 @@ requirement. See [the build guide](BUILD_FROM_SOURCE.md) before rebuilding.
 | Path | Purpose |
 |---|---|
 | `Paper-data/current_results/2026-10-12/` | Compact results and provenance for Sections 4.3–4.6 and the conditional-shape supplement |
+| `Paper-data/supplementary_data_s1/` | Current manuscript data archive, table/figure mappings, and matched-window records for Fig. 8, Table 4, Table S11, and Fig. S16 |
 | `Paper-data/tools/` | Evidence integrity checks and figure-input export |
 | `Paper-data/raw_data/README.txt` | Stanford VI-E attribution and source-data preparation instructions |
 | `standalone/experiments/` | Orders 4–8 benchmarks, directional templates, direct window statistics, controlled-moment checks, and supporting workflows |
@@ -51,6 +52,13 @@ The `Paper-data` records preserve the original scientific-run configurations,
 reports, and hashes. Use the reproduction guide to resolve source-data and
 output paths on a new machine. Large raw reservoir files and generated maps
 are obtained or generated separately.
+
+The current Supplementary Data S1 archive includes complete data for its 14
+selected windows and the verified candidate-statistics tables. See its
+[README](../Paper-data/supplementary_data_s1/README.md) for extraction and
+verification commands. The October snapshot is retained as execution
+provenance; its original figure previews may differ from the current paper's
+display versions identified in the archive's `FIGURE_TO_FILE_MAP.csv`.
 
 Some module directory names retain their original dates. In particular,
 `standalone/experiments/r1_5_incremental_value_20260924/` supplies modules used
@@ -62,6 +70,7 @@ numerical build dependencies.
 | Document | Purpose |
 |---|---|
 | [QUICKSTART.md](QUICKSTART.md) | Installation, worked interface settings, and expected outputs |
+| [UI_GUIDE.md](UI_GUIDE.md) | Current panel illustrations and active-control explanations |
 | [TROUBLESHOOTING.md](TROUBLESHOOTING.md) | Host, parameter, and output diagnosis |
 | [NUMERICAL_CONTRACT.md](NUMERICAL_CONTRACT.md) | Statistical definitions, support, geometry, and audit rules |
 | [PARAMETER_MAPPING.md](PARAMETER_MAPPING.md) | Interface and implementation parameter correspondence |

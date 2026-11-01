@@ -129,6 +129,16 @@ static void test_hidden_form()
     std::vector<hv::Issue> unknownIssues(1, unknown);
     hv::present(&form, summary, unknownIssues);
     check(summary->text().contains("A general check failed."), "unmapped errors are still shown in summary");
+
+    // Removed controls can still occur in saved PAR files. Their diagnostics
+    // must remain readable even though no widget exists to highlight.
+    hv::Issue retired;
+    retired.field = "normalize_weights";
+    retired.message = "Window weights are always normalized. Remove normalize_weights from the parameter file or set it to true.";
+    hv::present(&form, summary, std::vector<hv::Issue>(1, retired));
+    check(summary->text().contains("Parameter file / weight normalization"),
+        "removed normalization control has a readable parameter-file diagnostic");
+    check(summary->text().contains("always normalized"), "removed-control correction is visible without a widget");
 }
 
 int main(int argc, char** argv)

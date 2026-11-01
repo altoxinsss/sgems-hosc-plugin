@@ -48,13 +48,15 @@ reported fields, then run again.
 |---|---|
 | Source must be a Cartesian grid | Reimport the dataset as a regular Cartesian grid with explicit dimensions and geometry. Point sets are unsupported. |
 | `legacy_search` is not supported for 3D | Select `exhaustive_integer_offsets` for a three-dimensional source. |
-| Exact mode supports unweighted Cumulant only | Select `Cumulant` and set **Enable Weighted Cumulant = Disable**. A selected `uniform` mode does not override an enabled weighting switch. |
+| Exact mode supports Cumulant only | Select `Cumulant` in General. |
+| Template weighting is enabled in an old parameter file | Remove `Weighted_Enable` from that file or set it to `Disable`. Template calculations are unweighted in both sampling modes; the UI has no weighting control. |
 | Integer direction vectors invalid | Supply one nonzero integer vector for each direction. A 3D example is `1,0,0;0,1,0;0,0,1`; a 2D vector has two components. |
 | Template lists have inconsistent lengths | Occurrences, lag counts, lag steps, and all angle/tolerance lists need the same direction count. |
 | Template order exceeds eight | Total order equals one origin occurrence plus the sum of the specified direction occurrences. Reduce the occurrences. |
 | Window step or size invalid | A window must fit the source. X/Y steps must be positive; use Z step zero for a 2D source and a positive Z step for a 3D source. |
-| Weight normalization required | Set `Normalize weights = true` for enabled weighting. |
-| Coordinate center mode invalid | Use `window_center` for coordinate-Gaussian window weighting. |
+| An old file specifies `normalize_weights=false` | Remove that parameter or set it to `true`. Normalization is fixed in the backend and has no UI control. |
+| An old file enables inversion or legacy centering | Remove `invert_window_output` / `zero_first_order_moment`, or set them to `false`. These fixed settings have no UI controls. |
+| Coordinate center mode invalid | Remove `weight_center_mode` from the old file or set it to `window_center`. The backend always uses the window center. |
 | Audit directory invalid | Create an existing writable directory, then select it, or disable the audit sidecar. |
 | Moment with standardized cumulant enabled | Disable standardized cumulant output when calculating moments. |
 

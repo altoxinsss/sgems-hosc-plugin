@@ -46,6 +46,34 @@ Assert-Match $calls 'wmc::is_finite_number\(results\[row\]\) \? 1\.0 : 0\.0' "Ex
 Assert-Match $calls 'std::numeric_limits<double>::quiet_NaN\(\)' "No-support exact lags are not represented as uninformed."
 Assert-Match $ui '<cstring>template_sampling</cstring>' "The UI does not expose the template sampling mode."
 Assert-Match $ui '<cstring>integer_direction_vectors</cstring>' "The UI does not expose exact integer direction vectors."
+if ($ui -match '<cstring>(Weighted_Enable|Weight_Mode|Normalize_Weights|Zero_First_Order_Moment|Weight_[^<]+)</cstring>' -or $ui -match '<string>Weighted Moment</string>') {
+    throw "The template UI still exposes a weighting control or weighting tab."
+}
+
+# Validate the policy before selecting either sampling route. The former
+# legacy-2D early return must not provide an enabled-weighting path.
+$initializeMatch = [regex]::Match($plugin, '(?s)bool HOSC_TEMPLATE::initialize\s*\(.*?(?=\r?\n(?:bool|int|void) HOSC_TEMPLATE::)')
+if (-not $initializeMatch.Success) { throw "Cannot locate template initialization for policy ordering." }
+$initializeText = $initializeMatch.Value
+$weightValidationPosition = $initializeText.IndexOf('get_Weighted_Options(parameters, error_mesgs)')
+$samplingPosition = $initializeText.IndexOf('get_Template_Sampling(parameters, error_mesgs)')
+if ($weightValidationPosition -lt 0 -or $samplingPosition -lt 0 -or $weightValidationPosition -ge $samplingPosition) {
+    throw "Template weighting is not validated before selecting the sampling route."
+}
+$weightOptionsMatch = [regex]::Match($plugin, '(?s)bool HOSC_TEMPLATE::get_Weighted_Options\s*\(.*?(?=\r?\n(?:bool|int|void) HOSC(?:_TEMPLATE)?::)')
+if (-not $weightOptionsMatch.Success) { throw "Cannot locate the template weighting-policy function." }
+$weightOptions = $weightOptionsMatch.Value
+Assert-Match $weightOptions 'weighted_enabled_\s*=\s*false;' "Template execution is not fixed to unweighted."
+Assert-Match $weightOptions 'enabled_text\.empty\(\)' "Template policy does not handle absent legacy weighting parameters."
+Assert-Match $weightOptions 'enabled_text != "disable"' "Template policy does not retain disabled legacy-file compatibility."
+Assert-Match $weightOptions '(?s)error_mesgs->report\("Weighted_Enable", "Template calculations are unweighted\..*?return false;' "Enabled legacy template weighting is not explicitly rejected."
+if ($weightOptions -match 'weighted_enabled_\s*=\s*(true|parse_)') {
+    throw "A public template parameter can still enable weighting."
+}
+[xml]$templateExample = Get-Content -LiteralPath (Join-Path $RepoRoot 'examples\template_3d.par') -Raw
+if ($null -ne $templateExample.SelectSingleNode('/parameters/Weighted_Enable | /parameters/Weight_Mode | /parameters/Normalize_Weights | /parameters/Zero_First_Order_Moment')) {
+    throw "The current template example still serializes removed weighting controls."
+}
 Assert-Match $plugin 'hosc_validation::FeedbackGuard feedback\(error_mesgs, "hosc_template_validation_summary"\)' "The template plugin does not publish its input errors to the form."
 Assert-Match $ui '<cstring>hosc_template_validation_summary</cstring>' "The template UI has no field-specific validation summary."
 

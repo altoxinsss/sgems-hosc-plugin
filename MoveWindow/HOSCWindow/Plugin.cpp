@@ -1236,6 +1236,9 @@ HOSC_WINDOW::HOSC_WINDOW()
 	useWeightedMoment = false;
 	coordinateWeightUsesWindowCenter = true;
 	weightedOptions = wmc::WeightedMomentOptions();
+	// Fixed public policy; legacy PAR fields below are checked, not applied.
+	weightedOptions.normalize_weights = true;
+	weightedOptions.zero_first_order_moment = false;
 
 	G_CalculateTarget = -1;
 	G_TargetDimension = 0;
@@ -2090,6 +2093,8 @@ bool HOSC_WINDOW::get_Weighted_Moment_Options(const Parameters_handler* paramete
 {
 	append_hosc_window_trace("get_Weighted_Moment_Options.begin");
 	weightedOptions = wmc::WeightedMomentOptions();
+	weightedOptions.normalize_weights = true;
+	weightedOptions.zero_first_order_moment = false;
 	useWeightedMoment = false;
 	coordinateWeightUsesWindowCenter = true;
 
@@ -2142,47 +2147,40 @@ bool HOSC_WINDOW::get_Weighted_Moment_Options(const Parameters_handler* paramete
 	}
 
 	const string normalize = parameter_value_compat(parameters, "normalize_weights.value");
-	if(!normalize.empty() && !parse_strict_bool_text(normalize, &weightedOptions.normalize_weights))
+	bool requested_normalize = true;
+	if(!normalize.empty() && !parse_strict_bool_text(normalize, &requested_normalize))
 	{
 		error_mesgs->report("normalize_weights", "Expected a boolean value");
 		return false;
 	}
-	if(useWeightedMoment && !weightedOptions.normalize_weights)
+	if(!requested_normalize)
 	{
-		error_mesgs->report("normalize_weights", "Normalized weights are required for the supported weighted statistics");
+		error_mesgs->report("normalize_weights", "Window weights are always normalized. Remove normalize_weights from the parameter file or set it to true.");
 		return false;
 	}
 
 	const string zero_first = parameter_value_compat(parameters, "zero_first_order_moment.value");
-	if(!zero_first.empty() && !parse_strict_bool_text(zero_first, &weightedOptions.zero_first_order_moment))
+	bool requested_zero_first = false;
+	if(!zero_first.empty() && !parse_strict_bool_text(zero_first, &requested_zero_first))
 	{
 		error_mesgs->report("zero_first_order_moment", "Expected a boolean value");
 		return false;
 	}
-	if(weightedOptions.zero_first_order_moment)
+	if(requested_zero_first)
 	{
-		error_mesgs->report("zero_first_order_moment", "Legacy zero-first-order centering is not supported; use center_cumulant_input_for_order_ge_2 for cumulants");
+		error_mesgs->report("zero_first_order_moment", "Legacy zero-first-order centering is disabled. Remove zero_first_order_moment from the parameter file or set it to false; use center_cumulant_input_for_order_ge_2 for cumulants.");
 		return false;
 	}
 
 	const string center_mode = parameter_value_compat(parameters, "weight_center_mode.value");
-	if(weightedOptions.mode == wmc::WeightMode_CoordinateGaussian)
+	if(!center_mode.empty())
 	{
 		const string normalized_center_mode = normalize_algorithm_text(center_mode);
-		if(normalized_center_mode.empty() || normalized_center_mode == "window_center" ||
-		   normalized_center_mode == "window center")
+		if(!normalized_center_mode.empty() && normalized_center_mode != "window_center" &&
+		   normalized_center_mode != "window center")
 		{
-			coordinateWeightUsesWindowCenter = true;
-		}
-		else if(normalized_center_mode == "parameter")
-		{
-			error_mesgs->report("weight_center_mode", "Parameter center mode is not supported by the relative-window coordinate Gaussian; use window_center");
+			error_mesgs->report("weight_center_mode", "Coordinate Gaussian weights always use the window center. Remove weight_center_mode from the parameter file or set it to window_center.");
 			append_hosc_window_trace("get_Weighted_Moment_Options.fail parameter_center_rejected");
-			return false;
-		}
-		else
-		{
-			error_mesgs->report("weight_center_mode", "Expected window_center or parameter");
 			return false;
 		}
 	}
@@ -2292,14 +2290,15 @@ bool HOSC_WINDOW::get_Windows_Moment(const Parameters_handler* parameters, Error
 	varianceEpsilon = 1.0e-12;
 	auditOutputDirectory.clear();
 	auditRunDirectory.clear();
-	if(!invert_output.empty() && !parse_strict_bool_text(invert_output, &invertWindowOutput))
+	bool requested_invert = false;
+	if(!invert_output.empty() && !parse_strict_bool_text(invert_output, &requested_invert))
 	{
 		error_mesgs->report("invert_window_output", "Expected a boolean value");
 		return false;
 	}
-	if(invertWindowOutput)
+	if(requested_invert)
 	{
-		error_mesgs->report("invert_window_output", "Inverting the primary statistic is not supported; use the raw cumulant output");
+		error_mesgs->report("invert_window_output", "The primary statistic is never inverted. Remove invert_window_output from the parameter file or set it to false.");
 		return false;
 	}
 	if(!enable_clip.empty() && !parse_strict_bool_text(enable_clip, &enablePercentileClipping))

@@ -15,14 +15,11 @@
   <stepx value="1" />
   <stepy value="1" />
   <stepz value="1" />
-  <invert_window_output value="false" />
   <enable_percentile_clipping value="false" />
   <percentile_vmin value="2" />
   <percentile_vmax value="98" />
   <enable_weighted_moment value="Enable" />
   <weight_mode value="coordinate_gaussian" />
-  <normalize_weights value="true" />
-  <zero_first_order_moment value="false" />
   <center_cumulant_input_for_order_ge_2 value="true" />
   <output_standardized_cumulant value="true" />
   <variance_epsilon value="1e-12" />
@@ -32,7 +29,6 @@
   <high_porosity_threshold value="0.25" />
   <soft_transition_width value="0.02" />
   <soft_weight_strength value="0.8" />
-  <weight_center_mode value="window_center" />
   <write_audit_sidecar value="false" />
   <audit_output_directory value="" />
 </parameters>

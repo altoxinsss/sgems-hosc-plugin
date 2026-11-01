@@ -1,10 +1,49 @@
-# Release validation — 20 October 2026
+# Release validation
+
+## Current package — 2 November 2026
+
+Version `2026.11.02` removes the fixed normalization, legacy centering,
+primary-statistic inversion and coordinate-center controls from the window
+interface. The template weighting tab is removed. The backend fixes these
+policies independently of the UI and rejects contradictory legacy parameters.
+Both exact and legacy 2D template calculations are unweighted.
+
+| Current artifact | SHA-256 |
+|---|---|
+| HOSC2008.dll | `7df0c0af505eac15af9797e597e524cc257ffeec932bc6a568b882721a3fc5f0` |
+| HOSCWindow.dll | `5c3c09e72a13364352624bed0cf3a40c3263e10a60188029467823f9f9da09cb` |
+
+Both DLLs were rebuilt with VC7.1 (13.10.3077), Qt 3.3.5 and the matching
+SGeMS SDK. The numerical core, hidden Qt3 feedback checks (including errors
+for removed controls), static UI contracts and binary dependency checks
+passed. The source and release manifests were regenerated from this build.
+
+The four current parameter examples, which omit the removed fields, passed
+all 54 output-node checks in an isolated host and in the installed host.
+The recovery calculation also accepts compatible legacy fixed values.
+Eight additional rejected requests cover false normalization with weighting
+enabled and disabled, legacy centering, inversion, a non-window center in
+uniform and Gaussian modes, and weighted exact-3D and legacy-2D templates.
+Together with the existing malformed-template and zero-window cases, these
+produce eleven expected field diagnostics from ten rejected calls. Subsequent
+valid calculations succeed in the same process, with exit code zero.
+
+The installed DLL/UI pairs were backed up and replaced together; their hashes
+match `bin/win32/manifest.json`. `RunExamples.cmd` reproduces the current
+checks and writes the negative-case names to `RESULT.json`. No full scientific
+experiments or remote publication were performed for this UI change.
+
+## Previous validation — 20 October 2026
+
+The following records describe the earlier package, including its original
+artifact hashes and regression counts. Current package identity and changed
+control behavior are specified above.
 
 The distribution provides prebuilt HOSC plugins for Windows x86 SGeMS 2.0,
 Qt 3.3.5 and the VC7.1 runtime. Normal installation and example execution
 require neither a compiler nor a separate Python installation.
 
-## Package identity
+### Package identity
 
 | Artifact | SHA-256 |
 |---|---|
@@ -16,7 +55,7 @@ fingerprints. `build_source_manifest.json` records the compiled source inputs.
 The source was built in a separate directory containing spaces with the
 VC7.1 compiler (13.10.3077); the numerical and Qt3 widget tests passed.
 
-## Completed checks
+### Completed checks
 
 | Boundary | Result |
 |---|---|
@@ -30,7 +69,7 @@ VC7.1 compiler (13.10.3077); the numerical and Qt3 widget tests passed.
 | Published scientific evidence | 234 copied-file checksums, two derived CSVs and 11 figure/table contracts passed verification. |
 | Download and Git checkout | ZIP extraction, temporary Git add/checkout with `core.autocrlf=true`, and execution from a path containing Unicode and spaces passed; package and research-evidence hashes remained valid. |
 
-## Numerical examples
+### Numerical examples
 
 | Supplied parameter file | Calculation | Nodes | Maximum absolute raw-value error |
 |---|---|---:|---:|
@@ -52,7 +91,7 @@ The two deliberately invalid calls produce four field diagnostics before
 the valid cases run successfully. Interactive appearance of the complete
 SGeMS application is distinct from the hidden Qt3 widget checks.
 
-## External host and scientific-run scope
+### External host and scientific-run scope
 
 The official `sgems_2.0_installer.exe` was downloaded and its SHA-256 matched
 the SourceForge metadata:
@@ -66,7 +105,7 @@ The scientific result package was checked for integrity and provenance.
 Full reservoir experiments were not repeated as part of deployment testing.
 Its existing run reports describe the archived scientific results.
 
-## Contents updated for this distribution
+### Contents updated for this distribution
 
 - Added the latest DLL/UI pairs, installation preflight, transactional backup
   and restoration, four loadable parameter files and executable examples.

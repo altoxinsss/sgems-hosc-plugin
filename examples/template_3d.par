@@ -23,10 +23,6 @@
   <trd_dir value="3" />
   <cross_pos value="1" />
   <Output_3D_Slice_Enable value="Disable" />
-  <Weighted_Enable value="Disable" />
-  <Weight_Mode value="uniform" />
-  <Normalize_Weights value="true" />
-  <Zero_First_Order_Moment value="false" />
   <template_sampling value="exhaustive_integer_offsets" />
   <integer_direction_vectors value="1,0,0;0,1,0;0,0,1" />
 </parameters>

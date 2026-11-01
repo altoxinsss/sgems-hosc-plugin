@@ -1,5 +1,9 @@
 # Quick start: install, calculate, inspect
 
+The [illustrated interface guide](UI_GUIDE.md) shows the panels distributed
+with the 2 November 2026 package. Use the parameter tables below or the shipped
+`.par` files for the reproducible examples; screenshots illustrate the controls.
+
 ## 1. Requirements
 
 - Windows with PowerShell 5.1 or newer.
@@ -82,7 +86,7 @@ output directory:
 | `audit/<run>/window_results.csv` | Double-precision window results and validity/support diagnostics |
 
 The runner also checks that invalid inputs produce specific diagnostics and
-that corrected inputs succeed in the same process. Four recorded field
+that corrected inputs succeed in the same process. Eleven recorded field
 diagnostics are expected in `reported_issues.csv`; the overall success signal
 is `"status": "passed"` in `RESULT.json` and `PASS` in the console.
 
@@ -131,12 +135,9 @@ Select `HOSC_WINDOW` and set:
 | Sliding window | Moment/Cumulant Order | `4` |
 | Sliding window | Window Size X/Y/Z | `3 / 3 / 3` |
 | Sliding window | Move Step X/Y/Z | `1 / 1 / 1` |
-| Sliding window | Invert primary statistic | `false` |
 | Sliding window | Percentile clipping | `false` |
 | Weighted Moment | Enable normalized weighting | `Disable` |
 | Weighted Moment | Weight Mode | `uniform` |
-| Weighted Moment | Normalize weights (required) | `true` |
-| Weighted Moment | Legacy centering (unsupported) | `false` |
 | Weighted Moment | Center cumulant inputs for order >= 2 | `true` |
 | Weighted Moment | Write standardized cumulant lambda | `true` |
 | Weighted Moment | Lambda variance epsilon | `1e-12` |
@@ -146,7 +147,6 @@ Select `HOSC_WINDOW` and set:
 | Weighted Moment | High-porosity threshold | `0.25` |
 | Weighted Moment | Soft transition width | `0.02` |
 | Weighted Moment | Soft weight strength | `0.8` |
-| Weighted Moment | Coordinate center mode | `window_center` |
 | Weighted Moment | Write double audit sidecar | `true` |
 | Weighted Moment | Existing audit base directory | An existing writable directory, e.g. `C:/HOSC_examples/audit` |
 
@@ -189,7 +189,6 @@ Use the same `test / phi` grid. Select `HOSC_TEMPLATE` and set:
 | Target Crosssections | Direction X / Y / Z | `1 / 2 / 3` |
 | Target Crosssections | Position | `1` |
 | 3D Slice | Enable 3D Slice | `Disable` |
-| Weighted Moment | Enable Weighted Cumulant | `Disable` |
 | Exact Template | Sampling mode | `exhaustive_integer_offsets` |
 | Exact Template | Integer direction vectors | `1,0,0;0,1,0;0,0,1` |
 
@@ -202,10 +201,9 @@ reservoir nodes. For lag indices `(i,j,k)`, support is
 `(5-i)(5-j)(3-k)`: 75 at `(0,0,0)` and 9 at `(2,2,2)`. All 27 cells have
 complete-template support. Repeat with Bell to compare evaluators.
 
-Three-dimensional grids require the exact mode. The exact mode requires
-weighted calculation to be disabled, including when the selected weight mode
-is `uniform`. Angle-search controls do not define the exact template; the
-integer vectors and lag steps do.
+Three-dimensional grids require the exact mode. Template calculations use
+equal contributions from complete tuples. Angle-search controls do not define
+the exact template; the integer vectors and lag steps do.
 
 ## 6. Use a new dataset
 

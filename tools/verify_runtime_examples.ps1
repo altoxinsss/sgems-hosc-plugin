@@ -117,7 +117,7 @@ $template = [ordered]@{
     NOD = '1,1,1'; NLAG = '6,12,12'; LAG = '4,4,4'; LTOL = '0,0,0';
     AZM = '180,90,0'; ATOL = '0,0,0'; BANDWH = '0,0,0'; DIP = '0,0,0'; DTOL = '0,0,0'; BANDWD = '0,0,0';
     fst_dir = '3'; snd_dir = '2'; trd_dir = '0'; cross_pos = '1'; Output_3D_Slice_Enable = 'Disable';
-    Weighted_Enable = 'Enable'; Weight_Mode = 'uniform'; Normalize_Weights = 'true'; Zero_First_Order_Moment = 'false';
+    Weighted_Enable = 'Disable'; Weight_Mode = 'uniform'; Normalize_Weights = 'true'; Zero_First_Order_Moment = 'false';
     Weight_Bandwidth = '1'; Weight_Minimum = '0'; Weight_Reference_Value = '0'; Weight_Center_X = '0'; Weight_Center_Y = '0'; Weight_Center_Z = '0';
     template_sampling = 'legacy_search'; integer_direction_vectors = '1,0;0,1'
 }
@@ -141,6 +141,55 @@ $window = [ordered]@{
 $invalidWindowXml = New-ParameterXml 'HOSC_WINDOW' $window
 $window['windowl'] = '3'; $window['props'] = 'valid_window'
 $validWindowXml = New-ParameterXml 'HOSC_WINDOW' $window
+# Exercise the removed fields as legacy PAR input. Each invalid request must
+# fail before creating output, then the normal calls below must still succeed.
+$policyCases = @()
+foreach ($spec in @(
+    @{Name='normalize_enabled'; Field='normalize_weights'; Value='false'; Enabled='true'; Mode='uniform'},
+    @{Name='normalize_disabled'; Field='normalize_weights'; Value='false'; Enabled='false'; Mode='uniform'},
+    @{Name='legacy_centering'; Field='zero_first_order_moment'; Value='true'; Enabled='true'; Mode='uniform'},
+    @{Name='inverted_statistic'; Field='invert_window_output'; Value='true'; Enabled='false'; Mode='uniform'},
+    @{Name='parameter_center'; Field='weight_center_mode'; Value='parameter'; Enabled='true'; Mode='coordinate_gaussian'},
+    @{Name='parameter_center_uniform'; Field='weight_center_mode'; Value='parameter'; Enabled='false'; Mode='uniform'}
+)) {
+    $parameters = [ordered]@{}
+    foreach ($key in $window.Keys) { $parameters[$key] = $window[$key] }
+    $parameters['props'] = 'rejected_' + $spec.Name
+    $parameters['enable_weighted_moment'] = $spec.Enabled
+    $parameters['weight_mode'] = $spec.Mode
+    $parameters[$spec.Field] = $spec.Value
+    $policyCases += [PSCustomObject]@{Name=$spec.Name; Algorithm='HOSC_WINDOW'; Field=$spec.Field; Xml=(New-ParameterXml 'HOSC_WINDOW' $parameters)}
+}
+# A real one-layer Cartesian fixture covers the former legacy-2D bypass.
+function Write-BigEndianNumber($Writer, $Value, [switch]$Single) {
+    if ($Single) { $bytes = [BitConverter]::GetBytes([single]$Value) }
+    else { $bytes = [BitConverter]::GetBytes([uint32]$Value) }
+    [Array]::Reverse($bytes); $Writer.Write($bytes)
+}
+function Write-GridString($Writer, [string]$Value) {
+    $bytes = [Text.Encoding]::ASCII.GetBytes($Value + [char]0)
+    Write-BigEndianNumber $Writer $bytes.Length
+    $Writer.Write($bytes)
+}
+$fixture2d = Join-Path $EvidenceRoot 'input_2d.sgems'
+$fixtureWriter = New-Object IO.BinaryWriter([IO.File]::Create($fixture2d))
+try {
+    Write-BigEndianNumber $fixtureWriter ([uint32]::Parse('B211175D',[Globalization.NumberStyles]::HexNumber))
+    Write-GridString $fixtureWriter 'Cgrid'; Write-GridString $fixtureWriter 'test2d'
+    foreach ($number in @(100,5,5,1)) { Write-BigEndianNumber $fixtureWriter $number }
+    foreach ($number in $source.Geometry) { Write-BigEndianNumber $fixtureWriter $number -Single }
+    Write-BigEndianNumber $fixtureWriter 1; Write-GridString $fixtureWriter 'phi'
+    foreach ($number in $source.Properties['phi'][0..24]) { Write-BigEndianNumber $fixtureWriter $number -Single }
+} finally { $fixtureWriter.Dispose() }
+if ((Read-CartesianGrid $fixture2d).NZ -ne 1) { throw 'Invalid 2D fixture.' }
+foreach ($mode in @('legacy_search','exhaustive_integer_offsets')) {
+    $parameters = [ordered]@{}
+    foreach ($key in $template.Keys) { $parameters[$key] = $template[$key] }
+    $parameters['Weighted_Enable'] = 'Enable'; $parameters['props'] = 'rejected_' + $mode
+    $parameters['template_sampling'] = $mode
+    if ($mode -eq 'legacy_search') { $parameters['Source_Grid'] = 'test2d' }
+    $policyCases += [PSCustomObject]@{Name=$mode; Algorithm='HOSC_TEMPLATE'; Field='Weighted_Enable'; Xml=(New-ParameterXml 'HOSC_TEMPLATE' $parameters)}
+}
 $templateExport = Join-Path $EvidenceRoot 'valid_template.sgems'
 $windowExport = Join-Path $EvidenceRoot 'valid_window.sgems'
 $commandPath = Join-Path $EvidenceRoot 'validation_sequence.cmd'
@@ -148,6 +197,12 @@ $stdoutPath = Join-Path $EvidenceRoot 'host.stdout.log'
 $stderrPath = Join-Path $EvidenceRoot 'host.stderr.log'
 $commands = @(
     "LoadObjectFromFile $FixturePath`::s-gems",
+    "LoadObjectFromFile $fixture2d`::s-gems"
+)
+foreach ($case in $policyCases) {
+    $commands += 'RunGeostatAlgorithm ' + $case.Algorithm + '::/GeostatParamUtils/XML::' + $case.Xml
+}
+$commands += @(
     "RunGeostatAlgorithm HOSC_TEMPLATE::/GeostatParamUtils/XML::$invalidTemplateXml",
     "RunGeostatAlgorithm HOSC_TEMPLATE::/GeostatParamUtils/XML::$validTemplateXml",
     "SaveGeostatGrid myGrid::$templateExport`::s-gems",
@@ -262,11 +317,13 @@ $issues = New-Object 'System.Collections.Generic.List[object]'
 foreach ($match in [regex]::Matches($log, '<(?<field>[A-Za-z_][A-Za-z0-9_]*)\s+diagnostic="(?<message>[^\r\n]*)"\s*/>')) {
     $issues.Add([PSCustomObject]@{ Field = $match.Groups['field'].Value; Message = [Net.WebUtility]::HtmlDecode($match.Groups['message'].Value) })
 }
-foreach ($field in @('template_sampling', 'Weighted_Enable', 'integer_direction_vectors', 'windowl')) {
-    if (@($issues | Where-Object { $_.Field -eq $field }).Count -ne 1) { throw "Expected exactly one diagnostic for $field. See $stderrPath" }
+foreach ($field in @('template_sampling', 'integer_direction_vectors', 'windowl', 'Weighted_Enable', 'normalize_weights', 'zero_first_order_moment', 'invert_window_output', 'weight_center_mode')) {
+    $expectedCount = @($policyCases | Where-Object { $_.Field -eq $field }).Count
+    if ($field -in @('template_sampling', 'integer_direction_vectors', 'windowl')) { $expectedCount++ }
+    if (@($issues | Where-Object { $_.Field -eq $field }).Count -ne $expectedCount) { throw "Expected $expectedCount diagnostic(s) for $field. See $stderrPath" }
 }
-if ($issues.Count -ne 4) { throw "Expected four total field diagnostics (three template, one window); got $($issues.Count)." }
-if ([regex]::Matches($log, 'Command RunGeostatAlgorithm could not be performed').Count -ne 2) { throw 'Expected precisely the two deliberately invalid algorithm calls to fail.' }
+if ($issues.Count -ne (3 + $policyCases.Count)) { throw "Unexpected total field diagnostic count: $($issues.Count)." }
+if ([regex]::Matches($log, 'Command RunGeostatAlgorithm could not be performed').Count -ne (2 + $policyCases.Count)) { throw 'Only the deliberately invalid algorithm calls should fail.' }
 $issues | Export-Csv -LiteralPath (Join-Path $EvidenceRoot 'reported_issues.csv') -NoTypeInformation -Encoding UTF8
 
 $output = Read-CartesianGrid $templateExport
@@ -415,7 +472,8 @@ foreach ($case in $exampleCases) {
 $exampleChecks | Export-Csv -LiteralPath (Join-Path $EvidenceRoot 'gui_example_result_checks.csv') -NoTypeInformation -Encoding UTF8
 $summary = [ordered]@{
     status = 'passed'; host_process_id = $hostPid; host_exit_code = $exitCode; isolated_host = $SGeMSRoot;
-    template_invalid_diagnostic_fields = @('template_sampling', 'Weighted_Enable', 'integer_direction_vectors');
+    template_invalid_diagnostic_fields = @('template_sampling', 'integer_direction_vectors');
+    fixed_policy_rejections = @($policyCases | Select-Object Name,Algorithm,Field);
     template_valid_nodes = 27; template_support_min = 9; template_support_max = 75;
     window_invalid_diagnostic_field = 'windowl'; window_valid_rows = 9;
     same_process_recovery = $true; command_mode_no_modal_hang = $true;

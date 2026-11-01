@@ -23,8 +23,11 @@ and coordinate-Gaussian and soft-high-porosity sixth-order windows. The
 hashes and per-case checks.
 
 The runner deliberately submits invalid parameters before the valid cases to
-check field diagnostics and same-process recovery. The four diagnostics in
+check field diagnostics and same-process recovery. The eleven diagnostics in
 `reported_issues.csv` are expected. `RESULT.json` must report `status: passed`.
+Eight rejected requests cover the removed window controls and template
+weighting in exact 3D and legacy 2D modes. Valid legacy fixed values and the
+current examples without these fields must both calculate successfully.
 
 For explicit paths:
 
@@ -68,7 +71,12 @@ build procedure described in [the build guide](../docs/BUILD_FROM_SOURCE.md).
 
 `tools/verify_moving_window_contract.ps1` and
 `tools/verify_template_contract.ps1` check source/interface contracts and small
-layout models. They do not execute the host's grid or numerical implementation.
+layout models. The checks require the fixed window controls and template
+weighting tab to be absent, and require backend validation of conflicting
+legacy parameters before calculation. They do not execute the host's grid or
+numerical implementation. The direct-XML compatibility and recovery actions
+in [manual testing](../docs/MANUAL_TESTING.md#errors-and-persistence) cover the
+runtime boundary; record their actual run outcomes separately.
 
 The independent standalone implementation has CTest checks and Python tests:
 

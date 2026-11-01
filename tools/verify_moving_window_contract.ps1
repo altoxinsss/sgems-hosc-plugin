@@ -18,7 +18,7 @@ Assert-Match $plugin 'center_cumulant_input_for_order_ge_2' "The stable cumulant
 Assert-Match $plugin 'output_standardized_cumulant' "The standardized cumulant output control is missing."
 Assert-Match $plugin 'variance_epsilon' "The standardized cumulant variance threshold is missing."
 Assert-Match $plugin 'G_CalculateTarget\s*!=\s*4' "Standardized output is not restricted to Cumulant."
-Assert-Match $plugin 'Parameter center mode is not supported' "Coordinate Gaussian parameter-center mode is not explicitly rejected."
+Assert-Match $plugin 'Coordinate Gaussian weights always use the window center' "The fixed coordinate-Gaussian center policy is missing."
 Assert-Match $plugin 'source_nx_\s*==\s*1\s*\|\|\s*source_ny_\s*==\s*1' "The unsupported XZ/YZ-grid guard is missing."
 Assert-Match $plugin 'source_present_\[\(size_t\)\(source_index\s*-\s*1\)\]\s*==\s*0' "Missing source cells are not excluded from complete windows."
 Assert-Match $plugin 'is_float_representable\(value\)' "Float32 display validity is not checked before host output."
@@ -32,8 +32,8 @@ Assert-Match $plugin 'window_params\.call\.returned' "The parameter-function ret
 Assert-Match $plugin 'window_ready\.host_log\.begin' "The host window-ready log boundary trace is missing."
 Assert-Match $plugin 'window_params\.body\.end\.locals_destroy_next' "The parameter local-destruction boundary trace is missing."
 Assert-Match $plugin 'lambda_not_requested' "The audit sidecar cannot distinguish disabled lambda output from a variance failure."
-Assert-Match $plugin 'Inverting the primary statistic is not supported' "The primary-statistic inversion guard is missing."
-Assert-Match $plugin 'Legacy zero-first-order centering is not supported' "The unsupported legacy centering guard is missing."
+Assert-Match $plugin 'The primary statistic is never inverted' "The primary-statistic inversion guard is missing."
+Assert-Match $plugin 'Legacy zero-first-order centering is disabled' "The legacy centering guard is missing."
 Assert-Match $plugin 'is_float_representable\(clipped_values' "The clipped-property float32 range guard is missing."
 Assert-Match $plugin 'source_grid_name_' "The audit sidecar does not receive source-grid identity."
 Assert-Match $plugin 'source_property_name_' "The audit sidecar does not receive source-property identity."
@@ -44,8 +44,37 @@ Assert-Match $ui '<cstring>center_cumulant_input_for_order_ge_2</cstring>' "The 
 Assert-Match $ui '<cstring>output_standardized_cumulant</cstring>' "The UI has no standardized-cumulant control."
 Assert-Match $ui '<cstring>variance_epsilon</cstring>' "The UI has no variance-epsilon control."
 Assert-Match $ui '<cstring>write_audit_sidecar</cstring>' "The UI has no audit-sidecar control."
-Assert-Match $ui 'Invert primary statistic \(unsupported\)' "The UI still presents primary-statistic inversion as supported."
-Assert-Match $ui 'Legacy centering \(unsupported\)' "The UI still presents legacy centering as supported."
+foreach ($fixedField in @('normalize_weights', 'zero_first_order_moment', 'invert_window_output', 'weight_center_mode')) {
+    if ($ui -match ('<cstring>' + [regex]::Escape($fixedField) + '</cstring>')) {
+        throw "The fixed backend setting $fixedField is still exposed in the UI."
+    }
+}
+if ($ui -match 'Normalize weights|Legacy centering|Invert primary statistic|Coordinate center mode') {
+    throw "A removed fixed-setting label remains in the moving-window UI."
+}
+
+# Legacy PAR values are validated separately from the fixed execution state.
+# In particular, normalization=false must not be accepted merely because the
+# current run has weighting disabled.
+Assert-Match $plugin 'weightedOptions\.normalize_weights\s*=\s*true;' "Window normalization is not fixed to true."
+Assert-Match $plugin 'weightedOptions\.zero_first_order_moment\s*=\s*false;' "Legacy first-moment centering is not fixed to false."
+Assert-Match $plugin 'invertWindowOutput\s*=\s*false;' "Primary-statistic inversion is not fixed to false."
+Assert-Match $plugin 'coordinateWeightUsesWindowCenter\s*=\s*true;' "The coordinate Gaussian center is not fixed to the window center."
+Assert-Match $plugin '(?s)if\(!requested_normalize\)\s*\{\s*error_mesgs->report\("normalize_weights",.*?return false;' "Conflicting legacy normalization is not unconditionally rejected."
+Assert-Match $plugin '(?s)if\(requested_zero_first\)\s*\{\s*error_mesgs->report\("zero_first_order_moment",.*?return false;' "Conflicting legacy first-moment centering is not rejected."
+Assert-Match $plugin '(?s)if\(requested_invert\)\s*\{\s*error_mesgs->report\("invert_window_output",.*?return false;' "Conflicting legacy inversion is not rejected."
+Assert-Match $plugin '(?s)if\(!center_mode\.empty\(\)\).*?normalized_center_mode != "window_center".*?error_mesgs->report\("weight_center_mode",.*?return false;' "Conflicting legacy center mode is not rejected."
+if ($plugin -match 'parse_strict_bool_text\([^\r\n]*&(weightedOptions\.(normalize_weights|zero_first_order_moment)|invertWindowOutput)\)') {
+    throw "A legacy boolean parameter still writes directly into fixed execution state."
+}
+foreach ($example in @('window_uniform.par', 'window_coordinate_gaussian.par', 'window_soft_high_porosity.par')) {
+    [xml]$exampleXml = Get-Content -LiteralPath (Join-Path $RepoRoot "examples\$example") -Raw
+    foreach ($fixedField in @('normalize_weights', 'zero_first_order_moment', 'invert_window_output', 'weight_center_mode')) {
+        if ($null -ne $exampleXml.SelectSingleNode("/parameters/$fixedField")) {
+            throw "The current example $example still serializes the fixed field $fixedField."
+        }
+    }
+}
 Assert-Match $plugin 'hosc_validation::FeedbackGuard feedback\(error_mesgs, "hosc_window_validation_summary"\)' "The moving-window plugin does not publish its input errors to the form."
 Assert-Match $ui '<cstring>hosc_window_validation_summary</cstring>' "The moving-window UI has no field-specific validation summary."
 

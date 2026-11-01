@@ -1,6 +1,7 @@
 Title: Supporting data for "An integrated SGeMS plugin for computing high-order spatial statistics"
-Package revision: 2026-10-20
-Current result snapshot: current_results/2026-10-12/
+Package revision: 2026-11-02
+Current manuscript table/data package: supplementary_data_s1/ (see archive_manifest.json)
+Recorded result snapshot: current_results/2026-10-12/
 Source model: Stanford VI-E, Stanford Center for Earth Resources Forecasting
 Source URL: https://github.com/SCRFpublic/Stanford-VI-E
 Code URL: https://github.com/altoxinsss/sgems-hosc-plugin
@@ -19,6 +20,7 @@ Current 3D datasets: z15_26, z45_56, z75_86; each 75 x 100 x 12 coarse-grid cell
 Current primary moving window: 5 x 5 x 3; Section 4.5 also includes 3 x 3 x 3 and 7 x 7 x 3.
 Current direct map count: 102 (90 primary and 12 sensitivity).
 Current evaluation: direct map statistics and paired spatial-block bootstrap; primary 2000 replicates, scale and parameter sensitivity 1000, large-block sensitivity 500.
+Matched-window evidence: Supplementary Data S1 includes seven pairs (14 complete 5 x 5 x 3 windows), 1,050 coarse-cell records, 8,400 original fine-cell records, and 197,280 facies-valid candidate windows across the three subvolumes. Portable scripts verify selected-window statistics, reconstruct the pair screening, export Table S11, and generate Figure S16. This analysis uses existing model outputs without new simulations.
 
 Exact copied files and SHA-256: current_results/2026-10-12/copied_files_manifest.csv
 Derived figure-input provenance: current_results/2026-10-12/figure_inputs/derived_manifest.json

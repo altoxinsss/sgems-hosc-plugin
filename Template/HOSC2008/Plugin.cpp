@@ -1600,11 +1600,7 @@ bool HOSC_TEMPLATE::get_Template_Sampling(const Parameters_handler* parameters, 
 	}
 	if(weighted_enabled_)
 	{
-		std::ostringstream diagnostic;
-		diagnostic << "Weighted Moment / Enable Weighted Cumulant: current value '"
-			<< template_diagnostic_value(parameter_value_or_empty(parameters, "Weighted_Enable.value"))
-			<< "' is incompatible with exhaustive_integer_offsets. Select Disable; choosing uniform alone does not disable weighting.";
-		error_mesgs->report("Weighted_Enable", diagnostic.str());
+		error_mesgs->report("Weighted_Enable", "Template calculations are unweighted. Remove Weighted_Enable from the parameter file or set it to Disable.");
 		valid = false;
 	}
 	const int coordinate_dimensions = source_nz_ <= 1 ? 2 : 3;
@@ -1634,62 +1630,21 @@ bool HOSC_TEMPLATE::get_Template_Sampling(const Parameters_handler* parameters, 
 bool HOSC_TEMPLATE::get_Weighted_Options(const Parameters_handler* parameters, Error_messages_handler* error_mesgs)
 {
 	hosc_debug_log("get_Weighted_Options.begin", "start");
-	try
+	// All public template calculations, including legacy 2D sampling, use
+	// unweighted moments. Validate old PAR files before any sampling branch.
+	weighted_enabled_ = false;
+	weighted_options_ = weighted_moment_core::WeightedMomentOptions();
+	weighted_options_.normalize_weights = true;
+	weighted_options_.zero_first_order_moment = false;
+	const string enabled_text = normalize_algorithm_text(parameter_value_or_empty(parameters, "Weighted_Enable.value"));
+	if(!enabled_text.empty() && enabled_text != "disable" && enabled_text != "disabled" &&
+	   enabled_text != "false" && enabled_text != "0" && enabled_text != "no" && enabled_text != "off")
 	{
-		string enabled_text = parameter_value_or_empty(parameters, "Weighted_Enable.value");
-		weighted_enabled_ = parse_bool_selection(enabled_text);
-		hosc_debug_log("get_Weighted_Options.enable", "raw=%s parsed=%d", enabled_text.c_str(), weighted_enabled_ ? 1 : 0);
-		if(!weighted_enabled_)
-		{
-			weighted_options_ = weighted_moment_core::WeightedMomentOptions();
-			hosc_debug_log("get_Weighted_Options.end", "disabled");
-			return true;
-		}
-
-		weighted_options_ = weighted_moment_core::WeightedMomentOptions();
-		weighted_options_.mode = parse_weight_mode_selection(parameter_value_or_empty(parameters, "Weight_Mode.value"));
-		weighted_options_.bandwidth = parameter_double_or(parameters, "Weight_Bandwidth.value", 1.0);
-		weighted_options_.reference_value = parameter_double_or(parameters, "Weight_Reference_Value.value", 0.0);
-		weighted_options_.min_weight = parameter_double_or(parameters, "Weight_Minimum.value", 0.0);
-		weighted_options_.center_x = parameter_double_or(parameters, "Weight_Center_X.value", 0.0);
-		weighted_options_.center_y = parameter_double_or(parameters, "Weight_Center_Y.value", 0.0);
-		weighted_options_.center_z = parameter_double_or(parameters, "Weight_Center_Z.value", 0.0);
-		weighted_options_.normalize_weights = parse_bool_selection(parameter_value_or_empty(parameters, "Normalize_Weights.value"));
-		weighted_options_.zero_first_order_moment = parse_bool_selection(parameter_value_or_empty(parameters, "Zero_First_Order_Moment.value"));
-	}
-	catch(...)
-	{
-		weighted_enabled_ = false;
-		weighted_options_ = weighted_moment_core::WeightedMomentOptions();
-		hosc_debug_log("get_Weighted_Options.fail", "unexpected exception; weighted disabled");
-		return true;
-	}
-
-	if(weighted_options_.bandwidth <= 0.0)
-	{
-		hosc_debug_log("get_Weighted_Options.fail", "bandwidth=%.17g", weighted_options_.bandwidth);
-		error_mesgs->report("Weight_Bandwidth", "Weight bandwidth must be positive");
+		error_mesgs->report("Weighted_Enable", "Template calculations are unweighted. Remove Weighted_Enable from the parameter file or set it to Disable. Use HOSC_WINDOW for normalized spatial or value weighting.");
+		hosc_debug_log("get_Weighted_Options.fail", "template weighting request rejected");
 		return false;
 	}
-	if(weighted_options_.min_weight < 0.0)
-	{
-		hosc_debug_log("get_Weighted_Options.fail", "min_weight=%.17g", weighted_options_.min_weight);
-		error_mesgs->report("Weight_Minimum", "Minimum weight must be non-negative");
-		return false;
-	}
-	hosc_debug_log(
-		"get_Weighted_Options.end",
-		"enabled=%d mode=%d bandwidth=%.17g ref=%.17g min=%.17g center=(%.17g,%.17g,%.17g) normalize=%d zero_first=%d",
-		weighted_enabled_ ? 1 : 0,
-		(int)weighted_options_.mode,
-		weighted_options_.bandwidth,
-		weighted_options_.reference_value,
-		weighted_options_.min_weight,
-		weighted_options_.center_x,
-		weighted_options_.center_y,
-		weighted_options_.center_z,
-		weighted_options_.normalize_weights ? 1 : 0,
-		weighted_options_.zero_first_order_moment ? 1 : 0);
+	hosc_debug_log("get_Weighted_Options.end", "fixed unweighted policy");
 	return true;
 }
 
