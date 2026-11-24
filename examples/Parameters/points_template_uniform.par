@@ -1,0 +1,30 @@
+<parameters>
+  <algorithm name="HOSC_TEMPLATE" />
+  <Source_Grid value="points" />
+  <Source_Property value="value" />
+  <weight_mode value="uniform" />
+  <weight_property value="weight" />
+  <Target_Button value="Cumulant" />
+  <Algorithm_Button value="AVL Based algorithm" />
+  <coordinate_dimensions value="3" />
+  <output_diagnostics value="true" />
+  <output_point_weights value="true" />
+  <NOD value="3" />
+  <NLAG value="2" />
+  <LAG value="1" />
+  <LTOL value="0" />
+  <AZM value="0" />
+  <ATOL value="0" />
+  <BANDWH value="0" />
+  <DIP value="0" />
+  <DTOL value="0" />
+  <BANDWD value="0" />
+  <fst_dir value="1" />
+  <snd_dir value="0" />
+  <trd_dir value="0" />
+  <cross_pos value="" />
+  <enable_weighted_moment value="1" />
+  <template_sampling value="point_set_tolerance" />
+  <integer_direction_vectors value="1,0,0" />
+  <props value="points_template_uniform" />
+</parameters>

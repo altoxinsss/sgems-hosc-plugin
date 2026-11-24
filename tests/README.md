@@ -1,91 +1,61 @@
-# Tests and reference fixtures
+# Tests for the native SGeMS x64 plugins
 
-## Reviewer installation check
+The primary checks load the DLLs inside a real SGeMS process. They do not replace plugin runs with the optional reference executables. Run commands from the repository root with Python 3.10 or later. Generated files belong in ignored `build/` and `output/` directories, not in the paper evidence package.
 
-After installing the prebuilt package, run from the repository root:
-
-```powershell
-.\RunExamples.cmd "C:\SGeMS"
-```
-
-This runs small calculations with the supplied native Cartesian grid in a
-separate SGeMS environment, exports results, and validates numerical values and
-support. The output directory and validation manifest are printed by the
-runner. Each run writes a separate `run_<timestamp>_<id>` directory containing
-`RESULT.json`, `reported_issues.csv`, `template_result_checks.csv`, exported
-`.sgems` grids, and window audit files. No compiler or Python is required.
-
-The four shipped `examples/*.par` files are executed with their original
-parameters: a fourth-order exact template, a uniform fourth-order window,
-and coordinate-Gaussian and soft-high-porosity sixth-order windows. The
-54 checked output nodes are recorded in `gui_example_result_checks.csv`;
-`executed_parameters/` preserves the files and `RESULT.json` records their
-hashes and per-case checks.
-
-The runner deliberately submits invalid parameters before the valid cases to
-check field diagnostics and same-process recovery. The eleven diagnostics in
-`reported_issues.csv` are expected. `RESULT.json` must report `status: passed`.
-Eight rejected requests cover the removed window controls and template
-weighting in exact 3D and legacy 2D modes. Valid legacy fixed values and the
-current examples without these fields must both calculate successfully.
-
-For explicit paths:
+## 1. Check the distribution without running SGeMS
 
 ```powershell
-powershell.exe -NoProfile -ExecutionPolicy Bypass -File .\tools\run_examples.ps1 -SGeMSRoot "C:\SGeMS" -OutputDirectory "C:\HOSC_examples"
+python tools/check_repository.py
+python tests/repository_tools_checks.py
+.\tools\install_x64.ps1 -TargetRoot "D:\SGeMS-x64-Beta" -VerifyOnly
 ```
 
-[QUICKSTART.md](../docs/QUICKSTART.md) gives equivalent interface actions and
-expected values. [MANUAL_TESTING.md](../docs/MANUAL_TESTING.md) covers additional
-weighting, missing-value, invalid-input, save/reload, and repeated-run cases.
+These verify the numerical-source baseline, release hashes, x64 DLL headers, UI copies, paper-data hashes, evaluator selections and documentation links. Parameter-copy tests also confirm that only paths change and that existing output is not overwritten. They do not demonstrate numerical correctness on their own.
 
-## Fixtures
+## 2. Run the six introductory examples
 
-| File | Contents and use |
-|---|---|
-| `fixtures/manual/selftest_3d_cartesian.sgems` | Native Cartesian grid named `test`, dimensions `5 × 5 × 3`, unit cells, zero origin, property `phi`; ready to load |
-| `fixtures/manual/selftest_2d.gslib` | 25 rows, dimensions `5 × 5 × 1`; import as a Cartesian grid |
-| `fixtures/manual/selftest_3d.gslib` | 75 rows, dimensions `5 × 5 × 3`; import as a Cartesian grid |
-| `fixtures/manual/expected_window.csv` | Reference values for `phi` and `spike`, three weight modes, orders 1–8, and nine 3D windows |
-| `fixtures/manual/expected_template.csv` | Reference values for the documented 2D, 3D, and singleton-third-lag cases |
-
-The native `.sgems` fixture contains only `phi`. The GSLIB files contain
-`phi`, `constant`, `phi_shift`, `phi_missing0`, `locator`, and `spike`. Their
-definitions and import settings are in the manual testing guide. The expected
-CSVs are reference calculations, not logs of host executions.
-
-For the basic uniform, fourth-order `3 × 3 × 3` window on the native fixture,
-all nine results have raw cumulant `-6.2306722005208369e-5`, variance
-`0.009114583333333334`, standardized cumulant `-0.75`, and support/ESS `27`.
-The extended template CSV describes its named cases; the quick-start
-`3 × 3 × 3` lag example is a separate 27-cell configuration.
-
-## Developer checks
-
-`vc9_core_checks.cpp` retains its historical filename and exercises the shared
-weighted-statistics core: nonzero-mean low-order cumulants, independent central
-moment formulas through order six, translation invariance through order eight,
-standardized cumulants, effective sample size, soft weights, and relative-window
-Gaussian geometry. It is a core test, not a SGeMS GUI test. Use the matching
-build procedure described in [the build guide](../docs/BUILD_FROM_SOURCE.md).
-
-`tools/verify_moving_window_contract.ps1` and
-`tools/verify_template_contract.ps1` check source/interface contracts and small
-layout models. The checks require the fixed window controls and template
-weighting tab to be absent, and require backend validation of conflicting
-legacy parameters before calculation. They do not execute the host's grid or
-numerical implementation. The direct-XML compatibility and recovery actions
-in [manual testing](../docs/MANUAL_TESTING.md#errors-and-persistence) cover the
-runtime boundary; record their actual run outcomes separately.
-
-The independent standalone implementation has CTest checks and Python tests:
+Prepare an isolated runtime in a **new directory**. The source installation is read but never modified.
 
 ```powershell
-cmake -S standalone -B standalone/build
-cmake --build standalone/build --config Release
-ctest --test-dir standalone/build -C Release --output-on-failure
+python tools/stage_test_host.py --host "D:\SGeMS-x64-Beta" --output "D:\HOSC-tests\host"
+python tools/run_examples.py --host "D:\HOSC-tests\host" --out "D:\HOSC-tests\examples"
 ```
 
-See [standalone/README.md](../standalone/README.md) for toolchains, Python
-requirements, and the experiment tests. Scientific result integrity is checked
-separately by the tools under `Paper-data/tools/`.
+The runner checks all six bundled parameter files against independent fourth-order partition calculations, saved native results and successful 64-bit performance records. The output path must be new to avoid stale results.
+
+## 3. Geometry, support and evaluator regressions
+
+```powershell
+python tests/current_host_checks.py --host "D:\HOSC-tests\host" --out "D:\HOSC-tests\core"
+```
+
+This suite covers grid and point input, exact and tolerance template searches, raw moments, Bell/AVL selections, missing values, origin/spacing, output slices, support, standardization and the three declustering methods. It includes independent partition calculations. Use a fresh output directory for each run.
+
+## 4. Build and check the Qt4 interface and run recorder
+
+```powershell
+python tools/build_x64.py --sdk-root "D:\Development\DLL\DLL\WithSGeMS64\sdk" --with-tests
+```
+
+After step 3, run the interface test with the same isolated host and its successful fixtures:
+
+```powershell
+python tools/run_ui_checks.py --host "D:\HOSC-tests\host" --suite "D:\HOSC-tests\core" --out "D:\HOSC-tests\ui"
+```
+
+This invokes `build/x64/qt4_ui_smoke.exe`, loads the actual host selector and Qt4 forms, checks saved evaluator/weight selections, and runs and saves outputs through the control panel. `--exe` selects another build directory. The runner sets the host DLL and embedded Python paths for the child process only. The form is placed off-screen by the test. Saved results are compared with the independently checked host fixtures.
+
+`build/x64/run_performance_checks.exe <existing-output-directory>` checks per-run timer, sampled memory peak, reset versus lifetime peak, success/failure records and monitor-handle cleanup. It uses a temporary 64 MiB allocation, not a paper benchmark.
+
+To test newly built DLLs, stage another fresh host with `--dll-dir build/x64`. Builds do not overwrite the distributed or installed plugins.
+
+## Optional developer-reference comparisons
+
+The following tests also need the executables built from [dev/reference](../dev/reference/README.md):
+
+- `external_weight_host_checks.py`: external weights, all-one/scaled weights, missing data and invalid weights.
+- `window_declustering_host_checks.py`: window weighting and geometry against the independent reference.
+- `window_declustering_edge_checks.py`: edge cases for the same comparison.
+- `native_reference_checks.py`: comparison helpers and extended historical fixture replay; its `--reference` argument requires an earlier run archive, which is not included in the minimal distribution.
+
+Use each script's `--help` for its required paths. These are development checks, not additional software required by SGeMS users. See [validation scope](../docs/VALIDATION.md).

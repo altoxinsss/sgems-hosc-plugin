@@ -1,0 +1,278 @@
+﻿measurement,case_id,algorithm,role,repeat,process_bits,elapsed_seconds,baseline_working_set_mib,peak_working_set_mib,working_set_increase_mib
+timing,S43_template_direction_r6_d2_a3-2_avl,AVL Based algorithm,warmup,0,64,1.7435510000000001,,,
+timing,S43_template_direction_r6_d2_a3-2_avl,AVL Based algorithm,formal,1,64,1.7083655,,,
+timing,S43_template_direction_r6_d2_a3-2_avl,AVL Based algorithm,formal,2,64,1.7288905000000001,,,
+timing,S43_template_direction_r6_d2_a3-2_avl,AVL Based algorithm,formal,3,64,1.7338726,,,
+timing,S43_template_direction_r6_d2_a3-2_avl,AVL Based algorithm,formal,4,64,1.7426173,,,
+timing,S43_template_direction_r6_d2_a3-2_avl,AVL Based algorithm,formal,5,64,1.7747284000000001,,,
+timing,S43_template_direction_r6_d2_a3-2_bell,Bell,warmup,0,64,9.4560894999999991,,,
+timing,S43_template_direction_r6_d2_a3-2_bell,Bell,formal,1,64,9.3934137,,,
+timing,S43_template_direction_r6_d2_a3-2_bell,Bell,formal,2,64,9.5245245999999995,,,
+timing,S43_template_direction_r6_d2_a3-2_bell,Bell,formal,3,64,9.3464568000000003,,,
+timing,S43_template_direction_r6_d2_a3-2_bell,Bell,formal,4,64,9.4194133000000004,,,
+timing,S43_template_direction_r6_d2_a3-2_bell,Bell,formal,5,64,9.5646114000000004,,,
+timing,S43_template_direction_r6_d4_a2-1-1-1_avl,AVL Based algorithm,warmup,0,64,2.3041011,,,
+timing,S43_template_direction_r6_d4_a2-1-1-1_avl,AVL Based algorithm,formal,1,64,2.296443,,,
+timing,S43_template_direction_r6_d4_a2-1-1-1_avl,AVL Based algorithm,formal,2,64,2.3303031999999999,,,
+timing,S43_template_direction_r6_d4_a2-1-1-1_avl,AVL Based algorithm,formal,3,64,2.3261357,,,
+timing,S43_template_direction_r6_d4_a2-1-1-1_avl,AVL Based algorithm,formal,4,64,2.3400208999999998,,,
+timing,S43_template_direction_r6_d4_a2-1-1-1_avl,AVL Based algorithm,formal,5,64,2.3418578999999999,,,
+timing,S43_template_direction_r6_d4_a2-1-1-1_bell,Bell,warmup,0,64,9.7877825999999999,,,
+timing,S43_template_direction_r6_d4_a2-1-1-1_bell,Bell,formal,1,64,9.7781298999999997,,,
+timing,S43_template_direction_r6_d4_a2-1-1-1_bell,Bell,formal,2,64,9.9381158000000003,,,
+timing,S43_template_direction_r6_d4_a2-1-1-1_bell,Bell,formal,3,64,9.8318732999999998,,,
+timing,S43_template_direction_r6_d4_a2-1-1-1_bell,Bell,formal,4,64,9.8566377000000003,,,
+timing,S43_template_direction_r6_d4_a2-1-1-1_bell,Bell,formal,5,64,9.9634894000000003,,,
+timing,S43_template_occurrence_r6_d3_a1-1-3_avl,AVL Based algorithm,warmup,0,64,1.8409466000000001,,,
+timing,S43_template_occurrence_r6_d3_a1-1-3_avl,AVL Based algorithm,formal,1,64,1.8474058,,,
+timing,S43_template_occurrence_r6_d3_a1-1-3_avl,AVL Based algorithm,formal,2,64,1.8494984000000001,,,
+timing,S43_template_occurrence_r6_d3_a1-1-3_avl,AVL Based algorithm,formal,3,64,1.8652331,,,
+timing,S43_template_occurrence_r6_d3_a1-1-3_avl,AVL Based algorithm,formal,4,64,1.8494116,,,
+timing,S43_template_occurrence_r6_d3_a1-1-3_avl,AVL Based algorithm,formal,5,64,1.8806181,,,
+timing,S43_template_occurrence_r6_d3_a1-1-3_bell,Bell,warmup,0,64,10.230958599999999,,,
+timing,S43_template_occurrence_r6_d3_a1-1-3_bell,Bell,formal,1,64,10.2807099,,,
+timing,S43_template_occurrence_r6_d3_a1-1-3_bell,Bell,formal,2,64,10.2845829,,,
+timing,S43_template_occurrence_r6_d3_a1-1-3_bell,Bell,formal,3,64,10.221746899999999,,,
+timing,S43_template_occurrence_r6_d3_a1-1-3_bell,Bell,formal,4,64,10.2923174,,,
+timing,S43_template_occurrence_r6_d3_a1-1-3_bell,Bell,formal,5,64,10.333767099999999,,,
+timing,S43_template_occurrence_r6_d3_a1-3-1_avl,AVL Based algorithm,warmup,0,64,1.9717084,,,
+timing,S43_template_occurrence_r6_d3_a1-3-1_avl,AVL Based algorithm,formal,1,64,1.9780911000000001,,,
+timing,S43_template_occurrence_r6_d3_a1-3-1_avl,AVL Based algorithm,formal,2,64,1.9786763999999999,,,
+timing,S43_template_occurrence_r6_d3_a1-3-1_avl,AVL Based algorithm,formal,3,64,1.9751371,,,
+timing,S43_template_occurrence_r6_d3_a1-3-1_avl,AVL Based algorithm,formal,4,64,1.9896446000000001,,,
+timing,S43_template_occurrence_r6_d3_a1-3-1_avl,AVL Based algorithm,formal,5,64,1.9780757,,,
+timing,S43_template_occurrence_r6_d3_a1-3-1_avl,AVL Based algorithm,extra,1,64,1.9845383000000001,,,
+timing,S43_template_occurrence_r6_d3_a1-3-1_bell,Bell,warmup,0,64,10.2221452,,,
+timing,S43_template_occurrence_r6_d3_a1-3-1_bell,Bell,formal,1,64,10.384741999999999,,,
+timing,S43_template_occurrence_r6_d3_a1-3-1_bell,Bell,formal,2,64,10.4070097,,,
+timing,S43_template_occurrence_r6_d3_a1-3-1_bell,Bell,formal,3,64,10.2718858,,,
+timing,S43_template_occurrence_r6_d3_a1-3-1_bell,Bell,formal,4,64,10.3988604,,,
+timing,S43_template_occurrence_r6_d3_a1-3-1_bell,Bell,formal,5,64,10.306282400000001,,,
+timing,S43_template_occurrence_r6_d3_a3-1-1_avl,AVL Based algorithm,warmup,0,64,1.9822047,,,
+timing,S43_template_occurrence_r6_d3_a3-1-1_avl,AVL Based algorithm,formal,1,64,1.9849576,,,
+timing,S43_template_occurrence_r6_d3_a3-1-1_avl,AVL Based algorithm,formal,2,64,1.9981008,,,
+timing,S43_template_occurrence_r6_d3_a3-1-1_avl,AVL Based algorithm,formal,3,64,1.9949600999999999,,,
+timing,S43_template_occurrence_r6_d3_a3-1-1_avl,AVL Based algorithm,formal,4,64,2.0003364000000001,,,
+timing,S43_template_occurrence_r6_d3_a3-1-1_avl,AVL Based algorithm,formal,5,64,1.9799994999999999,,,
+timing,S43_template_occurrence_r6_d3_a3-1-1_bell,Bell,warmup,0,64,10.6446185,,,
+timing,S43_template_occurrence_r6_d3_a3-1-1_bell,Bell,formal,1,64,10.3311265,,,
+timing,S43_template_occurrence_r6_d3_a3-1-1_bell,Bell,formal,2,64,10.4793109,,,
+timing,S43_template_occurrence_r6_d3_a3-1-1_bell,Bell,formal,3,64,10.889484100000001,,,
+timing,S43_template_occurrence_r6_d3_a3-1-1_bell,Bell,formal,4,64,10.9065987,,,
+timing,S43_template_occurrence_r6_d3_a3-1-1_bell,Bell,formal,5,64,10.832099299999999,,,
+timing,S43_template_order_r4_d3_a1-1-1_avl,AVL Based algorithm,warmup,0,64,1.8491123,,,
+timing,S43_template_order_r4_d3_a1-1-1_avl,AVL Based algorithm,formal,1,64,1.8505052,,,
+timing,S43_template_order_r4_d3_a1-1-1_avl,AVL Based algorithm,formal,2,64,1.8749317000000001,,,
+timing,S43_template_order_r4_d3_a1-1-1_avl,AVL Based algorithm,formal,3,64,1.8696339,,,
+timing,S43_template_order_r4_d3_a1-1-1_avl,AVL Based algorithm,formal,4,64,1.8731473999999999,,,
+timing,S43_template_order_r4_d3_a1-1-1_avl,AVL Based algorithm,formal,5,64,1.8494914,,,
+timing,S43_template_order_r4_d3_a1-1-1_bell,Bell,warmup,0,64,2.0588852000000002,,,
+timing,S43_template_order_r4_d3_a1-1-1_bell,Bell,formal,1,64,2.0640369999999999,,,
+timing,S43_template_order_r4_d3_a1-1-1_bell,Bell,formal,2,64,2.0872183,,,
+timing,S43_template_order_r4_d3_a1-1-1_bell,Bell,formal,3,64,2.0693880999999998,,,
+timing,S43_template_order_r4_d3_a1-1-1_bell,Bell,formal,4,64,2.0682700999999999,,,
+timing,S43_template_order_r4_d3_a1-1-1_bell,Bell,formal,5,64,2.0816403000000001,,,
+timing,S43_template_order_r5_d3_a2-1-1_avl,AVL Based algorithm,warmup,0,64,2.0322642000000002,,,
+timing,S43_template_order_r5_d3_a2-1-1_avl,AVL Based algorithm,formal,1,64,2.0061612000000002,,,
+timing,S43_template_order_r5_d3_a2-1-1_avl,AVL Based algorithm,formal,2,64,2.0418891000000001,,,
+timing,S43_template_order_r5_d3_a2-1-1_avl,AVL Based algorithm,formal,3,64,2.0540378000000001,,,
+timing,S43_template_order_r5_d3_a2-1-1_avl,AVL Based algorithm,formal,4,64,2.0191026000000001,,,
+timing,S43_template_order_r5_d3_a2-1-1_avl,AVL Based algorithm,formal,5,64,2.0426286,,,
+timing,S43_template_order_r5_d3_a2-1-1_bell,Bell,warmup,0,64,3.5189583999999998,,,
+timing,S43_template_order_r5_d3_a2-1-1_bell,Bell,formal,1,64,3.4720414000000002,,,
+timing,S43_template_order_r5_d3_a2-1-1_bell,Bell,formal,2,64,3.4898088999999999,,,
+timing,S43_template_order_r5_d3_a2-1-1_bell,Bell,formal,3,64,3.4820215999999999,,,
+timing,S43_template_order_r5_d3_a2-1-1_bell,Bell,formal,4,64,3.4814601999999999,,,
+timing,S43_template_order_r5_d3_a2-1-1_bell,Bell,formal,5,64,3.4881677,,,
+timing,S43_template_order_r6_d3_a2-2-1_avl,AVL Based algorithm,warmup,0,64,2.4033494000000002,,,
+timing,S43_template_order_r6_d3_a2-2-1_avl,AVL Based algorithm,formal,1,64,2.3580182999999999,,,
+timing,S43_template_order_r6_d3_a2-2-1_avl,AVL Based algorithm,formal,2,64,2.3894438999999998,,,
+timing,S43_template_order_r6_d3_a2-2-1_avl,AVL Based algorithm,formal,3,64,2.3524314999999998,,,
+timing,S43_template_order_r6_d3_a2-2-1_avl,AVL Based algorithm,formal,4,64,2.3902169,,,
+timing,S43_template_order_r6_d3_a2-2-1_avl,AVL Based algorithm,formal,5,64,2.3590195,,,
+timing,S43_template_order_r6_d3_a2-2-1_bell,Bell,warmup,0,64,10.4122903,,,
+timing,S43_template_order_r6_d3_a2-2-1_bell,Bell,formal,1,64,10.3508207,,,
+timing,S43_template_order_r6_d3_a2-2-1_bell,Bell,formal,2,64,10.4355115,,,
+timing,S43_template_order_r6_d3_a2-2-1_bell,Bell,formal,3,64,10.399054100000001,,,
+timing,S43_template_order_r6_d3_a2-2-1_bell,Bell,formal,4,64,10.481565700000001,,,
+timing,S43_template_order_r6_d3_a2-2-1_bell,Bell,formal,5,64,10.4159404,,,
+timing,S43_template_order_r7_d3_a2-2-2_avl,AVL Based algorithm,warmup,0,64,2.9168270000000001,,,
+timing,S43_template_order_r7_d3_a2-2-2_avl,AVL Based algorithm,formal,1,64,2.9012916999999998,,,
+timing,S43_template_order_r7_d3_a2-2-2_avl,AVL Based algorithm,formal,2,64,2.9431395,,,
+timing,S43_template_order_r7_d3_a2-2-2_avl,AVL Based algorithm,formal,3,64,2.8853179,,,
+timing,S43_template_order_r7_d3_a2-2-2_avl,AVL Based algorithm,formal,4,64,2.9084037,,,
+timing,S43_template_order_r7_d3_a2-2-2_avl,AVL Based algorithm,formal,5,64,2.8941883000000002,,,
+timing,S43_template_order_r7_d3_a2-2-2_bell,Bell,warmup,0,64,45.733393800000002,,,
+timing,S43_template_order_r7_d3_a2-2-2_bell,Bell,formal,1,64,47.718869300000001,,,
+timing,S43_template_order_r7_d3_a2-2-2_bell,Bell,formal,2,64,45.5893175,,,
+timing,S43_template_order_r7_d3_a2-2-2_bell,Bell,formal,3,64,45.571070300000002,,,
+timing,S43_template_order_r7_d3_a2-2-2_bell,Bell,formal,4,64,45.797585300000001,,,
+timing,S43_template_order_r7_d3_a2-2-2_bell,Bell,formal,5,64,45.618830600000003,,,
+timing,S43_template_order_r8_d3_a3-2-2_avl,AVL Based algorithm,warmup,0,64,3.3047164000000002,,,
+timing,S43_template_order_r8_d3_a3-2-2_avl,AVL Based algorithm,formal,1,64,3.4587211,,,
+timing,S43_template_order_r8_d3_a3-2-2_avl,AVL Based algorithm,formal,2,64,3.3471875999999998,,,
+timing,S43_template_order_r8_d3_a3-2-2_avl,AVL Based algorithm,formal,3,64,3.3605915,,,
+timing,S43_template_order_r8_d3_a3-2-2_avl,AVL Based algorithm,formal,4,64,3.3251103,,,
+timing,S43_template_order_r8_d3_a3-2-2_avl,AVL Based algorithm,formal,5,64,3.3341050999999999,,,
+timing,S43_template_order_r8_d3_a3-2-2_bell,Bell,warmup,0,64,246.45537970000001,,,
+timing,S43_template_order_r8_d3_a3-2-2_bell,Bell,formal,1,64,247.32724970000001,,,
+timing,S43_template_order_r8_d3_a3-2-2_bell,Bell,formal,2,64,243.56638280000001,,,
+timing,S43_template_order_r8_d3_a3-2-2_bell,Bell,formal,3,64,245.71984219999999,,,
+timing,S43_template_order_r8_d3_a3-2-2_bell,Bell,formal,4,64,244.4438126,,,
+timing,S43_template_order_r8_d3_a3-2-2_bell,Bell,formal,5,64,246.25032160000001,,,
+timing,S43_template_workload_r4_d3_a1-1-1_10x10_avl,AVL Based algorithm,warmup,0,64,0.76706830000000004,,,
+timing,S43_template_workload_r4_d3_a1-1-1_10x10_avl,AVL Based algorithm,formal,1,64,0.77905440000000004,,,
+timing,S43_template_workload_r4_d3_a1-1-1_10x10_avl,AVL Based algorithm,formal,2,64,0.76937639999999996,,,
+timing,S43_template_workload_r4_d3_a1-1-1_10x10_avl,AVL Based algorithm,formal,3,64,0.79006949999999998,,,
+timing,S43_template_workload_r4_d3_a1-1-1_10x10_avl,AVL Based algorithm,formal,4,64,0.76715960000000005,,,
+timing,S43_template_workload_r4_d3_a1-1-1_10x10_avl,AVL Based algorithm,formal,5,64,0.78349550000000001,,,
+timing,S43_template_workload_r4_d3_a1-1-1_15x15_avl,AVL Based algorithm,warmup,0,64,1.3625103999999999,,,
+timing,S43_template_workload_r4_d3_a1-1-1_15x15_avl,AVL Based algorithm,formal,1,64,1.3067827000000001,,,
+timing,S43_template_workload_r4_d3_a1-1-1_15x15_avl,AVL Based algorithm,formal,2,64,1.4256869000000001,,,
+timing,S43_template_workload_r4_d3_a1-1-1_15x15_avl,AVL Based algorithm,formal,3,64,1.3210942999999999,,,
+timing,S43_template_workload_r4_d3_a1-1-1_15x15_avl,AVL Based algorithm,formal,4,64,1.3190181999999999,,,
+timing,S43_template_workload_r4_d3_a1-1-1_15x15_avl,AVL Based algorithm,formal,5,64,1.3180095999999999,,,
+timing,S43_template_workload_r4_d3_a1-1-1_10x10_bell,Bell,warmup,0,64,0.8549293,,,
+timing,S43_template_workload_r4_d3_a1-1-1_10x10_bell,Bell,formal,1,64,0.86101079999999997,,,
+timing,S43_template_workload_r4_d3_a1-1-1_10x10_bell,Bell,formal,2,64,0.8690812,,,
+timing,S43_template_workload_r4_d3_a1-1-1_10x10_bell,Bell,formal,3,64,0.92447500000000005,,,
+timing,S43_template_workload_r4_d3_a1-1-1_10x10_bell,Bell,formal,4,64,0.87134710000000004,,,
+timing,S43_template_workload_r4_d3_a1-1-1_10x10_bell,Bell,formal,5,64,0.87017650000000002,,,
+timing,S43_template_workload_r4_d3_a1-1-1_15x15_bell,Bell,warmup,0,64,1.4544357000000001,,,
+timing,S43_template_workload_r4_d3_a1-1-1_15x15_bell,Bell,formal,1,64,1.4766786999999999,,,
+timing,S43_template_workload_r4_d3_a1-1-1_15x15_bell,Bell,formal,2,64,1.4645155000000001,,,
+timing,S43_template_workload_r4_d3_a1-1-1_15x15_bell,Bell,formal,3,64,1.5098829,,,
+timing,S43_template_workload_r4_d3_a1-1-1_15x15_bell,Bell,formal,4,64,1.4691661,,,
+timing,S43_template_workload_r4_d3_a1-1-1_15x15_bell,Bell,formal,5,64,1.4805961000000001,,,
+timing,S43_template_workload_r4_d3_a1-1-1_25x25_avl,AVL Based algorithm,warmup,0,64,2.7546569999999999,,,
+timing,S43_template_workload_r4_d3_a1-1-1_25x25_avl,AVL Based algorithm,formal,1,64,2.7620748000000002,,,
+timing,S43_template_workload_r4_d3_a1-1-1_25x25_avl,AVL Based algorithm,formal,2,64,2.7770237,,,
+timing,S43_template_workload_r4_d3_a1-1-1_25x25_avl,AVL Based algorithm,formal,3,64,2.8173501000000001,,,
+timing,S43_template_workload_r4_d3_a1-1-1_25x25_avl,AVL Based algorithm,formal,4,64,2.7675743000000002,,,
+timing,S43_template_workload_r4_d3_a1-1-1_25x25_avl,AVL Based algorithm,formal,5,64,2.8093473000000002,,,
+timing,S43_template_workload_r4_d3_a1-1-1_25x25_bell,Bell,warmup,0,64,3.0026811000000002,,,
+timing,S43_template_workload_r4_d3_a1-1-1_25x25_bell,Bell,formal,1,64,3.0138484999999999,,,
+timing,S43_template_workload_r4_d3_a1-1-1_25x25_bell,Bell,formal,2,64,3.0427018000000001,,,
+timing,S43_template_workload_r4_d3_a1-1-1_25x25_bell,Bell,formal,3,64,3.0670274000000002,,,
+timing,S43_template_workload_r4_d3_a1-1-1_25x25_bell,Bell,formal,4,64,3.0587778999999999,,,
+timing,S43_template_workload_r4_d3_a1-1-1_25x25_bell,Bell,formal,5,64,3.0447758,,,
+timing,S43_window_r4_w5_avl,AVL Based algorithm,warmup,0,64,0.50801220000000002,,,
+timing,S43_window_r4_w5_avl,AVL Based algorithm,formal,1,64,0.49589430000000001,,,
+timing,S43_window_r4_w5_avl,AVL Based algorithm,formal,2,64,0.50044889999999997,,,
+timing,S43_window_r4_w5_avl,AVL Based algorithm,formal,3,64,0.51193390000000005,,,
+timing,S43_window_r4_w5_avl,AVL Based algorithm,formal,4,64,0.53301160000000003,,,
+timing,S43_window_r4_w5_avl,AVL Based algorithm,formal,5,64,0.51988100000000004,,,
+timing,S43_window_r4_w5_bell,Bell,warmup,0,64,0.47455029999999998,,,
+timing,S43_window_r4_w5_bell,Bell,formal,1,64,0.48046149999999999,,,
+timing,S43_window_r4_w5_bell,Bell,formal,2,64,0.47993839999999999,,,
+timing,S43_window_r4_w5_bell,Bell,formal,3,64,0.49075809999999997,,,
+timing,S43_window_r4_w5_bell,Bell,formal,4,64,0.4872129,,,
+timing,S43_window_r4_w5_bell,Bell,formal,5,64,0.50584280000000004,,,
+timing,S43_window_r4_w9_avl,AVL Based algorithm,warmup,0,64,0.59167239999999999,,,
+timing,S43_window_r4_w9_avl,AVL Based algorithm,formal,1,64,0.59206590000000003,,,
+timing,S43_window_r4_w9_avl,AVL Based algorithm,formal,2,64,0.59978010000000004,,,
+timing,S43_window_r4_w9_avl,AVL Based algorithm,formal,3,64,0.6194984,,,
+timing,S43_window_r4_w9_avl,AVL Based algorithm,formal,4,64,0.63261480000000003,,,
+timing,S43_window_r4_w9_avl,AVL Based algorithm,formal,5,64,0.61835099999999998,,,
+timing,S43_window_r4_w9_bell,Bell,warmup,0,64,0.55242769999999997,,,
+timing,S43_window_r4_w9_bell,Bell,formal,1,64,0.56072999999999995,,,
+timing,S43_window_r4_w9_bell,Bell,formal,2,64,0.56514880000000001,,,
+timing,S43_window_r4_w9_bell,Bell,formal,3,64,0.57301069999999998,,,
+timing,S43_window_r4_w9_bell,Bell,formal,4,64,0.56730930000000002,,,
+timing,S43_window_r4_w9_bell,Bell,formal,5,64,0.58441430000000005,,,
+timing,S43_window_r4_w13_avl,AVL Based algorithm,warmup,0,64,0.71455440000000003,,,
+timing,S43_window_r4_w13_avl,AVL Based algorithm,formal,1,64,0.73036279999999998,,,
+timing,S43_window_r4_w13_avl,AVL Based algorithm,formal,2,64,0.77952969999999999,,,
+timing,S43_window_r4_w13_avl,AVL Based algorithm,formal,3,64,0.72884819999999995,,,
+timing,S43_window_r4_w13_avl,AVL Based algorithm,formal,4,64,0.76487830000000001,,,
+timing,S43_window_r4_w13_avl,AVL Based algorithm,formal,5,64,0.78083670000000005,,,
+timing,S43_window_r4_w13_bell,Bell,warmup,0,64,0.63828669999999998,,,
+timing,S43_window_r4_w13_bell,Bell,formal,1,64,0.74657569999999995,,,
+timing,S43_window_r4_w13_bell,Bell,formal,2,64,0.68752959999999996,,,
+timing,S43_window_r4_w13_bell,Bell,formal,3,64,0.64900380000000002,,,
+timing,S43_window_r4_w13_bell,Bell,formal,4,64,0.65791670000000002,,,
+timing,S43_window_r4_w13_bell,Bell,formal,5,64,0.65857449999999995,,,
+memory,S43_template_order_r4_d3_a1-1-1_avl,AVL Based algorithm,formal,1,64,,80.296875,84.49609375,4.19921875
+memory,S43_template_order_r4_d3_a1-1-1_avl,AVL Based algorithm,formal,2,64,,80.3359375,83.27734375,2.94140625
+memory,S43_template_order_r4_d3_a1-1-1_avl,AVL Based algorithm,formal,3,64,,80.359375,84.54296875,4.18359375
+memory,S43_template_order_r4_d3_a1-1-1_avl,AVL Based algorithm,formal,4,64,,80.34375,84.27734375,3.93359375
+memory,S43_template_order_r4_d3_a1-1-1_avl,AVL Based algorithm,formal,5,64,,80.42578125,83.3359375,2.91015625
+memory,S43_template_order_r4_d3_a1-1-1_bell,Bell,formal,1,64,,80.28125,84.0390625,3.7578125
+memory,S43_template_order_r4_d3_a1-1-1_bell,Bell,formal,2,64,,80.2734375,84.90234375,4.62890625
+memory,S43_template_order_r4_d3_a1-1-1_bell,Bell,formal,3,64,,80.2578125,83.125,2.8671875
+memory,S43_template_order_r4_d3_a1-1-1_bell,Bell,formal,4,64,,80.29296875,84.03515625,3.7421875
+memory,S43_template_order_r4_d3_a1-1-1_bell,Bell,formal,5,64,,80.2421875,83.37109375,3.12890625
+memory,S43_template_workload_r4_d3_a1-1-1_10x10_avl,AVL Based algorithm,formal,1,64,,80.265625,84.06640625,3.80078125
+memory,S43_template_workload_r4_d3_a1-1-1_10x10_avl,AVL Based algorithm,formal,2,64,,80.3203125,83.67578125,3.35546875
+memory,S43_template_workload_r4_d3_a1-1-1_10x10_avl,AVL Based algorithm,formal,3,64,,80.3359375,84.45703125,4.12109375
+memory,S43_template_workload_r4_d3_a1-1-1_10x10_avl,AVL Based algorithm,formal,4,64,,80.1875,82.765625,2.578125
+memory,S43_template_workload_r4_d3_a1-1-1_10x10_avl,AVL Based algorithm,formal,5,64,,80.34765625,83.06640625,2.71875
+memory,S43_template_workload_r4_d3_a1-1-1_10x10_bell,Bell,formal,1,64,,80.2734375,82.9375,2.6640625
+memory,S43_template_workload_r4_d3_a1-1-1_10x10_bell,Bell,formal,2,64,,80.3046875,83.765625,3.4609375
+memory,S43_template_workload_r4_d3_a1-1-1_10x10_bell,Bell,formal,3,64,,80.3125,83.40234375,3.08984375
+memory,S43_template_workload_r4_d3_a1-1-1_10x10_bell,Bell,formal,4,64,,80.234375,83.69921875,3.46484375
+memory,S43_template_workload_r4_d3_a1-1-1_10x10_bell,Bell,formal,5,64,,80.25390625,84.51953125,4.265625
+memory,S43_template_workload_r4_d3_a1-1-1_15x15_avl,AVL Based algorithm,formal,1,64,,80.4453125,83.28125,2.8359375
+memory,S43_template_workload_r4_d3_a1-1-1_15x15_avl,AVL Based algorithm,formal,2,64,,80.2734375,83.94921875,3.67578125
+memory,S43_template_workload_r4_d3_a1-1-1_15x15_avl,AVL Based algorithm,formal,3,64,,80.27734375,84.09765625,3.8203125
+memory,S43_template_workload_r4_d3_a1-1-1_15x15_avl,AVL Based algorithm,formal,4,64,,80.31640625,84.421875,4.10546875
+memory,S43_template_workload_r4_d3_a1-1-1_15x15_avl,AVL Based algorithm,formal,5,64,,80.26171875,83.7265625,3.46484375
+memory,S43_template_workload_r4_d3_a1-1-1_15x15_bell,Bell,formal,1,64,,80.25390625,83.5703125,3.31640625
+memory,S43_template_workload_r4_d3_a1-1-1_15x15_bell,Bell,formal,2,64,,80.20703125,83.67578125,3.46875
+memory,S43_template_workload_r4_d3_a1-1-1_15x15_bell,Bell,formal,3,64,,80.234375,83.7109375,3.4765625
+memory,S43_template_workload_r4_d3_a1-1-1_15x15_bell,Bell,formal,4,64,,80.29296875,84.80859375,4.515625
+memory,S43_template_workload_r4_d3_a1-1-1_15x15_bell,Bell,formal,5,64,,80.22265625,83.64453125,3.421875
+memory,S43_template_workload_r4_d3_a1-1-1_25x25_avl,AVL Based algorithm,formal,1,64,,80.34375,83.34765625,3.00390625
+memory,S43_template_workload_r4_d3_a1-1-1_25x25_avl,AVL Based algorithm,formal,2,64,,80.40234375,83.6875,3.28515625
+memory,S43_template_workload_r4_d3_a1-1-1_25x25_avl,AVL Based algorithm,formal,3,64,,80.3359375,84.7421875,4.40625
+memory,S43_template_workload_r4_d3_a1-1-1_25x25_avl,AVL Based algorithm,formal,4,64,,80.3203125,83.83203125,3.51171875
+memory,S43_template_workload_r4_d3_a1-1-1_25x25_avl,AVL Based algorithm,formal,5,64,,80.2890625,84.3125,4.0234375
+memory,S43_template_workload_r4_d3_a1-1-1_25x25_bell,Bell,formal,1,64,,80.24609375,85.0234375,4.77734375
+memory,S43_template_workload_r4_d3_a1-1-1_25x25_bell,Bell,formal,2,64,,80.3203125,83.61328125,3.29296875
+memory,S43_template_workload_r4_d3_a1-1-1_25x25_bell,Bell,formal,3,64,,80.22265625,83.22265625,3
+memory,S43_template_workload_r4_d3_a1-1-1_25x25_bell,Bell,formal,4,64,,80.3046875,85.12890625,4.82421875
+memory,S43_template_workload_r4_d3_a1-1-1_25x25_bell,Bell,formal,5,64,,80.25390625,83.6796875,3.42578125
+memory,S43_window_r4_w13_avl,AVL Based algorithm,formal,1,64,,80.31640625,83.140625,2.82421875
+memory,S43_window_r4_w13_avl,AVL Based algorithm,formal,2,64,,80.2421875,83.06640625,2.82421875
+memory,S43_window_r4_w13_avl,AVL Based algorithm,formal,3,64,,80.234375,83.0625,2.828125
+memory,S43_window_r4_w13_avl,AVL Based algorithm,formal,4,64,,80.2265625,83.10546875,2.87890625
+memory,S43_window_r4_w13_avl,AVL Based algorithm,formal,5,64,,80.36328125,83.19921875,2.8359375
+memory,S43_window_r4_w13_bell,Bell,formal,1,64,,80.22265625,82.0234375,1.80078125
+memory,S43_window_r4_w13_bell,Bell,formal,2,64,,80.29296875,82.1875,1.89453125
+memory,S43_window_r4_w13_bell,Bell,formal,3,64,,80.2578125,82.01171875,1.75390625
+memory,S43_window_r4_w13_bell,Bell,formal,4,64,,80.1953125,82.08203125,1.88671875
+memory,S43_window_r4_w13_bell,Bell,formal,5,64,,80.3359375,82.078125,1.7421875
+memory,S43_window_r4_w5_avl,AVL Based algorithm,formal,1,64,,80.28515625,83.0546875,2.76953125
+memory,S43_window_r4_w5_avl,AVL Based algorithm,formal,2,64,,80.21484375,83.01171875,2.796875
+memory,S43_window_r4_w5_avl,AVL Based algorithm,formal,3,64,,80.2734375,83.046875,2.7734375
+memory,S43_window_r4_w5_avl,AVL Based algorithm,formal,4,64,,80.21875,82.9921875,2.7734375
+memory,S43_window_r4_w5_avl,AVL Based algorithm,formal,5,64,,80.19140625,82.95703125,2.765625
+memory,S43_window_r4_w5_bell,Bell,formal,1,64,,80.21875,82.21484375,1.99609375
+memory,S43_window_r4_w5_bell,Bell,formal,2,64,,80.2890625,81.9765625,1.6875
+memory,S43_window_r4_w5_bell,Bell,formal,3,64,,80.375,82.01953125,1.64453125
+memory,S43_window_r4_w5_bell,Bell,formal,4,64,,80.37890625,82.18359375,1.8046875
+memory,S43_window_r4_w5_bell,Bell,formal,5,64,,80.19921875,81.99609375,1.796875
+memory,S43_window_r4_w9_avl,AVL Based algorithm,formal,1,64,,80.3125,83.0859375,2.7734375
+memory,S43_window_r4_w9_avl,AVL Based algorithm,formal,2,64,,80.234375,83.01953125,2.78515625
+memory,S43_window_r4_w9_avl,AVL Based algorithm,formal,3,64,,80.22265625,82.98046875,2.7578125
+memory,S43_window_r4_w9_avl,AVL Based algorithm,formal,4,64,,80.22265625,82.98828125,2.765625
+memory,S43_window_r4_w9_avl,AVL Based algorithm,formal,5,64,,80.28125,83.07421875,2.79296875
+memory,S43_window_r4_w9_bell,Bell,formal,1,64,,80.22265625,81.859375,1.63671875
+memory,S43_window_r4_w9_bell,Bell,formal,2,64,,80.22265625,82.16015625,1.9375
+memory,S43_window_r4_w9_bell,Bell,formal,3,64,,80.24609375,81.8984375,1.65234375
+memory,S43_window_r4_w9_bell,Bell,formal,4,64,,80.234375,81.859375,1.625
+memory,S43_window_r4_w9_bell,Bell,formal,5,64,,80.2421875,81.87890625,1.63671875
+memory,S43_template_order_r4_d3_a1-1-1_avl,AVL Based algorithm,warmup,1,64,,80.44140625,85.015625,4.57421875
+memory,S43_template_order_r4_d3_a1-1-1_bell,Bell,warmup,1,64,,80.34375,84.015625,3.671875
+memory,S43_template_workload_r4_d3_a1-1-1_10x10_avl,AVL Based algorithm,warmup,1,64,,80.30859375,83.55859375,3.25
+memory,S43_template_workload_r4_d3_a1-1-1_10x10_bell,Bell,warmup,1,64,,80.234375,83.62890625,3.39453125
+memory,S43_template_workload_r4_d3_a1-1-1_15x15_avl,AVL Based algorithm,warmup,1,64,,80.28125,84.9375,4.65625
+memory,S43_template_workload_r4_d3_a1-1-1_15x15_bell,Bell,warmup,1,64,,80.296875,83.7578125,3.4609375
+memory,S43_template_workload_r4_d3_a1-1-1_25x25_avl,AVL Based algorithm,warmup,1,64,,80.39453125,84.2578125,3.86328125
+memory,S43_template_workload_r4_d3_a1-1-1_25x25_bell,Bell,warmup,1,64,,80.2578125,84.2421875,3.984375
+memory,S43_window_r4_w13_avl,AVL Based algorithm,warmup,1,64,,80.21875,83.09375,2.875
+memory,S43_window_r4_w13_bell,Bell,warmup,1,64,,79.99609375,81.80859375,1.8125
+memory,S43_window_r4_w5_avl,AVL Based algorithm,warmup,1,64,,80.13671875,82.91796875,2.78125
+memory,S43_window_r4_w5_bell,Bell,warmup,1,64,,80.35546875,82.15234375,1.796875
+memory,S43_window_r4_w9_avl,AVL Based algorithm,warmup,1,64,,80.25,83.0390625,2.7890625
+memory,S43_window_r4_w9_bell,Bell,warmup,1,64,,80.25390625,81.859375,1.60546875

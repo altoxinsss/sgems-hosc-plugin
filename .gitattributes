@@ -1,4 +1,4 @@
-# Preserve legacy source bytes and encodings; CRLF is intentional in VC2008 files.
+# Preserve validated source bytes and encodings across the x64 source import.
 # No repository-wide line-ending conversion is performed.
 *.cpp -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
 *.h -text whitespace=blank-at-eol,blank-at-eof,space-before-tab,cr-at-eol
@@ -15,4 +15,4 @@
 *.cmd text eol=crlf
 *.ps1 text eol=crlf
 # Archived research evidence is checksum-bound; never normalize its bytes.
-Paper-data/current_results/** -text
+paper/Data/** -text

@@ -1,2 +1,0 @@
-# Keep archived bytes stable so published SHA-256 manifests survive checkout.
-current_results/** -text

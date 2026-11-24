@@ -1,0 +1,24 @@
+<parameters>
+  <algorithm name="HOSC_WINDOW" />
+  <Source_Grid value="grid" />
+  <Source_Property value="value" />
+  <weight_mode value="External weights" />
+  <weight_property value="weight" />
+  <Target_Button value="Cumulant" />
+  <Algorithm_Button value="AVL Based algorithm" />
+  <coordinate_dimensions value="3" />
+  <output_diagnostics value="true" />
+  <output_point_weights value="true" />
+  <moment_order value="4" />
+  <windowl value="3" />
+  <windoww value="2" />
+  <windowh value="2" />
+  <stepx value="1" />
+  <stepy value="1" />
+  <stepz value="1" />
+  <neighborhood_shape value="box" />
+  <neighborhood_radii value="100,100,100" />
+  <min_samples value="1" />
+  <center_mode value="sample_points" />
+  <props value="grid_window_external" />
+</parameters>
